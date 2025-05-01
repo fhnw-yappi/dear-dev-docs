@@ -81,3 +81,8 @@ Wir sammeln die benötigte Literatur in dieser Zotero Gruppe:
 
 [Zotero Gruppe](https://www.zotero.org/groups/5907706/ip-dear-dev/library)
 
+## Projekt Dokumentation
+
+Die ausführliche Projektdokumentation ist unter `./arc42/` einsehbar. Die
+Dokumentation folgt dem arc42 template.
+
