@@ -13,15 +13,15 @@
 \contentsline {section}{\numberline {5.1}Zugriffskontrolle über API Keys}{12}{}%
 \contentsline {section}{\numberline {5.2}Companion Apps}{12}{}%
 \contentsline {subsection}{\numberline {5.2.1}Integration in die Entwicklungsumgebung}{12}{}%
-\contentsline {subsection}{\numberline {5.2.2}Kalender Integration}{12}{}%
+\contentsline {subsection}{\numberline {5.2.2}Integration von Kalenderdaten}{12}{}%
 \contentsline {subsection}{\numberline {5.2.3}Integratin von Gesundheitsdaten}{12}{}%
-\contentsline {section}{\numberline {5.3}Yappi Coach}{12}{}%
-\contentsline {section}{\numberline {5.4}Konzeptevaluation}{12}{}%
-\contentsline {chapter}{\numberline {6}Implementierung}{13}{}%
-\contentsline {section}{\numberline {6.1}Zugriffskontrolle über API Keys}{13}{}%
-\contentsline {section}{\numberline {6.2}Companion Apps}{13}{}%
-\contentsline {subsection}{\numberline {6.2.1}IntelliJ IDEA Companion}{13}{}%
-\contentsline {subsection}{\numberline {6.2.2}Calendar Companion}{13}{}%
-\contentsline {subsection}{\numberline {6.2.3}Health Companion}{13}{}%
-\contentsline {chapter}{\numberline {7}Evaluation}{14}{}%
-\contentsline {chapter}{\numberline {8}Quellen}{15}{}%
+\contentsline {section}{\numberline {5.3}Yappi Coach}{13}{}%
+\contentsline {section}{\numberline {5.4}Konzeptevaluation}{13}{}%
+\contentsline {chapter}{\numberline {6}Implementierung}{14}{}%
+\contentsline {section}{\numberline {6.1}Zugriffskontrolle über API Keys}{14}{}%
+\contentsline {section}{\numberline {6.2}Companion Apps}{14}{}%
+\contentsline {subsection}{\numberline {6.2.1}IntelliJ IDEA Companion}{14}{}%
+\contentsline {subsection}{\numberline {6.2.2}Calendar Companion}{14}{}%
+\contentsline {subsection}{\numberline {6.2.3}Health Companion}{14}{}%
+\contentsline {chapter}{\numberline {7}Evaluation}{15}{}%
+\contentsline {chapter}{\numberline {8}Quellen}{16}{}%
