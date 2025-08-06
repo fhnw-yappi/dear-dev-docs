@@ -2,9 +2,11 @@
 \contentsline {chapter}{\numberline {1}Einleitung}{6}{}%
 \contentsline {section}{\numberline {1.1}Hintergrund und Motivation}{6}{}%
 \contentsline {section}{\numberline {1.2}Ziele und Vision}{7}{}%
-\contentsline {section}{\numberline {1.3}Fragestellungen}{7}{}%
+\contentsline {section}{\numberline {1.3}Fragestellungen}{8}{}%
 \contentsline {chapter}{\numberline {2}Hintergrund}{9}{}%
 \contentsline {chapter}{\numberline {3}State of the Art}{10}{}%
+\contentsline {section}{\numberline {3.1}Stand der Forschung und verwandte Arbeiten}{10}{}%
+\contentsline {section}{\numberline {3.2}Bestehende Lösungen und Wettbewerbsanalyse}{10}{}%
 \contentsline {chapter}{\numberline {4}Methoden}{11}{}%
 \contentsline {section}{\numberline {4.1}Projektmethodik}{11}{}%
 \contentsline {section}{\numberline {4.2}Prototypen}{11}{}%
@@ -14,7 +16,7 @@
 \contentsline {section}{\numberline {5.2}Companion Apps}{12}{}%
 \contentsline {subsection}{\numberline {5.2.1}Integration in die Entwicklungsumgebung}{12}{}%
 \contentsline {subsection}{\numberline {5.2.2}Integration von Kalenderdaten}{12}{}%
-\contentsline {subsection}{\numberline {5.2.3}Integratin von Gesundheitsdaten}{12}{}%
+\contentsline {subsection}{\numberline {5.2.3}Integration von Gesundheitsdaten}{12}{}%
 \contentsline {section}{\numberline {5.3}Yappi Coach}{13}{}%
 \contentsline {section}{\numberline {5.4}Konzeptevaluation}{13}{}%
 \contentsline {chapter}{\numberline {6}Implementierung}{14}{}%
@@ -23,5 +25,6 @@
 \contentsline {subsection}{\numberline {6.2.1}IntelliJ IDEA Companion}{14}{}%
 \contentsline {subsection}{\numberline {6.2.2}Calendar Companion}{14}{}%
 \contentsline {subsection}{\numberline {6.2.3}Health Companion}{14}{}%
+\contentsline {section}{\numberline {6.3}Deployment}{14}{}%
 \contentsline {chapter}{\numberline {7}Evaluation}{15}{}%
 \contentsline {chapter}{\numberline {8}Quellen}{16}{}%
