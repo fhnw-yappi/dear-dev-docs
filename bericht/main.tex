@@ -1,0 +1,180 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{lmodern}
+\usepackage{enumitem}
+
+% Hilfscommand für TODO""
+\usepackage{xcolor}
+\newcommand{\todo}[1]{\colorbox{red}{\textbf{TODO: #1}}}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    {\huge \textbf{Yappi - Developer Happiness} \par}
+    {\large IP5 Project \par}
+    \vspace{0.5cm}
+    {Windisch, August 2025 \par}
+    \vspace{0.5cm}
+
+    \begin{tabular}{@{}ll@{}}
+        \textbf{Studenten:} & Xeno Isenegger, Gideon Monterosa \\
+        \textbf{Fachbetreuer:} & Norbert Seyff, Nitish Patkar
+    \end{tabular}
+
+    \vfill
+    {Fachhochschule Nordwestschweiz, Hochschule für Informatik \par}
+\end{titlepage}
+
+\chapter*{Abstract}
+\newpage
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\newpage
+
+\listoftables
+\newpage
+
+\chapter{Einleitung}
+
+\section{Hintergrund und Motivation}
+\todo{evt Ausgangslage}
+
+\todo{Text aus dem Project Agreement noch zu überarbeiten}
+
+Die Zufriedenheit von Entwicklerinnen und Entwicklern wird, wenn überhaupt, meist nur anhand der
+Menge ihrer geleisteten Arbeit gemessen. Dabei entstehen zwangsläufig Defizite, und ein halbjährli-
+ches Mitarbeitergespräch erweist sich oft als wenig wirksame Massnahme zur Problemlösung.
+
+Dieses Projekt baut auf einer bestehenden Arbeit auf, in der eine Plattform zur Erfassung der Ent-
+wicklerzufriedenheit entwickelt wurde. Die Webapplikation Yappi ermöglicht es Entwicklerinnen und
+Entwicklern, ihre Zufriedenheit mit ihrer Arbeit und ihrer aktuellen Situation fortlaufend zu bewerten.
+Yappi erfasst emotionale Faktoren wie Happiness sowie weitere Zufriedenheitsindikatoren. Zusätz-
+lich können spezifische Aufgaben und Arbeitstypen individuell bewertet werden. Die erhobenen Da-
+ten werden anonym auf Teamebene analysiert, um ein fundiertes Verständnis für die Stimmung in-
+nerhalb der Teams zu gewinnen.
+
+Entwicklerinnen und Entwickler haben die Möglichkeit, ihre Zufriedenheit für verschiedene Teams zu
+erfassen, wodurch gezielte Analysen ermöglicht werden. Unternehmen erhalten dadurch wertvolle
+Einblicke, um das Arbeitsumfeld gezielt zu verbessern.
+
+Unser Projekt baut auf Yappi auf und zielt darauf ab, die Erfassung der Zufriedenheit weiter zu opti-
+mieren. Es wird untersucht, wie die Daten noch präziser erfasst und ausgewertet werden können,
+um langfristige Verbesserungen zu unterstützen. Diese Arbeit dient als Grundlage für ein weiterfüh-
+rendes Forschungsprojekt, das sich vertieft mit der Entwicklerzufriedenheit auseinandersetzt und
+zusätzliche Erkenntnisse gewinnen soll.
+
+\section{Ziele und Vision}
+
+\todo{Text aus dem Project Agreement noch zu überarbeiten}
+
+Yappi wird zu einer umfassenden Plattform weiterentwickelt, die nicht nur die Zufriedenheit misst,
+sondern sich nahtlos in den Arbeitsalltag integriert und wertvolle Handlungsempfehlungen liefert.
+Dazu werden folgende Kernaspekte umgesetzt:
+
+\textbf{Produktivitätsfaktoren identifizieren}
+
+Durch eine tiefere Analyse von Zufriedenheitsindikatoren sollen zentrale Faktoren ermittelt werden,
+die sich positiv oder negativ auf die Produktivität und das Wohlbefinden von Entwicklerinnen und
+Entwicklern auswirken. Diese Erkenntnisse werden genutzt, um Vorschläge zu Verbesserungsmass-
+nahmen abzuleiten.
+
+\textbf{Integration in den Arbeitsprozess}
+
+Yappi soll sich direkt in bestehende Arbeitsabläufe einfügen, um die Erfassung der Zufriedenheit
+möglichst intuitiv und effizient zu gestalten. Dies kann durch verschiedene Schnittstellen und Erwei-
+terungen erfolgen, die eine nahtlose Interaktion ermöglichen.
+
+\textbf{Erweiterung um kontextbezogene Daten}
+
+Um ein umfassenderes Bild der Arbeitszufriedenheit zu erhalten, können weitere Einflussfaktoren
+berücksichtigt werden. Dazu gehören beispielsweise arbeitsbezogene Rahmenbedingungen oder
+individuelle Gesundheits- und Belastungsindikatoren. Diese Daten sollen helfen, ein besseres Ver-
+ständnis für langfristige Trends und Zusammenhänge zu entwickeln.
+
+\textbf{Intelligente Analyse und Handlungsempfehlungen}
+
+Durch die Integration von AI schnittstellen können gezielte Analysen erstellt und individualisierte
+Empfehlungen abgeleitet werden. Dies kann sowohl auf individueller als auch auf Teamebene erfol-
+gen, um nachhaltige Verbesserungen im Arbeitsumfeld zu fördern.
+
+\textbf{Fazit}
+
+Mit diesen Erweiterungen wird Yappi zu einem essenziellen Bestandteil des Entwickleralltags. Es
+bietet nicht nur eine präzisere Erfassung der Zufriedenheit, sondern liefert auch wertvolle Einblicke
+und Handlungsempfehlungen, um die Arbeitsbedingungen nachhaltig zu verbessern. Unternehmen
+erhalten fundierte Analysen und können gezielt Massnahmen ergreifen, um eine motivierte und pro-
+duktive Entwicklergemeinschaft zu fördern.
+
+\section{Fragestellungen}
+
+\todo{Text aus dem Project Agreement noch zu überarbeiten}
+
+\begin{enumerate}[label=\Alph*.] % A, B, C ...
+    \item Durch welche Technologien und Schnittstellen kann Yappi erweitert werden, 
+    um ein reibungsloses und einfaches Erfassen von Zufriedenheitsdaten zu ermöglichen?
+    \begin{enumerate}[label=\alph*.] % a, b, c ...
+        \item Entwicklung von Entwickler-Tool-Plugins, die nahtlos in bestehende Arbeitsumgebungen 
+        integriert werden können, um die Nutzung von Yappi angenehmer und effizienter zu gestalten. 
+        Diese Plugins sollen Entwicklern ermöglichen, direkt in ihrer bevorzugten Umgebung Feedback 
+        zu erfassen, ohne den Arbeitsfluss zu unterbrechen. Integration von Yappi in verschiedene 
+        Plattformen und Tools wie Webbrowser, IntelliJ, Microsoft Teams und Outlook.
+    \end{enumerate}
+    \item Wie können Gesundheitsdaten in die Auswertung der Entwicklerzufriedenheit einfließen?
+    \begin{enumerate}[label=\alph*.]
+        \item Direkte Anbindung der Gesundheitsdaten-API, um relevante Gesundheitsmetriken wie 
+        Herzfrequenz, Schlafqualität oder Stresslevel automatisch in die Analyse der 
+        Entwicklerzufriedenheit zu integrieren. Dies ermöglicht eine genauere Einschätzung des 
+        Wohlbefindens und potenzieller Belastungsfaktoren.
+    \end{enumerate}
+    \item Wie kann Yappi Teams und Entwickler dabei unterstützen, aus den erfassten 
+    Zufriedenheitsdaten Handlungsempfehlungen abzuleiten, um die Zufriedenheit und Produktivität 
+    von Entwicklern zu erhöhen?
+    \begin{enumerate}[label=\alph*.]
+        \item Entwicklung eines Yappi Coach, der anhand einer detaillierten Analyse der erfassten 
+        Daten gezielte Tipps zur Verbesserung der Arbeitsweise gibt. Beispielsweise könnte der Coach 
+        darauf hinweisen, dass Meetings nicht länger als 1,5 Stunden dauern sollten, da längere 
+        Sitzungen die Zufriedenheit und Konzentration der Entwickler negativ beeinflussen können.
+        \item Integration von KI-gestützten Diensten, die auf Basis der gesammelten Gesundheitsdaten 
+        sowie Zufriedenheits- und Produktivitätsmetriken individuelle Maßnahmen vorschlagen. Diese 
+        KI-gestützten Empfehlungen können Teams dabei helfen, gezielt Optimierungen vorzunehmen, um 
+        die Arbeitsbedingungen und die Effizienz der Entwickler nachhaltig zu verbessern.
+    \end{enumerate}
+\end{enumerate}
+
+\chapter{Hintergrund}
+\chapter{State of the Art}
+
+\chapter{Methoden}
+\section{Projektmethodik}
+\section{Prototypen}
+\section{Proof of Concepts}
+
+\chapter{Konzeptentwurf}
+\section{Zugriffskontrolle über API Keys}
+\section{Companion Apps}
+\subsection{Integration in die Entwicklungsumgebung}
+\subsection{Kalender Integration}
+\subsection{Integratin von Gesundheitsdaten}
+\section{Yappi Coach}
+\section{Konzeptevaluation}
+
+\chapter{Implementierung}
+\section{Zugriffskontrolle über API Keys}
+\section{Companion Apps}
+\subsection{IntelliJ IDEA Companion}
+\subsection{Calendar Companion}
+\subsection{Health Companion}
+
+\chapter{Evaluation}
+
+\chapter{Quellen}
+
+
+\end{document}
