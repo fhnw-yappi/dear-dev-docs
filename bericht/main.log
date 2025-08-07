@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/nixos.org) (preloaded format=pdflatex 1980.1.1)  7 AUG 2025 20:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/nixos.org) (preloaded format=pdflatex 1980.1.1)  7 AUG 2025 22:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -311,13 +311,18 @@ e-se KI-gestützten
 [8]
 Kapitel 2.
 
+Underfull \hbox (badness 10000) in paragraph at lines 154--155
+
+ []
+
+
 
 [9
 
 ]
 Kapitel 3.
 
-Underfull \hbox (badness 10000) in paragraph at lines 158--159
+Underfull \hbox (badness 10000) in paragraph at lines 160--163
 
  []
 
@@ -326,40 +331,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 158--159
 [10
 
 ]
+Overfull \hbox (10.29694pt too wide) in paragraph at lines 181--183
+[]\T1/lmr/m/n/12 bietet Das-h-boards zu Com-mits, Pull-Requests und Release-
+ []
+
+
+Overfull \hbox (27.41313pt too wide) in paragraph at lines 184--188
+\T1/lmr/m/n/12 mu-ni-ka-ti-ons-da-ten ab-ge-lei-tet, oh-ne je-de Kopp-lung an t
+at-säch-li-che Entwickler-
+ []
+
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
+94.
+
+(/nix/store/fj6m46sdmirlhjlwyc0w50qbpbd3n6pp-texlive-combined-full-2025.2025070
+3-texmfdist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+
+[11{/nix/store/fj6m46sdmirlhjlwyc0w50qbpbd3n6pp-texlive-combined-full-2025.2025
+0703-texmfdist/fonts/enc/dvips/lm/lm-ts1.enc}]
 Kapitel 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--162
+Underfull \hbox (badness 10000) in paragraph at lines 201--202
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--167
-
- []
-
-
-
-[11
-
-]
-Kapitel 5.
-
-Overfull \hbox (124.18828pt too wide) in paragraph at lines 171--172
-[][][][][][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 171--172
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 176--177
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 182--184
+Underfull \hbox (badness 10000) in paragraph at lines 206--207
 
  []
 
@@ -368,37 +367,52 @@ Underfull \hbox (badness 10000) in paragraph at lines 182--184
 [12
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 213--214
+Kapitel 5.
 
- []
-
-
-
-[13]
-Kapitel 6.
-
-Underfull \hbox (badness 10000) in paragraph at lines 224--225
-
- []
-
-
-Overfull \hbox (125.68976pt too wide) in paragraph at lines 227--230
+Overfull \hbox (124.18828pt too wide) in paragraph at lines 211--212
 [][][][][][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 227--230
+Underfull \hbox (badness 10000) in paragraph at lines 211--212
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 216--217
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 222--224
 
  []
 
 
 
-[14
+[13
 
 ]
-Kapitel 7.
+Underfull \hbox (badness 10000) in paragraph at lines 253--254
 
-Underfull \hbox (badness 10000) in paragraph at lines 232--233
+ []
+
+
+
+[14]
+Kapitel 6.
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--265
+
+ []
+
+
+Overfull \hbox (125.68976pt too wide) in paragraph at lines 267--270
+[][][][][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 267--270
 
  []
 
@@ -407,10 +421,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 232--233
 [15
 
 ]
-Kapitel 8.
+Kapitel 7.
+
+Underfull \hbox (badness 10000) in paragraph at lines 272--273
+
+ []
+
 
 
 [16
+
+]
+Kapitel 8.
+
+
+[17
 
 ] (./main.aux)
  ***********
@@ -419,21 +444,21 @@ L3 programming layer <2025-06-09>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 3314 strings out of 467888
- 57210 string characters out of 5405403
+ 3355 strings out of 467888
+ 58388 string characters out of 5405403
  472533 words of memory out of 5000000
- 31855 multiletter control sequences out of 15000+600000
- 662932 words of font info for 60 fonts, out of 8000000 for 9000
+ 31891 multiletter control sequences out of 15000+600000
+ 663307 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,6n,56p,228b,257s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </nix/store/fj6m46sdmirlhjlwyc0w50qbpbd3n6pp-texlive-combined-full-2025.20250
 703-texmfdist/fonts/type1/public/lm/lmbx12.pfb></nix/store/fj6m46sdmirlhjlwyc0w
 50qbpbd3n6pp-texlive-combined-full-2025.20250703-texmfdist/fonts/type1/public/l
 m/lmr12.pfb>
-Output written on main.pdf (17 pages, 82974 bytes).
+Output written on main.pdf (18 pages, 87525 bytes).
 PDF statistics:
- 70 PDF objects out of 1000 (max. 8388607)
- 46 compressed objects within 1 object stream
+ 77 PDF objects out of 1000 (max. 8388607)
+ 51 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -151,11 +151,51 @@ duktive Entwicklergemeinschaft zu fördern.
 \end{enumerate}
 
 \chapter{Hintergrund}
+\todo{unterkapitel für den Stand von Yappi vor dem Projekt}
+
 \chapter{State of the Art}
 \section{Stand der Forschung und verwandte Arbeiten}
 \section{Bestehende Lösungen und Wettbewerbsanalyse}
 
-\todo{evt Wettbewerbsanalyse entfernen (zu wirtschaftlich?)}
+\question{Braucht es hier quellen?}
+\question{Sind das zu viele?}
+\begin{description}
+	\item[Officevibe] ist ein SaaS-Tool für wöchentliche Puls-Umfragen, das primär die allgemeine Mitarbeiter­
+		bindung und das Engagement im Unternehmen misst. Für Entwicklerteams liefert es zwar Stimmungs­trends,
+		doch es fehlen auf Entwickler zugeschnittene Kontextbasierte Daten.
+
+	\item[TeamMood] verschickt täglich einen kurzen Stimmungs-Prompt per E-Mail, Slack oder Teams und visualisiert
+		die Antworten als Verlaufsdiagramm. Die Lösung ist niedrigschwellig, erfasst jedoch keine Code- oder 
+		Prozessmetriken und gibt auch keine automatisierten Empfehlungen, sodass Entwickler selbst interpretieren 
+		müssen, was aus den Daten folgt.
+
+	\item[Happimeter] stammt aus einem Forschungsprojekt der TU Wien und erzeugt einen „Happiness-Score“ auf Basis 
+		von Wearable-Sensoren wie Herzfrequenz und Aktivität. Es fehlt jedoch der Kontext zur eigentlichen 
+		Entwicklugsarbeit.
+
+	\item[Code Climate Velocity] analysiert Pull-Request-Dauer, Cycle-Time und Review-Aktivität, um Teamleistung zu
+		beurteilen. Die Plattform konzentriert sich vollständig auf Prozess- und Code-Metriken. Subjektive
+		Zufriedenheitsdaten bleiben aussen vor, sodass der Einfluss der Stimmung auf die gemessene Performance
+		unsichtbar bleibt.
+
+	\item[GitHub Insights] bietet Dashboards zu Commits, Pull-Requests und Release-Takt. Das Tool liefert wertvolle
+		Aktivitäts­statistiken, berücksichtigt jedoch keine emotionalen Faktoren.
+
+	\item[Microsoft Viva Insights] wertet Kalendereinträge, Meetings und Kommunikationsmuster in Microsoft 365 aus,
+		um Arbeitsgewohnheiten zu optimieren. Zwar erhält man Hinweise zu Meeting-Überlastung oder Fokuszeiten,
+		doch wird das Wohlbefinden ausschliesslich indirekt aus Kommunikationsdaten abgeleitet, ohne jede Kopplung 
+		an tatsächliche Entwickler­tätigkeiten oder subjektive Gefühlslagen.
+\end{description}
+
+Engagement-Tools erfassen Stimmung, Dev-Analytics Leistung, Gesundheitsdaten, doch keine Lösung integriert alle drei
+Dimensionen und leitet automatisch konkrete Verbesserungen ab. Yappi positioniert sich daher als Brückentechnologie, die
+
+\begin{itemize}
+	\item das Erfassen von Zufriedenheitsdaten in den Arbeitsprozess integriert,
+	\item Daten zu Commits und Kalendererereignissen automatisch als Kontext mit einbezieht,
+	\item zusätzlich Gesundheitsdaten sammelt,
+	\item per KI Coach handlungsorientierte Empfehlungen liefert.
+\end{itemize}
 
 \chapter{Methoden}
 \todo{Kanban erwähen}
