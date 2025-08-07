@@ -6,10 +6,11 @@
 \usepackage{lmodern}
 \usepackage{enumitem}
 
-% Hilfscommand für TODO""
 \usepackage{xcolor}
 \newcommand{\todo}[1]{\colorbox{red}{\textbf{TODO: #1}}\\}
 \newcommand{\question}[1]{\colorbox{yellow}{\textbf{QUESTION: #1}}\\}
+\newcommand{\xeno}[1]{\colorbox{pink}{\textbf{TODO XENO: #1}}\\}
+\newcommand{\gideon}[1]{\colorbox{green}{\textbf{TODO GIDEON: #1}}\\}
 
 \begin{document}
 
@@ -117,10 +118,10 @@ duktive Entwicklergemeinschaft zu fördern.
 
 \todo{Text aus dem Project Agreement noch zu überarbeiten}
 
-\begin{enumerate}[label=\Alph*.] % A, B, C ...
+\begin{enumerate}[label=\Alph*.]
 	\item Durch welche Technologien und Schnittstellen kann Yappi erweitert werden,
 	      um ein reibungsloses und einfaches Erfassen von Zufriedenheitsdaten zu ermöglichen?
-	      \begin{enumerate}[label=\alph*.] % a, b, c ...
+	      \begin{enumerate}[label=\alph*.]
 		      \item Entwicklung von Entwickler-Tool-Plugins, die nahtlos in bestehende Arbeitsumgebungen
 		            integriert werden können, um die Nutzung von Yappi angenehmer und effizienter zu gestalten.
 		            Diese Plugins sollen Entwicklern ermöglichen, direkt in ihrer bevorzugten Umgebung Feedback
@@ -157,9 +158,7 @@ duktive Entwicklergemeinschaft zu fördern.
 \todo{evt Wettbewerbsanalyse entfernen (zu wirtschaftlich?)}
 
 \chapter{Methoden}
-
 \todo{Kanban erwähen}
-
 \section{Projektmethodik}
 \section{Prototypen}
 \section{Proof of Concepts}
@@ -174,6 +173,7 @@ duktive Entwicklergemeinschaft zu fördern.
 \section{Companion Apps}
 \subsection{Integration in die Entwicklungsumgebung}
 \subsection{Integration von Kalenderdaten}
+\xeno{}
 \subsection{Integration von Gesundheitsdaten}
 
 Die folgenden Gesundheitsmetriken sind für unsere Arbeit relevant, da sie einen interessanten Einfluss
@@ -210,19 +210,26 @@ Leistungsfähigkeit abzuleiten.
 
 \section{Yappi Coach}
 \section{Konzeptevaluation}
+\xeno{Fragebogen}
 
 \chapter{Implementierung}
 \section{Zugriffskontrolle über API Keys}
+
+\todo{Quelle für spring Securtiy Architektur}
+https://docs.spring.io/spring-security/reference/servlet/architecture.html
+
 \section{Companion Apps}
 \subsection{IntelliJ IDEA Companion}
 \subsection{Calendar Companion}
+\xeno{}
 \subsection{Health Companion}
 \section{Deployment}
-
+\xeno{}
 \todo{nicht sicher ob es auch ein entsprechendes Kapitel im Konzeptdesign benötigt}
 \todo{UML Deployment Diagramm}
 
 \chapter{Evaluation}
+\xeno{}
 
 \chapter{Quellen}
 
