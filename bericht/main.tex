@@ -1,5 +1,8 @@
 \documentclass[12pt,a4paper]{report}
 
+\usepackage[backend=biber, style=apa]{biblatex}
+\addbibresource{literature.bib}
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
@@ -15,20 +18,20 @@
 \begin{document}
 
 \begin{titlepage}
-	\centering
-	{\huge \textbf{Yappi - Developer Happiness} \par}
-	{\large IP5 Project \par}
-	\vspace{0.5cm}
-	{Windisch, August 2025 \par}
-	\vspace{0.5cm}
+  \centering
+  {\huge \textbf{Yappi - Developer Happiness} \par}
+  {\large IP5 Project \par}
+  \vspace{0.5cm}
+  {Windisch, August 2025 \par}
+  \vspace{0.5cm}
 
-	\begin{tabular}{@{}ll@{}}
-		\textbf{Studenten:}    & Xeno Isenegger, Gideon Monterosa \\
-		\textbf{Fachbetreuer:} & Norbert Seyff, Nitish Patkar
-	\end{tabular}
+  \begin{tabular}{@{}ll@{}}
+    \textbf{Studenten:}    & Xeno Isenegger, Gideon Monterosa \\
+    \textbf{Fachbetreuer:} & Norbert Seyff, Nitish Patkar
+  \end{tabular}
 
-	\vfill
-	{Fachhochschule Nordwestschweiz, Hochschule für Informatik \par}
+  \vfill
+  {Fachhochschule Nordwestschweiz, Hochschule für Informatik \par}
 \end{titlepage}
 
 \chapter*{Abstract}
@@ -119,82 +122,87 @@ duktive Entwicklergemeinschaft zu fördern.
 \todo{Text aus dem Project Agreement noch zu überarbeiten}
 
 \begin{enumerate}[label=\Alph*.]
-	\item Durch welche Technologien und Schnittstellen kann Yappi erweitert werden,
-	      um ein reibungsloses und einfaches Erfassen von Zufriedenheitsdaten zu ermöglichen?
-	      \begin{enumerate}[label=\alph*.]
-		      \item Entwicklung von Entwickler-Tool-Plugins, die nahtlos in bestehende Arbeitsumgebungen
-		            integriert werden können, um die Nutzung von Yappi angenehmer und effizienter zu gestalten.
-		            Diese Plugins sollen Entwicklern ermöglichen, direkt in ihrer bevorzugten Umgebung Feedback
-		            zu erfassen, ohne den Arbeitsfluss zu unterbrechen. Integration von Yappi in verschiedene
-		            Plattformen und Tools wie Webbrowser, IntelliJ, Microsoft Teams und Outlook.
-	      \end{enumerate}
-	\item Wie können Gesundheitsdaten in die Auswertung der Entwicklerzufriedenheit einfliessen?
-	      \begin{enumerate}[label=\alph*.]
-		      \item Direkte Anbindung der Gesundheitsdaten-API, um relevante Gesundheitsmetriken wie
-		            Herzfrequenz, Schlafqualität oder Stresslevel automatisch in die Analyse der
-		            Entwicklerzufriedenheit zu integrieren. Dies ermöglicht eine genauere Einschätzung des
-		            Wohlbefindens und potenzieller Belastungsfaktoren.
-	      \end{enumerate}
-	\item Wie kann Yappi Teams und Entwickler dabei unterstützen, aus den erfassten
-	      Zufriedenheitsdaten Handlungsempfehlungen abzuleiten, um die Zufriedenheit und Produktivität
-	      von Entwicklern zu erhöhen?
-	      \begin{enumerate}[label=\alph*.]
-		      \item Entwicklung eines Yappi Coach, der anhand einer detaillierten Analyse der erfassten
-		            Daten gezielte Tipps zur Verbesserung der Arbeitsweise gibt. Beispielsweise könnte der Coach
-		            darauf hinweisen, dass Meetings nicht länger als 1,5 Stunden dauern sollten, da längere
-		            Sitzungen die Zufriedenheit und Konzentration der Entwickler negativ beeinflussen können.
-		      \item Integration von KI-gestützten Diensten, die auf Basis der gesammelten Gesundheitsdaten
-		            sowie Zufriedenheits- und Produktivitätsmetriken individuelle Massnahmen vorschlagen. Diese
-		            KI-gestützten Empfehlungen können Teams dabei helfen, gezielt Optimierungen vorzunehmen, um
-		            die Arbeitsbedingungen und die Effizienz der Entwickler nachhaltig zu verbessern.
-	      \end{enumerate}
+  \item Durch welche Technologien und Schnittstellen kann Yappi erweitert werden,
+        um ein reibungsloses und einfaches Erfassen von Zufriedenheitsdaten zu ermöglichen?
+        \begin{enumerate}[label=\alph*.]
+          \item Entwicklung von Entwickler-Tool-Plugins, die nahtlos in bestehende Arbeitsumgebungen
+                integriert werden können, um die Nutzung von Yappi angenehmer und effizienter zu gestalten.
+                Diese Plugins sollen Entwicklern ermöglichen, direkt in ihrer bevorzugten Umgebung Feedback
+                zu erfassen, ohne den Arbeitsfluss zu unterbrechen. Integration von Yappi in verschiedene
+                Plattformen und Tools wie Webbrowser, IntelliJ, Microsoft Teams und Outlook.
+        \end{enumerate}
+  \item Wie können Gesundheitsdaten in die Auswertung der Entwicklerzufriedenheit einfliessen?
+        \begin{enumerate}[label=\alph*.]
+          \item Direkte Anbindung der Gesundheitsdaten-API, um relevante Gesundheitsmetriken wie
+                Herzfrequenz, Schlafqualität oder Stresslevel automatisch in die Analyse der
+                Entwicklerzufriedenheit zu integrieren. Dies ermöglicht eine genauere Einschätzung des
+                Wohlbefindens und potenzieller Belastungsfaktoren.
+        \end{enumerate}
+  \item Wie kann Yappi Teams und Entwickler dabei unterstützen, aus den erfassten
+        Zufriedenheitsdaten Handlungsempfehlungen abzuleiten, um die Zufriedenheit und Produktivität
+        von Entwicklern zu erhöhen?
+        \begin{enumerate}[label=\alph*.]
+          \item Entwicklung eines Yappi Coach, der anhand einer detaillierten Analyse der erfassten
+                Daten gezielte Tipps zur Verbesserung der Arbeitsweise gibt. Beispielsweise könnte der Coach
+                darauf hinweisen, dass Meetings nicht länger als 1,5 Stunden dauern sollten, da längere
+                Sitzungen die Zufriedenheit und Konzentration der Entwickler negativ beeinflussen können.
+          \item Integration von KI-gestützten Diensten, die auf Basis der gesammelten Gesundheitsdaten
+                sowie Zufriedenheits- und Produktivitätsmetriken individuelle Massnahmen vorschlagen. Diese
+                KI-gestützten Empfehlungen können Teams dabei helfen, gezielt Optimierungen vorzunehmen, um
+                die Arbeitsbedingungen und die Effizienz der Entwickler nachhaltig zu verbessern.
+        \end{enumerate}
 \end{enumerate}
 
 \chapter{Hintergrund}
 \todo{unterkapitel für den Stand von Yappi vor dem Projekt}
 
 \chapter{State of the Art}
+\section{Definition von Entwiklerzufriedenheit}
+
+Entwicklerzufriedenheit wird in der Literatur als Balance zwischen positiven und negativen Erlebnissen bei der
+Arbeit definiert \parencite{Graziotin2019}.
+
 \section{Stand der Forschung und verwandte Arbeiten}
 \section{Bestehende Lösungen und Wettbewerbsanalyse}
 
 \question{Braucht es hier quellen?}
 \question{Sind das zu viele?}
 \begin{description}
-	\item[Officevibe] ist ein SaaS-Tool für wöchentliche Puls-Umfragen, das primär die allgemeine Mitarbeiter­
-		bindung und das Engagement im Unternehmen misst. Für Entwicklerteams liefert es zwar Stimmungs­trends,
-		doch es fehlen auf Entwickler zugeschnittene Kontextbasierte Daten.
+  \item[Officevibe] ist ein SaaS-Tool für wöchentliche Puls-Umfragen, das primär die allgemeine Mitarbeiter­
+        bindung und das Engagement im Unternehmen misst. Für Entwicklerteams liefert es zwar Stimmungs­trends,
+        doch es fehlen auf Entwickler zugeschnittene Kontextbasierte Daten.
 
-	\item[TeamMood] verschickt täglich einen kurzen Stimmungs-Prompt per E-Mail, Slack oder Teams und visualisiert
-		die Antworten als Verlaufsdiagramm. Die Lösung ist niedrigschwellig, erfasst jedoch keine Code- oder 
-		Prozessmetriken und gibt auch keine automatisierten Empfehlungen, sodass Entwickler selbst interpretieren 
-		müssen, was aus den Daten folgt.
+  \item[TeamMood] verschickt täglich einen kurzen Stimmungs-Prompt per E-Mail, Slack oder Teams und visualisiert
+        die Antworten als Verlaufsdiagramm. Die Lösung ist niedrigschwellig, erfasst jedoch keine Code- oder
+        Prozessmetriken und gibt auch keine automatisierten Empfehlungen, sodass Entwickler selbst interpretieren
+        müssen, was aus den Daten folgt.
 
-	\item[Happimeter] stammt aus einem Forschungsprojekt der TU Wien und erzeugt einen „Happiness-Score“ auf Basis 
-		von Wearable-Sensoren wie Herzfrequenz und Aktivität. Es fehlt jedoch der Kontext zur eigentlichen 
-		Entwicklugsarbeit.
+  \item[Happimeter] stammt aus einem Forschungsprojekt der TU Wien und erzeugt einen „Happiness-Score“ auf Basis
+        von Wearable-Sensoren wie Herzfrequenz und Aktivität. Es fehlt jedoch der Kontext zur eigentlichen
+        Entwicklugsarbeit.
 
-	\item[Code Climate Velocity] analysiert Pull-Request-Dauer, Cycle-Time und Review-Aktivität, um Teamleistung zu
-		beurteilen. Die Plattform konzentriert sich vollständig auf Prozess- und Code-Metriken. Subjektive
-		Zufriedenheitsdaten bleiben aussen vor, sodass der Einfluss der Stimmung auf die gemessene Performance
-		unsichtbar bleibt.
+  \item[Code Climate Velocity] analysiert Pull-Request-Dauer, Cycle-Time und Review-Aktivität, um Teamleistung zu
+        beurteilen. Die Plattform konzentriert sich vollständig auf Prozess- und Code-Metriken. Subjektive
+        Zufriedenheitsdaten bleiben aussen vor, sodass der Einfluss der Stimmung auf die gemessene Performance
+        unsichtbar bleibt.
 
-	\item[GitHub Insights] bietet Dashboards zu Commits, Pull-Requests und Release-Takt. Das Tool liefert wertvolle
-		Aktivitäts­statistiken, berücksichtigt jedoch keine emotionalen Faktoren.
+  \item[GitHub Insights] bietet Dashboards zu Commits, Pull-Requests und Release-Takt. Das Tool liefert wertvolle
+        Aktivitäts­statistiken, berücksichtigt jedoch keine emotionalen Faktoren.
 
-	\item[Microsoft Viva Insights] wertet Kalendereinträge, Meetings und Kommunikationsmuster in Microsoft 365 aus,
-		um Arbeitsgewohnheiten zu optimieren. Zwar erhält man Hinweise zu Meeting-Überlastung oder Fokuszeiten,
-		doch wird das Wohlbefinden ausschliesslich indirekt aus Kommunikationsdaten abgeleitet, ohne jede Kopplung 
-		an tatsächliche Entwickler­tätigkeiten oder subjektive Gefühlslagen.
+  \item[Microsoft Viva Insights] wertet Kalendereinträge, Meetings und Kommunikationsmuster in Microsoft 365 aus,
+        um Arbeitsgewohnheiten zu optimieren. Zwar erhält man Hinweise zu Meeting-Überlastung oder Fokuszeiten,
+        doch wird das Wohlbefinden ausschliesslich indirekt aus Kommunikationsdaten abgeleitet, ohne jede Kopplung
+        an tatsächliche Entwickler­tätigkeiten oder subjektive Gefühlslagen.
 \end{description}
 
 Engagement-Tools erfassen Stimmung, Dev-Analytics Leistung, Gesundheitsdaten, doch keine Lösung integriert alle drei
 Dimensionen und leitet automatisch konkrete Verbesserungen ab. Yappi positioniert sich daher als Brückentechnologie, die
 
 \begin{itemize}
-	\item das Erfassen von Zufriedenheitsdaten in den Arbeitsprozess integriert,
-	\item Daten zu Commits und Kalendererereignissen automatisch als Kontext mit einbezieht,
-	\item zusätzlich Gesundheitsdaten sammelt,
-	\item per KI Coach handlungsorientierte Empfehlungen liefert.
+  \item das Erfassen von Zufriedenheitsdaten in den Arbeitsprozess integriert,
+  \item Daten zu Commits und Kalendererereignissen automatisch als Kontext mit einbezieht,
+  \item zusätzlich Gesundheitsdaten sammelt,
+  \item per KI Coach handlungsorientierte Empfehlungen liefert.
 \end{itemize}
 
 \chapter{Methoden}
@@ -221,26 +229,26 @@ auf die Zufriedenheit von Softwareentwicklern haben.
 
 \todo{Nochmals anschauen}
 \begin{enumerate}
-	\item \textbf{Schlafdauer}\\
-	      Untersuchungen zeigen, dass längere Schlafdauer mit höherer Arbeitszufriedenheit einhergeht:
-	      Männer mit mehr Schlaf berichten signifikant grössere Zufriedenheit am Arbeitsplatz als
-	      solche mit verkürztem Schlafpensum.
+  \item \textbf{Schlafdauer}\\
+        Untersuchungen zeigen, dass längere Schlafdauer mit höherer Arbeitszufriedenheit einhergeht:
+        Männer mit mehr Schlaf berichten signifikant grössere Zufriedenheit am Arbeitsplatz als
+        solche mit verkürztem Schlafpensum.
 
-	\item \textbf{Ruheherzfrequenz}\\
-	      Eine erhöhte Ruheherzfrequenz spiegelt häufig chronisch erhöhte Stresslevel wider. In einer
-	      Querschnittsstudie war hoher Job-Strain mit erhöhter RHR assoziiert, und gleichzeitig berichten
-	      Beschäftigte in stark belastenden Jobs über signifikant geringere Zufriedenheit.
+  \item \textbf{Ruheherzfrequenz}\\
+        Eine erhöhte Ruheherzfrequenz spiegelt häufig chronisch erhöhte Stresslevel wider. In einer
+        Querschnittsstudie war hoher Job-Strain mit erhöhter RHR assoziiert, und gleichzeitig berichten
+        Beschäftigte in stark belastenden Jobs über signifikant geringere Zufriedenheit.
 
-	\item \textbf{Stress (HRV)}\\
-	      Die Herzratenvariabilität (HRV) ist ein objektiver Marker für die autonome Balance: Niedrige
-	      HRV-Werte korrelieren konsistent mit höheren Stresslevels am Arbeitsplatz. Da hohe Stresslevels
-	      nachweislich die Zufriedenheit verringern, eignet sich HRV-Monitoring als indirektes Mass für
-	      potenzielle Unzufriedenheit.
+  \item \textbf{Stress (HRV)}\\
+        Die Herzratenvariabilität (HRV) ist ein objektiver Marker für die autonome Balance: Niedrige
+        HRV-Werte korrelieren konsistent mit höheren Stresslevels am Arbeitsplatz. Da hohe Stresslevels
+        nachweislich die Zufriedenheit verringern, eignet sich HRV-Monitoring als indirektes Mass für
+        potenzielle Unzufriedenheit.
 
-	\item \textbf{Aktivitätsminuten und Schritte}\\
-	      Regelmässige moderate Bewegung, erfasst über Schritte und aktive Minuten, steht in direktem
-	      Zusammenhang mit höherer Jobzufriedenheit. Eine aktuelle Studie belegt, dass wöchentliche
-	      Freizeitaktivität signifikant positive Effekte auf die Zufriedenheit am Arbeitsplatz hat.
+  \item \textbf{Aktivitätsminuten und Schritte}\\
+        Regelmässige moderate Bewegung, erfasst über Schritte und aktive Minuten, steht in direktem
+        Zusammenhang mit höherer Jobzufriedenheit. Eine aktuelle Studie belegt, dass wöchentliche
+        Freizeitaktivität signifikant positive Effekte auf die Zufriedenheit am Arbeitsplatz hat.
 \end{enumerate}
 
 \todo{zu viel?}
@@ -273,5 +281,6 @@ https://docs.spring.io/spring-security/reference/servlet/architecture.html
 
 \chapter{Quellen}
 
+\printbibliography
 
 \end{document}
