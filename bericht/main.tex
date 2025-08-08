@@ -280,7 +280,7 @@ Dimensionen und leitet automatisch konkrete Verbesserungen ab. Yappi positionier
 \xeno{}
 
 Ein vollständiges erfassen der Entwicklerzufriedenheit erforder die Berücksichtigung aller Arbeitsaspekte,
-insbesondere auch Besprechungen (Meetings).Empirische untersuchungen zeigen, dass Entwickler durchschnittlich zwischen
+insbesondere auch Besprechungen (Meetings). Empirische untersuchungen zeigen, dass Entwickler durchschnittlich zwischen
 10,9 Stunden und 16,5 Stunden pro Woche in Besprechungen verbringen. Ein erheblicher Teil dieser Zeit wird insbesondere
 bei grossen oder ungünstig terminierten Besprechungen als wenig produktiv bewertet.
 Eine hohe Meetingfrequenz kann den Arbeitstag fragmentieren und den Flow unterbrechen \cite{stray_understanding_2020, meyer_today_2021}.
@@ -290,7 +290,7 @@ in die bestehenden Webanwendung Yappi und einer Companion-App welche durch eine 
 Die Erweiterung soll nach Ende eines Meetings automatisch, den Entwickler nach Feedback abfragen und die Ergebnisse davon in Yappi für weitere Auswertungen bereitstellen.
 
 \subsubsection{Messung der Meetingqualität}
-
+\xeno{rework mit quelle}
 Zur Bewertung werden sieben Kriterien definiert. Diese sind in Anlehnung an Best Practices und gängige Meeting-Umfrageinstrumente ausgewählt:
 
 \begin{enumerate}
@@ -318,8 +318,58 @@ Zur Bewertung werden sieben Kriterien definiert. Diese sind in Anlehnung an Best
 
 Diese Kriterien ermöglichen ein umfassendes Bild der Meetingqualität und liefern Ansatzpunkte für Verbesserungen.
 
+\subsubsection{Kalenderintegration auf Basis offener Standards}
+
+Zur automatischen Erkennung relevanter Meetings wird eine Anbindung an das Kalendersysteme des Entwickler vorgesehen.
+Wichtig dabei ist es einen Offenen Standard zu verwenden um eine möglichst hohe Kompatibilität mit Kalendersystemen zu schaffen.
+Grundlage dazu bildet das weit verbreitete iCalendar-Format (ICS), das von nahezu allen gängigen Plattformen unterstützt wird.
+Das Konzept sieht vor, dass der Nutzer in Yappi auf seinem Profil den zugriff auf den Kalender hinterlegen kann.
+Regelmässig werden die auf einen vom Nutzer im Kalender erstellten Kalendereinträge in die Datenbank synchronisiert.
+Auf dieser Basis kann die Anwendung automatisch identifizieren, wann ein Meeting stattfindet.
+Dadurch lassen sich Feedback-Anfragen unmittelbar nach dem Ende einer Besprechung auslösen, ohne dass der Nutzer manuell eingreifen muss.
+
+Die Synchronisation des Kalender erfolgt ausschliesslich lesend, um Eingriffe in persönliche Kalender zu vermeiden.
+Alle übermittelten Kalenderinformationen werden vertraulich behandelt und ausschliesslich für den definierten Zweck genutzt.
+Informationen zu Kalendereinträge sind nur für den Nutzer persönlich einsehbar.
+
+Durch diese Anbindung entfällt das manuelle Erfassung von Kalendereinträgen. Meetings werden automatisch erkannt,
+Änderungen übernommen und die Nutzer benachrichtigt. So entsteht ein nahtloser integrierter feedback flow um die
+Zufriedenheitsdaten von Meetings für die Entwickler zu erheben.
+
+\subsubsection{Companion-App als Feedback-Trigger}
+
+Die Companion-App wird als Browsererweiterung umgesetzt, um eine direkte Interaktion mit den Entwicklern zum richtigen
+Zeitpunkt zu ermöglichen. Nach dem Ende eines im Kalender erfassten Meetings erhält der Nutzer eine Benachrichtigung,
+die zur Abgabe einer kurzen Bewertung auffordert. Diese zeitnahe Erhebung stellt sicher, dass Eindrücke und Wahrnehmungen
+noch frisch sind und die Datenqualität hoch bleibt. Die Interaktion erfolgt freiwillig, um Befragungsmüdigkeit zu vermeiden,
+und ist so gestaltet, dass die Beantwortung wenige Sekunden benötigt. Durch die Integration in den Browser wird kein
+zusätzlicher Systemwechsel nötig, wodurch die Hemmschwelle zur Teilnahme sinkt.
+
+\subsubsection{Datenverarbeitung und Auswertung}
+
+Die erhobenen Feedbackdaten werden ausschliesslich auf dem Yappi-Server verarbeitet.
+Vor der Auswertung erfolgt eine Anonymisierung, um Rückschlüsse auf einzelne Personen zu verhindern.
+Für jedes Meeting werden aggregierte Kennzahlen, wie Durchschnittswerte der sieben Kriterien oder Verteilungen der Bewertungen, berechnet.
+Diese werden nur dann angezeigt, wenn eine vordefinierte Mindestanzahl an Rückmeldungen vorliegt.
+Neben der Auswertung einzelner Meetings können über längere Zeiträume Trends analysiert und Optimierungsmassnahmen evaluiert werden.
+
+\subsubsection{Integration in die Yappi Webanwendung}
+
+Die bestehenden Funktionen von Yappi werden um einen Bereich zur Meetinganalyse ergänzt.
+Entwickler sehen hier ihre eigenen Feedbackabgaben und offene Anfragen.
+Auf der Teamebene kann auf aggregierte, anonymisierte Auswertungen zu den Meetings ihres Teams zugegriffen werden.
+Die Konfiguration der Kalenderintegration und der Verbindung zur Companion-App wird im Nutzerprofil zentral verwaltet.
+Dadurch bleibt die Erweiterung vollständig in die bestehende Systemarchitektur eingebettet und benötigt keine separaten Plattformen.
 
 \subsection{Integration von Gesundheitsdaten}
+
+Zusätzlich zur Meetinganalyse kann Yappi um die Integration von Gesundheits- und Belastungsdaten erweitert werden,
+sofern der Nutzer dies explizit freigibt.
+Mögliche Datenquellen sind Wearables oder manuell erfasste Angaben zu Schlaf, Bewegung oder Arbeitsbelastung.
+Durch die Kombination von Meetingfeedback und Gesundheitsindikatoren lassen sich Korrelationen erkennen,
+beispielsweise zwischen hoher Meetingdichte und erhöhter Ermüdung.
+Diese Informationen können genutzt werden, um Arbeitsprozesse gesundheitsförderlich zu gestalten.
+
 
 Die folgenden Gesundheitsmetriken sind für unsere Arbeit relevant, da sie einen interessanten Einfluss
 auf die Zufriedenheit von Softwareentwicklern haben.
