@@ -222,6 +222,45 @@ Dimensionen und leitet automatisch konkrete Verbesserungen ab. Yappi positionier
 \subsection{Integration in die Entwicklungsumgebung}
 \subsection{Integration von Kalenderdaten}
 \xeno{}
+
+Ein vollständiges erfassen der Entwicklerzufriedenheit erforder die Berücksichtigung aller Arbeitsaspekte, insbesondere auch Meetings.
+Untersuchungen zeigen, dass Entwickler durchschnittlich mehr als zehn Stunden pro Woche in Besprechungen verbringen, wo bei bis zu 71% dieser Zeit
+als unproduktiv gelten. Häufige Meetings können den Arbeitsfluss erheblich stören.
+
+Ziel dieses Konzeptentwurf ist die Entwicklung einer Kalendererweiterung für Yappi, welche durch das Integrieren des Persönlichen Kalender
+in die bestehenden Webanwendung Yappi und einer Companion-App welche durch eine Browser-Erweiterung einsicht in die Meetings der Entwickler ermöglicht.
+Die Erweiterung soll nach Ende eines Meetings automatisch, den Entwickler nach Feedback abfragen und die Ergebnisse davon in Yappi für weitere Auswertungen bereitstellen.
+
+\subsubsection{Messung der Meetingqualität}
+
+Zur Bewertung werden sieben Kriterien definiert. Diese sind in Anlehnung an Best Practices und gängige Meeting-Umfrageinstrumente ausgewählt:
+
+\begin{enumerate}
+    \item \textbf{Zielklarheit und Relevanz} \\
+    Prüft, ob die Meetingziele klar formuliert und relevant waren. Eine präzise Agenda und eindeutige Zieldefinition steigern die Produktivität.
+
+    \item \textbf{Inhaltliche Tiefe und Verständlichkeit} \\
+    Bewertet, ob Themen angemessen tief und zugleich verständlich behandelt wurden. Unnötige Detailfülle ist zu vermeiden.
+
+    \item \textbf{Zeitmanagement} \\
+    Umfasst Pünktlichkeit beim Start und Einhaltung der geplanten Dauer. Studien empfehlen, Meetingzeiten bewusst zu verkürzen (z. B. 25 statt 30 Minuten), um Effizienz zu erhöhen.
+
+    \item \textbf{Moderation und Beteiligung} \\
+    Erfasst die Qualität der Moderation und die aktive Einbindung der Teilnehmenden. Eine hohe Beteiligungsquote gilt als Indikator für Interaktivität.
+
+    \item \textbf{Ergebnisorientierung} \\
+    Misst, ob konkrete Entscheidungen oder Aufgaben resultierten. Die Anzahl abgeschlossener Aktionspunkte kann als Kennzahl dienen.
+
+    \item \textbf{Allgemeine Zufriedenheit} \\
+    Ermittelt das subjektive Gesamturteil, beispielsweise auf einer Skala von 1 bis 10.
+
+    \item \textbf{Meetingdauer} \\
+    Vergleicht geplante mit tatsächlicher Dauer und bewertet die Angemessenheit.
+\end{enumerate}
+
+Diese Kriterien ermöglichen ein umfassendes Bild der Meetingqualität und liefern Ansatzpunkte für Verbesserungen.
+
+
 \subsection{Integration von Gesundheitsdaten}
 
 Die folgenden Gesundheitsmetriken sind für unsere Arbeit relevant, da sie einen interessanten Einfluss
