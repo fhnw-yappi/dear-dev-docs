@@ -83,33 +83,33 @@ Yappi wird zu einer umfassenden Plattform weiterentwickelt, die nicht nur die Zu
 sondern sich nahtlos in den Arbeitsalltag integriert und wertvolle Handlungsempfehlungen liefert.
 Dazu werden folgende Kernaspekte umgesetzt:
 
-\textbf{Produktivitätsfaktoren identifizieren}
+\subsubsection{Produktivitätsfaktoren identifizieren}
 
 Durch eine tiefere Analyse von Zufriedenheitsindikatoren sollen zentrale Faktoren ermittelt werden,
 die sich positiv oder negativ auf die Produktivität und das Wohlbefinden von Entwicklerinnen und
 Entwicklern auswirken. Diese Erkenntnisse werden genutzt, um Vorschläge zu Verbesserungsmass-
 nahmen abzuleiten.
 
-\textbf{Integration in den Arbeitsprozess}
+\subsubsection{Integration in den Arbeitsprozess}
 
 Yappi soll sich direkt in bestehende Arbeitsabläufe einfügen, um die Erfassung der Zufriedenheit
 möglichst intuitiv und effizient zu gestalten. Dies kann durch verschiedene Schnittstellen und Erwei-
 terungen erfolgen, die eine nahtlose Interaktion ermöglichen.
 
-\textbf{Erweiterung um kontextbezogene Daten}
+\subsubsection{Erweiterung um kontextbezogene Daten}
 
 Um ein umfassenderes Bild der Arbeitszufriedenheit zu erhalten, können weitere Einflussfaktoren
 berücksichtigt werden. Dazu gehören beispielsweise arbeitsbezogene Rahmenbedingungen oder
 individuelle Gesundheits- und Belastungsindikatoren. Diese Daten sollen helfen, ein besseres Ver-
 ständnis für langfristige Trends und Zusammenhänge zu entwickeln.
 
-\textbf{Intelligente Analyse und Handlungsempfehlungen}
+\subsubsection{Intelligente Analyse und Handlungsempfehlungen}
 
 Durch die Integration von AI schnittstellen können gezielte Analysen erstellt und individualisierte
 Empfehlungen abgeleitet werden. Dies kann sowohl auf individueller als auch auf Teamebene erfol-
 gen, um nachhaltige Verbesserungen im Arbeitsumfeld zu fördern.
 
-\textbf{Fazit}
+\subsubsection{Fazit}
 
 Mit diesen Erweiterungen wird Yappi zu einem essenziellen Bestandteil des Entwickleralltags. Es
 bietet nicht nur eine präzisere Erfassung der Zufriedenheit, sondern liefert auch wertvolle Einblicke
@@ -155,6 +155,13 @@ duktive Entwicklergemeinschaft zu fördern.
 
 \chapter{Hintergrund}
 \todo{unterkapitel für den Stand von Yappi vor dem Projekt}
+
+\chapter{Methoden}
+\todo{Kanban erwähen}
+\section{Projektmethodik}
+\section{Prototypen}
+\section{Proof of Concepts}
+\todo{arc42 erwähen}
 
 \chapter{State of the Art}
 \section{Definition von Entwiklerzufriedenheit}
@@ -230,59 +237,113 @@ somit klar darauf hin, dass Entwicklerzufriedenheit kein rein „weiches“ Them
 Codequalität und Personalbindung hat. Zufriedene Entwickler arbeiten effizienter, treffen sorgfältigere Entscheidungen und bleiben
 ihrem Team länger erhalten, während Unzufriedenheit mit erhöhten Kosten für Projekte und Rekrutierung verbunden ist.
 
+\todo{evt. Methoden und Instrumente zur Messung der Entwicklerzufriedenheit}
+\todo{evt. Technologische und methodische Ansätze in verwandten Arbeiten}
+\todo{Forschungslücken}
+
 \section{Bestehende Lösungen und Wettbewerbsanalyse}
 
-\todo{kleine einleitung}
+Der Markt bietet bereits verschiedene Tools und Plattformen, die Teilaspekte der Entwicklerzufriedenheit adressieren. Im Folgenden
+werden einige repräsentative bestehende Lösungen vorgestellt und hinsichtlich ihres Fokus und ihrer Lücken bewertet:
 
-\question{Braucht es hier quellen?}
-\question{Sind das zu viele?}
 \begin{description}
-  \item[Officevibe] ist ein SaaS-Tool für wöchentliche Puls-Umfragen, das primär die allgemeine Mitarbeiter­
-        bindung und das Engagement im Unternehmen misst. Für Entwicklerteams liefert es zwar Stimmungs­trends,
-        doch es fehlen auf Entwickler zugeschnittene Kontextbasierte Daten.
+  \item[Officevibe:] Ein Software-as-a-Service-Tool, das wöchentliche Pulse-Umfragen an Mitarbeitende verschickt. Ziel ist es,
+    Engagement und Stimmung im Unternehmen kontinuierlich zu messen. Officevibe bietet anonyme wöchentliche Kurzbefragungen per
+    E-Mail oder Chat an, deren Ergebnisse in übersichtlichen Dashboards für Teamleiter aufbereitet werden. Entwicklerteams erhalten
+    dadurch Stimmungs-Trendkurven und allgemeines Mitarbeiterfeedback. Allerdings ist Officevibe eher generisch auf
+    Mitarbeiterengagement ausgerichtet und liefert keine speziell auf Entwickler zugeschnittenen Kontextdaten, z.B. werden keine
+    technischen Metriken aus der Softwareentwicklung einbezogen \cite{courier_officevibe_2025}.
 
-  \item[TeamMood] verschickt täglich einen kurzen Stimmungs-Prompt per E-Mail, Slack oder Teams und visualisiert
-        die Antworten als Verlaufsdiagramm. Die Lösung ist niedrigschwellig, erfasst jedoch keine Code- oder
-        Prozessmetriken und gibt auch keine automatisierten Empfehlungen, sodass Entwickler selbst interpretieren
-        müssen, was aus den Daten folgt.
+  \item[TeamMood:] Ein schlankes Stimmungsbarometer für Teams, das täglich eine einfache Mood-Abfrage durchführt. TeamMood sendet
+    jedem Teammitglied jeden Tag einen kurzen Prompt (per E-Mail, Slack, microsoft teams etc.), in dem die Person mit einem Klick
+    ihre aktuelle Stimmung angibt. Die Antworten werden als anonymer Team-Stimmungsverlauf visualisiert, was es erlaubt, Trends über
+    die Zeit zu erkennen. Die Hürde zur Teilnahme ist sehr niedrig (niedrigschwelliges Feedback). Jedoch erfasst TeamMood keine
+    technischen Prozessmetriken (wie Code-Commits, Buildzeiten o.ä.) und bietet keine automatisierten Empfehlungen. Das bedeutet,
+    dass Entwickler und Manager die Stimmungsverläufe selbst interpretieren und Massnahmen ableiten müssen, ohne direkte
+    Handlungsempfehlungen durch das Tool \cite{revelo_teammood_2025}.
 
-  \item[Happimeter] stammt aus einem Forschungsprojekt der TU Wien und erzeugt einen „Happiness-Score“ auf Basis
-        von Wearable-Sensoren wie Herzfrequenz und Aktivität. Es fehlt jedoch der Kontext zur eigentlichen
-        Entwicklugsarbeit.
+  \item[Happimeter:] Hervorgegangen aus einem Forschungsprojekt (u.a. TU Wien und MIT) setzt Happimeter auf Wearable Sensoren, um
+    einen persönlichen Happiness-Score zu bestimmen. Entwickler tragen z.B. eine Smartwatch mit der Happimeter-App, die
+    kontinuierlich physiologische Daten wie Herzfrequenz, Bewegung oder Schlaf erfasst. Ein Machine-Learning-Modell sagt daraus
+    die aktuelle Stimmung bzw. den Stresslevel der Person voraus. Auf diese Weise sollen objektive Gesundheitsmetriken mit dem
+    subjektiven Wohlbefinden verknüpft werden. Der Ansatz liefert interessante biometrische Einblicke (z.B. Stressspitzen während
+    der Arbeit), jedoch fehlt der direkte Bezug zur eigentlichen Entwicklungsarbeit. Happimeter weiss nichts über Tasks, Code oder
+    Arbeitskontext, sodass die sensorbasierten Glücks-Werte ohne diesen Kontext schwer zu interpretieren sind
+    \cite{budner_making_2017}.
 
-  \item[Code Climate Velocity] analysiert Pull-Request-Dauer, Cycle-Time und Review-Aktivität, um Teamleistung zu
-        beurteilen. Die Plattform konzentriert sich vollständig auf Prozess- und Code-Metriken. Subjektive
-        Zufriedenheitsdaten bleiben aussen vor, sodass der Einfluss der Stimmung auf die gemessene Performance
-        unsichtbar bleibt.
+  \item[Code Climate Velocity:] Code Climate Velocity: Eine Datenplattform, die Entwicklungsmetriken aus Git-Repositories analysiert,
+    um die Team-Performance zu bewerten. Velocity konzentriert sich voll auf quantitative Software-Engineering-Kennzahlen. Es misst
+    etwa die Durchlaufzeit von Pull Requests, die Commit-Frequenz, die Review-Geschwindigkeit und diverse weitere Metriken der
+    Entwicklungspipeline. Auch Industrie-Standards wie die vier DORA-Metriken (Deployment Frequency, Lead Time for Changes, Change
+    Failure Rate, Mean Time to Restore Service) sind integriert. Dadurch erhalten Führungskräfte einen detaillierten Blick auf
+    Code-Qualität, Liefergeschwindigkeit und Prozess-Effizienz. Allerdings fehlen subjektive Zufriedenheitsdaten vollständig, die
+    menschliche Stimmungslage der Entwickler wird nicht erfasst. Etwaige Einflüsse von Motivation oder Frustration auf die
+    gemessenen Leistungsindikatoren bleiben somit unsichtbar \cite{infoworld_codeclimate_2023}.
 
-  \item[GitHub Insights] bietet Dashboards zu Commits, Pull-Requests und Release-Takt. Das Tool liefert wertvolle
-        Aktivitäts­statistiken, berücksichtigt jedoch keine emotionalen Faktoren.
+  \item[GitHub Insights:] Als integrierter Teil von GitHub bietet Insights grundlegende Analysen zur Repository-Aktivität. In jedem
+    GitHub-Repository steht ein Insights-Dashboard zur Verfügung, das Statistiken zu Commits, Pull-Request-Aktivitäten,
+    Issue-Verläufen und Release-Frequenzen visualisiert. Teams können so ihre Entwicklungsaktivität und Geschwindigkeit verfolgen
+    (“Wie viele PRs werden pro Woche gemerged? Wie oft wird deployed?” etc.). Diese Metriken sind wertvolle Aktivitätsstatistiken,
+    berücksichtigen jedoch keine emotionalen Faktoren. GitHub Insights liefert also Kennzahlen zur Produktivität, blendet aber das
+    Stimmungsbild der Entwickler aus. Etwa ob eine Phase hoher Commit-Rate auf Überstunden und Stress zurückzuführen ist, bleibt
+    unklar \cite{axify_git_2025}.
 
-  \item[Microsoft Viva Insights] wertet Kalendereinträge, Meetings und Kommunikationsmuster in Microsoft 365 aus,
-        um Arbeitsgewohnheiten zu optimieren. Zwar erhält man Hinweise zu Meeting-Überlastung oder Fokuszeiten,
-        doch wird das Wohlbefinden ausschliesslich indirekt aus Kommunikationsdaten abgeleitet, ohne jede Kopplung
-        an tatsächliche Entwickler­tätigkeiten oder subjektive Gefühlslagen.
+  \item[Microsoft Viva Insights:] Viva Insights ist Teil von Microsoft 365 und zielt darauf ab, durch Analyse von Arbeitsmustern die
+    Produktivität und das Wohlbefinden von Mitarbeitenden zu verbessern. Die Plattform wertet vor allem Kalender- und
+    Kommunikationsdaten aus (z.B. E-Mail- und Teams-Nutzung, Meeting-Häufigkeit). Entwickler erhalten z.B. Hinweise, wenn
+    Meeting-Überlast droht, oder Vorschläge, regelmässige Fokuszeiten für ungestörtes Arbeiten einzuplanen. Führungskräfte sehen
+    aggregierte Team-Insights, etwa ob viele Überstunden anfallen oder wenig Konzentrationsphasen vorhanden sind. Zwar gibt Viva
+    nützliche Empfehlungen (z.B. “Schützen Sie wöchentlich 4 Stunden Fokuszeit” oder “Vermeiden Sie Meetings über 1 Stunde”).
+    Allerdings werden Wohlbefinden und Zufriedenheit nur indirekt aus den Verhaltensdaten abgeleitet, eine direkte Erfassung der
+    Gefühlslage oder ein Bezug zu konkreten Entwickler-Tätigkeiten (Code, Tickets etc.) fehlt vollständig. Somit bleibt die
+    emotionale Dimension in Viva Insights eher implizit und generalisiert \cite{zachminers_introduction_nodate}.
 \end{description}
 
-Engagement-Tools erfassen Stimmung, Dev-Analytics Leistung, Gesundheitsdaten, doch keine Lösung integriert alle drei
-Dimensionen und leitet automatisch konkrete Verbesserungen ab. Yappi positioniert sich daher als Brückentechnologie, die
-
-\begin{itemize}
-  \item das Erfassen von Zufriedenheitsdaten in den Arbeitsprozess integriert,
-  \item Daten zu Commits und Kalendererereignissen automatisch als Kontext mit einbezieht,
-  \item zusätzlich Gesundheitsdaten sammelt,
-  \item per KI Coach handlungsorientierte Empfehlungen liefert.
-\end{itemize}
-
-\chapter{Methoden}
-\todo{Kanban erwähen}
-\section{Projektmethodik}
-\section{Prototypen}
-\section{Proof of Concepts}
-
-\todo{arc42 erwähen}
+Bestehende Lösungen decken jeweils nur einzelne Aspekte der Entwicklerzufriedenheit ab. Engagement-Tools erfassen Stimmungsdaten,
+stellen jedoch keinen Bezug zu technischen oder gesundheitlichen Kontextinformationen her. Engineering-Analytics-Tools analysieren
+Leistungskennzahlen, berücksichtigen jedoch die emotionale Dimension nicht. Gesundheits-Tracker wiederum messen physiologische Daten,
+ohne diese mit der konkreten Entwicklungsarbeit zu verknüpfen. Eine Plattform, die emotionale Faktoren, technischen Kontext und
+physisches Wohlbefinden gemeinsam erfasst und daraus konkrete Handlungsempfehlungen ableitet, ist derzeit nicht verfügbar.
 
 \chapter{Konzeptentwurf}
+
+Die im vorhergehenden Kapitel dargestellte Analyse bestehender Lösungen verdeutlicht, dass es derzeit keine Plattform gibt, welche
+emotionale Faktoren, technischen Kontext und physisches Wohlbefinden integriert erfasst und daraus konkrete Handlungsempfehlungen
+ableitet. Yappi soll genau diese Lücke schliessen und eine einheitliche, praxisorientierte Lösung bieten. Ziel ist es, die
+Entwicklerzufriedenheit umfassend zu erfassen und die gewonnenen Erkenntnisse in konkrete Massnahmen zu überführen. Die geplanten
+Kernfunktionen umfassen:
+
+\begin{description}
+  \item[Integriertes Erfassen im Arbeitsfluss:] Yappi lässt sich nahtlos in den täglichen Entwicklungsprozess einbetten. Durch 
+    Plugins für Entwicklungsumgebungen, Browser-Erweiterungen oder Integrationen in Kollaborationstools können Entwickler ihre
+    Zufriedenheit direkt in ihrer Arbeitsumgebung erfassen, ohne den Kontext zu wechseln. Dies erhöht die Teilnahmebereitschaft
+    und stellt sicher, dass Feedback leicht und unmittelbar gegeben werden kann ohne den Arbeitsfluss zu unterbrechen.
+  \item[Automatischer Kontext durch Prozessdaten:] Neben manuellen Stimmungsangaben bezieht Yappi automatisch Kontextinformationen
+    aus dem Arbeitsprozess ein. Beispielsweise können Commit-Daten aus Git und Kalendereinträge herangezogen werden, um die Stimmung
+    in Bezug zu objektiven Ereignissen zu setzen. So liesse sich erkennen, ob z.B. eine Häufung negativer Stimmungswerte mit vielen
+    Meetings korreliert.
+  \item[Erweiterung um Gesundheitsmetriken:] Um ein umfassenderes Bild des Wohlbefindens zu erhalten, soll Yappi optional auch
+    Gesundheitsdaten einbeziehen. Dies kann durch die Anbindung an gängige Gesundheits-APIs oder Wearables (ähnlich Happimeter)
+    erfolgen. Die so gewonnenen zusätzlichen Datenpunkte ermöglichen es, langfristige Entwicklungen zu erkennen und diese im
+    Zusammenhang mit Prozess- sowie Zufriedenheitsdaten zu analysieren.
+  \item[KI-gestützter Coach mit Handlungsempfehlungen:] Über die reine Datenerfassung hinaus soll Yappi einen intelligenten
+    Empfehlungsdienst bereitstellen. Dieser Yappi-Coach analysiert die erfassten Zufriedenheitsdaten, Produktivitätskennzahlen und
+    gegebenenfalls Gesundheitsdaten mittels KI-gestützter Verfahren. Auf dieser Grundlage werden gezielte, evidenzbasierte
+    Empfehlungen für einzelne Entwicklerinnen und Entwickler sowie für Teams generiert. Beispielsweise könnte der Coach vorschlagen,
+    die Dauer von Team-Meetings auf höchstens 1,5 Stunden zu begrenzen, wenn längere Sitzungen mit sinkender Zufriedenheit
+    einhergehen. Ebenso kann er empfehlen, nach vier Stunden konzentrierter Entwicklungsarbeit eine Pause einzulegen, sofern die
+    Analyse zeigt, dass dies die Zufriedenheit steigert. Ziel ist es, konkrete Handlungsimpulse zu geben, die sowohl das
+    individuelle Wohlbefinden als auch die Teamproduktivität verbessern.
+\end{description}
+
+Durch die Kombination dieser Aspekte entsteht mit Yappi eine zentrale Plattform, die kontinuierliches Stimmungs-Tracking,
+automatisierte Kontextdaten aus dem Arbeitsprozess, Gesundheitsmetriken und KI-gestützte Handlungsempfehlungen integriert. Ziel ist
+es, die Entwicklerzufriedenheit nicht nur präzise zu erfassen, sondern die gewonnenen Erkenntnisse unmittelbar in nachhaltige
+Verbesserungen des Arbeitsalltags zu überführen. Unternehmen erhalten damit eine fundierte Entscheidungsgrundlage, um gezielt
+Massnahmen zur Förderung einer motivierten, gesunden und leistungsfähigen Entwicklergemeinschaft umzusetzen. Die nachfolgenden
+Abschnitte greifen diese Kernaspekte auf und verknüpfen sie mit weiteren Konzeptbestandteilen, um ein ganzheitliches Lösungsdesign
+zu entwickeln.
+
 \section{Zugriffskontrolle über API Keys}
 
 \todo{Kapitel evt umbenennen; Aussage soll sein die das Yappi zu Plattform wird...}
@@ -384,8 +445,8 @@ beispielsweise zwischen hoher Meetingdichte und erhöhter Ermüdung.
 Diese Informationen können genutzt werden, um Arbeitsprozesse gesundheitsförderlich zu gestalten.
 
 
-Die folgenden Gesundheitsmetriken sind für unsere Arbeit relevant, da sie einen interessanten Einfluss
-auf die Zufriedenheit von Softwareentwicklern haben.
+Die folgenden Gesundheitsmetriken sind für unsere Arbeit relevant, da sie einen interessanten Einfluss auf die Zufriedenheit von
+Softwareentwicklern haben.
 
 \todo{Nochmals anschauen}
 \begin{enumerate}
