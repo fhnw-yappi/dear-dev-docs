@@ -225,8 +225,8 @@ beschrieb, er dokumentiert seinen Code gründlicher und achten stärker auf Wart
 \cite{graziotin_what_2018}.
 
 Neben akademischen Studien liefern auch Industireumfragen und Community-Studien wertvolle Einblicke. Der jährliche Stack Overflow
-Developer Survey etwa spiegelt wieder, dass weiterhin Verbesserungsbedarf besteht. laut der Umfrage 2024 bezeichen sich nur rund 20\%
-der Entwickler als wirklich zufrieden in ihrem Job, während etwa 80\% unzufrieden oder "gelassen" (complacent) sind. Diese Zahl
+Developer Survey etwa spiegelt wieder, dass weiterhin Verbesserungsbedarf besteht. laut der Umfrage 2024 bezeichen sich nur rund 
+20\% der Entwickler als wirklich zufrieden in ihrem Job, während etwa 80\% unzufrieden oder "gelassen" (complacent) sind. Diese Zahl
 unterstreicht, dass ein grosser Teil der Entwicklergemeinschaft nicht glücklich im Arbeitsumfeld ist. Als Hauptgründe werden oft
 Faktoren wie schlechte Work-Life-Balance, zu viele Meetings oder fehlende Anerkennung genannt \cite{stackoverflow_survey_2025}. Eine
 Untersuchung von Zenhub kam zu ähnlichen Ergebnissen: Zwar gaben die meisten befragten Entwickler an, überwiegend zufrieden zu sein,
@@ -346,9 +346,19 @@ Massnahmen zur Förderung einer motivierten, gesunden und leistungsfähigen Entw
 Abschnitte greifen diese Kernaspekte auf und verknüpfen sie mit weiteren Konzeptbestandteilen, um ein ganzheitliches Lösungsdesign
 zu entwickeln.
 
-\section{Zugriffskontrolle über API Keys}
+\section{Yappi als Integrationsplattform}
 
-\todo{Kapitel evt umbenennen; Aussage soll sein die das Yappi zu Plattform wird...}
+Die Erweiterung von Yappi zu einer Integrationsplattform ist notwendig, um Daten aus unterschiedlichen Quellen sicher und 
+zuverlässig zu erfassen. Neben Prozessdaten wie Commits oder Meeting-Aktivitäten sollen auch Gesundheitsdaten aus externen
+Companion Apps einbezogen werden. Dies erfordert eine Architektur, welche den Datenaustausch zwischen Yappi und externen Anwendungen
+standardisiert und absichert. Zentrales Element ist ein API-Key-basiertes Authentifizierungsverfahren, das autorisierte Anwendungen
+eindeutig identifiziert und deren Zugriff kontrolliert. Auf dieser Basis können Daten aus heterogenen Quellen in ein einheitliches
+System integriert werden.
+
+\subsection{Systemarchitektur der Integrationsplattform}
+\subsection{Kommunikationsmechanismus}
+\subsection{Sicherheit}
+\subsection{Ablauf der API-Key-Erstellung und -Verwendung}
 
 \section{Companion Apps}
 \subsection{Integration in die Entwicklungsumgebung}
@@ -439,47 +449,66 @@ Dadurch bleibt die Erweiterung vollständig in die bestehende Systemarchitektur 
 
 \subsection{Integration von Gesundheitsdaten}
 
-Zusätzlich zur Meetinganalyse kann Yappi um die Integration von Gesundheits- und Belastungsdaten erweitert werden,
-sofern der Nutzer dies explizit freigibt.
-Mögliche Datenquellen sind Wearables oder manuell erfasste Angaben zu Schlaf, Bewegung oder Arbeitsbelastung.
-Durch die Kombination von Meetingfeedback und Gesundheitsindikatoren lassen sich Korrelationen erkennen,
-beispielsweise zwischen hoher Meetingdichte und erhöhter Ermüdung.
-Diese Informationen können genutzt werden, um Arbeitsprozesse gesundheitsförderlich zu gestalten.
+Gesundheitsdaten können wertvolle Zusatzinformationen zur Entwicklerzufriedenheit liefern. Sie ergänzen subjektive Stimmungsangaben
+um objektive Messwerte, die Rückschlüsse auf Belastung und Erholung ermöglichen. Durch die Anbindung an etablierte Schnittstellen
+wie Apple HealthKit oder Garmin Health API lassen sich Metriken wie Schlafqualität, Herzfrequenz oder Stressindikatoren 
+automatisiert erfassen. Diese Daten bilden zusammen mit den Prozess- und Zufriedenheitsmetriken eine erweiterte Grundlage, um
+Korrelationen zwischen physischem Wohlbefinden und Arbeitszufriedenheit zu erkennen und gezielte Massnahmen abzuleiten.
 
+\subsubsection{Auswahl relevanter Gesundheitsmetriken}
 
-Die folgenden Gesundheitsmetriken sind für unsere Arbeit relevant, da sie einen interessanten Einfluss auf die Zufriedenheit von
-Softwareentwicklern haben.
+Die Integration von Gesundheitsdaten in Yappi soll das subjektive Stimmungsbild ergänzen und objektive Indikatoren für Belastung,
+Erholung und generelles Wohlbefinden liefern. Subjektive Zufriedenheitsangaben geben wertvolle Einblicke in die aktuelle emotionale
+Lage. Physiologische Metriken hingegen erfassen Veränderungen, die den Betroffenen nicht immer bewusst sind. Beide Perspektiven zu
+kombinieren ermöglicht eine fundiertere Analyse potenzieller Einflussfaktoren auf die Arbeitszufriedenheit von Entwicklerinnen und
+Entwicklern.
 
-\todo{Nochmals anschauen}
+Für die Auswahl der relevanten Gesundheitsmetriken wurden drei Kriterien herangezogen:
+
+\begin{itemize}
+  \item \textbf{Wissenschaftlich belegter Zusammenhang} mit Arbeitszufriedenheit oder Leistungsfähigkeit.
+  \item \textbf{Technische Messbarkeit} mittels gängiger Wearables bzw. Smartphone-Sensoren.
+  \item \textbf{Integrationsfähigkeit} über etablierte Schnittstellen wie Apple HealthKit oder die Garmin Health API.
+\end{itemize}
+
+Basierend darauf wurden folgende vier Metriken ausgewählt:
+
 \begin{enumerate}
   \item \textbf{Schlafdauer}\\
-        Untersuchungen zeigen, dass längere Schlafdauer mit höherer Arbeitszufriedenheit einhergeht:
-        Männer mit mehr Schlaf berichten signifikant grössere Zufriedenheit am Arbeitsplatz als
-        solche mit verkürztem Schlafpensum.
+        Schlafdauer ist ein zentraler Prädiktor für kognitive Leistungsfähigkeit, emotionale Regulation und Motivation. Chronisch 
+        verkürzter Schlaf führt zu verminderter Aufmerksamkeitsspanne, reduzierter Problemlösefähigkeit und einer erhöhten 
+        Anfälligkeit für negative Stimmungslagen. Personen mit ausreichendem, qualitativ hochwertigem Schlaf weisen höhere
+        Arbeitszufriedenheit, geringere Reizbarkeit und bessere soziale Interaktionen am Arbeitsplatz auf. Besonders in
+        wissensintensiven Tätigkeiten wie der Softwareentwicklung, bei denen hohe Konzentration und Kreativität erforderlich sind,
+        kann Schlafmangel die Produktivität stark mindern \cite{opoku_sleep_2023}.
 
-  \item \textbf{Ruheherzfrequenz}\\
-        Eine erhöhte Ruheherzfrequenz spiegelt häufig chronisch erhöhte Stresslevel wider. In einer
-        Querschnittsstudie war hoher Job-Strain mit erhöhter RHR assoziiert, und gleichzeitig berichten
-        Beschäftigte in stark belastenden Jobs über signifikant geringere Zufriedenheit.
+  \item \textbf{Ruheherzfrequenz (RHR)}\\
+        Die Ruheherzfrequenz reflektiert den Grundzustand des Herz-Kreislauf-Systems und reagiert empfindlich auf chronische 
+        Belastungen wie Stress oder Überarbeitung. Eine dauerhaft erhöhte RHR ist mit  reduzierten Erholungsphasen assoziiert.
+        In arbeitspsychologischen Studien wurde ein signifikanter Zusammenhang zwischen hohem Job-Strain, erhöhter RHR und niedrigerer Arbeitszufriedenheit festgestellt. Für Entwicklerinnen und Entwickler kann eine kontinuierliche Überwachung der RHR
+        helfen, Phasen erhöhter Belastung zu erkennen, noch bevor subjektive Erschöpfung spürbar wird \cite{eriksson_rhr_2016}.
 
-  \item \textbf{Stress (HRV)}\\
-        Die Herzratenvariabilität (HRV) ist ein objektiver Marker für die autonome Balance: Niedrige
-        HRV-Werte korrelieren konsistent mit höheren Stresslevels am Arbeitsplatz. Da hohe Stresslevels
-        nachweislich die Zufriedenheit verringern, eignet sich HRV-Monitoring als indirektes Mass für
-        potenzielle Unzufriedenheit.
+  \item \textbf{Stress (Herzratenvariabilität, HRV)}\\
+        Die Herzratenvariabilität beschreibt die zeitliche Variation zwischen aufeinanderfolgenden Herzschlägen und gilt als
+        sensibler Indikator für die Funktionsbalance des autonomen Nervensystems. Eine hohe HRV weist auf ein flexibles, gut
+        reguliertes System hin, das Belastungen effizient kompensieren kann. Eine niedrige HRV hingegen signalisiert anhaltenden
+        Stress oder unzureichende Erholung. In Kombination mit subjektiven Zufriedenheitsdaten kann die HRV helfen, versteckte
+        Stressmuster zu identifizieren, die sonst unentdeckt bleiben würden \cite{borchini_hrv_2012}.
 
   \item \textbf{Aktivitätsminuten und Schritte}\\
-        Regelmässige moderate Bewegung, erfasst über Schritte und aktive Minuten, steht in direktem
-        Zusammenhang mit höherer Jobzufriedenheit. Eine aktuelle Studie belegt, dass wöchentliche
-        Freizeitaktivität signifikant positive Effekte auf die Zufriedenheit am Arbeitsplatz hat.
+        Körperliche Aktivität wirkt sich positiv auf mentale Gesundheit, Energielevel und Stimmung aus. Schon moderate Bewegung
+        reduziert Stress, verbessert die Schlafqualität und steigert die Arbeitszufriedenheit. Diese lässt sich durch die täglichen
+        Schritte oder die aktiven Minuten messen. Für sitzende Berufe wie die Softwareentwicklung kann regelmässige Bewegung das
+        Risiko von Ermüdung und Motivationsverlust verringern. Mitarbeitende mit höherem Aktivitätsniveau klagen seltener über
+        emotionale Erschöpfung und haben eine insgesamt positivere Einstellung zur Arbeit \cite{dallmeyer_activity_2023}.
 \end{enumerate}
 
-\todo{zu viel?}
-Diese Kennzahlen erlauben es, Zusammenhänge zwischen erholungsbezogenen Faktoren und der subjektiven
-Arbeitszufriedenheit zu erkennen und so gezielte Massnahmen zur Förderung des Wohlbefindens und der
-Leistungsfähigkeit abzuleiten.
+Diese Metriken ermöglichen eine gezielte Verknüpfung zwischen erholungs- und gesundheitsbezogenen Faktoren sowie den erhobenen
+Zufriedenheits- und Prozessdaten. Damit lassen sich Muster identifizieren, die potenzielle Belastungssituationen aufzeigen und 
+gezielte Massnahmen zur Förderung von Wohlbefinden, Motivation und Leistungsfähigkeit ermöglichen.
 
 \section{Yappi Coach}
+\question{hier erwähnen dass umsetzung erst im nächsten projekt?}
 \section{Konzeptevaluation}
 \xeno{Fragebogen}
 
