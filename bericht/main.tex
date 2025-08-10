@@ -599,11 +599,36 @@ Zufriedenheits- und Prozessdaten. Damit lassen sich Muster identifizieren, die p
 gezielte Massnahmen zur Förderung von Wohlbefinden, Motivation und Leistungsfähigkeit ermöglichen.
 
 \section{Yappi Coach}
+\todo
 \question{hier erwähnen dass umsetzung erst im nächsten projekt?}
 
-\section{Konzeptevaluation}
-\xeno{Fragebogen}
 
+\section{Konzeptevaluation}
+
+Ziel der Evaluation war es, die Relevanz der im Konzeptentwurf beschriebenen Erweiterungen von Yappi aus
+Sicht der Hauptnutzer zu überprüfen.
+Hierzu wurde eine Umfrage erstellt, die alle vorgesehenen Konzepte und deren Funktionen abdeckte.
+Die Bewertung erfolgte mit einer Likert-Skala von 0 bis 10, wobei 0 „sehr unwichtig“ und 10 „sehr wichtig“ bedeutet.
+Eine Likert-Skala ist ein in der Sozialforschung weit verbreitetes Verfahren, bei dem Teilnehmende ihre Zustimmung
+oder Ablehnung zu einer Aussage stufenweise angeben können.
+An der Befragung nahmen acht individuelle Softwareentwickler teil.
+
+Die Abbildung~\ref{fig:konzept-eval-feature-wichtigkeit} zeigt die nach Themen gruppierten Durchschnittsbewertungen.
+Am höchsten bewertet wurden Funktionen mit direkter Integration in den Arbeitsfluss, wie das IntelliJ-Plugin (8,50)
+oder die Erfassung von Gesundheitsdaten (7,67).
+Niedrigere Werte erhielten Funktionen, die manuelle Eingaben erfordern, insbesondere Freitextkommentare zu Meetings (2,33).
+
+Die Umfrage diente nicht nur der Bestätigung der Konzeptideen, sondern auch der Priorisierung und Optimierung einzelner Funktionen.
+So ergab sich aus den Rückmeldungen, dass die Meetingumfrage als kompakter Frageblock mit Auswahloptionen gestaltet wird,
+während Freitextfelder nur ergänzend zum Einsatz kommen.
+Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichkeit für regelmässige Rückmeldungen erhöht.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{../figures/konzept-eval-feature-wichtigkeit.drawio.png}
+  \caption{Durchschnittsbewertung der Konzeptfunktionen auf einer Likert-Skala von 0 = sehr unwichtig bis 10 = sehr wichtig.}
+  \label{fig:konzept-eval-feature-wichtigkeit}
+\end{figure}
 
 \chapter{Implementierung}
 \section{Zugriffskontrolle über API-Keys}
