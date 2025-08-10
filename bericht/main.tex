@@ -165,6 +165,7 @@ duktive Entwicklergemeinschaft zu fördern.
 \section{Projektmethodik}
 \section{Prototypen}
 \section{Proof of Concepts}
+\todo{Abgrenzung bezüglich Datenschutz}
 \todo{arc42 erwähen}
 
 \chapter{State of the Art}
@@ -178,8 +179,7 @@ und -umfeld auf, d.h. als Mass für Zufriedenheit, Freude oder innere Zufriedenh
 Zufriedene Entwickler empfinden demnach mehr Arbeitsfreude und Inhaltlichkeit in ihrer Rolle, was eng mit
 der Arbeitsmotivation und dem Engagement bei der Arbeit verknüpft ist \cite{franca_motivation_2020}.
 
-\todo{evt braucht es hier eine citation oder fussnote für den originalen Begriff von flow}
-\todo{Ich bin mir unsicher ob die citation in diesem Absatz sauber genug ist}
+\question{braucht es hier eine citation oder fussnote für den originalen Begriff von flow}
 Eng verwendt mit der Zufriedenheit ist der Begriff \textbf{Flow}. In Anlehnung an Csikszentmihalyis Konzept beschreibt
 Flow einen Zustand von völliger Vertiefung und hohen Fokus beim Programmieren. Flow tritt dann auf, wenn die Anforderungen
 einer Aufgabe im Gleichgewicht mit dem Fähigkeiten des Entwicklers stehen, wodurch man in einen Zustand von intensiver 
@@ -187,8 +187,6 @@ Konzentration gelangt. Zufriedene Entwickler gelangen einfacher in einen anhalte
 hingegen unterbricht diesen Flow, was zu Frustration führt und Schwierigkeiten führt, nach Unterbrechungen wieder in
 eine Aufgabe zurückzufinden. Teilnehmer einer Untersuchung berichten, negative Erlebnisse reissen einen aus dem Flow
 Zustand und machen es schwer, die Arbeit wieder aufzunehmen \cite{sadowski_happiness_2019}.
-
-\todo{maybe absatz über burnout}
 
 Motivation und Zufriedenheit hängen eng zusammen, sind aber konzeptionell unterscheidbar. Motivierte Entwickler sind
 zeigen hohes Engagement und Fokus auf ihre Aufgaben, während Zufriedenheiteher durch allgemeines Wohlbefinden und gute
@@ -416,7 +414,7 @@ Interaktionen während des gesamten Prozesses.
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.95\textwidth]{../figures/apikey-swimlane-diagram.drawio.png}
-  \caption{Ablauf der API-Key Erstellung und -Verwendung in der Yappi-Integrationsplattform}
+  \caption{Ablauf der API-Key Erstellung und -Verwendung in Yappi}
   \label{fig:apikey-swimlane}
 \end{figure}
 
@@ -517,7 +515,7 @@ Dadurch bleibt die Erweiterung vollständig in die bestehende Systemarchitektur 
 
 Gesundheitsdaten können wertvolle Zusatzinformationen zur Entwicklerzufriedenheit liefern. Sie ergänzen subjektive Stimmungsangaben
 um objektive Messwerte, die Rückschlüsse auf Belastung und Erholung ermöglichen. Durch die Anbindung an etablierte Schnittstellen
-wie Apple HealthKit oder Garmin Health API lassen sich Metriken wie Schlafqualität, Herzfrequenz oder Stressindikatoren 
+wie Apple Health Kit oder Garmin Health API lassen sich Metriken wie Schlafqualität, Herzfrequenz oder Stressindikatoren 
 automatisiert erfassen. Diese Daten bilden zusammen mit den Prozess- und Zufriedenheitsmetriken eine erweiterte Grundlage, um
 Korrelationen zwischen physischem Wohlbefinden und Arbeitszufriedenheit zu erkennen und gezielte Massnahmen abzuleiten.
 
@@ -534,7 +532,7 @@ Für die Auswahl der relevanten Gesundheitsmetriken wurden drei Kriterien herang
 \begin{itemize}
   \item \textbf{Wissenschaftlich belegter Zusammenhang} mit Arbeitszufriedenheit oder Leistungsfähigkeit.
   \item \textbf{Technische Messbarkeit} mittels gängiger Wearables bzw. Smartphone-Sensoren.
-  \item \textbf{Integrationsfähigkeit} über etablierte Schnittstellen wie Apple HealthKit oder die Garmin Health API.
+  \item \textbf{Integrationsfähigkeit} über etablierte Schnittstellen wie Apple Health Kit oder die Garmin Health API.
 \end{itemize}
 
 Basierend darauf wurden folgende vier Metriken ausgewählt:
@@ -573,6 +571,34 @@ Diese Metriken ermöglichen eine gezielte Verknüpfung zwischen erholungs- und g
 Zufriedenheits- und Prozessdaten. Damit lassen sich Muster identifizieren, die potenzielle Belastungssituationen aufzeigen und 
 gezielte Massnahmen zur Förderung von Wohlbefinden, Motivation und Leistungsfähigkeit ermöglichen.
 
+\subsubsection{Quellen und Schnittstellen für Gesundheitsdaten}
+
+Für die Integration von Gesundheitsdaten wurden mehrere Optionen geprüft. Im Mittelpunkt standen die Garmin Health API sowie Apple
+Health Kit. Beide Quellen decken relevante Metriken wie Schritte, Herzfrequenz, Schlaf und Stress/HRV ab, unterscheiden sich jedoch
+deutlich hinsichtlich Zugangsmodell, Datenschutzmechanismen, Integrationsaufwand und Eignung für nicht-kommerzielle 
+Forschungsprojekte.
+
+\begin{description}
+  \item[Garmin Health API] Die Garmin Health API stellt über eine REST-Schnittstelle umfangreiche Tages- und Aktivitätsmetriken 
+    bereit. Die Daten werden in der Regel nach dem Gerätesync via über die Mobile Applikation von Garmin bereitgestellt und in
+    JSON ausgeliefert. die Plattform unterstützt Pull- und Push-Modelle, sodass auch eine ereignisgetriebene Integration möglich
+    ist. Der Zugang ist für genehmigte Business-Developer vorgesehen. Für die kommerzielle Nutzung fallen in der Regel
+    Lizenzgebühren an. Diese geschäftliche Ausrichtung sowie die erforderliche formale Zulassung machen die direkte Nutzung für
+    ein kleines, nicht-kommerzielles Forschungsprojekt unpassend. Zwar existieren Forschungsprogramme und Partnerlösungen rund um
+    Garmin, diese sind jedoch üblicherweise an formelle Kooperationen, Vertragsaufwände und teils Kosten gebunden, was die
+    Umsetzungshürde erhöht.
+  \item[Apple Health Kit] Health Kit dient auf iOS als zentrales, lokales Datenrepository für Gesundheits- und Fitnessdaten von 
+    iPhone, Apple Watch und angebundenen Geräten/Apps. Der Zugriff erfolgt feingranular pro Datentyp und erfordert stets explizite
+    Nutzerzustimmung (Lesen/Schreiben getrennt). Daten liegen verschlüsselt auf dem Gerät. Apps erhalten nur Zugriff auf die
+    explizit freigegebenen Kategorien. Für die Integration stehen dokumentierte APIs und Query-Muster zur Verfügung. Eine
+    serverseitige Drittplattform ist nicht erforderlich, wodurch Architektur, Betrieb und Datenschutzfolgenabschätzung vereinfacht
+    werden.
+\end{description}
+
+Da die Garmin Health API primär für kommerzielle Anwendungen vorgesehen ist und der beantragte Zugang für dieses Projekt nicht
+gewährt wurde, wurde Apple Health Kit als geeignetere Datenquelle ausgewählt. Für die Umsetzung bedeutet dies, dass eine
+iOS-Anwendung entwickelt wird, die die relevanten Daten aus Apple HealthKit ausliest und an Yappi überträgt.
+
 \section{Yappi Coach}
 \question{hier erwähnen dass umsetzung erst im nächsten projekt?}
 \section{Konzeptevaluation}
@@ -595,8 +621,10 @@ https://docs.spring.io/spring-security/reference/servlet/architecture.html
 \todo{UML Deployment Diagramm}
 
 \chapter{Evaluation}
-\section{Beantwortung der Fragestellung}
 \xeno{}
+\todo{Hackathon}
+\todo{kleine evaluation vor projektende}
+\section{Beantwortung der Fragestellung}
 
 \chapter{Diskussion}
 
