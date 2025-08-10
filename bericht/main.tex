@@ -51,7 +51,6 @@
 
 \section{Motivation}
 \question{Müssen wir gendern? Entwicklerinnen und Entwickler}
-\todo{aus Project Agreement: zu überarbeiten}
 
 Die Zufriedenheit von Entwicklerinnen und Entwicklern wird, wenn überhaupt, meist nur anhand der
 Menge ihrer geleisteten Arbeit gemessen. Dabei entstehen zwangsläufig Defizite, und ein halbjährli-
@@ -76,8 +75,6 @@ rendes Forschungsprojekt, das sich vertieft mit der Entwicklerzufriedenheit ause
 zusätzliche Erkenntnisse gewinnen soll.
 
 \section{Ziele und Vision}
-
-\todo{Text aus dem Project Agreement noch zu überarbeiten}
 
 Yappi wird zu einer umfassenden Plattform weiterentwickelt, die nicht nur die Zufriedenheit misst,
 sondern sich nahtlos in den Arbeitsalltag integriert und wertvolle Handlungsempfehlungen liefert.
@@ -119,8 +116,6 @@ duktive Entwicklergemeinschaft zu fördern.
 
 \section{Fragestellungen}
 
-\todo{Text aus dem Project Agreement noch zu überarbeiten}
-
 \begin{enumerate}[label=\Alph*.]
   \item Durch welche Technologien und Schnittstellen kann Yappi erweitert werden,
         um ein reibungsloses und einfaches Erfassen von Zufriedenheitsdaten zu ermöglichen?
@@ -154,17 +149,58 @@ duktive Entwicklergemeinschaft zu fördern.
 \end{enumerate}
 
 \chapter{Hintergrund}
+
+\todo{kurze Einleitung}
+
 \section{Ausgangslage}
-\todo{unterkapitel für den Stand von Yappi vor dem Projekt}
+
+Yappi ist eine Webplattform zur Erfassung der Entwicklerzufriedenheit und produktionsnaher Kennzahlen. Ziel ist eine regelmässige,
+datenbasierte Diskussion im Team und ein besseres Verständnis wiederkehrender Muster der Teamstimmung. Die Vorgängerarbeit
+definiert dafür eine klare Produktvision und liefert ein erstes Minimum Viable Product (MVP) als Grundlage. Die Plattform 
+fokussiert sich auf Selbst-Reporting zur Auswertung der Entwicklerzufriedenheit. Der Ansatz adressiert typische Schmerzpunkte
+agiler Teams und stützt sich auf Interviews, Literatur und abgeleitete Produktziele. Yappi erlaubt die Erfassung von
+Happiness-Daten, deren Auswertung im Dashboard und Vergleiche innerhalb eines Teams. Die Lösung ist so ausgelegt, dass in
+Retrospektiven datenbasierte Gespräche geführt werden können.
+
+Yappi ist als Open-Source-Projekt veröffentlicht. Die Repositories für Backend, Frontend und Infrastruktur sind getrennt 
+organisiert. Eine lauffähige Instanz steht zu beginn dieses Projektes nicht zur verfügung. Die Zielgruppe ist klar beschrieben. 
+Angesprochen sind agile Software-Teams, Scrum Master und Product Owner unterschiedlicher Unternehmensgrössen. Die Vorgängerarbeit
+hat die methodische Basis gelegt. Sie umfasst Literaturrecherche, Interviews, abgeleitete Problemfelder, User Flows, Produktziele
+und die Validierung der Konzeptlösung. Das vorliegende Projekt baut auf dieser Struktur auf und fokussiert nun auf Integration,
+Erweiterbarkeit und vertiefte Analytik.
+
 \section{Aktueller technischer Stand}
+
+\begin{description}
+  \item[Backend] Das Backend ist mit Spring Boot umgesetzt. Als Datenbank ist PostgreSQL im Einsatz. Die Kommunikation zum Frontend
+    erfolgt über REST-Schnttstellen, welche nach dem OpenAPI standart dokumentiert sind.
+  \item[Frontend] Das Frontend basiert auf React und Next.js mit TypeScript. Für Aufrufe werden SWR-Hooks verwendet, dabei handelt
+    es sich ume eine React library um Daten zu laden. Komponenten werden mit der Library wird shadcn/ui aufgebaut. Die 
+    Visualisierungen entstehen mit Recharts. Um die Codequalität sicherzustellen wird ESLint zur statischen Code analyse und 
+    Prettier zur automatischen Formatierung nach vordefinierten Guidelines verwendet.
+  \item[Authentisierung und Autorisierung] Die Anmeldung erfolgt über OAuth 2.0. Dabei werden Anbieter wie Google oder GitHub 
+    über Auth.js unterstützt. Passwörter werden nicht gepseichert. Die Anfragen ans Backend werden mit JSON Web Tokens (JWT) 
+    abgesichert.
+  \item[Datenmodell] Das relationale Schema umfasst unter anderem Benutzer, Teams, Sprints sowie Umfragetypen für Happiness,
+    Emotionen und Work-Kinds.
+  \item[Deployment] Die Komponenten sind grösstenteils containerisiert mit Docker. Eine funktionierende CI/CD-Pipeline ist aktuell
+    nicht vorhanden. Bestehende Images sind im GitHub Container Registry abgelegt. Für den Betrieb wird eine Linux-VM wie z.B. auf
+    der Switch-Engine-Infrastruktur benötigt.
+\end{description}
 \section{Parallele Entwicklung auf gemeinsamer Codebasis}
+
+\todo{Zusammenarbeit kurz erklären mit Auswirkungen auf unser Projekt}
+
 \section{Stakeholder}
 
-\begin{itemize}
-  \item Kunde IIT
-  \item Dev Teammitglieder
-  \item Management
-\end{itemize}
+Das Projekt umfasst die folgenden Stakeholder:
+
+\begin{description}
+  \item[Primäre Nutzergruppen] Softwareentwickelnde, Scrum Master und Product Owner in agilen Teams. 
+  \item[Organisationen] Unternehmen nutzen Yappi, um Kultur und Zusammenarbeit datenbasiert zu verbessern.
+  \item[Akademische Stakeholder] Betreuende Dozierende und das Institut an der FHNW welche das Projekt begleiten.
+  \item[Betrieb und Entwicklung] Projektteam dieses Projekts und anderer Projekte die auf Yappi aufbauen.
+\end{description}
 
 \chapter{Methoden}
 \todo{Kanban erwähen}
@@ -633,6 +669,7 @@ gewährt wurde, wurde Apple Health Kit als geeignetere Datenquelle ausgewählt. 
 iOS-Anwendung entwickelt wird, die die relevanten Daten aus Apple HealthKit ausliest und an Yappi überträgt.
 
 \section{Yappi Coach}
+\todo{Ausgearbeitets Konzept dokumentieren}
 \question{hier erwähnen dass umsetzung erst im nächsten projekt?}
 
 \section{Konzeptevaluation}
