@@ -361,11 +361,36 @@ System integriert werden.
 \subsection{Ablauf der API-Key-Erstellung und -Verwendung}
 
 \section{Companion Apps}
-\subsection{Integration in die Entwicklungsumgebung}
+
+\subsubsection{Integration in die Entwicklungsumgebung}
+
+\xeno{rework}
+
+Yappi wird direkt in die integrierte Entwicklungsumgebung (IDE) eingebunden, um den Arbeitsfluss von Entwicklerinnen
+und Entwicklern nicht zu unterbrechen.Als primäre Zielplattform eignet sich ein Plugin für IntelliJ IDEA,
+eine der weltweit am häufigsten genutzten Java-Entwicklungsumgebungen von JetBrains.
+Die Wahl von IntelliJ IDEA basiert auf drei Hauptfaktoren: hohe Verbreitung im professionellen Java-Umfeld,
+umfangreiche Plugin-Schnittstellen zur Integration externer Funktionen und Unterstützung mehrerer Programmiersprachen
+und Build-Systeme, was den Einsatz auch in heterogenen Entwicklungsteams ermöglicht.
+Die unmittelbare Einbettung in die gewohnte Arbeitsoberfläche erlaubt die Erfassung von Zufriedenheitsdaten ohne Kontextwechsel.
+
+Die Integration trägt dazu bei, den Flow-Zustand zu erhalten.
+Flow bezeichnet einen Zustand tiefer Konzentration, der nur entsteht, wenn Anforderungen und Fähigkeiten
+im Gleichgewicht stehen und Unterbrechungen vermieden werden.
+Kontextwechsel zu externen Tools oder Browsern können diesen Zustand unterbrechen und damit Produktivität sowie Zufriedenheit verringern.
+Das IntelliJ-Plugin reduziert solche Unterbrechungen, indem es Feedbackprozesse unmittelbar in den bestehenden Arbeitskontext integriert.
+
+Eine Post-Commit-Aktion ermöglicht es, direkt nach einem abgeschlossenen Commit ein kurzes Feedback abzugeben.
+Dadurch entfällt der Umweg über die Webplattform von Yappi, was die Bedienung beschleunigt und die Gefahr von Befragungsmüdigkeit verringert.
+Kurze, kontextbezogene Abfragen im richtigen Moment erhöhen die Teilnahmebereitschaft und verbessern die Datenqualität.
+
+Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in den Entwicklungsprozess integriert ist.
+
+
 \subsection{Integration von Kalenderdaten}
 \xeno{}
 
-Ein vollständiges erfassen der Entwicklerzufriedenheit erforder die Berücksichtigung aller Arbeitsaspekte,
+Ein vollständiges erfassen der Entwicklerzufriedenheit erfordert die Berücksichtigung aller Arbeitsaspekte,
 insbesondere auch Besprechungen (Meetings). Empirische untersuchungen zeigen, dass Entwickler durchschnittlich zwischen
 10,9 Stunden und 16,5 Stunden pro Woche in Besprechungen verbringen. Ein erheblicher Teil dieser Zeit wird insbesondere
 bei grossen oder ungünstig terminierten Besprechungen als wenig produktiv bewertet.
@@ -509,8 +534,10 @@ gezielte Massnahmen zur Förderung von Wohlbefinden, Motivation und Leistungsfä
 
 \section{Yappi Coach}
 \question{hier erwähnen dass umsetzung erst im nächsten projekt?}
+
 \section{Konzeptevaluation}
 \xeno{Fragebogen}
+
 
 \chapter{Implementierung}
 \section{Zugriffskontrolle über API Keys}
