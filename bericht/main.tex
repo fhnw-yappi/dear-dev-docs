@@ -700,23 +700,36 @@ während Freitextfelder nur ergänzend zum Einsatz kommen.
 Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichkeit für regelmässige Rückmeldungen erhöht.
 
 \chapter{Implementierung}
-\section{Zugriffskontrolle über API-Keys}
+    \section{Zugriffskontrolle über API-Keys}
 
-\todo{Quelle für spring Securtiy Architektur}
-https://docs.spring.io/spring-security/reference/servlet/architecture.html
-\todo{Hash Algorithmus}
-\todo{Datenbank Erweiterung}
-\todo{Security "Workarround" erklären}
-\todo{Beispiel Request (Sequenzdiagramm)}
-\todo{Front End Anpassung}
+    \todo{Quelle für spring Securtiy Architektur}
+    https://docs.spring.io/spring-security/reference/servlet/architecture.html
+    \todo{Hash Algorithmus}
+    \todo{Datenbank Erweiterung}
+    \todo{Security "Workarround" erklären}
+    \todo{Beispiel Request (Sequenzdiagramm)}
+    \todo{Front End Anpassung}
 
 \section{Companion Apps}
 \subsection{IntelliJ IDEA Companion}
 
 
 \subsection{Calendar Companion}
-    In diesem Kapitel wird die Implementierung des Calendar Companion dokumentiert.
-    Diese Erweiterung von Yappi besteht aus mehreren Komponenten. Diese Komponenten werden in der Folgenden Abbildung Dargestellt.
+
+    Der \textit{Calendar Companion} erweitert die Yappi-Plattform um eine Kalenderintegration mit Echtzeitbenachrichtigung
+    und integriertem Feedbackprozess. Er kombiniert Backend-Services, eine Browsererweiterung sowie einen Kommunikationsbroker,
+    um Kalendereinträge aus standardisierten iCalendar Quellen zu synchronisieren und direktes Feedback zu ermöglichen.
+    Dieses Kapitel beschreibt die technische Implementierung der einzelnen Komponenten, deren Zusammenspiel
+    sowie die zugrunde liegenden Datenstrukturen.
+
+    \begin{figure}[!htbp]
+      \centering
+      \includegraphics[width=0.85\textwidth]{../figures/implementation-claendar-companion-system.drawio.png}
+      \caption{Systemübersicht zur Kalenderintegration in Yappi}
+      \label{fig:implementation-calendar-companion-system}
+    \end{figure}
+
+    Die Abbildung~\ref{fig:implementation-calendar-companion-system} zeigt eine Systemübersicht der Kalenderintegration.
 
 \subsubsection{Backend-Integration}
 
