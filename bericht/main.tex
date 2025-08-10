@@ -8,6 +8,7 @@
 \usepackage[ngerman]{babel}
 \usepackage{lmodern}
 \usepackage{enumitem}
+\usepackage{graphicx}
 
 \usepackage{xcolor}
 \newcommand{\todo}[1]{\colorbox{red}{\textbf{TODO: #1}}\\}
@@ -49,6 +50,7 @@
 \chapter{Einleitung}
 
 \section{Motivation}
+\question{Müssen wir gendern? Entwicklerinnen und Entwickler}
 \todo{aus Project Agreement: zu überarbeiten}
 
 Die Zufriedenheit von Entwicklerinnen und Entwicklern wird, wenn überhaupt, meist nur anhand der
@@ -355,10 +357,74 @@ standardisiert und absichert. Zentrales Element ist ein API-Key-basiertes Authen
 eindeutig identifiziert und deren Zugriff kontrolliert. Auf dieser Basis können Daten aus heterogenen Quellen in ein einheitliches
 System integriert werden.
 
-\subsection{Systemarchitektur der Integrationsplattform}
-\subsection{Kommunikationsmechanismus}
-\subsection{Sicherheit}
-\subsection{Ablauf der API-Key-Erstellung und -Verwendung}
+\subsubsection{Kommunikationsmechanismus}
+
+Für die Kommunikation zwischen Companion-Anwendungen und dem Yappi Backend wurde bewusst auf einen API-Key-basierten Mechanismus
+gesetzt, anstatt die bestehende JWT-basierte Authentifizierung des Frontends zu verwenden. JWTs eignen sich vor allem für die
+Authentifizierung einzelner Nutzer in interaktiven Sitzungen. Sie erfordern in der Regel eine vorgelagerte Benutzeranmeldung und
+regelmässige Token-Erneuerung. Dieser Ablauf ist für Companion-Anwendungen, die im Hintergrund oder automatisiert Daten erfassen
+und übertragen, nicht optimal. Diese würden durch die Notwendigkeit einer manuellen Anmeldung in ihrer Funktionalität eingeschränkt.
+
+Der API-Key-Mechanismus wurde entwickelt, um diesen Anforderungen gerecht zu werden. Jeder Nutzer verfügt über einen persönlichen
+API-Key, der in der Webanwendung einmalig generiert wird. Dieser Schlüssel wird manuell in den gewünschten Companion-Anwendungen
+hinterlegt. Bei jeder Anfrage an das Backend wird der API-Key im HTTP-Header übermittelt. Das Backend prüft die Gültigkeit des 
+Schlüssels und ordnet die Anfrage dem entsprechenden Nutzerkonto zu. So wird sichergestellt, dass nur autorisierte Clients im
+Namen des Nutzers Daten übermitteln können. API-Keys lassen sich bei Bedarf widerrufen oder rotieren. Durch diesen Mechanismus
+können Companion-Anwendungen zuverlässig und ohne Benutzerinteraktion mit Yappi kommunizieren, während gleichzeitig ein hohes Mass
+an Sicherheit gewährleistet ist.
+
+Durch diesen Mechanismus können Companion-Anwendungen zuverlässig und ohne wiederkehrende Benutzerinteraktion mit Yappi 
+kommunizieren, während gleichzeitig ein hohes Mass an Sicherheit gewährleistet ist.
+
+\subsubsection{Systemarchitektur der Integrationsplattform}
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{../figures/plattform-system-diagram.drawio.png}
+  \caption{Systemarchitektur der Yappi-Integrationsplattform}
+  \label{fig:systemarchitektur}
+\end{figure}
+
+Das in Abbildung \ref{fig:systemarchitektur} dargestellte Architekturdiagramm zeigt die zentralen Komponenten der 
+Yappi-Integrationsplattform sowie deren Anbindung an externe Companion-Anwendungen. Im Zentrum befindet sich das Yappi Backend,
+das als zentrale Schnittstelle für alle eingehenden Daten und Anfragen fungiert.
+
+Das Yappi Frontend verwendet die bestehende JWT-basierte Authentifizierung zur Verwaltung von Nutzersitzungen. Externe
+Companion-Apps, wie beispielsweise die IntelliJ-, Health- oder Calendar-Companion, sind über einen API-Key-Mechanismus angebunden.
+Dieser gewährleistet, dass nur registrierte und autorisierte Clients Daten an das System übermitteln können. Alle eingehenden
+Daten werden vom Backend in der dargestellten Datenbank (DB) persistiert.
+
+\subsubsection{Sicherheit}
+
+Der API-Key-Mechanismus der Integrationsplattform ist so konzipiert, dass er eine sichere und kontrollierte Anbindung externer
+Companion-Anwendungen ermöglicht. Jeder API-Key ist eindeutig einem Nutzerkonto zugeordnet und wird in der Webanwendung einmalig
+generiert. Die Generierung erfolgt über eine abgesicherte Benutzeroberfläche, wodurch sichergestellt ist, dass ausschliesslich
+berechtigte Nutzer einen Schlüssel anlegen können. Zur Übertragungssicherheit wird der API-Key ausschliesslich über verschlüsselte
+Verbindungen (HTTPS) zwischen der Companion-Anwendung und dem Backend übertragen.
+
+Im Backend erfolgt eine serverseitige Validierung, bei der der Schlüssel auf Gültigkeit und Zuordnung geprüft wird. Die Schlüssel
+werden dabei nicht im Klartext gespeichert, sondern in sicherer Form (z. B. gehasht) abgelegt, um auch bei einem möglichen
+Datenbankzugriff unbefugten Gebrauch zu verhindern. Ein kompromittierter API-Key kann jederzeit durch den Nutzer oder einen
+Administrator gesperrt oder durch einen neuen ersetzt werden.
+
+\subsubsection{Ablauf der API-Key Erstellung und -Verwendung}
+
+Abbildung \ref{fig:apikey-swimlane} zeigt den Ablauf der Erstellung und Verwendung des API-Keys innerhalb der
+Yappi-Integrationsplattform. Die Darstellung erfolgt als Swimlane-Diagramm und verdeutlicht die beteiligten Akteure sowie deren
+Interaktionen während des gesamten Prozesses.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{../figures/apikey-swimlane-diagram.drawio.png}
+  \caption{Ablauf der API-Key Erstellung und -Verwendung in der Yappi-Integrationsplattform}
+  \label{fig:apikey-swimlane}
+\end{figure}
+
+Der Prozess beginnt mit der einmaligen Generierung des API-Keys durch den Nutzer in der Webanwendung. Nach der Erstellung wird der
+Schlüssel in der Companion-App hinterlegt und dort dauerhaft gespeichert. Jede Datenanfrage der Companion-App an das Backend
+enthält den API-Key im HTTP-Header, woraufhin das Backend den Schlüssel validiert und die Anfrage bei positiver Prüfung
+autorisiert. Dieser Ablauf stellt sicher, dass ausschliesslich autorisierte Anwendungen im Namen eines Nutzers Daten an Yappi
+übermitteln können.
 
 \section{Companion Apps}
 
@@ -540,7 +606,7 @@ gezielte Massnahmen zur Förderung von Wohlbefinden, Motivation und Leistungsfä
 
 
 \chapter{Implementierung}
-\section{Zugriffskontrolle über API Keys}
+\section{Zugriffskontrolle über API-Keys}
 
 \todo{Quelle für spring Securtiy Architektur}
 https://docs.spring.io/spring-security/reference/servlet/architecture.html
