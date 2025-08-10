@@ -675,13 +675,162 @@ https://docs.spring.io/spring-security/reference/servlet/architecture.html
 
 \section{Companion Apps}
 \subsection{IntelliJ IDEA Companion}
+
+
 \subsection{Calendar Companion}
 \xeno{}
 
-\todo{Backend Integration}
-\todo{Datenbank Erweiterung}
-\todo{Kommunikationsbroker}
+In diesem Kapitel wird die Implementierung des Calendar Companion dokumentiert.
+Diese Erweiterung von Yappi besteht aus mehreren Komponenten. Diese Komponenten werden in der Folgenden Abbildung Dargestellt.
+
+\subsubsection{Backend-Integration}
+
+Das Kalendermodul ist für die Verwaltung und Bereitstellung von Kalendereinträgen verantwortlich.
+Es unterstützt sowohl den Abruf von Einträgen über eine REST-API als auch eine proaktive Benachrichtigung von Clients in Echtzeit.
+Letzteres erfolgt über das Publish-Subscribe-Protokoll \textit{MQTT} (Message Queuing Telemetry Transport).
+Zudem werden externe iCalendar-Daten (ICS) der Nutzer automatisch synchronisiert.
+
+\paragraph{Model-Klasse}
+Die zentrale Datenstruktur bildet die JPA-Entität \texttt{CalendarEvent.java} (\texttt{entities/}).
+Sie repräsentiert einen einzelnen Kalendereintrag mit Attributen wie \texttt{title}, \texttt{startDate}, \texttt{endDate}, \texttt{allDay} sowie der Zuordnung zu einem Nutzer (\texttt{userId}).
+Diese Klasse wird innerhalb des Backends zwischen Services und Controllern verwendet.
+
+\paragraph{API-Endpunkte (\texttt{CalendarController})}
+Die Interaktion externer Clients mit dem Kalendermodul erfolgt über folgende REST-Endpunkte:
+\begin{itemize}
+  \item \texttt{GET /api/calendar/\{userId\}}
+        Ruft alle Kalendereinträge einer bestimmten Nutzer-ID ab.
+        Der Controller delegiert die Anfrage an den \texttt{CalendarService}, der die Daten lädt und als JSON zurückgibt.
+  \item \texttt{POST /api/calendar/sync}
+        Stösst die Synchronisation manuell an, z.\,B. für sofortige Aktualisierungen oder Debugging.
+        Nutzt dieselbe Logik wie die automatische Synchronisation durch den \texttt{CalendarEventScheduler}.
+\end{itemize}
+
+\paragraph{Service-Schicht (\texttt{CalendarService})}
+Der \texttt{CalendarService} enthält die Geschäftslogik und entkoppelt Controller und geplante Aufgaben von der Datenverarbeitung.
+Er übernimmt:
+\begin{itemize}
+  \item Abruf von Kalendereinträgen,
+  \item Erstellung und Aktualisierung von Einträgen durch Abgleich mit externen Daten,
+  \item Benachrichtigung über \texttt{MQTT} nach dem Ende von Terminen.
+
+\end{itemize}
+
+\paragraph{Geplante Aufgaben (\texttt{CalendarEventScheduler})}
+Zwei periodische Jobs sorgen für Aktualität und Benachrichtigungen:
+\begin{enumerate}
+  \item \textbf{Prüfung beendeter Events} (alle 60 Sekunden):
+        Erkennt neu abgeschlossene Kalendereinträge und benachrichtigt betroffene Clients über \texttt{MQTT}.
+  \item \textbf{Kalendersynchronisation} (alle 5 Minuten):
+        Aktualisiert Kalendereinträge auf Basis externer ICS-Daten.
+        Dabei werden neue Events erstellt, geänderte aktualisiert und nicht mehr vorhandene gelöscht.
+        Änderungen lösen eine Update-Benachrichtigung an die Clients aus.
+\end{enumerate}
+
+\paragraph{Echtzeit-Benachrichtigungen (\texttt{MqttService})}
+Nach Änderungen publiziert der \texttt{MqttService} Nachrichten auf themenspezifischen Topics (z.\,B. \texttt{deardev/teams/\{teamId\}/calendar}).
+Clients abonnieren diese Topics und können ihre UI unmittelbar aktualisieren, ohne Polling durchführen zu müssen.
+
+
+\subsubsection{Datenbankerweiterung}
+
+Zur Speicherung der Kalendereinträge wurde die neue Tabelle \texttt{calendar\_events} eingeführt.
+Die Struktur wird durch die JPA-Entität \texttt{CalendarEvent.java} definiert.
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|l|l|p{9cm}|}
+\hline
+\textbf{Spalte} & \textbf{Datentyp} & \textbf{Beschreibung} \\
+\hline
+\texttt{id} & INTEGER & Primärschlüssel des Eintrags \\
+\texttt{title} & VARCHAR & Titel des Kalenderevents (z.\,B. \glqq Sprint~1\grqq) \\
+\texttt{start\_date} & TIMESTAMP & Startdatum und -zeit \\
+\texttt{end\_date} & TIMESTAMP & Enddatum und -zeit \\
+\texttt{all\_day} & BOOLEAN & Kennzeichen für ganztägige Events \\
+\texttt{user\_id} & INTEGER & Fremdschlüssel zur Tabelle \texttt{users} \\
+\texttt{team\_id} & INTEGER & Fremdschlüssel zur Tabelle \texttt{teams} \\
+\hline
+\end{tabular}
+\caption{Schema der Tabelle \texttt{calendar\_events}}
+\label{tab:calendar_events_schema}
+\end{table}
+
+\paragraph{Backend-Komponenten}
+\begin{itemize}
+  \item \textbf{Entität} (\texttt{CalendarEvent.java}): Datenmodell und Tabellenstruktur.
+  \item \textbf{Repository} (\texttt{CalendarEventRepository.java}): CRUD-Operationen auf \texttt{calendar\_events}.
+  \item \textbf{Service} (\texttt{CalendarService.java}): Geschäftslogik zum Erstellen, Abrufen und Löschen von Events.
+  \item \textbf{Controller} (\texttt{CalendarController.java}): REST-Endpunkte zum Abrufen von Events pro Nutzer.
+  \item \textbf{Scheduler} (\texttt{CalendarEventScheduler.java}): Zeitgesteuerte Erstellung und Aktualisierung der Events.
+  \item \textbf{Factory} (\texttt{CalendarEventFactory.java}): Hilfsklasse zur einfachen Erstellung neuer Eventobjekte.
+\end{itemize}
+
+\paragraph{Automatisierte Erstellung}
+Der \texttt{CalendarEventScheduler} generiert automatisch Einträge auf Basis aktiver Sprints:
+\begin{enumerate}
+  \item Abruf aller aktiven Sprints für jedes Team,
+  \item Prüfung, ob für jedes Teammitglied bereits ein Event existiert,
+  \item Erstellung neuer Events mittels \texttt{CalendarEventFactory}, falls erforderlich,
+  \item Speicherung der Events über das \texttt{CalendarEventRepository}.
+\end{enumerate}
+
+\subsubsection{Kommunikationsbroker}
+
+Für die Echtzeitübertragung von Benachrichtigungen an Clients wird der Open-Source-MQTT-Broker \textbf{Eclipse Mosquitto} eingesetzt.
+\textit{MQTT} (Message Queuing Telemetry Transport) ist ein leichtgewichtiges Publish-Subscribe-Protokoll, das sich besonders für Anwendungen mit geringer Latenz und hohem Aktualisierungsbedarf eignet.
+
+\paragraph{Zweck}
+Der Kommunikationsbroker ermöglicht die sofortige Benachrichtigung von Companion-Anwendungen, insbesondere der Google-Chrome-Erweiterung des Calendar Companions.
+Damit entfällt die Notwendigkeit von Polling-Anfragen an das Backend, was die Netzwerklast reduziert und eine reaktive Benutzeroberfläche ermöglicht.
+
+\paragraph{Kommunikationsfluss}
+\begin{enumerate}
+  \item Das Backend erkennt eine relevante Änderung, z.\,B. das Ende eines Meetings oder die Erstellung eines neuen Kalendereintrags.
+  \item Der \texttt{MqttService} des Backends verbindet sich mit dem Mosquitto-Broker und publiziert die Nachricht auf einem benutzerspezifischen Topic:
+        \texttt{calendar/event/\{user-api-key\}}.
+  \item Die Chrome-Erweiterung des Calendar Companions ist als MQTT-Client auf diesem Topic angemeldet (\textit{subscribed}).
+  \item Beim Empfang einer Nachricht aktualisiert der Client die lokale Ansicht und kann bei Bedarf Folgeaktionen anstossen (z.\,B. Anzeige eines Feedback-Dialogs).
+\end{enumerate}
+
+\paragraph{Nachrichtenformat}
+Die vom Backend publizierten Benachrichtigungen werden als JSON-Objekte gesendet.
+Eine typische Nachricht enthält die folgenden Felder:
+
+\begin{verbatim}
+{
+  "eventId": 3002,
+  "userId": 1,
+  "title": "Meeting IP5 - Standup",
+  "startDate": "2025-08-09T15:00",
+  "endDate": "2025-08-09T15:15",
+  "location": "",
+  "questionBlockId": 1,
+  "teams": [
+    {
+      "id": 1,
+      "name": "Test Team 1"
+    },
+    {
+      "id": 3,
+      "name": "Test Team 2"
+    }
+  ]
+}
+\end{verbatim}
+
+\paragraph{Vorteile}
+\begin{itemize}
+  \item Sofortige Zustellung ohne Polling.
+  \item Geringe Netzwerklast durch Publish-Subscribe-Architektur.
+  \item Einfaches Routing über benutzerspezifische Topics.
+  \item Erweiterbar für weitere Eventtypen oder Companion-Anwendungen.
+\end{itemize}
+
+
 \todo{Browser Extension}
+
+
 \todo{Sequenzdiagramm}
 \todo{Dynamische Umfragen}
 \todo{Front End Anpassung}
