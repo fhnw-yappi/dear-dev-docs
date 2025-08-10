@@ -828,11 +828,184 @@ Eine typische Nachricht enthält die folgenden Felder:
 \end{itemize}
 
 
-\todo{Browser Extension}
+\subsubsection{Yappi Chrome Extension}
+
+Die Yappi Chrome Extension dient als Companion-Anwendung zur Erfassung und Anzeige von Zufriedenheits-Feedback direkt im Webbrowser.
+Sie ist als ereignisgesteuerte Anwendung konzipiert und unterstützt sowohl synchrone Datenabfragen als auch asynchrone Echtzeitbenachrichtigungen.
+
+\paragraph{Zweck}
+Die Extension ermöglicht es, Umfragen, Benachrichtigungen und Verlaufseinträge ohne den Umweg über die Yappi-Webplattform zu verarbeiten.
+Dadurch werden Feedbackprozesse näher an den Arbeitskontext des Nutzers verlagert und Befragungsmüdigkeit reduziert.
+
+\paragraph{Architektur}
+Die Anwendung besteht aus zwei Hauptkomponenten:
+\begin{enumerate}
+  \item \textbf{Persistenter Background-Prozess}
+        Läuft dauerhaft im Hintergrund und ist für die Kommunikation mit externen Diensten, die Verwaltung des Zustands
+        und das proaktive Benachrichtigen des Nutzers zuständig.
+  \item \textbf{Temporäre Popup-Benutzeroberfläche (UI)}
+        Wird nur bei aktiver Benutzerinteraktion geladen und dient der Darstellung von Inhalten sowie der Erfassung von Feedback.
+\end{enumerate}
+
+\paragraph{Kommunikationskanäle}
+Die Verbindung zum Yappi-Backend erfolgt über zwei Kanäle:
+\begin{itemize}
+  \item \textbf{REST-API} Für synchronen Abruf von Daten (z.\,B. Umfragen) und Übermittlung von Antworten.
+  \item \textbf{MQTT-Broker} Für asynchrone Benachrichtigungen in Echtzeit, z.\,B. über neu verfügbare Umfragen.
+\end{itemize}
+Die interne Kommunikation zwischen Background-Prozess und Popup-UI nutzt die Browser-API \texttt{chrome.storage}.
+
+\paragraph{Komponenten im Detail}
+
+\subparagraph{Background-Prozess (\texttt{background/background.js})}
+\begin{itemize}
+  \item Aufbau und Aufrechterhaltung einer MQTT-Verbindung (über \texttt{lib/mqtt.js}) zu einem Broker via WebSocket.
+  \item Abonnieren benutzerspezifischer Topics zur Echtzeitbenachrichtigung.
+  \item Verarbeitung eingehender Nachrichten und Erzeugung nativer Desktop-Benachrichtigungen (\texttt{chrome.notifications}).
+  \item Persistente Speicherung der letzten zehn Ereignisse in \texttt{chrome.storage.local} nach FIFO-Prinzip.
+\end{itemize}
+
+\subparagraph{Popup-Benutzeroberfläche (\texttt{popup/home.html})}
+\begin{itemize}
+  \item Dynamischer Umfrage-Builder (\texttt{popup/survey/builder.js}):
+        Ruft aktuelle Umfragen über die REST-API ab, generiert DOM-Elemente aus Vorlagen (\texttt{popup/questionblock.html},
+        \texttt{popup/questionblock.js}) und integriert diese in die Ansicht.
+  \item Feedback-Übermittlung (\texttt{popup/popup.js}):
+        Sammelt Antworten, strukturiert sie als JSON und sendet sie per POST-Request an die REST-API.
+  \item Verlaufsansicht (\texttt{popup/history.html}, \texttt{popup/history.js}):
+        Liest die letzten zehn gespeicherten Ereignisse aus und stellt sie in einer separaten Ansicht dar.
+\end{itemize}
+
+\paragraph{Externe Abhängigkeiten}
+\begin{itemize}
+  \item \textbf{Yappi-Backend} Bereitstellung der REST-API und MQTT-Broker.
+  \item \textbf{MQTT.js} (\texttt{lib/mqtt.js}) JavaScript-Clientbibliothek für MQTT-Kommunikation.
+\end{itemize}
+
+\subsubsection{Dynamische Umfragen}
+
+Die dynamischen Umfragen in Yappi basieren auf flexibel konfigurierbaren Fragenblöcken, die als JSON-Objekte in der Datenbank gespeichert werden.
+Diese Struktur ermöglicht es, Umfragen anzupassen oder zu erweitern, ohne Änderungen am Anwendungscode vorzunehmen.
+
+\paragraph{Datenbank}
+Die Tabelle \texttt{questionblocks} speichert die Konfiguration einzelner Fragenblöcke.
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{|l|l|p{9cm}|}
+\hline
+\textbf{Spalte} & \textbf{Datentyp} & \textbf{Beschreibung} \\
+\hline
+\texttt{id} & SERIAL & Eindeutiger, automatisch inkrementierender Primärschlüssel \\
+\texttt{configuration} & JSONB & Vollständige Konfiguration des Fragenblocks als JSON-Objekt.
+Ermöglicht flexible Strukturierung und effiziente Abfragen \\
+\hline
+\end{tabular}
+\caption{Schema der Tabelle \texttt{questionblocks}}
+\label{tab:questionblocks_schema}
+\end{table}
+
+\noindent
+\textbf{Anmerkung:} Der Datentyp \texttt{JSONB} (Binary JSON) erlaubt eine performante Speicherung und gezielte Abfragen innerhalb der JSON-Daten.
+
+\paragraph{Backend-Komponenten}
+\begin{itemize}
+  \item \textbf{Entität} (\texttt{QuestionBlock.java}) — Abbildung der Tabelle \texttt{questionblocks} als JPA-Entität.
+        Attribute: \texttt{id} (INTEGER) und \texttt{configuration} (\texttt{JsonNode}).
+  \item \textbf{Repository} (\texttt{QuestionBlockRepository.java}) — CRUD-Operationen auf der Tabelle.
+  \item \textbf{Service} (\texttt{QuestionBlockService.java}) — Geschäftslogik für den Zugriff und die Validierung von Fragenblöcken.
+  \item \textbf{Controller} (\texttt{QuestionBlockController.java}) — Bereitstellung der API-Endpunkte.
+\end{itemize}
+
+\paragraph{API-Endpunkte}
+\begin{itemize}
+  \item \texttt{GET /companion/questionblocks/\{id\}}
+        Ruft den Fragenblock mit der angegebenen ID ab.
+        \textbf{Antworten:} \texttt{200 OK} mit JSON-Objekt oder \texttt{404 Not Found}, falls nicht vorhanden.
+\end{itemize}
+
+\paragraph{Darstellung in der Companion-App}
+Die Chrome Extension ruft den entsprechenden Fragenblock per REST-API ab.
+Das Skript \texttt{popup/survey/builder.js} parst die JSON-Daten und erstellt für jede Frage die passenden HTML-Elemente
+basierend auf den Templates (\texttt{popup/questionblock.html}) und der Logik in \texttt{popup/questionblock.js}.
+Unterstützt werden Fragetypen wie:
+\begin{itemize}
+  \item Likert-Skalen
+  \item Single-Choice
+  \item Multiple-Choice
+  \item Freitext
+\end{itemize}
+
+\paragraph{Beispiel einer Umfragekonfiguration}
+\begin{verbatim}
+{
+  "id": "1000",
+  "title": "Basic Meeting Feedback",
+  "description": "This is am Meeting feedback survey.",
+  "sections": [
+    {
+      "id": "q1",
+      "type": "likert",
+      "title": "1. Clarity of Goals & Relevance",
+      "prompt": "The goals of the meeting were clearly defined.",
+      "required": true,
+      "min": 1,
+      "label_min": "strongly disagree",
+      "max": 5,
+      "label_max": "strongly agree",
+      "step": 1,
+      "default": 3
+    },
+    {
+      "id": "q2",
+      "type": "single-choice",
+      "title": "2. Meeting Length",
+      "prompt": "How would you rate the length of the meeting?",
+      "required": true,
+      "options": [
+        { "value": "too-short", "label": "Too short" },
+        { "value": "just-right", "label": "Just right" },
+        { "value": "too-long", "label": "Too long" }
+      ],
+      "default": "just-right"
+    },
+    {
+      "id": "q3",
+      "type": "multiple-choice",
+      "title": "3. Meeting Highlights",
+      "prompt": "Which aspects of the meeting did you find valuable? (Select all that apply)",
+      "required": false,
+      "options": [
+        { "value": "clear-agenda", "label": "Clear agenda" },
+        { "value": "useful-content", "label": "Useful content" },
+        { "value": "good-discussion", "label": "Good discussion" },
+        { "value": "action-items", "label": "Clear action items" }
+      ],
+      "default": ["clear-agenda", "good-discussion"]
+    },
+    {
+      "id": "q5",
+      "type": "free-text",
+      "title": "4. Additional Comments",
+      "prompt": "Please share any additional feedback or suggestions.",
+      "required": false,
+      "placeholder": "Type your feedback here...",
+      "maxLength": 500
+    }
+  ]
+}
+
+\end{verbatim}
+
+\paragraph{Vorteile}
+\begin{itemize}
+  \item Anpassung und Erweiterung von Umfragen ohne Codeänderungen.
+  \item Unterstützung verschiedener Fragetypen und Layouts.
+  \item Zentrale Verwaltung und Wiederverwendung von Fragenblöcken.
+\end{itemize}
 
 
 \todo{Sequenzdiagramm}
-\todo{Dynamische Umfragen}
 \todo{Front End Anpassung}
 
 \subsection{Health Companion}
