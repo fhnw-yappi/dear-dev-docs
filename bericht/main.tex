@@ -509,7 +509,7 @@ in die bestehenden Webanwendung Yappi und einer Companion-App welche durch eine 
 Die Erweiterung soll nach Ende eines Meetings automatisch, den Entwickler nach Feedback abfragen und die Ergebnisse davon in Yappi für weitere Auswertungen bereitstellen.
 
 \subsubsection{Messung der Meetingqualität}
-\xeno{rework mit quelle}
+\xeno{quelle einbetten}
 Zur Bewertung werden sieben Kriterien definiert. Diese sind in Anlehnung an Best Practices und gängige Meeting-Umfrageinstrumente ausgewählt:
 
 \begin{enumerate}
@@ -700,7 +700,107 @@ während Freitextfelder nur ergänzend zum Einsatz kommen.
 Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichkeit für regelmässige Rückmeldungen erhöht.
 
 \chapter{Implementierung}
-    \section{Zugriffskontrolle über API-Keys}
+\section{Zugriffskontrolle über API-Keys}
+
+    Das API-Key-System dient der sicheren und eindeutigen Authentifizierung externer Dienste gegenüber der \texttt{Yappi-Companion}-API.
+    Anstelle von Benutzeranmeldedaten verwenden Clients einen statisch generierten API-Key, der für den jeweiligen Nutzer erstellt und ausschliesslich diesem zugeordnet ist.
+    Dies ermöglicht den kontrollierten Zugriff auf geschützte Endpunkte, ohne dass sensible Login-Daten offengelegt oder dauerhaft gespeichert werden müssen.
+
+    Über einen gültigen API-Key können autorisierte Clients Anfragen an Endpunkte mit dem Pfadpräfix \texttt{/companion/} stellen.
+    Beispielsweise kann der Fragenblock mit der ID~\texttt{1} wie folgt abgerufen werden:
+
+    \begin{verbatim}
+        GET https://yappi.dev/companion/questionblocks/1
+        X-API-KEY: <api-key>
+    \end{verbatim}
+
+
+    \paragraph{Datenbank}
+    Die Tabelle \texttt{api\_key} speichert die Metadaten und API-Keys.
+
+    \begin{table}[!htbp]
+    \centering
+    \begin{tabular}{|l|l|p{9cm}|}
+    \hline
+    \textbf{Spalte} & \textbf{Datentyp} & \textbf{Beschreibung} \\
+    \hline
+    \texttt{id} & SERIAL & Primärschlüssel, auto-inkrementierend \\
+    \texttt{user\_id} & INTEGER & Fremdschlüssel auf \texttt{users.id} \\
+    \texttt{hashed\_key} & TEXT & Gesalteter Hash des API-Keys (z.\,B. BCrypt oder Argon2) \\
+    \texttt{created\_at} & TIMESTAMPTZ & Zeitpunkt der Erstellung des Keys \\
+    \texttt{expires\_at} & TIMESTAMPTZ & Optionales Ablaufdatum \\
+    \texttt{active} & BOOLEAN & Aktivierungs-Flag, um Keys ohne Löschung zu sperren \\
+    \hline
+    \end{tabular}
+    \caption{Schema der Tabelle \texttt{api\_key}}
+    \label{tab:api_key_schema}
+    \end{table}
+
+    \paragraph{Backend-Komponenten}
+    \begin{itemize}
+      \item \textbf{Entität} (\texttt{ApiKey.java}) — Abbildung der Tabelle \texttt{api\_key} als JPA-Entität, ohne Feld für den rohen Key.
+      \item \textbf{Repository} (\texttt{ApiKeyRepository.java}) — Zugriff auf API-Key-Datensätze, inkl. Suche nach Key-Präfix.
+      \item \textbf{Util-Klasse} (\texttt{ApiKeyUtil.java}) — Generierung zufälliger Keys, Trennung von Präfix und geheimem Teil, Hashing des geheimen Teils mit einem sicheren Algorithmus.
+      \item \textbf{Service} (\texttt{ApiKeyService.java}) — Erstellung, Speicherung und Validierung von Keys.
+      \item \textbf{Controller} (\texttt{ApiKeyController.java}) — REST-Endpunkte zur Verwaltung von Keys.
+    \end{itemize}
+
+    \paragraph{API-Endpunkte}
+    Basispfad: \texttt{/apikey}. Alle Endpunkte setzen einen gültigen JWT im \texttt{Authorization}-Header voraus (\texttt{Bearer <token>}).
+
+    \begin{itemize}
+      \item \texttt{GET /apikey} \\
+            Liefert den aktiven API-Key des aktuell authentisierten Nutzers als Metadatenobjekt (kein Klartext-Key). \\
+            \textbf{Antworten:} \texttt{200 OK}, \texttt{404 Not Found} (kein aktiver Key), \texttt{401 Unauthorized} (fehlender/ungültiger Header).
+      \item \texttt{POST /apikey/generate} \\
+            Erzeugt einen neuen API-Key für den authentisierten Nutzer und gibt den Klartext-Key einmalig zurück. \\
+            \textbf{Antworten:} \texttt{200 OK}, \texttt{401 Unauthorized}.
+    \end{itemize}
+
+    \noindent
+    \textbf{Nutzung geschützter Ressourcen:} Externe Clients authentisieren sich anschliessend mit \texttt{X-API-KEY: <key>} gegenüber den Companion-/Backend-Endpunkten. Der Klartext-Key wird nicht gespeichert; in der Datenbank liegt nur \texttt{hashed\_key}.
+
+    \noindent
+    \textbf{Beispiel (cURL):}
+    \begin{verbatim}
+    # Key erzeugen
+    curl -H "Authorization: Bearer <JWT>" -X POST https://<host>/apikey/generate
+
+    # Aktiven Key (Metadaten) abrufen
+    curl -H "Authorization: Bearer <JWT>" https://<host>/apikey
+    \end{verbatim}
+
+
+    \paragraph{Verarbeitungslogik}
+    \textbf{Erstellung:}
+    \begin{enumerate}
+      \item Generierung eines neuen Keys (Präfix + geheimer Teil).
+      \item Hashing des geheimen Teils.
+      \item Speicherung des Hashes und der Metadaten in der Tabelle \texttt{api\_key}.
+      \item Rückgabe des vollständigen Keys an den Client (nur einmalig).
+    \end{enumerate}
+    \textbf{Validierung:}
+    \begin{enumerate}
+      \item Extraktion des Präfixes und geheimen Teils aus dem API-Key-Header.
+      \item Abruf des Datensatzes anhand des Präfixes.
+      \item Prüfung auf Existenz, Aktivstatus und Ablaufdatum.
+      \item Vergleich des Hashes mit dem übergebenen geheimen Teil.
+      \item Bei Erfolg: Authentifizierung des zugehörigen Benutzers.
+    \end{enumerate}
+
+    \paragraph{Sicherheitsintegration}
+    \begin{itemize}
+      \item \textbf{ApiKeyFilter} — Spring-Security-Filter, der den API-Key aus dem \texttt{X-API-KEY}-Header ausliest und validiert.
+      \item \textbf{SecurityConfig} — Bindet den Filter vor dem \texttt{UsernamePasswordAuthenticationFilter} in die Filterkette ein, um API-Key-Anfragen vor anderen Authentifizierungsmethoden zu prüfen.
+    \end{itemize}
+
+    \paragraph{Vorteile}
+    \begin{itemize}
+      \item Schlüssel werden nie im Klartext gespeichert.
+      \item Flexible Verwaltung durch Ablaufdaten und Aktivierungs-Flag.
+      \item Sichere Hashing-Verfahren verhindern Missbrauch bei Datenbankkompromittierung.
+    \end{itemize}
+
 
     \todo{Quelle für spring Securtiy Architektur}
     https://docs.spring.io/spring-security/reference/servlet/architecture.html
