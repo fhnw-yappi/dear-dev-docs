@@ -155,10 +155,16 @@ duktive Entwicklergemeinschaft zu fördern.
 
 \chapter{Hintergrund}
 \section{Ausgangslage}
+\todo{unterkapitel für den Stand von Yappi vor dem Projekt}
 \section{Aktueller technischer Stand}
 \section{Parallele Entwicklung auf gemeinsamer Codebasis}
 \section{Stakeholder}
-\todo{unterkapitel für den Stand von Yappi vor dem Projekt}
+
+\begin{itemize}
+  \item Kunde IIT
+  \item Dev Teammitglieder
+  \item Management
+\end{itemize}
 
 \chapter{Methoden}
 \todo{Kanban erwähen}
@@ -425,8 +431,9 @@ autorisiert. Dieser Ablauf stellt sicher, dass ausschliesslich autorisierte Anwe
 übermitteln können.
 
 \section{Companion Apps}
+\todo{kurze Einleitung}
 
-\subsubsection{Integration in die Entwicklungsumgebung}
+\subsection{Integration in die Entwicklungsumgebung}
 
 \xeno{rework}
 
@@ -453,6 +460,7 @@ Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in 
 
 \subsection{Integration von Kalenderdaten}
 \xeno{}
+\todo{Sytemdiagramm}
 
 Ein vollständiges erfassen der Entwicklerzufriedenheit erfordert die Berücksichtigung aller Arbeitsaspekte,
 insbesondere auch Besprechungen (Meetings). Empirische untersuchungen zeigen, dass Entwickler durchschnittlich zwischen
@@ -625,9 +633,7 @@ gewährt wurde, wurde Apple Health Kit als geeignetere Datenquelle ausgewählt. 
 iOS-Anwendung entwickelt wird, die die relevanten Daten aus Apple HealthKit ausliest und an Yappi überträgt.
 
 \section{Yappi Coach}
-\todo
 \question{hier erwähnen dass umsetzung erst im nächsten projekt?}
-
 
 \section{Konzeptevaluation}
 
@@ -639,6 +645,13 @@ Eine Likert-Skala ist ein in der Sozialforschung weit verbreitetes Verfahren, be
 oder Ablehnung zu einer Aussage stufenweise angeben können.
 An der Befragung nahmen acht individuelle Softwareentwickler teil.
 
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{../figures/konzept-eval-feature-wichtigkeit.drawio.png}
+  \caption{Durchschnittsbewertung der Konzeptfunktionen auf einer Likert-Skala von 0 = sehr unwichtig bis 10 = sehr wichtig.}
+  \label{fig:konzept-eval-feature-wichtigkeit}
+\end{figure}
+
 Die Abbildung~\ref{fig:konzept-eval-feature-wichtigkeit} zeigt die nach Themen gruppierten Durchschnittsbewertungen.
 Am höchsten bewertet wurden Funktionen mit direkter Integration in den Arbeitsfluss, wie das IntelliJ-Plugin (8,50)
 oder die Erfassung von Gesundheitsdaten (7,67).
@@ -649,27 +662,39 @@ So ergab sich aus den Rückmeldungen, dass die Meetingumfrage als kompakter Frag
 während Freitextfelder nur ergänzend zum Einsatz kommen.
 Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichkeit für regelmässige Rückmeldungen erhöht.
 
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=0.85\textwidth]{../figures/konzept-eval-feature-wichtigkeit.drawio.png}
-  \caption{Durchschnittsbewertung der Konzeptfunktionen auf einer Likert-Skala von 0 = sehr unwichtig bis 10 = sehr wichtig.}
-  \label{fig:konzept-eval-feature-wichtigkeit}
-\end{figure}
-
 \chapter{Implementierung}
 \section{Zugriffskontrolle über API-Keys}
 
 \todo{Quelle für spring Securtiy Architektur}
 https://docs.spring.io/spring-security/reference/servlet/architecture.html
+\todo{Hash Algorithmus}
+\todo{Datenbank Erweiterung}
+\todo{Security "Workarround" erklären}
+\todo{Beispiel Request (Sequenzdiagramm)}
+\todo{Front End Anpassung}
 
 \section{Companion Apps}
 \subsection{IntelliJ IDEA Companion}
 \subsection{Calendar Companion}
 \xeno{}
+
+\todo{Backend Integration}
+\todo{Datenbank Erweiterung}
+\todo{Kommunikationsbroker}
+\todo{Browser Extension}
+\todo{Sequenzdiagramm}
+\todo{Dynamische Umfragen}
+\todo{Front End Anpassung}
+
 \subsection{Health Companion}
+
+\todo{Health Kit API}
+\todo{Kommunikation}
+\todo{Benutzeroberfläche}
+\todo{Datenbankerweiterung}
+
 \section{Deployment}
 \xeno{}
-\todo{nicht sicher ob es auch ein entsprechendes Kapitel im Konzeptdesign benötigt}
 \todo{UML Deployment Diagramm}
 
 \chapter{Evaluation}
