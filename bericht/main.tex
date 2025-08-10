@@ -715,331 +715,326 @@ https://docs.spring.io/spring-security/reference/servlet/architecture.html
 
 
 \subsection{Calendar Companion}
-\xeno{}
-
-In diesem Kapitel wird die Implementierung des Calendar Companion dokumentiert.
-Diese Erweiterung von Yappi besteht aus mehreren Komponenten. Diese Komponenten werden in der Folgenden Abbildung Dargestellt.
+    In diesem Kapitel wird die Implementierung des Calendar Companion dokumentiert.
+    Diese Erweiterung von Yappi besteht aus mehreren Komponenten. Diese Komponenten werden in der Folgenden Abbildung Dargestellt.
 
 \subsubsection{Backend-Integration}
 
-Das Kalendermodul ist für die Verwaltung und Bereitstellung von Kalendereinträgen verantwortlich.
-Es unterstützt sowohl den Abruf von Einträgen über eine REST-API als auch eine proaktive Benachrichtigung von Clients in Echtzeit.
-Letzteres erfolgt über das Publish-Subscribe-Protokoll \textit{MQTT} (Message Queuing Telemetry Transport).
-Zudem werden externe iCalendar-Daten (ICS) der Nutzer automatisch synchronisiert.
+    Das Kalendermodul ist für die Verwaltung und Bereitstellung von Kalendereinträgen verantwortlich.
+    Es unterstützt sowohl den Abruf von Einträgen über eine REST-API als auch eine proaktive Benachrichtigung von Clients in Echtzeit.
+    Letzteres erfolgt über das Publish-Subscribe-Protokoll \textit{MQTT} (Message Queuing Telemetry Transport).
+    Zudem werden externe iCalendar-Daten (ICS) der Nutzer automatisch synchronisiert.
 
 \paragraph{Model-Klasse}
-Die zentrale Datenstruktur bildet die JPA-Entität \texttt{CalendarEvent.java} (\texttt{entities/}).
-Sie repräsentiert einen einzelnen Kalendereintrag mit Attributen wie \texttt{title}, \texttt{startDate}, \texttt{endDate}, \texttt{allDay} sowie der Zuordnung zu einem Nutzer (\texttt{userId}).
-Diese Klasse wird innerhalb des Backends zwischen Services und Controllern verwendet.
+    Die zentrale Datenstruktur bildet die JPA-Entität \texttt{CalendarEvent.java} (\texttt{entities/}).
+    Sie repräsentiert einen einzelnen Kalendereintrag mit Attributen wie \texttt{title}, \texttt{startDate}, \texttt{endDate}, \texttt{allDay} sowie der Zuordnung zu einem Nutzer (\texttt{userId}).
+    Diese Klasse wird innerhalb des Backends zwischen Services und Controllern verwendet.
 
 \paragraph{API-Endpunkte (\texttt{CalendarController})}
-Die Interaktion externer Clients mit dem Kalendermodul erfolgt über folgende REST-Endpunkte:
-\begin{itemize}
-  \item \texttt{GET /api/calendar/\{userId\}}
-        Ruft alle Kalendereinträge einer bestimmten Nutzer-ID ab.
-        Der Controller delegiert die Anfrage an den \texttt{CalendarService}, der die Daten lädt und als JSON zurückgibt.
-  \item \texttt{POST /api/calendar/sync}
-        Stösst die Synchronisation manuell an, z.\,B. für sofortige Aktualisierungen oder Debugging.
-        Nutzt dieselbe Logik wie die automatische Synchronisation durch den \texttt{CalendarEventScheduler}.
-\end{itemize}
+    Die Interaktion externer Clients mit dem Kalendermodul erfolgt über folgende REST-Endpunkte:
+    \begin{itemize}
+        \item \texttt{GET /api/calendar/\{userId\}}
+            Ruft alle Kalendereinträge einer bestimmten Nutzer-ID ab.
+            Der Controller delegiert die Anfrage an den \texttt{CalendarService}, der die Daten lädt und als JSON zurückgibt.
+        \item \texttt{POST /api/calendar/sync}
+            Stösst die Synchronisation manuell an, z.\,B. für sofortige Aktualisierungen oder Debugging.
+            Nutzt dieselbe Logik wie die automatische Synchronisation durch den \texttt{CalendarEventScheduler}.
+    \end{itemize}
 
 \paragraph{Service-Schicht (\texttt{CalendarService})}
-Der \texttt{CalendarService} enthält die Geschäftslogik und entkoppelt Controller und geplante Aufgaben von der Datenverarbeitung.
-Er übernimmt:
-\begin{itemize}
-  \item Abruf von Kalendereinträgen,
-  \item Erstellung und Aktualisierung von Einträgen durch Abgleich mit externen Daten,
-  \item Benachrichtigung über \texttt{MQTT} nach dem Ende von Terminen.
-
-\end{itemize}
+    Der \texttt{CalendarService} enthält die Geschäftslogik und entkoppelt Controller und geplante Aufgaben von der Datenverarbeitung.
+    Er übernimmt:
+    \begin{itemize}
+        \item Abruf von Kalendereinträgen,
+        \item Erstellung und Aktualisierung von Einträgen durch Abgleich mit externen Daten,
+        \item Benachrichtigung über \texttt{MQTT} nach dem Ende von Terminen.
+    \end{itemize}
 
 \paragraph{Geplante Aufgaben (\texttt{CalendarEventScheduler})}
-Zwei periodische Jobs sorgen für Aktualität und Benachrichtigungen:
-\begin{enumerate}
-  \item \textbf{Prüfung beendeter Events} (alle 60 Sekunden):
-        Erkennt neu abgeschlossene Kalendereinträge und benachrichtigt betroffene Clients über \texttt{MQTT}.
-  \item \textbf{Kalendersynchronisation} (alle 5 Minuten):
-        Aktualisiert Kalendereinträge auf Basis externer ICS-Daten.
-        Dabei werden neue Events erstellt, geänderte aktualisiert und nicht mehr vorhandene gelöscht.
-        Änderungen lösen eine Update-Benachrichtigung an die Clients aus.
-\end{enumerate}
+    Zwei periodische Jobs sorgen für Aktualität und Benachrichtigungen:
+    \begin{enumerate}
+        \item \textbf{Prüfung beendeter Events} (alle 60 Sekunden):
+            Erkennt neu abgeschlossene Kalendereinträge und benachrichtigt betroffene Clients über \texttt{MQTT}.
+        \item \textbf{Kalendersynchronisation} (alle 5 Minuten):
+            Aktualisiert Kalendereinträge auf Basis externer ICS-Daten.
+            Dabei werden neue Events erstellt, geänderte aktualisiert und nicht mehr vorhandene gelöscht.
+            Änderungen lösen eine Update-Benachrichtigung an die Clients aus.
+    \end{enumerate}
 
 \paragraph{Echtzeit-Benachrichtigungen (\texttt{MqttService})}
-Nach Änderungen publiziert der \texttt{MqttService} Nachrichten auf themenspezifischen Topics (z.\,B. \texttt{deardev/teams/\{teamId\}/calendar}).
-Clients abonnieren diese Topics und können ihre UI unmittelbar aktualisieren, ohne Polling durchführen zu müssen.
+    Nach Änderungen publiziert der \texttt{MqttService} Nachrichten auf themenspezifischen Topics (z.\,B. \texttt{deardev/teams/\{teamId\}/calendar}).
+    Clients abonnieren diese Topics und können ihre UI unmittelbar aktualisieren, ohne Polling durchführen zu müssen.
 
 
 \subsubsection{Datenbankerweiterung}
 
-Zur Speicherung der Kalendereinträge wurde die neue Tabelle \texttt{calendar\_events} eingeführt.
-Die Struktur wird durch die JPA-Entität \texttt{CalendarEvent.java} definiert.
+    Zur Speicherung der Kalendereinträge wurde die neue Tabelle \texttt{calendar\_events} eingeführt.
+    Die Struktur wird durch die JPA-Entität \texttt{CalendarEvent.java} definiert.
 
 \begin{table}[!htbp]
-\centering
-\begin{tabular}{|l|l|p{9cm}|}
-\hline
-\textbf{Spalte} & \textbf{Datentyp} & \textbf{Beschreibung} \\
-\hline
-\texttt{id} & INTEGER & Primärschlüssel des Eintrags \\
-\texttt{title} & VARCHAR & Titel des Kalenderevents (z.\,B. \glqq Sprint~1\grqq) \\
-\texttt{start\_date} & TIMESTAMP & Startdatum und -zeit \\
-\texttt{end\_date} & TIMESTAMP & Enddatum und -zeit \\
-\texttt{all\_day} & BOOLEAN & Kennzeichen für ganztägige Events \\
-\texttt{user\_id} & INTEGER & Fremdschlüssel zur Tabelle \texttt{users} \\
-\texttt{team\_id} & INTEGER & Fremdschlüssel zur Tabelle \texttt{teams} \\
-\hline
-\end{tabular}
-\caption{Schema der Tabelle \texttt{calendar\_events}}
-\label{tab:calendar_events_schema}
+    \centering
+    \begin{tabular}{|l|l|p{9cm}|}
+        \hline
+            \textbf{Spalte} & \textbf{Datentyp} & \textbf{Beschreibung} \\
+        \hline
+            \texttt{id} & INTEGER & Primärschlüssel des Eintrags \\
+            \texttt{title} & VARCHAR & Titel des Kalenderevents (z.\,B. \glqq Sprint~1\grqq) \\
+            \texttt{start\_date} & TIMESTAMP & Startdatum und -zeit \\
+            \texttt{end\_date} & TIMESTAMP & Enddatum und -zeit \\
+            \texttt{all\_day} & BOOLEAN & Kennzeichen für ganztägige Events \\
+            \texttt{user\_id} & INTEGER & Fremdschlüssel zur Tabelle \texttt{users} \\
+            \texttt{team\_id} & INTEGER & Fremdschlüssel zur Tabelle \texttt{teams} \\
+        \hline
+    \end{tabular}
+    \caption{Schema der Tabelle \texttt{calendar\_events}}
+    \label{tab:calendar_events_schema}
 \end{table}
 
 \paragraph{Backend-Komponenten}
-\begin{itemize}
-  \item \textbf{Entität} (\texttt{CalendarEvent.java}): Datenmodell und Tabellenstruktur.
-  \item \textbf{Repository} (\texttt{CalendarEventRepository.java}): CRUD-Operationen auf \texttt{calendar\_events}.
-  \item \textbf{Service} (\texttt{CalendarService.java}): Geschäftslogik zum Erstellen, Abrufen und Löschen von Events.
-  \item \textbf{Controller} (\texttt{CalendarController.java}): REST-Endpunkte zum Abrufen von Events pro Nutzer.
-  \item \textbf{Scheduler} (\texttt{CalendarEventScheduler.java}): Zeitgesteuerte Erstellung und Aktualisierung der Events.
-  \item \textbf{Factory} (\texttt{CalendarEventFactory.java}): Hilfsklasse zur einfachen Erstellung neuer Eventobjekte.
-\end{itemize}
+    \begin{itemize}
+        \item \textbf{Entität} (\texttt{CalendarEvent.java}): Datenmodell und Tabellenstruktur.
+        \item \textbf{Repository} (\texttt{CalendarEventRepository.java}): CRUD-Operationen auf \texttt{calendar\_events}.
+        \item \textbf{Service} (\texttt{CalendarService.java}): Geschäftslogik zum Erstellen, Abrufen und Löschen von Events.
+        \item \textbf{Controller} (\texttt{CalendarController.java}): REST-Endpunkte zum Abrufen von Events pro Nutzer.
+        \item \textbf{Scheduler} (\texttt{CalendarEventScheduler.java}): Zeitgesteuerte Erstellung und Aktualisierung der Events.
+        \item \textbf{Factory} (\texttt{CalendarEventFactory.java}): Hilfsklasse zur einfachen Erstellung neuer Eventobjekte.
+    \end{itemize}
 
 \paragraph{Automatisierte Erstellung}
-Der \texttt{CalendarEventScheduler} generiert automatisch Einträge auf Basis aktiver Sprints:
-\begin{enumerate}
-  \item Abruf aller aktiven Sprints für jedes Team,
-  \item Prüfung, ob für jedes Teammitglied bereits ein Event existiert,
-  \item Erstellung neuer Events mittels \texttt{CalendarEventFactory}, falls erforderlich,
-  \item Speicherung der Events über das \texttt{CalendarEventRepository}.
-\end{enumerate}
+    Der \texttt{CalendarEventScheduler} generiert automatisch Einträge auf Basis aktiver Sprints:
+    \begin{enumerate}
+        \item Abruf aller aktiven Sprints für jedes Team,
+        \item Prüfung, ob für jedes Teammitglied bereits ein Event existiert,
+        \item Erstellung neuer Events mittels \texttt{CalendarEventFactory}, falls erforderlich,
+        \item Speicherung der Events über das \texttt{CalendarEventRepository}.
+    \end{enumerate}
 
 \subsubsection{Kommunikationsbroker}
-
-Für die Echtzeitübertragung von Benachrichtigungen an Clients wird der Open-Source-MQTT-Broker \textbf{Eclipse Mosquitto} eingesetzt.
-\textit{MQTT} (Message Queuing Telemetry Transport) ist ein leichtgewichtiges Publish-Subscribe-Protokoll, das sich besonders für Anwendungen mit geringer Latenz und hohem Aktualisierungsbedarf eignet.
+    Für die Echtzeitübertragung von Benachrichtigungen an Clients wird der Open-Source-MQTT-Broker \textbf{Eclipse Mosquitto} eingesetzt.
+    \textit{MQTT} (Message Queuing Telemetry Transport) ist ein leichtgewichtiges Publish-Subscribe-Protokoll, das sich besonders für Anwendungen mit geringer Latenz und hohem Aktualisierungsbedarf eignet.
 
 \paragraph{Zweck}
-Der Kommunikationsbroker ermöglicht die sofortige Benachrichtigung von Companion-Anwendungen, insbesondere der Google-Chrome-Erweiterung des Calendar Companions.
-Damit entfällt die Notwendigkeit von Polling-Anfragen an das Backend, was die Netzwerklast reduziert und eine reaktive Benutzeroberfläche ermöglicht.
+    Der Kommunikationsbroker ermöglicht die sofortige Benachrichtigung von Companion-Anwendungen, insbesondere der Google-Chrome-Erweiterung des Calendar Companions.
+    Damit entfällt die Notwendigkeit von Polling-Anfragen an das Backend, was die Netzwerklast reduziert und eine reaktive Benutzeroberfläche ermöglicht.
 
 \paragraph{Kommunikationsfluss}
-\begin{enumerate}
-  \item Das Backend erkennt eine relevante Änderung, z.\,B. das Ende eines Meetings oder die Erstellung eines neuen Kalendereintrags.
-  \item Der \texttt{MqttService} des Backends verbindet sich mit dem Mosquitto-Broker und publiziert die Nachricht auf einem benutzerspezifischen Topic:
-        \texttt{calendar/event/\{user-api-key\}}.
-  \item Die Chrome-Erweiterung des Calendar Companions ist als MQTT-Client auf diesem Topic angemeldet (\textit{subscribed}).
-  \item Beim Empfang einer Nachricht aktualisiert der Client die lokale Ansicht und kann bei Bedarf Folgeaktionen anstossen (z.\,B. Anzeige eines Feedback-Dialogs).
-\end{enumerate}
+    \begin{enumerate}
+        \item Das Backend erkennt eine relevante Änderung, z.\,B. das Ende eines Meetings oder die Erstellung eines neuen Kalendereintrags.
+        \item Der \texttt{MqttService} des Backends verbindet sich mit dem Mosquitto-Broker und publiziert die Nachricht auf einem benutzerspezifischen Topic:
+            \texttt{calendar/event/\{user-api-key\}}.
+        \item Die Chrome-Erweiterung des Calendar Companions ist als MQTT-Client auf diesem Topic angemeldet (\textit{subscribed}).
+        \item Beim Empfang einer Nachricht aktualisiert der Client die lokale Ansicht und kann bei Bedarf Folgeaktionen anstossen (z.\,B. Anzeige eines Feedback-Dialogs).
+    \end{enumerate}
 
 \paragraph{Nachrichtenformat}
-Die vom Backend publizierten Benachrichtigungen werden als JSON-Objekte gesendet.
-Eine typische Nachricht enthält die folgenden Felder:
+    Die vom Backend publizierten Benachrichtigungen werden als JSON-Objekte gesendet.
+    Eine typische Nachricht enthält die folgenden Felder:
 
-\begin{verbatim}
-{
-  "eventId": 3002,
-  "userId": 1,
-  "title": "Meeting IP5 - Standup",
-  "startDate": "2025-08-09T15:00",
-  "endDate": "2025-08-09T15:15",
-  "location": "",
-  "questionBlockId": 1,
-  "teams": [
-    {
-      "id": 1,
-      "name": "Test Team 1"
-    },
-    {
-      "id": 3,
-      "name": "Test Team 2"
-    }
-  ]
-}
-\end{verbatim}
+    \begin{verbatim}
+        {
+            "eventId": 3002,
+            "userId": 1,
+            "title": "Meeting IP5 - Standup",
+            "startDate": "2025-08-09T15:00",
+            "endDate": "2025-08-09T15:15",
+            "location": "",
+            "questionBlockId": 1,
+            "teams": [
+                {
+                    "id": 1,
+                    "name": "Test Team 1"
+                },
+                {
+                    "id": 3,
+                    "name": "Test Team 2"
+                }
+            ]
+        }
+    \end{verbatim}
 
 \paragraph{Vorteile}
-\begin{itemize}
-  \item Sofortige Zustellung ohne Polling.
-  \item Geringe Netzwerklast durch Publish-Subscribe-Architektur.
-  \item Einfaches Routing über benutzerspezifische Topics.
-  \item Erweiterbar für weitere Eventtypen oder Companion-Anwendungen.
-\end{itemize}
+    \begin{itemize}
+        \item Sofortige Zustellung ohne Polling.
+        \item Geringe Netzwerklast durch Publish-Subscribe-Architektur.
+        \item Einfaches Routing über benutzerspezifische Topics.
+        \item Erweiterbar für weitere Eventtypen oder Companion-Anwendungen.
+    \end{itemize}
 
 
 \subsubsection{Yappi Chrome Extension}
+    Die Yappi Chrome Extension dient als Companion-Anwendung zur Erfassung von Zufriedenheits-Feedback und Benachrichtigen
+    über das beenden von Kalendereinträgen direkt im Webbrowser.
+    Sie ist als ereignisgesteuerte Anwendung konzipiert und unterstützt sowohl synchrone Datenabfragen als auch
+    asynchrone Echtzeitbenachrichtigungen.
 
-Die Yappi Chrome Extension dient als Companion-Anwendung zur Erfassung und Anzeige von Zufriedenheits-Feedback direkt im Webbrowser.
-Sie ist als ereignisgesteuerte Anwendung konzipiert und unterstützt sowohl synchrone Datenabfragen als auch asynchrone Echtzeitbenachrichtigungen.
-
-\paragraph{Zweck}
-Die Extension ermöglicht es, Umfragen, Benachrichtigungen und Verlaufseinträge ohne den Umweg über die Yappi-Webplattform zu verarbeiten.
-Dadurch werden Feedbackprozesse näher an den Arbeitskontext des Nutzers verlagert und Befragungsmüdigkeit reduziert.
+    Die Extension ermöglicht es, Umfragen und Benachrichtigungen ohne den Umweg über die Yappi-Webplattform zu verarbeiten.
+    Dadurch werden Feedbackprozesse in den Arbeits Flow des Nutzers verlagert und Befragungsmüdigkeit reduziert.
 
 \paragraph{Architektur}
-Die Anwendung besteht aus zwei Hauptkomponenten:
-\begin{enumerate}
-  \item \textbf{Persistenter Background-Prozess}
-        Läuft dauerhaft im Hintergrund und ist für die Kommunikation mit externen Diensten, die Verwaltung des Zustands
-        und das proaktive Benachrichtigen des Nutzers zuständig.
-  \item \textbf{Temporäre Popup-Benutzeroberfläche (UI)}
-        Wird nur bei aktiver Benutzerinteraktion geladen und dient der Darstellung von Inhalten sowie der Erfassung von Feedback.
-\end{enumerate}
+    Die Anwendung besteht aus zwei Hauptkomponenten:
+    \begin{enumerate}
+      \item \textbf{Persistenter Background-Prozess}
+            Läuft dauerhaft im Hintergrund und ist für die Kommunikation mit externen Diensten, die Verwaltung des Zustands
+            und das proaktive Benachrichtigen des Nutzers zuständig.
+      \item \textbf{Temporäre Popup-Benutzeroberfläche (UI)}
+            Wird nur bei aktiver Benutzerinteraktion geladen und dient der Darstellung von Inhalten sowie der Erfassung von Feedback.
+    \end{enumerate}
+
 
 \paragraph{Kommunikationskanäle}
-Die Verbindung zum Yappi-Backend erfolgt über zwei Kanäle:
-\begin{itemize}
-  \item \textbf{REST-API} Für synchronen Abruf von Daten (z.\,B. Umfragen) und Übermittlung von Antworten.
-  \item \textbf{MQTT-Broker} Für asynchrone Benachrichtigungen in Echtzeit, z.\,B. über neu verfügbare Umfragen.
-\end{itemize}
-Die interne Kommunikation zwischen Background-Prozess und Popup-UI nutzt die Browser-API \texttt{chrome.storage}.
+    Die Verbindung zum Yappi-Backend erfolgt über zwei Kanäle:
+    \begin{itemize}
+      \item \textbf{REST-API} Für synchronen Abruf von Daten (z.\,B. Umfragen) und Übermittlung von Antworten.
+      \item \textbf{MQTT-Broker} Für asynchrone Benachrichtigungen in Echtzeit, z.\,B. über neu verfügbare Umfragen.
+    \end{itemize}
+    Die interne Kommunikation zwischen Background-Prozess und Popup-UI nutzt die Browser-API \texttt{chrome.storage}.
 
 \paragraph{Komponenten im Detail}
+    \subparagraph{Background-Prozess (\texttt{background/background.js})}
+        \begin{itemize}
+          \item Aufbau und Aufrechterhaltung einer MQTT-Verbindung (über \texttt{lib/mqtt.js}) zu einem Broker via WebSocket.
+          \item Abonnieren benutzerspezifischer Topics zur Echtzeitbenachrichtigung.
+          \item Verarbeitung eingehender Nachrichten und Erzeugung nativer Desktop-Benachrichtigungen (\texttt{chrome.notifications}).
+          \item Persistente Speicherung der letzten zehn Ereignisse in \texttt{chrome.storage.local} nach FIFO-Prinzip.
+        \end{itemize}
 
-\subparagraph{Background-Prozess (\texttt{background/background.js})}
-\begin{itemize}
-  \item Aufbau und Aufrechterhaltung einer MQTT-Verbindung (über \texttt{lib/mqtt.js}) zu einem Broker via WebSocket.
-  \item Abonnieren benutzerspezifischer Topics zur Echtzeitbenachrichtigung.
-  \item Verarbeitung eingehender Nachrichten und Erzeugung nativer Desktop-Benachrichtigungen (\texttt{chrome.notifications}).
-  \item Persistente Speicherung der letzten zehn Ereignisse in \texttt{chrome.storage.local} nach FIFO-Prinzip.
-\end{itemize}
 
-\subparagraph{Popup-Benutzeroberfläche (\texttt{popup/home.html})}
-\begin{itemize}
-  \item Dynamischer Umfrage-Builder (\texttt{popup/survey/builder.js}):
-        Ruft aktuelle Umfragen über die REST-API ab, generiert DOM-Elemente aus Vorlagen (\texttt{popup/questionblock.html},
-        \texttt{popup/questionblock.js}) und integriert diese in die Ansicht.
-  \item Feedback-Übermittlung (\texttt{popup/popup.js}):
-        Sammelt Antworten, strukturiert sie als JSON und sendet sie per POST-Request an die REST-API.
-  \item Verlaufsansicht (\texttt{popup/history.html}, \texttt{popup/history.js}):
-        Liest die letzten zehn gespeicherten Ereignisse aus und stellt sie in einer separaten Ansicht dar.
-\end{itemize}
+    \subparagraph{Popup-Benutzeroberfläche (\texttt{popup/home.html})}
+        \begin{itemize}
+          \item Dynamischer Umfrage-Builder (\texttt{popup/survey/builder.js}):
+                Ruft aktuelle Umfragen über die REST-API ab, generiert DOM-Elemente aus Vorlagen (\texttt{popup/questionblock.html},
+                \texttt{popup/questionblock.js}) und integriert diese in die Ansicht.
+          \item Feedback-Übermittlung (\texttt{popup/popup.js}):
+                Sammelt Antworten, strukturiert sie als JSON und sendet sie per POST-Request an die REST-API.
+          \item Verlaufsansicht (\texttt{popup/history.html}, \texttt{popup/history.js}):
+                Liest die letzten zehn gespeicherten Ereignisse aus und stellt sie in einer separaten Ansicht dar.
+        \end{itemize}
 
 \paragraph{Externe Abhängigkeiten}
-\begin{itemize}
-  \item \textbf{Yappi-Backend} Bereitstellung der REST-API und MQTT-Broker.
-  \item \textbf{MQTT.js} (\texttt{lib/mqtt.js}) JavaScript-Clientbibliothek für MQTT-Kommunikation.
-\end{itemize}
+    \begin{itemize}
+      \item \textbf{Yappi-Backend} Bereitstellung der REST-API und MQTT-Broker.
+      \item \textbf{MQTT.js} (\texttt{lib/mqtt.js}) JavaScript-Clientbibliothek für MQTT-Kommunikation.
+    \end{itemize}
 
 \subsubsection{Dynamische Umfragen}
-
-Die dynamischen Umfragen in Yappi basieren auf flexibel konfigurierbaren Fragenblöcken, die als JSON-Objekte in der Datenbank gespeichert werden.
-Diese Struktur ermöglicht es, Umfragen anzupassen oder zu erweitern, ohne Änderungen am Anwendungscode vorzunehmen.
+    Die dynamischen Umfragen in Yappi basieren auf flexibel konfigurierbaren Fragenblöcken, die als JSON-Objekte in der Datenbank gespeichert werden.
+    Diese Struktur ermöglicht es, Umfragen anzupassen oder zu erweitern, ohne Änderungen am Anwendungscode vorzunehmen.
 
 \paragraph{Datenbank}
-Die Tabelle \texttt{questionblocks} speichert die Konfiguration einzelner Fragenblöcke.
+    Die Tabelle \texttt{questionblocks} speichert die Konfiguration einzelner Fragenblöcke.
 
-\begin{table}[!htbp]
-\centering
-\begin{tabular}{|l|l|p{9cm}|}
-\hline
-\textbf{Spalte} & \textbf{Datentyp} & \textbf{Beschreibung} \\
-\hline
-\texttt{id} & SERIAL & Eindeutiger, automatisch inkrementierender Primärschlüssel \\
-\texttt{configuration} & JSONB & Vollständige Konfiguration des Fragenblocks als JSON-Objekt.
-Ermöglicht flexible Strukturierung und effiziente Abfragen \\
-\hline
-\end{tabular}
-\caption{Schema der Tabelle \texttt{questionblocks}}
-\label{tab:questionblocks_schema}
-\end{table}
+    \begin{table}[!htbp]
+        \centering
+        \begin{tabular}{|l|l|p{9cm}|}
+            \hline
+                \textbf{Spalte} & \textbf{Datentyp} & \textbf{Beschreibung} \\
+            \hline
+                \texttt{id} & SERIAL & Eindeutiger, automatisch inkrementierender Primärschlüssel \\
+                \texttt{configuration} & JSONB & Vollständige Konfiguration des Fragenblocks als JSON-Objekt.
+                Ermöglicht flexible Strukturierung und effiziente Abfragen \\
+            \hline
+        \end{tabular}
+        \caption{Schema der Tabelle \texttt{questionblocks}}
+        \label{tab:questionblocks_schema}
+    \end{table}
 
-\noindent
-\textbf{Anmerkung:} Der Datentyp \texttt{JSONB} (Binary JSON) erlaubt eine performante Speicherung und gezielte Abfragen innerhalb der JSON-Daten.
+    \noindent
+    \textbf{Anmerkung:} Der Datentyp \texttt{JSONB} (Binary JSON) erlaubt eine performante Speicherung und gezielte Abfragen innerhalb der JSON-Daten.
 
 \paragraph{Backend-Komponenten}
-\begin{itemize}
-  \item \textbf{Entität} (\texttt{QuestionBlock.java}) — Abbildung der Tabelle \texttt{questionblocks} als JPA-Entität.
-        Attribute: \texttt{id} (INTEGER) und \texttt{configuration} (\texttt{JsonNode}).
-  \item \textbf{Repository} (\texttt{QuestionBlockRepository.java}) — CRUD-Operationen auf der Tabelle.
-  \item \textbf{Service} (\texttt{QuestionBlockService.java}) — Geschäftslogik für den Zugriff und die Validierung von Fragenblöcken.
-  \item \textbf{Controller} (\texttt{QuestionBlockController.java}) — Bereitstellung der API-Endpunkte.
-\end{itemize}
+    \begin{itemize}
+        \item \textbf{Entität} (\texttt{QuestionBlock.java}) — Abbildung der Tabelle \texttt{questionblocks} als JPA-Entität.
+            Attribute: \texttt{id} (INTEGER) und \texttt{configuration} (\texttt{JsonNode}).
+        \item \textbf{Repository} (\texttt{QuestionBlockRepository.java}) — CRUD-Operationen auf der Tabelle.
+        \item \textbf{Service} (\texttt{QuestionBlockService.java}) — Geschäftslogik für den Zugriff und die Validierung von Fragenblöcken.
+        \item \textbf{Controller} (\texttt{QuestionBlockController.java}) — Bereitstellung der API-Endpunkte.
+    \end{itemize}
 
 \paragraph{API-Endpunkte}
-\begin{itemize}
-  \item \texttt{GET /companion/questionblocks/\{id\}}
-        Ruft den Fragenblock mit der angegebenen ID ab.
-        \textbf{Antworten:} \texttt{200 OK} mit JSON-Objekt oder \texttt{404 Not Found}, falls nicht vorhanden.
-\end{itemize}
+    \begin{itemize}
+        \item \texttt{GET /companion/questionblocks/\{id\}}
+            Ruft den Fragenblock mit der angegebenen ID ab.
+            \textbf{Antworten:} \texttt{200 OK} mit JSON-Objekt oder \texttt{404 Not Found}, falls nicht vorhanden.
+    \end{itemize}
 
 \paragraph{Darstellung in der Companion-App}
-Die Chrome Extension ruft den entsprechenden Fragenblock per REST-API ab.
-Das Skript \texttt{popup/survey/builder.js} parst die JSON-Daten und erstellt für jede Frage die passenden HTML-Elemente
-basierend auf den Templates (\texttt{popup/questionblock.html}) und der Logik in \texttt{popup/questionblock.js}.
-Unterstützt werden Fragetypen wie:
-\begin{itemize}
-  \item Likert-Skalen
-  \item Single-Choice
-  \item Multiple-Choice
-  \item Freitext
-\end{itemize}
+    Die Chrome Extension ruft den entsprechenden Fragenblock per REST-API ab.
+    Das Skript \texttt{popup/survey/builder.js} parst die JSON-Daten und erstellt für jede Frage die passenden HTML-Elemente
+    basierend auf den Templates (\texttt{popup/questionblock.html}) und der Logik in \texttt{popup/questionblock.js}.
+    Unterstützt werden Fragetypen wie:
+    \begin{itemize}
+        \item Likert-Skalen
+        \item Single-Choice
+        \item Multiple-Choice
+        \item Freitext
+    \end{itemize}
 
 \paragraph{Beispiel einer Umfragekonfiguration}
-\begin{verbatim}
-{
-  "id": "1000",
-  "title": "Basic Meeting Feedback",
-  "description": "This is am Meeting feedback survey.",
-  "sections": [
-    {
-      "id": "q1",
-      "type": "likert",
-      "title": "1. Clarity of Goals & Relevance",
-      "prompt": "The goals of the meeting were clearly defined.",
-      "required": true,
-      "min": 1,
-      "label_min": "strongly disagree",
-      "max": 5,
-      "label_max": "strongly agree",
-      "step": 1,
-      "default": 3
-    },
-    {
-      "id": "q2",
-      "type": "single-choice",
-      "title": "2. Meeting Length",
-      "prompt": "How would you rate the length of the meeting?",
-      "required": true,
-      "options": [
-        { "value": "too-short", "label": "Too short" },
-        { "value": "just-right", "label": "Just right" },
-        { "value": "too-long", "label": "Too long" }
-      ],
-      "default": "just-right"
-    },
-    {
-      "id": "q3",
-      "type": "multiple-choice",
-      "title": "3. Meeting Highlights",
-      "prompt": "Which aspects of the meeting did you find valuable? (Select all that apply)",
-      "required": false,
-      "options": [
-        { "value": "clear-agenda", "label": "Clear agenda" },
-        { "value": "useful-content", "label": "Useful content" },
-        { "value": "good-discussion", "label": "Good discussion" },
-        { "value": "action-items", "label": "Clear action items" }
-      ],
-      "default": ["clear-agenda", "good-discussion"]
-    },
-    {
-      "id": "q5",
-      "type": "free-text",
-      "title": "4. Additional Comments",
-      "prompt": "Please share any additional feedback or suggestions.",
-      "required": false,
-      "placeholder": "Type your feedback here...",
-      "maxLength": 500
-    }
-  ]
-}
-
-\end{verbatim}
+    \begin{verbatim}
+        {
+        "id": "1000",
+        "title": "Basic Meeting Feedback",
+        "description": "This is am Meeting feedback survey.",
+        "sections": [
+        {
+            "id": "q1",
+            "type": "likert",
+            "title": "1. Clarity of Goals & Relevance",
+            "prompt": "The goals of the meeting were clearly defined.",
+            "required": true,
+            "min": 1,
+            "label_min": "strongly disagree",
+            "max": 5,
+            "label_max": "strongly agree",
+            "step": 1,
+            "default": 3
+        },
+        {
+            "id": "q2",
+            "type": "single-choice",
+            "title": "2. Meeting Length",
+            "prompt": "How would you rate the length of the meeting?",
+            "required": true,
+            "options": [
+                { "value": "too-short", "label": "Too short" },
+                { "value": "just-right", "label": "Just right" },
+                { "value": "too-long", "label": "Too long" }
+            ],
+            "default": "just-right"
+        },
+        {
+        "id": "q3",
+        "type": "multiple-choice",
+        "title": "3. Meeting Highlights",
+        "prompt": "Which aspects of the meeting did you find valuable? (Select all that apply)",
+        "required": false,
+        "options": [
+            { "value": "clear-agenda", "label": "Clear agenda" },
+            { "value": "useful-content", "label": "Useful content" },
+            { "value": "good-discussion", "label": "Good discussion" },
+            { "value": "action-items", "label": "Clear action items" }
+        ],
+        "default": ["clear-agenda", "good-discussion"]
+        },
+        {
+            "id": "q5",
+            "type": "free-text",
+            "title": "4. Additional Comments",
+            "prompt": "Please share any additional feedback or suggestions.",
+            "required": false,
+            "placeholder": "Type your feedback here...",
+            "maxLength": 500
+        }
+        ]
+        }
+    \end{verbatim}
 
 \paragraph{Vorteile}
-\begin{itemize}
-  \item Anpassung und Erweiterung von Umfragen ohne Codeänderungen.
-  \item Unterstützung verschiedener Fragetypen und Layouts.
-  \item Zentrale Verwaltung und Wiederverwendung von Fragenblöcken.
-\end{itemize}
+    \begin{itemize}
+        \item Anpassung und Erweiterung von Umfragen ohne Codeänderungen.
+        \item Unterstützung verschiedener Fragetypen und Layouts.
+        \item Zentrale Verwaltung und Wiederverwendung von Fragenblöcken.
+    \end{itemize}
 
 
 \todo{Sequenzdiagramm}
