@@ -1295,13 +1295,21 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
 
         Auf dem Server laufen die folgenden Container-Services:
 
+        Beschriftung und Beschreibung zur Abbildung \ref{fig:deployment-system}.
         \begin{itemize}
-            \item \textbf{NGINX-Reverse-Proxy} - leitet Anfragen an Backend.
+            \item \textbf{NGINX-Reverse-Proxy} - aggregiert Netzwerkanfragen
             \item \textbf{PostgreSQL-Datenbank} - persistente Speicherung der Applikationsdaten.
             \item \textbf{Backend-Service} - Spring-Boot-Anwendung, welche API- und MQTT-Funktionen bereitstellt.
             \item \textbf{Frontend-Service} - Next.js-Anwendung für die Benutzeroberfläche.
             \item \textbf{Eclipse Mosquitto} - MQTT-Broker für die Echtzeitkommunikation mit Companion-Apps.
         \end{itemize}
+
+        \begin{figure}[H]
+          \centering
+          \includegraphics[width=0.3\textwidth]{../figures/deployment-system.drawio.png}
+          \caption{Systemübersicht der Linuxumgebung}
+          \label{fig:deployment-system}
+        \end{figure}
 
     \subsection{NGINX-Proxykonfiguration}
 
