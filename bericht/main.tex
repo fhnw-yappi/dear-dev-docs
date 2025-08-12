@@ -835,6 +835,9 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
 
 \todo{}
 
+%--------------------------------------------------------------------------------------------------------------------------------------
+
+
 \section{Calendar Companion}
 
         Der \textit{Calendar Companion} erweitert die Yappi-Plattform um eine Kalenderintegration mit Echtzeitbenachrichtigung
@@ -852,30 +855,54 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
 
         Die Abbildung~\ref{fig:implementation-calendar-companion-system} zeigt eine Systemübersicht der Kalenderintegration.
 
-\subsection{Yappi Chrome Extension}
-        Die Yappi Chrome Extension dient als Companion-Anwendung zur Erfassung von Zufriedenheits-Feedback und Benachrichtigen
-        über das beenden von Kalendereinträgen direkt im Webbrowser.
-        Sie ist als ereignisgesteuerte Anwendung konzipiert und unterstützt sowohl synchrone Datenabfragen als auch
-        asynchrone Echtzeitbenachrichtigungen.
+  \subsection{Yappi Chrome Extension}
+      Die Yappi Chrome Extension dient als Companion-App zur Erfassung von Zufriedenheits-Feedback und Benachrichtigen
+      über das beenden von Kalendereinträgen direkt im Webbrowser.
+      Die Companion-App ist als ereignisgesteuerte Anwendung konzipiert und unterstützt sowohl synchrone Datenabfragen als auch
+      asynchrone Echtzeitbenachrichtigungen auf dem Betriebsystem.
 
-        Die Extension ermöglicht es, Umfragen und Benachrichtigungen ohne den Umweg über die Yappi-Webplattform zu verarbeiten.
-        Dadurch werden Feedbackprozesse in den Arbeits Flow des Nutzers verlagert und Befragungsmüdigkeit reduziert.
+      Die Extension ermöglicht es, Umfragen und Benachrichtigungen ohne den Umweg über die Yappi-Webplattform zu verarbeiten.
+      Dadurch werden Feedbackprozesse in den Arbeits Flow des Nutzers verlagert und Befragungsmüdigkeit reduziert.
+
+
 
     \subsubsection{Architektur}
         Die Anwendung besteht aus zwei Hauptkomponenten:
         \begin{enumerate}
           \item \textbf{Persistenter Background-Prozess}
-                Läuft dauerhaft im Hintergrund und ist für die Kommunikation mit externen Diensten, die Verwaltung des Zustands
+                Läuft dauerhaft im Hintergrund und ist für die Kommunikation mit dem Eclipse Mosquitto Nachrichtenbroker, die Verwaltung des Zustands
                 und das proaktive Benachrichtigen des Nutzers zuständig.
           \item \textbf{Temporäre Popup-Benutzeroberfläche (UI)}
-                Wird nur bei aktiver Benutzerinteraktion geladen und dient der Darstellung von Inhalten sowie der Erfassung von Feedback.
+                Wird nur bei aktiver Benutzerinteraktion geladen und dient der Darstellung der Benutzeroberfläche sowie dem Erfassen von Feedback.
         \end{enumerate}
+
+    \subsubsection{Komponenten im Detail}
+        \textbf{Background-Prozess (\texttt{background/background.js})} \\
+            \begin{itemize}
+              \item Aufbau und Aufrechterhaltung einer Websockets-Verbindung (über \texttt{lib/mqtt.js}) zum Yappi Kommunikationsbroker.
+              \item Abonnieren der benutzerspezifischen Topics zur Echtzeitbenachrichtigung (\texttt{companion/event/calendar/*user-token*}).
+              \item Verarbeitung eingehender Nachrichten und Erzeugung nativer Desktop-Benachrichtigungen (\texttt{chrome.notifications}).
+              \item Persistente Speicherung der letzten zehn Ereignisse in \texttt{chrome.storage.local} nach FIFO-Prinzip.
+            \end{itemize}
+
+
+        \textbf{Popup-Benutzeroberfläche (\texttt{popup/home.html})} \\
+            \begin{itemize}
+              \item Dynamischer Umfrage-Builder (\texttt{popup/survey/builder.js}):
+                    Ruft aktuelle Umfragen über die REST-API ab, generiert DOM-Elemente aus JSON Vorlagen (\texttt{popup/questionblock.html},
+                    \texttt{popup/questionblock.js}) und integriert diese in die Ansicht.
+                    Mehr Details dazu in Abschnitt \ref{section:Dynamische Umfragen}.
+                    \todo{check link}
+              \item Feedback-Übermittlung (\texttt{popup/popup.js}):
+                    Sammelt Antworten, strukturiert sie als JSON und sendet sie per POST-Request an das Yappi-Backend.
+            \end{itemize}
+
 
     \subsubsection{Benutzeroberfläche (UI)}
         Die Benutzeroberfläche der Yappi Chrome Extension besteht aus zwei zentralen Interaktionselementen: Systembenachrichtigungen und der Popup-Ansicht im Browser.
 
         \textbf{Systembenachrichtigungen} \\
-            Beim Ende eines Meetings, erzeugt die Extension eine native Systembenachrichtigung siehe Abbildung \ref{fig:yappi-extension-notification}.
+            Beim Ende eines Events im Kalender des Benutzer, erzeugt die Extension eine native Systembenachrichtigung siehe Abbildung \ref{fig:yappi-extension-notification}.
             Diese Benachrichtigungen enthalten:
             \begin{itemize}
                 \item Titel und Beschreibung des Meetings (z.\,B. \glqq Meeting IP5 - Standup\grqq),
@@ -898,16 +925,16 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
             Klick auf das Yappi-Icon in der Browser-Toolbar geöffnet.
             Die Ansicht enthält:
             \begin{itemize}
-                \item Verbindungsstatus zum Backend (z.\,B. \texttt{Connected} mit grüner Statusanzeige),
+                \item Verbindungsstatus zum Nachrichtenbroker,
                 \item Benutzerhinweis zum erfolgreichen Setup,
-                \item eine Liste kürzlich abgeschlossener Meetings mit Datum und Uhrzeit,
+                \item eine Liste kürzlich abgeschlossener Meetings zu welchen noch kein Feedback gegeben wurde,
                 \item Aktionsbuttons für jedes Meeting:
                     \begin{itemize}
                         \item \texttt{Review} Öffnet die zugehörige Feedback-Umfrage.
                         \item \texttt{Delete} Entfernt den Eintrag aus der Liste der letzten Meetings.
                     \end{itemize}
             \end{itemize}
-            Dieses Design stellt sicher, dass Nutzer sowohl über Echtzeitbenachrichtigungen als auch über die Popup-Ansicht
+            Das Design stellt sicher, dass Benutzer sowohl über Echtzeitbenachrichtigungen als auch über die Popup-Ansicht
             jederzeit auf anstehende Feedback-Aufgaben zugreifen können.
 
             \begin{figure}[!htbp]
@@ -917,34 +944,19 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
               \label{fig:yappi-extension-popup}
             \end{figure}
 
+
     \subsubsection{Kommunikationskanäle}
-        Die Verbindung zum Yappi-Backend erfolgt über zwei Kanäle:
+      \todo{grafik zu kommunikation}
+        Die Verbindung zum Yappi-Backend erfolgt über zwei Kommunikationskanäle:
         \begin{itemize}
-          \item \textbf{REST-API} Für synchronen Abruf von Daten (z.\,B. Umfragen) und Übermittlung von Antworten.
-          \item \textbf{MQTT-Broker} Für asynchrone Benachrichtigungen in Echtzeit, z.\,B. über neu verfügbare Umfragen.
+          \item \textbf{REST-API} Für synchronen Abruf von Daten und Übermittlung von Antworten.
+          \item \textbf{MQTT-Broker} Für asynchrone Benachrichtigungen in Echtzeit.
         \end{itemize}
+
         Die interne Kommunikation zwischen Background-Prozess und Popup-UI nutzt die Browser-API \texttt{chrome.storage}.
-
-    \subsubsection{Komponenten im Detail}
-        \textbf{Background-Prozess (\texttt{background/background.js})} \\
-            \begin{itemize}
-              \item Aufbau und Aufrechterhaltung einer MQTT-Verbindung (über \texttt{lib/mqtt.js}) zu einem Broker via WebSocket.
-              \item Abonnieren benutzerspezifischer Topics zur Echtzeitbenachrichtigung.
-              \item Verarbeitung eingehender Nachrichten und Erzeugung nativer Desktop-Benachrichtigungen (\texttt{chrome.notifications}).
-              \item Persistente Speicherung der letzten zehn Ereignisse in \texttt{chrome.storage.local} nach FIFO-Prinzip.
-            \end{itemize}
+        Dort werden alle Informationen, wie Clientdaten oder die letze Kalenderevents gespeichert und ausgetauscht.
 
 
-        \textbf{Popup-Benutzeroberfläche (\texttt{popup/home.html})} \\
-            \begin{itemize}
-              \item Dynamischer Umfrage-Builder (\texttt{popup/survey/builder.js}):
-                    Ruft aktuelle Umfragen über die REST-API ab, generiert DOM-Elemente aus Vorlagen (\texttt{popup/questionblock.html},
-                    \texttt{popup/questionblock.js}) und integriert diese in die Ansicht.
-              \item Feedback-Übermittlung (\texttt{popup/popup.js}):
-                    Sammelt Antworten, strukturiert sie als JSON und sendet sie per POST-Request an die REST-API.
-              \item Verlaufsansicht (\texttt{popup/history.html}, \texttt{popup/history.js}):
-                    Liest die letzten zehn gespeicherten Ereignisse aus und stellt sie in einer separaten Ansicht dar.
-            \end{itemize}
 
     \subsubsection{Externe Abhängigkeiten}
         \begin{itemize}
@@ -954,10 +966,17 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
 
 \subsection{Backend-Integration}
 
-        Das Kalendermodul ist für die Verwaltung und Bereitstellung von Kalendereinträgen verantwortlich.
-        Es unterstützt sowohl den Abruf von Einträgen über eine REST-API als auch eine proaktive Benachrichtigung von Clients in Echtzeit.
+        Das Yappi-Backend fungiert als Zentraler Controller der gesamten Kalenderintegration von Yappi.
+        Es ist zuständig für jeglichen Datenaustausch, Datenspeicherung sowie Datenverarbeitung und besteht
+        aus verschiedenen modulen welche alle ihre verantwortlichkeiten haben.
+
+        Für den Calendar Companion wurde ein eigenes Modul erstellt.
+
+        Das Kalendermodul im Yappi-Backend ist für die Verwaltung und Bereitstellung von Kalendereinträgen verantwortlich.
+        Es unterstützt sowohl den Abruf von Einträgen über eine REST-API als auch eine proaktive Benachrichtigung der Chrome-Extension in Echtzeit.
         Letzteres erfolgt über das Publish-Subscribe-Protokoll \textit{MQTT} (Message Queuing Telemetry Transport).
-        Zudem werden externe iCalendar-Daten (ICS) der Nutzer automatisch synchronisiert.
+        Zudem ist es Zuständig für das Laden und synchronisieren der externen iCalendar-Daten (ICS) welche von den Nutzer hinterlegt werden.
+
 
     \subsubsection{Model-Klasse}
         Die zentrale Datenstruktur bildet die JPA-Entität \texttt{CalendarEvent.java} (\texttt{entities/}).
@@ -1232,12 +1251,16 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
 \todo{Sequenzdiagramm}
 \todo{Front End Anpassung}
 
-\subsection{Health Companion}
+%--------------------------------------------------------------------------------------------------------------------------------------
+
+\section{Health Companion}
 
 \todo{Health Kit API}
 \todo{Kommunikation}
 \todo{Benutzeroberfläche}
 \todo{Datenbankerweiterung}
+
+%--------------------------------------------------------------------------------------------------------------------------------------
 
 \section{Deployment und CI/CD}
 
@@ -1300,7 +1323,7 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
             \item \textbf{NGINX-Reverse-Proxy} - aggregiert Netzwerkanfragen
             \item \textbf{PostgreSQL-Datenbank} - persistente Speicherung der Applikationsdaten.
             \item \textbf{Backend-Service} - Spring-Boot-Anwendung, welche API- und MQTT-Funktionen bereitstellt.
-            \item \textbf{Frontend-Service} - Next.js-Anwendung für die Benutzeroberfläche.
+            \item \textbf{Frontend-Service} - Next.js-Anwendung für die Benutzeroberfläche im Web.
             \item \textbf{Eclipse Mosquitto} - MQTT-Broker für die Echtzeitkommunikation mit Companion-Apps.
         \end{itemize}
 
@@ -1313,11 +1336,12 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
 
     \subsection{NGINX-Proxykonfiguration}
 
-        Der NGINX-Proxy übernimmt Routing und Zugriffskontrolle:
+        Der NGINX-Proxy übernimmt Routing und Zugriffskontrolle. Alle Anfragen werden per http/https direkt auf den Proxy gemacht.
+        Dieser aggregiert dann automatisch zum gewünschten Endpunkte. Das Mapping der Endpunkte sieht wie folgt aus:
 
         \begin{itemize}
             \item \texttt{/v1/}, \texttt{/apikey/}, \texttt{/auth/} $\rightarrow$ Weiterleitung an das Backend.
-            \item \texttt{/companion/} $\rightarrow$ Weiterleitung an das Backend mit speziellen CORS-Headern für Browser-Clients.
+            \item \texttt{/companion/} $\rightarrow$ Weiterleitung an das Backend mit speziellen CORS-Headern für API-Token Authentifizierung.
             \item \texttt{/} (Root) $\rightarrow$ Weiterleitung an das Frontend.
         \end{itemize}
 
@@ -1332,28 +1356,72 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
 
     \subsection{MQTT-Broker-Konfiguration}
 
-    Der \textbf{Eclipse Mosquitto}-Broker ist mit zwei Listenern konfiguriert:
+    Eclipse Mosquitto ist ein leichtgewichtiger MQTT-Broker, der im Projekt als zentraler Kommunikationsbroker eingesetzt wird.
+    Er sorgt dafür, dass Echtzeit-Benachrichtigungen unabhängig und effizient aggregiert werden können.
+    Mosquitto verwaltet den Nachrichtenaustausch zwischen dem Backend, das über MQTT kommuniziert, und der Chrome Extension, die zwingendermassen Websockets verwendet,
+    sodass beide Systeme zuverlässig miteinander Daten austauschen können.
 
     \begin{itemize}
         \item \textbf{TCP-Port 1883} für Backend-Services.
-        \item \textbf{WebSocket-Port 9001} für Browser-Clients (z.\,B. die Chrome Extension).
+        \item \textbf{WebSocket-Port 9001} für  die Chrome Extension.
     \end{itemize}
-
-    Für den Prototypenbetrieb ist die Authentifizierung deaktiviert (\texttt{allow\_anonymous true}).
 
     \subsection{Zusammenfassung}
 
-    Durch die Kombination aus GitHub Actions, Docker Compose und NGINX erfolgt der Betrieb der \texttt{Yappi}-Plattform weitgehend automatisiert. Codeänderungen werden unmittelbar getestet, gebaut und auf dem SwitchEngines-Server ausgerollt. Dies gewährleistet eine kontinuierliche und zuverlässige Auslieferung neuer Versionen.
+    Durch die Kombination aus GitHub Actions, Docker Compose und NGINX erfolgt der Betrieb der Yappi-Plattform weitgehend automatisiert.
+    Codeänderungen werden unmittelbar getestet, gebaut und auf dem SwitchEngines-Server ausgerollt. Dies gewährleistet eine kontinuierliche und zuverlässige Auslieferung neuer Versionen.
 
 \xeno{}
 \todo{UML Deployment Diagramm}
 
+%--------------------------------------------------------------------------------------------------------------------------------------
+
 \chapter{Evaluation}
 \xeno{}
-\todo{Hackathon}
+
+  \section{Usertesting an Hackathon}
+  \todo{Hackathon}
+
+    Ein Usertesting mit verschiedensten Entwickler zu planeen ist nicht einfach.
+    Zum glück wird aber an der FHNW ein Hackathon durchgeführt, die Energie-days wo sich diverse Entwickler treffen um gemeinsam Coole Projekte durchzuführen
+
+    Genau diese gelegenheit wollen wir nutzen um usertest durchzuführen.
+
+    Kontakt mit:
+
+    Idee ein team benutzt yappi um ihr arbeit zu tracken damit wir für das kommende IP6 userdaten haben und diese evaluieren können.
+
+    Fallback falls dies nicht möglich ist wäre es einen Stand aufzubauen und enwickler zu befragen.
+
+  \section{Evaluation durch Simulation}
+
+    Eigenes Testing um erfahrung zu messen. Dies wir bei der Arbeit durchgeführt
+
+    Idee dabei ist es Ohne Probleme von Datenschutz und so zu testen
+
+    Ergebnisse werden mit Hilfe von einem Fragebogen evaluiert.
+
+    Kein grosser repräsentativer test möglich da auslegung auf Hackathon ist und yappi als plattform zu verbessern.
+
+    Zielgruppen und Nutzerrollen definieren: Bestimme, welche Nutzergruppen das System verwenden werden, und erstelle typische Nutzerprofile (Personas). Lege fest, welche Aufgaben oder Ziele diese Nutzer haben.
+
+    Szenarien erstellen: Beschreibe realistische Nutzungsszenarien, die typische Abläufe oder Problemstellungen widerspiegeln. Diese Szenarien sollten die wichtigsten Funktionen und Prozesse des Systems abdecken.
+
+    Testpersonen auswählen: Wähle Teammitglieder aus verschiedenen Bereichen (z.B. Entwicklung, Support, Business), die die festgelegten Nutzerrollen übernehmen. Idealerweise sollten sie mit den Anforderungen der echten Nutzer vertraut sein, aber nicht zu tief in der Entwicklung involviert sein.
+
+    Rollenverteilung: Weise den Testpersonen die jeweiligen Nutzerrollen und Szenarien zu. Erkläre, dass sie die Aufgaben so lösen sollen, wie es ein echter Nutzer tun würde.
+
+    Durchführung der Simulation: Lass die Testpersonen die Szenarien Schritt für Schritt durchspielen. Sie sollen dabei laut denken und alle Schwierigkeiten oder Unklarheiten dokumentieren.
+
+    Ergebnisse festhalten: Sammle Beobachtungen, Schwierigkeiten und Verbesserungsvorschläge. Nutze dazu Protokolle, Checklisten oder strukturierte Fragebögen.
+
+    Auswertung und Nachbearbeitung: Analysiere die gesammelten Daten, identifiziere Muster und leite konkrete Massnahmen zur Verbesserung des Systems ab.
+
+
+
 \todo{kleine evaluation vor projektende}
-\section{Beantwortung der Fragestellung}
-\todo{}
+
+%--------------------------------------------------------------------------------------------------------------------------------------
 
 \chapter{Diskussion}
 \todo{}
