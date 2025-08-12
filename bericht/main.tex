@@ -65,7 +65,7 @@
 \chapter{Einleitung}
 
 \section{Motivation}
-\question{Müssen wir gendern? Entwicklerinnen und Entwickler}
+\todo{gendern überprüfen}
 
 Die Zufriedenheit von Entwicklerinnen und Entwicklern wird, wenn überhaupt, meist nur anhand der
 Menge ihrer geleisteten Arbeit gemessen. Dabei entstehen zwangsläufig Defizite, und ein halbjährli-
@@ -83,7 +83,7 @@ Entwicklerinnen und Entwickler haben die Möglichkeit, ihre Zufriedenheit für v
 erfassen, wodurch gezielte Analysen ermöglicht werden. Unternehmen erhalten dadurch wertvolle
 Einblicke, um das Arbeitsumfeld gezielt zu verbessern.
 
-Unser Projekt baut auf Yappi auf und zielt darauf ab, die Erfassung der Zufriedenheit weiter zu opti-
+Dieses Projekt baut auf Yappi auf und zielt darauf ab, die Erfassung der Zufriedenheit weiter zu opti-
 mieren. Es wird untersucht, wie die Daten noch präziser erfasst und ausgewertet werden können,
 um langfristige Verbesserungen zu unterstützen. Diese Arbeit dient als Grundlage für ein weiterfüh-
 rendes Forschungsprojekt, das sich vertieft mit der Entwicklerzufriedenheit auseinandersetzt und
@@ -489,7 +489,7 @@ autorisiert. Dieser Ablauf stellt sicher, dass ausschliesslich autorisierte Anwe
 \section{Companion Apps}
 \todo{kurze Einleitung}
 
-\subsection{Integration in die Entwicklungsumgebung}
+\section{Integration in die Entwicklungsumgebung}
 
 \xeno{rework}
 
@@ -514,7 +514,7 @@ Kurze, kontextbezogene Abfragen im richtigen Moment erhöhen die Teilnahmebereit
 Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in den Entwicklungsprozess integriert ist.
 
 
-\subsection{Integration von Kalenderdaten}
+\section{Integration von Kalenderdaten}
 \xeno{}
 \todo{Sytemdiagramm}
 
@@ -600,7 +600,7 @@ Auf der Teamebene kann auf aggregierte, anonymisierte Auswertungen zu den Meetin
 Die Konfiguration der Kalenderintegration und der Verbindung zur Companion-App wird im Nutzerprofil zentral verwaltet.
 Dadurch bleibt die Erweiterung vollständig in die bestehende Systemarchitektur eingebettet und benötigt keine separaten Plattformen.
 
-\subsection{Integration von Gesundheitsdaten}
+\section{Integration von Gesundheitsdaten}
 
 Gesundheitsdaten können wertvolle Zusatzinformationen zur Entwicklerzufriedenheit liefern. Sie ergänzen subjektive Stimmungsangaben
 um objektive Messwerte, die Rückschlüsse auf Belastung und Erholung ermöglichen. Durch die Anbindung an etablierte Schnittstellen
@@ -790,8 +790,7 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
     curl -H "Authorization: Bearer <JWT>" https://<host>/apikey
     \end{verbatim}
 
-
-    \subsubsection{Verarbeitungslogik}
+    \subsubsection{Verarbeitungslogik}//
     \textbf{Erstellung:}
     \begin{enumerate}
       \item Generierung eines neuen Keys (Präfix + geheimer Teil).
@@ -912,7 +911,7 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
             \end{itemize}
             Durch diese direkte Interaktionsmöglichkeit kann Feedback ohne Umweg über die Hauptanwendung erfasst werden.
 
-            \begin{figure}[!htbp]
+            \begin{figure}[htbp]
               \centering
               \includegraphics[width=0.60\textwidth]{../figures/yappi-chrome-extension/yappi-extension-notification.jpg}
               \caption{Systembenachrichtigung der Chrome Erweiterung in macOS}

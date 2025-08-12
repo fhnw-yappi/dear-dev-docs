@@ -1,0 +1,426 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[backend=biber, style=ieee]{biblatex}
+\addbibresource{literature.bib}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{microtype}
+\usepackage{parskip}
+
+\usepackage{xcolor}
+\newcommand{\todo}[1]{\colorbox{red}{\textbf{TODO: #1}}\\}
+\newcommand{\question}[1]{\colorbox{yellow}{\textbf{QUESTION: #1}}\\}
+\newcommand{\xeno}[1]{\colorbox{pink}{\textbf{TODO XENO: #1}}\\}
+\newcommand{\gideon}[1]{\colorbox{green}{\textbf{TODO GIDEON: #1}}\\}
+
+\begin{document}
+
+\tableofcontents
+\newpage
+
+\chapter{Konzeptlösung für die Erweiterungen an Yappi}
+
+Die im vorhergehenden Kapitel beschriebenen Problemstellungen und die Analyse bestehender Lösungen verdeutlichen, dass aktuelle
+Ansätze zur Erfassung der Entwicklerzufriedenheit häufig unvollständig sind. Sie erfassen den Einfluss einzelner Arbeitsereignisse
+nicht systematisch und bieten nur eingeschränkte Möglichkeiten, die erhobenen Daten im individuellen Arbeitskontext zu
+interpretieren. Zudem werden potenziell relevante Einflussfaktoren, wie das physische Wohlbefinden, nur selten berücksichtigt.
+
+Mit den geplanten Erweiterungen soll Yappi genau diese Lücken schliessen und eine integrierte, praxisorientierte Lösung
+bereitstellen, die Entwicklerinnen, Entwickler und Teams gleichermassen unterstützt. Ziel ist es, die Entwicklerzufriedenheit 
+umfassend zu erfassen und die gewonnenen Erkenntnisse in konkrete Handlungsempfehlungen zu überführen.
+
+Die Erweiterung basiert auf folgenden Ansätzen:
+
+\begin{itemize}
+
+    \item Literaturrecherche zum Stand der Forschung im Bereich der Entwicklerzufriedenheit und deren Einfluss auf die
+      Produktivität
+    \item Analyse bestehender Lösungen zur Erfassung und Auswertung von Entwicklerzufriedenheit, Arbeitskontext und 
+      Gesundheitsdaten im Umfeld der Softwareentwicklung
+    \item Befragungen von Entwicklerinnen und Entwicklern in den Unternehmen der Autorinnen und Autoren
+    \item Brainstorming mit den Projektbetreuenden
+\end{itemize}
+
+In den folgenden Unterkapiteln wird die schrittweise Entwicklung der Konzeptlösung für die geplanten Erweiterungen von Yappi
+detailliert beschrieben.
+
+\section{Problemstellungen}
+
+Die Erweiterung von Yappi verfolgt das Ziel, bestehende Schwächen in der Erfassung und Interpretation der Entwicklerzufriedenheit
+zu beheben. Dazu wurden die relevanten Herausforderungen nach dem Standard des Rational Unified Process (RUP) strukturiert
+beschrieben. Jede Problemstellung wird dabei in einem einheitlichen Schema dargestellt, um die Auswirkungen klar herauszuarbeiten
+und eine fundierte Basis für die Definition der Projektziele zu schaffen.
+
+Die folgenden Abschnitte fassen die drei zentralen Problemstellungen zusammen, die mit der Erweiterung adressiert werden sollen.
+
+\subsection{Passive Erfassung der Entwicklerzufriedenheit}
+
+In vielen aktuellen Umsetzungen erfolgt die Erfassung der Zufriedenheit rein passiv, d.\,h., Entwicklerinnen und Entwickler
+müssen von sich aus aktiv eine Rückmeldung abgeben. Dieser Prozess ist stark von der Eigeninitiative abhängig und wird im
+Arbeitsalltag häufig vergessen oder aufgeschoben. Dadurch entsteht eine unvollständige und unregelmässige Datengrundlage, die den
+tatsächlichen Verlauf der Zufriedenheit nur eingeschränkt widerspiegelt. Die vollständige Problemstellung ist in 
+Tabelle~\ref{tab:rup-passive} dargestellt.
+
+\begin{table}[H]
+  \caption{Problemstellung nach RUP: Passive erfassung der Entwicklerzufriedenheit}
+  \label{tab:rup-passive}
+  \centering
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.25\textwidth}|X}
+    \hline
+    Das Problem & der passiven Erfassung der Entwicklerzufriedenheit,
+    bei der ein Entwickler von sich aus eine Rückmeldung abgeben muss \\ \hline
+
+    betrifft & Entwicklerinnen und Entwickler. \\ \hline
+
+    Die Auswirkung dieses Problems & ist eine geringe Erfassungsrate der Zufriedenheitsdaten,
+    da Feedback oft vergessen oder aufgeschoben wird. \\ \hline
+
+    Eine erfolgreiche Lösung & fordert Entwicklerinnen und Entwickler zu relevanten
+    und regelmässigen Zeitpunkten automatisiert dazu auf, Zufriedenheitsdaten zu erfassen.
+    Dabei darf kein grosser Mehraufwand entstehen, um zur Abgabe zu motivieren. \\ \hline
+  \end{tabularx}
+\end{table}
+
+\subsection{Einfluss einzelner Meetings}
+
+Meetings nehmen einen wesentlichen Teil der Arbeitszeit von Entwicklerinnen und Entwicklern ein. Werden sie als unproduktiv oder
+belastend wahrgenommen, kann dies die Arbeitszufriedenheit deutlich beeinträchtigen. Derzeit wird jedoch der Einfluss einzelner
+Besprechungen auf die Zufriedenheit nicht systematisch erfasst, was eine gezielte Verbesserung der Meetingkultur erschwert. Die
+vollständige Problemstellung ist in Tabelle~\ref{tab:rup-meetings} dargestellt.
+
+\begin{table}[H]
+  \caption{Problemstellung nach RUP: Einfluss auf die Zufriedenheit einzelner Meetings wird nicht erfasst}
+  \label{tab:rup-meetings}
+  \centering
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.25\textwidth}|X}
+    \hline
+    Das Problem & dass der Einfluss einzelner Meetings auf die Zufriedenheit nicht erfasst wird \\ \hline
+
+    betrifft & Scrum Master, Product Owner, Entwicklerinnen und Entwickler. \\ \hline
+
+    Die Auswirkung dieses Problems & ist, dass unproduktive oder belastende Besprechungen schwer identifiziert werden können und
+    deren Auswirkungen auf die tägliche Arbeit unbekannt bleiben. \\ \hline
+
+    Eine erfolgreiche Lösung & erfasst nach relevanten Besprechungen zeitnah die wahrgenommene Produktivität und Belastung, um
+    den Einfluss einzelner Meetings auf die Arbeitszufriedenheit sichtbar zu machen. \\ \hline
+  \end{tabularx}
+\end{table}
+
+\subsection{Schwierigkeiten beim Ableiten von Schlussfolgerungen}
+
+Die Erhebung reiner Zufriedenheitswerte ohne weiterführende Informationen erschwert es, deren Ursachen oder Auslöser zu verstehen.  
+Ohne zusätzlichen Kontext ist es schwierig, Muster zu erkennen oder Zusammenhänge zwischen bestimmten Arbeitsbedingungen und der
+Zufriedenheit herzustellen. Dies führt dazu, dass Massnahmen zur Verbesserung oft auf Annahmen basieren und nicht ausreichend
+datenbasiert sind. Die vollständige Problemstellung ist in Tabelle~\ref{tab:rup-conclusions} dargestellt.
+
+\begin{table}[H]
+  \caption{Problemstellung nach RUP: Schwierigkeiten beim ableiten von Schlussfolgerungen aus Zufriedenheitsdaten}
+  \label{tab:rup-conclusions}
+  \centering
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.25\textwidth}|X}
+    \hline
+    Das Problem & dass es schwierig ist, aus den erfassten Zufriedenheitsdaten klare Schlussfolgerungen abzuleiten \\ \hline
+
+    betrifft & Scrum Master, Product Owner, Projektverantwortliche, Entwicklerinnen und Entwickler. \\ \hline
+
+    Die Auswirkung dieses Problems & ist, dass unklar bleibt, welche Faktoren oder Ereignisse zu den gemessenen Ergebnissen 
+    geführt haben, wodurch gezielte Massnahmen zur Verbesserung erschwert werden. \\ \hline
+
+    Eine erfolgreiche Lösung & ergänzt die Zufriedenheitsmessungen um automatisch erfasste Kontextinformationen aus dem 
+    Arbeitsumfeld sowie ausgewählte Gesundheitsdaten, um die Ergebnisse besser einordnen und deren Ursachen gezielter 
+    identifizieren zu können. Zusätzlich leitet sie konkrete Handlungsempfehlungen aus diesen Daten ab. \\ \hline
+  \end{tabularx}
+\end{table}
+
+\section{Idee}
+
+Die Erweiterung von Yappi verfolgt das Ziel, die Erfassung und Interpretation der Entwicklerzufriedenheit zu verbessern und deren
+Aussagekraft zu erhöhen. Grundlage ist die Annahme, dass eine ganzheitliche Erhebung, ergänzt durch Informationen aus dem
+Arbeitsumfeld, ein genaueres Verständnis der Einflussfaktoren ermöglicht. In bestehenden Lösungen werden Zufriedenheitswerte oft
+isoliert erfasst, was die Ableitung konkreter Verbesserungsmassnahmen erschwert.
+
+\subsection{Automatisierte Aufforderung zur Erfassung von Zufriedenheitsdaten}
+
+Ein zentraler Bestandteil der Erweiterung ist, dass Entwicklerinnen und Entwickler nicht mehr ausschliesslich aus eigener
+Initiative Zufriedenheitsdaten erfassen müssen. Stattdessen werden sie zu geeigneten Zeitpunkten automatisch dazu aufgefordert,
+kurze Rückmeldungen zu geben. Es wird angenommen, dass diese Form der aktiven Aufforderung die Häufigkeit der Erfassungen erhöht
+und somit eine vollständigere sowie aussagekräftigere Datengrundlage schafft.
+
+Ein relevanter Zeitpunkt zur Aufforderung zur Erfassung von Zufriedenheitsdaten sollte so gewählt werden, dass der Entwickler
+nicht aus seinem Arbeitsfluss herausgerissen wird. Geeignete Zeitpunkte dafür sind:
+
+\begin{itemize}
+  \item \textbf{Nach einem Commit:} Entwicklerinnen und Entwickler übermitteln im Arbeitsalltag regelmässig ihre vorgenommenen
+    Codeänderungen an das Versionsverwaltungssystem (Commit). Direkt nach dem Abschluss einer Entwicklungsaufgabe oder eines
+    Arbeitspakets wird der bestehende Arbeitsfluss ohnehin kurz unterbrochen, um den Commit auszuführen. Dieser Moment eignet sich
+    daher, um eine kurze Rückmeldung zu erfassen, ohne den Entwickler aus einer konzentrierten Arbeitssituation herauszureissen.
+    Gleichzeitig ist die Erinnerung an den gerade abgeschlossenen Arbeitsprozess noch präsent, was eine präzisere Einschätzung
+    ermöglicht.
+
+  \item \textbf{Nach Meetings:} Da Meetings selbst bereits eine Unterbrechung des regulären Arbeitsflusses darstellen, verursacht
+    die Erfassung der Zufriedenheit direkt im Anschluss keine zusätzliche Störung. In diesem Moment können die Teilnehmenden
+    ausserdem am besten einschätzen, wie produktiv, zielführend und angenehm die Besprechung empfunden wurde, wodurch die Angaben
+    besonders aussagekräftig sind.
+\end{itemize}
+
+\subsection{Erfassung der Meetingqualität}
+
+Ein weiterer Bestandteil der Erweiterung ist die Integration einer Funktion zur Bewertung von Meetings. Ziel ist es, nach
+Abschluss einer Besprechung zeitnah eine kurze Rückmeldung zur wahrgenommenen Produktivität und Relevanz zu erfassen. Es wird
+angenommen, dass durch die systematische Erhebung solcher Rückmeldungen der Einfluss einzelner Meetings auf die
+Arbeitszufriedenheit sichtbar wird und so eine fundierte Grundlage für Verbesserungen der Meetingkultur entsteht.
+
+Zur Bewertung werden sieben Kriterien herangezogen, die in Anlehnung an Best Practices und gängige Meeting-Umfrageinstrumente
+ausgewählt wurden:
+
+\begin{itemize}
+  \item \textbf{Zielklarheit und Relevanz:} Bewertet, ob die Ziele des Meetings klar formuliert und inhaltlich relevant waren. 
+    Eine präzise Agenda und eindeutige Zieldefinition gelten als zentrale Erfolgsfaktoren.
+
+  \item \textbf{Inhaltliche Tiefe und Verständlichkeit:} Misst, ob die behandelten Themen angemessen tief und gleichzeitig 
+    verständlich präsentiert wurden. Unnötige Detailfülle wird vermieden.
+
+  \item \textbf{Zeitmanagement:} Prüft, ob die geplante Dauer eingehalten und das Meeting pünktlich begonnen wurde. Studien 
+    zeigen, dass bewusst kürzere Meetings (z. B. 25 statt 30 Minuten) die Effizienz steigern können.
+
+  \item \textbf{Moderation und Beteiligung:} Erfasst die Qualität der Moderation und die aktive Einbindung der Teilnehmenden. 
+    Eine hohe Beteiligungsquote gilt als Indikator für Engagement und Interaktivität.
+
+  \item \textbf{Ergebnisorientierung:} Bewertet, ob aus dem Meeting konkrete Entscheidungen oder Aufgaben resultierten. Die Anzahl 
+    abgeschlossener Aktionspunkte kann als Kennzahl dienen.
+
+  \item \textbf{Allgemeine Zufriedenheit:} Ermittelt das subjektive Gesamturteil der Teilnehmenden, beispielsweise auf einer 
+    Skala von 1 bis 10.
+
+  \item \textbf{Meetingdauer:} Vergleicht die geplante mit der tatsächlichen Dauer und bewertet, ob diese angemessen war.
+\end{itemize}
+
+\subsection{Verknüpfung von Zufriedenheitswerten mit Kontext- und Gesundheitsdaten}
+
+Ein weiterer Bestandteil der Erweiterung ist die Verknüpfung der erfassten Zufriedenheitswerte mit zusätzlichen, für die
+Interpretation relevanten Einflussfaktoren. Ziel ist es, die Aussagekraft der Daten zu erhöhen und ein umfassenderes Bild der
+Zusammenhänge zwischen Arbeitsbedingungen und Arbeitszufriedenheit zu erhalten. Hierzu werden sowohl Daten aus dem Arbeitskontext
+als auch ausgewählte Gesundheitsdaten berücksichtigt.
+
+Unter Arbeitskontextdaten fallen Commitinformationen, wie Zeitpunkt und die Commit Message, welche eine kurze Zusammenfassung der
+Codeänderungen darstellt. Ausserdem werden zusätzliche Informationen zu Meetings erfasst, beispielsweise der Name des Meetings oder
+die Anzahl teilnehmender Personen.
+
+Die Ergänzung der Zufriedenheitswerte um Gesundheitsdaten soll das subjektive Stimmungsbild erweitern und objektive Indikatoren für
+Belastung, Erholung und allgemeines Wohlbefinden einbeziehen. Während subjektive Angaben wertvolle Einblicke in die aktuelle
+emotionale Lage geben, erfassen physiologische Metriken Veränderungen, die den Betroffenen nicht immer unmittelbar bewusst sind.
+Die Kombination beider Perspektiven ermöglicht eine fundiertere Analyse möglicher Einflussfaktoren auf die Arbeitszufriedenheit
+von Entwicklerinnen und Entwicklern.
+
+Für die Auswahl der relevanten Gesundheitsmetriken wurden drei Kriterien herangezogen:
+
+\begin{itemize}
+  \item \textbf{Wissenschaftlich belegter Zusammenhang} mit Arbeitszufriedenheit oder Leistungsfähigkeit.
+  \item \textbf{Technische Messbarkeit} mittels gängiger Wearables bzw. Smartphone-Sensoren.
+  \item \textbf{Integrationsfähigkeit} über etablierte Schnittstellen wie Apple Health Kit oder die Garmin Health API.
+\end{itemize}
+
+\todo{Referenz einfügen}
+Die im Kapitel~\ref{Gesundheit} beschriebenen Gesundheitsmetriken erfüllen diese Kriterien und umfassen:
+
+\begin{itemize}
+\item \textbf{Schlafdauer}
+\item \textbf{Ruheherzfrequenz (RHR)}
+\item \textbf{Stress} (gemessen über die Herzratenvariabilität, HRV)
+\item \textbf{Aktivitätsminuten und Schritte}
+\end{itemize}
+
+\subsection{Automatisierte Interpretation und Handlungsempfehlungen durch den Yappi Coach}
+
+Als letzer Bestandteil der Erweiterung wertet der Yappi Coach die erfassten Daten automatisiert aus. Ziel ist es, nicht nur 
+Rohdaten bereitzustellen, sondern diese in einen interpretierbaren Kontext zu setzen und daraus konkrete, umsetzbare 
+Handlungsempfehlungen abzuleiten.
+
+Der Yappi Coach kombiniert Zufriedenheitswerte, Kontextinformationen und ausgewählte Gesundheitsmetriken zu einem Gesamtbild der
+aktuellen Arbeitssituation. Dabei werden wiederkehrende Muster, Auffälligkeiten und Abweichungen von individuellen Referenzwerten
+identifiziert. Durch diese ganzheitliche Betrachtung können potenzielle Ursachen für Veränderungen in der Arbeitszufriedenheit
+erkannt werden.
+
+Ein wesentliches Ziel ist es, die Entwicklerinnen und Entwickler direkt bei der Verbesserung ihrer Arbeitssituation zu 
+unterstützen. Statt lediglich Zahlen und Diagramme anzuzeigen, formuliert der Yappi Coach daraus spezifische Empfehlungen, die 
+auf die jeweilige Personzugeschnitten sind. Beispiele hierfür sind:
+
+\begin{itemize}
+    \item Vorschläge zur Anpassung der Meetingfrequenz oder -dauer, wenn wiederholt ein negativer Zusammenhang zwischen
+      Meetingbelastung und Zufriedenheit erkennbar ist.
+    \item Hinweise auf mögliche Überlastung, wenn Gesundheitsmetriken wie Ruheherzfrequenz oder Schlafdauer über einen längeren
+      Zeitraum ungünstige Werte aufweisen.
+    \item Empfehlungen zur Optimierung des Arbeitsrhythmus, wenn bestimmte Tageszeiten oder Arbeitsphasen wiederholt mit höheren
+      Zufriedenheitswerten korrelieren.
+\end{itemize}
+
+Der Yappi Coach soll somit die Brücke zwischen Datenerhebung und konkreter Verbesserung schlagen. Durch die kontinuierliche, 
+automatisierte Analyse der Daten wird eine proaktive Unterstützung möglich, die nicht nur reaktiv auf bestehende Probleme eingeht,
+sondern auch frühzeitig präventive Massnahmen anstösst.
+
+\section{Vision, Mission und Leitprinzipien}
+
+Die Weiterentwicklung von Yappi folgt einer klaren strategischen Ausrichtung, die sowohl die langfristigen Ziele (Vision) als auch 
+den konkreten Handlungsauftrag (Mission) definiert. Dieses Kapitel beschreibt, welches Zukunftsbild mit Yappi angestrebt wird und
+nach welchen Grundsätzen die Umsetzung erfolgt.
+
+\subsection{Vision: Yappi als zentrale Plattform für Entwicklerzufriedenheit}
+
+Yappi soll sich zu einer zentralen, intelligenten Plattform entwickeln, die es Entwicklerinnen, Entwicklern und Teams ermöglicht,
+die Arbeitszufriedenheit kontinuierlich, präzise und im Kontext zu erfassen, zu verstehen und gezielt zu verbessern. Ziel ist ein
+Arbeitsumfeld, in dem Zufriedenheit als gleichwertiger Faktor neben Produktivität und Codequalität betrachtet wird und in dem
+datenbasierte Erkenntnisse zu einer nachhaltig gesunden und motivierenden Arbeitskultur beitragen.
+
+\subsection{Mission: Nahtlose Erfassung, Analyse und Optimierung im Arbeitsalltag}
+
+Die Mission von Yappi besteht darin, durch nahtlose Integration in den Arbeitsalltag verlässliche und kontextbezogene
+Zufriedenheitsdaten zu erfassen, diese mit relevanten Kontext- und Gesundheitsmetriken zu verknüpfen und mithilfe intelligenter
+Analysen konkrete Handlungsempfehlungen bereitzustellen. Dabei wird besonderer Wert darauf gelegt, den Erfassungs- und
+Auswertungsprozess so zu gestalten, dass er minimal störend und auf den individuellen wie auch den Nutzen für Teams ausgerichtet
+ist.
+
+\subsection{Leitprinzipien: Werte und Ausrichtung der Plattform}
+
+Die folgenden Leitsätze definieren den Rahmen, an dem sich die Weiterentwicklung von Yappi orientiert:
+
+\begin{enumerate}
+  \item \textbf{Ganzheitlichkeit vor Fragmentierung:} Zufriedenheitswerte werden immer im Kontext weiterer relevanter Faktoren 
+    betrachtet.
+  \item \textbf{Nahtlose Integration:} Die Nutzung soll den Arbeitsfluss nicht unterbrechen, sondern sich harmonisch einfügen.
+  \item \textbf{Datenbasiert und handlungsorientiert:} Die Analysen zielen stets auf konkrete, umsetzbare Handlungsempfehlungen.
+\end{enumerate}
+
+\section{Value Proposition}
+
+Dieses Kapitel beschreibt den konkreten Mehrwert, den die Erweiterung von Yappi für verschiedene Zielgruppen bietet. 
+Dabei wird zwischen Einzelpersonen und Teams unterschieden, um die Vorteile jeweils im passenden Anwendungskontext darzustellen.
+
+\subsection{Mehrwert für Einzelpersonen – Persönliche Optimierung der Arbeitszufriedenheit}
+
+Die Erweiterung von Yappi ermöglicht es Entwicklerinnen und Entwicklern, ihre Arbeitszufriedenheit regelmässig und ohne hohen 
+Mehraufwand zu erfassen. Durch die automatisierte Aufforderung zu geeigneten Zeitpunkten, die Anreicherung der Daten mit Kontext- 
+und Gesundheitsinformationen sowie die Interpretation durch den Yappi Coach, erhalten Einzelpersonen fundierte und individuell 
+relevante Rückmeldungen.  
+
+Die wichtigsten Vorteile für Einzelpersonen sind:
+\begin{itemize}
+    \item \textbf{Regelmässige, unkomplizierte Erfassung} von Zufriedenheitsdaten ohne manuelles Initiieren.
+    \item \textbf{Individuell zugeschnittene Empfehlungen} zur Verbesserung der eigenen Arbeitssituation.
+    \item \textbf{Frühzeitige Erkennung von Belastungstendenzen} durch Kombination subjektiver und objektiver Daten.
+    \item \textbf{Bessere Selbstreflexion} durch kontinuierliche und leicht zugängliche Verlaufsauswertungen.
+\end{itemize}
+
+\subsection{Mehrwert für Teams – Gemeinsame Verbesserung von Zusammenarbeit und Prozessen}
+
+Auf Teamebene bietet die Erweiterung die Möglichkeit, kollektive Muster in der Arbeitszufriedenheit zu erkennen. Die gesammelten
+Daten können aufzeigen, wie sich bestimmte Arbeitsweisen, Meetingstrukturen oder Prozessänderungen auf die Gesamtzufriedenheit im
+Team auswirken.  
+
+Die wichtigsten Vorteile für Teams sind:
+\begin{itemize}
+    \item \textbf{Transparenz über gemeinsame Herausforderungen} durch aggregierte Zufriedenheitsdaten.
+    \item \textbf{Fundierte Entscheidungsgrundlage} für Prozess- und Arbeitsablaufoptimierungen.
+    \item \textbf{Verbesserung der Meetingkultur} durch systematische Erfassung der Meetingqualität.
+    \item \textbf{Stärkung der Zusammenarbeit} durch gezielte, datenbasierte Anpassungen.
+\end{itemize}
+
+\section{Produktziele}
+
+Die im vorangehenden Kapitel beschriebenen Erweiterungsideen bilden die Grundlage für die folgenden Produktziele. Sie fassen die
+wesentlichen Eigenschaften zusammen, die Yappi im Rahmen der geplanten Weiterentwicklung erfüllen soll, um die identifizierten
+Problemstellungen wirksam zu adressieren.
+
+\subsection{Z-1: Automatisierte Aufforderung zur Zufriedenheitserfassung}
+
+\subsubsection{Ziel:}
+
+Yappi soll Entwicklerinnen und Entwickler automatisch zu geeigneten Zeitpunkten auffordern, Zufriedenheitsdaten zu erfassen, ohne
+den Arbeitsfluss zu stören. Dadurch wird eine kontinuierliche und vollständige Datengrundlage geschaffen, die eine präzisere
+Analyse der Zufriedenheit ermöglicht.
+
+\subsubsection{Beschreibung:}
+
+Die automatisierte Aufforderung erfolgt kontextbezogen, beispielsweise direkt nach einem Commit oder unmittelbar nach einem
+Meeting. Dies gewährleistet, dass die Erfassung in Momenten erfolgt, in denen der Arbeitsfluss ohnehin kurz unterbrochen ist, und
+reduziert so den wahrgenommenen Mehraufwand für die Nutzerinnen und Nutzer.
+
+\subsubsection{Bezug zur Forschungsfrage:}
+
+Bezieht sich auf Forschungsfrage A: Durch den Einsatz von Technologien und Schnittstellen wie IDE-Plugins, Browsererweiterungen
+oder Integrationen in Tools wie Microsoft Teams und Outlook wird ein reibungsloses und einfaches Erfassen von Zufriedenheitsdaten
+ermöglicht.
+
+\subsection{Z-2: Erfassung der Meetingqualität}
+
+\subsubsection{Ziel:}
+
+Yappi soll nach relevanten Meetings zeitnah eine kurze Rückmeldung zur wahrgenommenen Produktivität, Relevanz und Belastung
+einholen, um den Einfluss einzelner Besprechungen auf die Arbeitszufriedenheit sichtbar zu machen.
+
+\subsubsection{Beschreibung:}
+
+Die Bewertung erfolgt anhand vordefinierter Kriterien wie Zielklarheit, Moderationsqualität, Zeitmanagement und
+Ergebnisorientierung. Die Integration in gängige Meeting-Tools stellt sicher, dass die Abfrage ohne zusätzlichen manuellen Aufwand
+in den Arbeitsalltag eingebettet wird.
+
+\subsubsection{Bezug zur Forschungsfrage:}
+
+Bezieht sich auf Forschungsfrage A: Durch die Integration in Meeting-Plattformen wie Microsoft Teams oder Outlook werden
+bestehende Technologien genutzt, um die Erfassung im direkten Arbeitskontext zu automatisieren und den Erfassungsprozess für die
+Nutzerinnen und Nutzer zu vereinfachen.
+
+\subsection{Z-3: Verknüpfung mit Kontext- und Gesundheitsdaten}
+
+\subsubsection{Ziel:}
+
+Yappi soll Zufriedenheitswerte mit automatisch erfassten Kontextinformationen aus dem Arbeitsumfeld sowie ausgewählten
+Gesundheitsdaten verknüpfen, um ein vollständigeres Bild der Einflussfaktoren auf die Arbeitszufriedenheit zu erhalten.
+
+\subsubsection{Beschreibung:}
+
+Neben Arbeitskontextdaten wie Commit-Zeitpunkt, Commit-Message und Meetinginformationen werden Gesundheitsmetriken wie
+Schlafdauer, Ruheherzfrequenz, Stress (HRV) sowie Aktivitätsminuten und Schritte einbezogen. Diese Daten werden über etablierte
+Schnittstellen wie Apple HealthKit oder die Garmin Health API automatisiert integriert.
+
+\subsubsection{Bezug zur Forschungsfrage:}
+
+Bezieht sich auf Forschungsfrage B: Die Anbindung an Gesundheitsdaten-APIs ermöglicht es, wissenschaftlich relevante und technisch
+messbare Metriken in die Analyse der Entwicklerzufriedenheit einzubeziehen, um Zusammenhänge zwischen Wohlbefinden und
+Zufriedenheit datenbasiert zu identifizieren.
+
+\subsection{Z-4: Automatisierte Interpretation und Handlungsempfehlungen (Yappi Coach)}
+
+\subsubsection{Ziel:}
+
+Yappi soll die erfassten Zufriedenheits-, Kontext- und Gesundheitsdaten automatisiert analysieren und daraus konkrete, individuell
+zugeschnittene Handlungsempfehlungen ableiten.
+
+\subsubsection{Beschreibung:}
+
+Der Yappi Coach erkennt Muster, Auffälligkeiten und Abweichungen von individuellen Referenzwerten, um frühzeitig potenzielle
+Probleme zu identifizieren. Auf Basis dieser Analysen werden praxisnahe, datengestützte Empfehlungen gegeben, die sowohl
+präventive Massnahmen als auch Optimierungen im Arbeitsalltag umfassen.
+
+\subsubsection{Bezug zur Forschungsfrage:}
+
+Bezieht sich auf Forschungsfrage C: Durch die Nutzung KI-gestützter Auswertungen können aus den kombinierten Daten gezielte,
+evidenzbasierte Vorschläge zur Verbesserung der Arbeitsbedingungen und der Zufriedenheit abgeleitet werden.
+
+\subsubsection{Anmerkung:}
+
+Dieses Ziel wird im Rahmen der vorliegenden Arbeit nicht technisch umgesetzt, sondern ausschliesslich konzeptionell ausgearbeitet.
+Die praktische Implementierung ist als Bestandteil eines Nachfolgeprojekts vorgesehen.
+
+\todo{szenarien}
+
+\printbibliography
+
+\end{document}
