@@ -392,7 +392,7 @@ Belastungssituationen aufzeigen, bevor sie sich in Produktivitätsverlust oder Q
     und Entwicklern. Empirische Untersuchungen zeigen,dass Softwareentwickelnde durchschnittlich zwischen 10,9 und 16,5
     Stunden pro Woche in Besprechungen verbringen. Ein erheblicher Teil
     dieser Zeit wird als wenig produktiv eingeschätzt. Besonders problematisch sind lange oder ungünstig terminierte Meetings,
-    die den Arbeitstag fragmentieren. Dies unterbricht oft den sogenannten Flow-Zustand, also eine Phase tiefer Konzentration
+    die den Arbeitstag fragmentieren. Dies unterbricht oft den Flow-Zustand, also eine Phase tiefer Konzentration
     und vollständiger Aufgabenfokussierung. Die Wiederaufnahme komplexer Programmieraufgaben nach einer Unterbrechung erfordert
     zusätzlichen kognitiven Aufwand und führt zu Zeitverlust. \cite{stray_understanding_2020, meyer_today_2021}
 
@@ -1651,51 +1651,180 @@ iOS-Anwendung entwickelt wird, die die relevanten Daten aus Apple HealthKit ausl
 \chapter{Evaluation}
 \xeno{}
 
-  \section{Usertesting an Hackathon}
-  \todo{Hackathon}
+ \section{Usertesting am Hackathon}
 
-    Ein Usertesting mit verschiedensten Entwickler zu planeen ist nicht einfach.
-    Zum glück wird aber an der FHNW ein Hackathon durchgeführt, die Energie-days wo sich diverse Entwickler treffen um gemeinsam Coole Projekte durchzuführen
+ Ein geplanter Usability-Test wird im Rahmen des an der FHNW stattfindenden Hackathons \textit{Energie-Days} durchgeführt.
+ Der Hackathon findet am 11. und 12. September 2025 statt und liegt somit zeitlich nach der Abgabe dieser Arbeit.
 
-    Genau diese gelegenheit wollen wir nutzen um usertest durchzuführen.
+ Die Veranstaltung bringt Entwicklerinnen und Entwickler mit unterschiedlichem fachlichen Hintergrund zusammen, die in
+ kurzer Zeit kollaborativ Projekte umsetzen. Diese Rahmenbedingungen bieten eine geeignete Gelegenheit, Yappi unter
+ realistischen Arbeitsbedingungen zu testen.
 
-    Kontakt mit:
+ Zum Zeitpunkt der Erstellung dieser Arbeit wurde der Test noch nicht durchgeführt. Es besteht jedoch bereits Kontakt mit
+ den Organisatoren, um vor Ort entweder:
+ \begin{itemize}
+     \item Yappi direkt in einem Entwicklerteam einzusetzen, das die Plattform während des Hackathons aktiv nutzt, oder
+     \item eine Befragung von Teilnehmenden an einem Informations- und Teststand durchzuführen.
+ \end{itemize}
 
-    Idee ein team benutzt yappi um ihr arbeit zu tracken damit wir für das kommende IP6 userdaten haben und diese evaluieren können.
+ Die Durchführung dieses Tests wird es ermöglichen, praxisnahe Rückmeldungen zur Benutzerfreundlichkeit, Funktionalität
+ und Integration von Yappi in den Arbeitsfluss zu erhalten. Zusätzlich bieten dieser Test die möglichkeit testdaten zu
+ sammeln um weitere erkentnisse zwischen den gesammelten Daten und der Zufriedenheit schaffen.gesammelten Die dabei
+ gewonnenen Erkenntnisse sollen in ein Folgeprojekt (IP6) einfliessen.
 
-    Fallback falls dies nicht möglich ist wäre es einen Stand aufzubauen und enwickler zu befragen.
+\section{Evaluation durch Simulation}
 
-  \section{Evaluation durch Simulation}
+Neben dem Praxistest am Hackathon wurde Yappi in einer kontrollierten Testumgebung evaluiert. Ziel ist es, spezifische
+Funktionen ohne Abhängigkeit von realen Projektdaten oder sensiblen Informationen zu überprüfen.
 
-    Eigenes Testing um erfahrung zu messen. Dies wir bei der Arbeit durchgeführt
+Die Simulation erfolgte in mehreren Schritten:
+\begin{enumerate}
+    \item Zielgruppen und Nutzerrollen festlegen: Definition typischer Nutzerprofile (Personas) wie Softwareentwickler,
+    Scrum Master oder Product Owner, inklusive ihrer Ziele und Anforderungen.
+    \item Szenarien entwickeln: Erstellung realistischer Nutzungsszenarien, die zentrale Arbeitsabläufe abbilden.
+    \item Testpersonen auswählen: Rekrutierung von Personen mit relevanter Erfahrung, jedoch ohne tiefe
+    Beteiligung an der Entwicklung von Yappi, um eine objektive Bewertung zu gewährleisten.
+    \item Rollen zuweisen: Verteilung der definierten Personas und Szenarien an die Testpersonen mit der Anweisung,
+    die Aufgaben wie in einer realen Arbeitssituation durchzuführen.
+    \item Testdurchführung: Schrittweises Durchspielen der Szenarien, begleitet von der Methode des lauten Denkens,
+    um Nutzungshürden und Verständnisprobleme zu identifizieren.
+    \item Ergebniserfassung: Dokumentation der Beobachtungen in Protokollen, Checklisten und standardisierten
+    Fragebögen.
+    \item Auswertung und Massnahmen: Analyse der Rückmeldungen, Identifikation wiederkehrender Probleme und Ableitung
+    konkreter Optimierungsvorschläge.
+\end{enumerate}
 
-    Idee dabei ist es Ohne Probleme von Datenschutz und so zu testen
+Diese Simulation ermöglicht es, Funktionen iterativ zu verbessern, bevor sie in realen Teams eingesetzt werden. Eine
+kurze Evaluation vor Projektabschluss stellt sicher, dass die vorgenommenen Anpassungen die identifizierten Probleme adressieren.
 
-    Ergebnisse werden mit Hilfe von einem Fragebogen evaluiert.
+    \subsection{Nutzerprofil (Persona)}
 
-    Kein grosser repräsentativer test möglich da auslegung auf Hackathon ist und yappi als plattform zu verbessern.
+    \textbf{Persona:} Softwareentwickler/in
 
-    Zielgruppen und Nutzerrollen definieren: Bestimme, welche Nutzergruppen das System verwenden werden, und erstelle typische Nutzerprofile (Personas). Lege fest, welche Aufgaben oder Ziele diese Nutzer haben.
+    \textbf{Ziele:}
+    \begin{itemize}
+        \item Arbeitszufriedenheit einfach erfassen.
+        \item Persönliche Trends erkennen.
+    \end{itemize}
 
-    Szenarien erstellen: Beschreibe realistische Nutzungsszenarien, die typische Abläufe oder Problemstellungen widerspiegeln. Diese Szenarien sollten die wichtigsten Funktionen und Prozesse des Systems abdecken.
+    \textbf{Anforderungen:}
+    \begin{itemize}
+        \item Schnelle und intuitive Bedienung.
+        \item Minimale Unterbrechung des Arbeitsflusses.
+    \end{itemize}
 
-    Testpersonen auswählen: Wähle Teammitglieder aus verschiedenen Bereichen (z.B. Entwicklung, Support, Business), die die festgelegten Nutzerrollen übernehmen. Idealerweise sollten sie mit den Anforderungen der echten Nutzer vertraut sein, aber nicht zu tief in der Entwicklung involviert sein.
+    \subsection{Testszenarien}
 
-    Rollenverteilung: Weise den Testpersonen die jeweiligen Nutzerrollen und Szenarien zu. Erkläre, dass sie die Aufgaben so lösen sollen, wie es ein echter Nutzer tun würde.
+    Für die Evaluation von Yappi wurden drei Szenarien definiert, die zentrale Funktionen der Plattform abdecken.
+    Die Szenarien wurden für die Simulation entwickelt um die funktionen von Yappi zu Testen.
 
-    Durchführung der Simulation: Lass die Testpersonen die Szenarien Schritt für Schritt durchspielen. Sie sollen dabei laut denken und alle Schwierigkeiten oder Unklarheiten dokumentieren.
+    \subsubsection{Szenario 1: Erfassung der Zufriedenheit nach einem Code-Commit}
+    \textbf{Ziel:} Überprüfung der intuitiven Nutzung und Unterbrechungswirkung der Zufriedenheitserfassung über das IDE-Plugin.
 
-    Ergebnisse festhalten: Sammle Beobachtungen, Schwierigkeiten und Verbesserungsvorschläge. Nutze dazu Protokolle, Checklisten oder strukturierte Fragebögen.
+    \textbf{Ablauf:}
+    \begin{enumerate}
+        \item Die Testperson führt eine Programmieraufgabe in IntelliJ IDEA durch.
+        \item Nach dem Commit erscheint automatisch eine Benachrichtigung des Yappi-Plugins.
+        \item Die Testperson gibt die aktuelle Zufriedenheit über die Eingabemaske ein.
+        \item Rückmeldungen zu Verständlichkeit, Geschwindigkeit und Arbeitsfluss werden dokumentiert.
+    \end{enumerate}
 
-    Auswertung und Nachbearbeitung: Analysiere die gesammelten Daten, identifiziere Muster und leite konkrete Massnahmen zur Verbesserung des Systems ab.
+    \textbf{Bewertungskriterien:}
+    \begin{itemize}
+        \item Verständlichkeit und Auffindbarkeit der Funktion
+        \item Geschwindigkeit des Erfassungsprozesses
+        \item Wahrgenommene Unterbrechung des Arbeitsflusses
+    \end{itemize}
+
+    \subsubsection{Szenario 2: API-Key mit der Kalenderintegration verbinden}
+    \textbf{Ziel:} Überprüfung, ob die Verbindung zwischen Yappi und dem persönlichen Kalender mittels API-Key einfach
+    und verständlich hergestellt werden kann. Dabei soll festgestellt werden, ob Nutzerinnen und Nutzer ohne technische
+    Unterstützung den Vorgang erfolgreich durchführen.
+
+    \textbf{Ablauf:}
+    \begin{enumerate}
+        \item Die Testperson ruft in Yappi den Bereich für des Benutzerprofil auf.
+        \item Sie generiert oder kopiert einen bestehenden API-Key.
+        \item Der API-Key wird in das dafür vorgesehene Feld in der Browsererweiterung eingefügt.
+        \item Yappi benachrichtigt automatisch über Kalenderevents.
+        \item Rückmeldungen zu Verständlichkeit, benötigter Zeit und auftretenden Schwierigkeiten werden dokumentiert.
+    \end{enumerate}
+
+    \textbf{Bewertungskriterien:}
+    \begin{itemize}
+        \item Verständlichkeit der Anleitung in Yappi
+        \item Einfachheit des Kopier- und Einfügevorgangs des API-Keys
+        \item Zuverlässigkeit der Synchronisation der Kalenderdaten
+        \item Wahrgenommener Zeitaufwand
+    \end{itemize}
+
+    \subsubsection{Szenario 3: Meeting-Erfassung über Kalenderintegration}
+    \textbf{Ziel:} Validierung der automatischen Erkennung und zeitnahen Erfassung von Meetingwahrnehmungen.
+
+    \textbf{Ablauf:}
+    \begin{enumerate}
+        \item Ein Testmeeting wird im Kalender der Testperson eingetragen.
+        \item Nach beenden des Meeting erhält die Testperson automatisch eine Erinnerung zur Bewertung.
+        \item Die Testperson füllt das Feedbackformular aus.
+        \item Feedback zu Auslösezeitpunkt, Relevanz und Eingabeprozess wird dokumentiert.
+    \end{enumerate}
+
+    \textbf{Bewertungskriterien:}
+    \begin{itemize}
+        \item Zuverlässigkeit der Meeting-Erkennung
+        \item Angemessenheit des Erinnerungszeitpunkts
+        \item Vollständigkeit der abgefragten Informationen
+    \end{itemize}
 
 
-
-\todo{kleine evaluation vor projektende}
+%--------------------------------------------------------------------------------------------------------------------------------------
 
 \section{Beantwortung der Fragestellung}
-\todo{Bezug auf die Ziele nehmen}
-\todo{}
+
+    Die im Projekt verfolgten Forschungsfragen wurden anhand der definierten Produktziele überprüft. Die Beantwortung
+    erfolgt nachfolgend in direktem Bezug zu den formulierten Zielen und den erzielten Ergebnissen.
+
+    \subsection*{Forschungsfrage A}
+    \textit{Durch welche Technologien und Schnittstellen kann Yappi erweitert werden, um ein reibungsloses und einfaches
+    Erfassen von Zufriedenheitsdaten zu ermöglichen?}
+
+    Dieses Ziel wurde im Rahmen der Entwicklung vollständig adressiert. Die Integration in bestehende Arbeitsumgebungen
+    erfolgt über:
+    \begin{itemize}
+        \item ein \textbf{IntelliJ-IDEA-Plugin} zur direkten Erfassung nach einem Code-Commit (Ziel Z-1),
+        \item eine \textbf{Kalenderintegration} über das iCalendar-Format zur automatisierten Erkennung von Meetings (Ziel Z-2),
+        \item eine \textbf{Browsererweiterung} zur zeitnahen Erfassung der Meetingwahrnehmung (Ziel Z-2).
+    \end{itemize}
+    Die automatisierte und kontextbezogene Aufforderung reduziert den manuellen Aufwand und erhöht die Regelmässigkeit
+    der Erfassungen. Damit wird das Ziel einer nahtlosen Integration in den Arbeitsprozess erreicht.
+
+    \subsection*{Forschungsfrage B}
+    \textit{Wie können Gesundheitsdaten in die Auswertung der Entwicklerzufriedenheit einfliessen?}
+
+    Es wurde eine konzeptionelle und teilweise technische Lösung für die Anbindung an \textbf{Apple HealthKit} entwickelt
+    (Ziel Z-3). Dadurch können wissenschaftlich relevante Metriken wie Schlafdauer, Ruheherzfrequenz, Stress (HRV) sowie
+    Aktivitätsminuten automatisiert erfasst und mit den Zufriedenheitsdaten verknüpft werden.
+    Die Integration schafft die Grundlage für weiterführende Analysen zu möglichen Zusammenhängen zwischen physiologischen
+    Faktoren und der subjektiven Arbeitszufriedenheit. Aufgrund zeitlicher Einschränkungen wurde diese Anbindung nicht
+    vollständig produktiv umgesetzt, die technische Machbarkeit jedoch validiert.
+
+    \subsection*{Forschungsfrage C}
+    \textit{Wie kann Yappi Teams und Entwickler dabei unterstützen, aus den erfassten Zufriedenheitsdaten
+    Handlungsempfehlungen abzuleiten?}
+
+    Die Entwicklung einer intelligenten Empfehlungskomponente, \textbf{Yappi Coach}, wurde konzeptionell ausgearbeitet
+    (Ziel Z-4).
+    Das Konzept sieht vor, Zufriedenheitsdaten, Arbeitskontext und Gesundheitsmetriken zu kombinieren, um datenbasierte
+    und individuell zugeschnittene Handlungsempfehlungen zu generieren. Eine technische Implementierung erfolgte in diesem
+    Projekt nicht, da sie den Rahmen der Arbeit überschreiten würde. Das Konzept bildet jedoch eine belastbare Grundlage
+    für ein Folgeprojekt.
+
+    \subsection*{Zusammenfassung}
+    Die Ziele Z-1 bis Z-3 wurden in diesem Projekt vollständig oder prototypisch umgesetzt, womit die Forschungsfragen
+    A und B beantwortet werden können. Die Forschungsfrage C wurde konzeptionell beantwortet, eine praktische Umsetzung
+    ist als nächster Entwicklungsschritt vorgesehen. Insgesamt trägt die Arbeit zur Verbesserung der kontinuierlichen,
+    kontextbezogenen und nutzerfreundlichen Erfassung von Entwicklerzufriedenheit bei.
+
 
 %--------------------------------------------------------------------------------------------------------------------------------------
 
