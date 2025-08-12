@@ -877,73 +877,6 @@ So ergab sich aus den Rückmeldungen, dass die Meetingumfrage als kompakter Frag
 während Freitextfelder nur ergänzend zum Einsatz kommen.
 Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichkeit für regelmässige Rückmeldungen erhöht.
 
-\chapter{Konzeptentwurf}
-\todo{Entfernen sobald alle Inhalte übernommen wurden}
-
-\section{Integration in die Entwicklungsumgebung}
-
-\xeno{rework}
-
-Yappi wird direkt in die integrierte Entwicklungsumgebung (IDE) eingebunden, um den Arbeitsfluss von Entwicklerinnen
-und Entwicklern nicht zu unterbrechen.Als primäre Zielplattform eignet sich ein Plugin für IntelliJ IDEA,
-eine der weltweit am häufigsten genutzten Java-Entwicklungsumgebungen von JetBrains.
-Die Wahl von IntelliJ IDEA basiert auf drei Hauptfaktoren: hohe Verbreitung im professionellen Java-Umfeld,
-umfangreiche Plugin-Schnittstellen zur Integration externer Funktionen und Unterstützung mehrerer Programmiersprachen
-und Build-Systeme, was den Einsatz auch in heterogenen Entwicklungsteams ermöglicht.
-Die unmittelbare Einbettung in die gewohnte Arbeitsoberfläche erlaubt die Erfassung von Zufriedenheitsdaten ohne Kontextwechsel.
-
-Die Integration trägt dazu bei, den Flow-Zustand zu erhalten.
-Flow bezeichnet einen Zustand tiefer Konzentration, der nur entsteht, wenn Anforderungen und Fähigkeiten
-im Gleichgewicht stehen und Unterbrechungen vermieden werden.
-Kontextwechsel zu externen Tools oder Browsern können diesen Zustand unterbrechen und damit Produktivität sowie Zufriedenheit verringern.
-Das IntelliJ-Plugin reduziert solche Unterbrechungen, indem es Feedbackprozesse unmittelbar in den bestehenden Arbeitskontext integriert.
-
-Eine Post-Commit-Aktion ermöglicht es, direkt nach einem abgeschlossenen Commit ein kurzes Feedback abzugeben.
-Dadurch entfällt der Umweg über die Webplattform von Yappi, was die Bedienung beschleunigt und die Gefahr von Befragungsmüdigkeit verringert.
-Kurze, kontextbezogene Abfragen im richtigen Moment erhöhen die Teilnahmebereitschaft und verbessern die Datenqualität.
-
-Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in den Entwicklungsprozess integriert ist.
-
-\section{Integration von Gesundheitsdaten}
-\todo{in implementierung einbauen}
-
-Gesundheitsdaten können wertvolle Zusatzinformationen zur Entwicklerzufriedenheit liefern. Sie ergänzen subjektive Stimmungsangaben
-um objektive Messwerte, die Rückschlüsse auf Belastung und Erholung ermöglichen. Durch die Anbindung an etablierte Schnittstellen
-wie Apple Health Kit oder Garmin Health API lassen sich Metriken wie Schlafqualität, Herzfrequenz oder Stressindikatoren
-automatisiert erfassen. Diese Daten bilden zusammen mit den Prozess- und Zufriedenheitsmetriken eine erweiterte Grundlage, um
-Korrelationen zwischen physischem Wohlbefinden und Arbeitszufriedenheit zu erkennen und gezielte Massnahmen abzuleiten.
-
-\subsubsection{Auswahl relevanter Gesundheitsmetriken}
-
-\subsubsection{Quellen und Schnittstellen für Gesundheitsdaten}
-\todo{in implementierung einbauen}
-
-Für die Integration von Gesundheitsdaten wurden mehrere Optionen geprüft. Im Mittelpunkt standen die Garmin Health API sowie Apple
-Health Kit. Beide Quellen decken relevante Metriken wie Schritte, Herzfrequenz, Schlaf und Stress/HRV ab, unterscheiden sich jedoch
-deutlich hinsichtlich Zugangsmodell, Datenschutzmechanismen, Integrationsaufwand und Eignung für nicht-kommerzielle
-Forschungsprojekte.
-
-\begin{description}
-  \item[Garmin Health API] Die Garmin Health API stellt über eine REST-Schnittstelle umfangreiche Tages- und Aktivitätsmetriken
-    bereit. Die Daten werden in der Regel nach dem Gerätesync via über die Mobile Applikation von Garmin bereitgestellt und in
-    JSON ausgeliefert. die Plattform unterstützt Pull- und Push-Modelle, sodass auch eine ereignisgetriebene Integration möglich
-    ist. Der Zugang ist für genehmigte Business-Developer vorgesehen. Für die kommerzielle Nutzung fallen in der Regel
-    Lizenzgebühren an. Diese geschäftliche Ausrichtung sowie die erforderliche formale Zulassung machen die direkte Nutzung für
-    ein kleines, nicht-kommerzielles Forschungsprojekt unpassend. Zwar existieren Forschungsprogramme und Partnerlösungen rund um
-    Garmin, diese sind jedoch üblicherweise an formelle Kooperationen, Vertragsaufwände und teils Kosten gebunden, was die
-    Umsetzungshürde erhöht \cite{garmin_healthapi_2025}.
-  \item[Apple Health Kit] Health Kit dient auf iOS als zentrales, lokales Datenrepository für Gesundheits- und Fitnessdaten von
-    iPhone, Apple Watch und angebundenen Geräten/Apps. Der Zugriff erfolgt feingranular pro Datentyp und erfordert stets explizite
-    Nutzerzustimmung (Lesen/Schreiben getrennt). Daten liegen verschlüsselt auf dem Gerät. Apps erhalten nur Zugriff auf die
-    explizit freigegebenen Kategorien. Für die Integration stehen dokumentierte APIs und Query-Muster zur Verfügung. Eine
-    serverseitige Drittplattform ist nicht erforderlich, wodurch Architektur, Betrieb und Datenschutzfolgenabschätzung vereinfacht
-    werden \cite{apple_healthkit_2025}.
-\end{description}
-
-Da die Garmin Health API primär für kommerzielle Anwendungen vorgesehen ist und der beantragte Zugang für dieses Projekt nicht
-gewährt wurde, wurde Apple Health Kit als geeignetere Datenquelle ausgewählt. Für die Umsetzung bedeutet dies, dass eine
-iOS-Anwendung entwickelt wird, die die relevanten Daten aus Apple HealthKit ausliest und an Yappi überträgt.
-
 \chapter{Implementierung}
 \todo{Einleitung}
 
@@ -1058,6 +991,30 @@ iOS-Anwendung entwickelt wird, die die relevanten Daten aus Apple HealthKit ausl
 \section{IntelliJ IDEA Companion}
 
 \todo{}
+
+\xeno{rework oder}
+\gideon{:)}
+
+Yappi wird direkt in die integrierte Entwicklungsumgebung (IDE) eingebunden, um den Arbeitsfluss von Entwicklerinnen
+und Entwicklern nicht zu unterbrechen.Als primäre Zielplattform eignet sich ein Plugin für IntelliJ IDEA,
+eine der weltweit am häufigsten genutzten Java-Entwicklungsumgebungen von JetBrains.
+Die Wahl von IntelliJ IDEA basiert auf drei Hauptfaktoren: hohe Verbreitung im professionellen Java-Umfeld,
+umfangreiche Plugin-Schnittstellen zur Integration externer Funktionen und Unterstützung mehrerer Programmiersprachen
+und Build-Systeme, was den Einsatz auch in heterogenen Entwicklungsteams ermöglicht.
+Die unmittelbare Einbettung in die gewohnte Arbeitsoberfläche erlaubt die Erfassung von Zufriedenheitsdaten ohne Kontextwechsel.
+
+Die Integration trägt dazu bei, den Flow-Zustand zu erhalten.
+Flow bezeichnet einen Zustand tiefer Konzentration, der nur entsteht, wenn Anforderungen und Fähigkeiten
+im Gleichgewicht stehen und Unterbrechungen vermieden werden.
+Kontextwechsel zu externen Tools oder Browsern können diesen Zustand unterbrechen und damit Produktivität sowie Zufriedenheit verringern.
+Das IntelliJ-Plugin reduziert solche Unterbrechungen, indem es Feedbackprozesse unmittelbar in den bestehenden Arbeitskontext integriert.
+
+Eine Post-Commit-Aktion ermöglicht es, direkt nach einem abgeschlossenen Commit ein kurzes Feedback abzugeben.
+Dadurch entfällt der Umweg über die Webplattform von Yappi, was die Bedienung beschleunigt und die Gefahr von Befragungsmüdigkeit verringert.
+Kurze, kontextbezogene Abfragen im richtigen Moment erhöhen die Teilnahmebereitschaft und verbessern die Datenqualität.
+
+Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in den Entwicklungsprozess integriert ist
+
 
 %--------------------------------------------------------------------------------------------------------------------------------------
 
