@@ -1,0 +1,152 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[backend=biber, style=ieee]{biblatex}
+\addbibresource{literature.bib}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{microtype}
+\usepackage{parskip}
+
+\usepackage{xcolor}
+\newcommand{\todo}[1]{\colorbox{red}{\textbf{TODO: #1}}\\}
+\newcommand{\question}[1]{\colorbox{yellow}{\textbf{QUESTION: #1}}\\}
+\newcommand{\xeno}[1]{\colorbox{pink}{\textbf{TODO XENO: #1}}\\}
+\newcommand{\gideon}[1]{\colorbox{green}{\textbf{TODO GIDEON: #1}}\\}
+
+\begin{document}
+
+\tableofcontents
+\newpage
+
+\chapter{Konzeptlösung für die Erweiterungen an Yappi}
+
+Die im vorhergehenden Kapitel beschriebenen Problemstellungen und die Analyse bestehender Lösungen verdeutlichen, dass aktuelle
+Ansätze zur Erfassung der Entwicklerzufriedenheit häufig unvollständig sind. Sie erfassen den Einfluss einzelner Arbeitsereignisse
+nicht systematisch und bieten nur eingeschränkte Möglichkeiten, die erhobenen Daten im individuellen Arbeitskontext zu
+interpretieren. Zudem werden potenziell relevante Einflussfaktoren, wie das physische Wohlbefinden, nur selten berücksichtigt.
+
+Mit den geplanten Erweiterungen soll Yappi genau diese Lücken schliessen und eine integrierte, praxisorientierte Lösung
+bereitstellen, die Entwicklerinnen, Entwickler, Teams und Organisationen gleichermassen unterstützt. Ziel ist es, die
+Entwicklerzufriedenheit umfassend zu erfassen und die gewonnenen Erkenntnisse in konkrete Handlungsempfehlungen zu überführen.
+
+Die Erweiterung basiert auf folgenden Ansätzen:
+
+\begin{itemize}
+
+    \item Literaturrecherche zum Stand der Forschung im Bereich der Entwicklerzufriedenheit und deren Einfluss auf die
+      Produktivität
+    \item Analyse bestehender Lösungen zur Erfassung und Auswertung von Entwicklerzufriedenheit, Arbeitskontext und 
+      Gesundheitsdaten im Umfeld der Softwareentwicklung
+    \item Befragungen von Entwicklerinnen und Entwicklern in den Unternehmen der Autorinnen und Autoren
+    \item Brainstorming-Sitzungen mit den Projektbetreuenden
+\end{itemize}
+
+In den folgenden Unterkapiteln wird die schrittweise Entwicklung der Konzeptlösung für die geplanten Erweiterungen von Yappi
+detailliert beschrieben.
+
+\section{Problemstellungen}
+
+Die Erweiterung von Yappi verfolgt das Ziel, bestehende Schwächen in der Erfassung und Interpretation der Entwicklerzufriedenheit
+zu beheben. Dazu wurden die relevanten Herausforderungen nach dem Standard des Rational Unified Process (RUP) strukturiert
+beschrieben. Jede Problemstellung wird dabei in einem einheitlichen Schema dargestellt, um die Auswirkungen klar herauszuarbeiten
+und eine fundierte Basis für die Definition der Projektziele zu schaffen.
+
+Die folgenden Abschnitte fassen die drei zentralen Problemstellungen zusammen, die mit der Erweiterung adressiert werden sollen.
+
+\subsection{Passive Erfassung der Entwicklerzufriedenheit}
+
+In vielen aktuellen Umsetzungen erfolgt die Erfassung der Zufriedenheit rein passiv, d.\,h., Entwicklerinnen und Entwickler
+müssen von sich aus aktiv eine Rückmeldung abgeben. Dieser Prozess ist stark von der Eigeninitiative abhängig und wird im
+Arbeitsalltag häufig vergessen oder aufgeschoben. Dadurch entsteht eine unvollständige und unregelmässige Datengrundlage, die den
+tatsächlichen Verlauf der Zufriedenheit nur eingeschränkt widerspiegelt. Die vollständige Problemstellung ist in 
+Tabelle~\ref{tab:rup-passive} dargestellt.
+
+\begin{table}[H]
+  \caption{Problemstellung nach RUP: Passive erfassung der Entwicklerzufriedenheit}
+  \label{tab:rup-passive}
+  \centering
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.25\textwidth}|X}
+    \hline
+    Das Problem & der passiven Erfassung der Entwicklerzufriedenheit,
+    bei der ein Entwickler von sich aus eine Rückmeldung abgeben muss \\ \hline
+
+    betrifft & Entwicklerinnen und Entwickler. \\ \hline
+
+    Die Auswirkung dieses Problems & ist eine geringe Erfassungsrate der Zufriedenheitsdaten,
+    da Feedback oft vergessen oder aufgeschoben wird. \\ \hline
+
+    Eine erfolgreiche Lösung & fordert Entwicklerinnen und Entwickler zu relevanten
+    und regelmässigen Zeitpunkten automatisiert dazu auf, Zufriedenheitsdaten zu erfassen.
+    Dabei darf kein grosser Mehraufwand entstehen, um zur Abgabe zu motivieren. \\ \hline
+  \end{tabularx}
+\end{table}
+
+\subsection{Schwierigkeiten beim Ableiten von Schlussfolgerungen}
+
+Die Erhebung reiner Zufriedenheitswerte ohne weiterführende Informationen erschwert es, deren Ursachen oder Auslöser zu verstehen.  
+Ohne zusätzlichen Kontext ist es schwierig, Muster zu erkennen oder Zusammenhänge zwischen bestimmten Arbeitsbedingungen und der
+Zufriedenheit herzustellen. Dies führt dazu, dass Massnahmen zur Verbesserung oft auf Annahmen basieren und nicht ausreichend
+datenbasiert sind. Die vollständige Problemstellung ist in Tabelle~\ref{tab:rup-conclusions} dargestellt.
+
+\begin{table}[H]
+  \caption{Problemstellung nach RUP: Schwierigkeiten beim ableiten von Schlussfolgerungen aus Zufriedenheitsdaten}
+  \label{tab:rup-conclusions}
+  \centering
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.25\textwidth}|X}
+    \hline
+    Das Problem & dass es schwierig ist, aus den erfassten Zufriedenheitsdaten klare Schlussfolgerungen abzuleiten \\ \hline
+
+    betrifft & Scrum Master, Product Owner, Projektverantwortliche, Entwicklerinnen und Entwickler. \\ \hline
+
+    Die Auswirkung dieses Problems & ist, dass unklar bleibt, welche Faktoren oder Ereignisse zu den gemessenen Ergebnissen 
+    geführt haben, wodurch gezielte Massnahmen zur Verbesserung erschwert werden. \\ \hline
+
+    Eine erfolgreiche Lösung & ergänzt die Zufriedenheitsmessungen um automatisch erfasste Kontextinformationen aus dem 
+    Arbeitsumfeld sowie ausgewählte Gesundheitsdaten, um die Ergebnisse besser einordnen und deren Ursachen gezielter 
+    identifizieren zu können. Zusätzlich leitet sie konkrete Handlungsempfehlungen aus diesen Daten ab. \\ \hline
+  \end{tabularx}
+\end{table}
+
+\subsection{Einfluss einzelner Meetings}
+
+Meetings nehmen einen wesentlichen Teil der Arbeitszeit von Entwicklerinnen und Entwicklern ein. Werden sie als unproduktiv oder
+belastend wahrgenommen, kann dies die Arbeitszufriedenheit deutlich beeinträchtigen. Derzeit wird jedoch der Einfluss einzelner
+Besprechungen auf die Zufriedenheit nicht systematisch erfasst, was eine gezielte Verbesserung der Meetingkultur erschwert. Die
+vollständige Problemstellung ist in Tabelle~\ref{tab:rup-meetings} dargestellt.
+
+\begin{table}[H]
+  \caption{Problemstellung nach RUP: Einfluss auf die Zufriedenheit einzelner Meetings wird nicht erfasst}
+  \label{tab:rup-meetings}
+  \centering
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.25\textwidth}|X}
+    \hline
+    Das Problem & dass der Einfluss einzelner Meetings auf die Zufriedenheit nicht erfasst wird \\ \hline
+
+    betrifft & Scrum Master, Product Owner, Entwicklerinnen und Entwickler. \\ \hline
+
+    Die Auswirkung dieses Problems & ist, dass unproduktive oder belastende Besprechungen schwer identifiziert werden können und
+    deren Auswirkungen auf die tägliche Arbeit unbekannt bleiben. \\ \hline
+
+    Eine erfolgreiche Lösung & erfasst nach relevanten Besprechungen zeitnah die wahrgenommene Produktivität und Belastung, um
+    den Einfluss einzelner Meetings auf die Arbeitszufriedenheit sichtbar zu machen. \\ \hline
+  \end{tabularx}
+\end{table}
+
+\section{Grundidee}
+\section{Vision und Mission}
+\section{Value Proposition}
+\section{Produktziele}
+\todo{Anmerkung }
+\section{Zielgruppe}
+
+\printbibliography
+
+\end{document}

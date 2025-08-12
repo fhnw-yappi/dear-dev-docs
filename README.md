@@ -51,7 +51,6 @@ ergreifen, um eine mo-tivierte und produktive Entwicklergemeinschaft zu fördern
 - **A. Durch welche Technologien und Schnittstellen kann Yappi erweitert werden,
   um ein reibungsloses und einfaches Erfassen von Zufriedenheitsdaten zu
   ermöglichen?**
-
   - Entwicklung von Entwickler-Tool-Plugins, die nahtlos in bestehende
     Arbeitsumgebungen integriert werden können, um die Nutzung von Yappi
     angenehmer und effizienter zu gestalten.
@@ -60,7 +59,6 @@ ergreifen, um eine mo-tivierte und produktive Entwicklergemeinschaft zu fördern
 
 - **B. Wie können Gesundheitsdaten in die Auswertung der Entwicklerzufriedenheit
   einfliessen?**
-
   - Direkte Anbindung der Garmin Gesundheitsdaten-API, um relevante
     Gesundheitsmetriken (Herzfrequenz, Schlafqualität, Stresslevel) automatisch
     in die Analyse der Entwicklerzufriedenheit zu integrieren.
@@ -86,3 +84,12 @@ Wir sammeln die benötigte Literatur in dieser Zotero Gruppe:
 Die ausführliche Projektdokumentation ist unter `./arc42/` einsehbar. Die
 Dokumentation folgt dem arc42 template.
 
+## Bericht IP5
+
+Der Bericht für unser IP5 Projekt ist im Ordner `./bericht` abgelegt. Das PDF für den Bericht
+lässt sich mit folgendem Befehl generieren.
+
+```bash
+cd ./bericht
+make
+```
