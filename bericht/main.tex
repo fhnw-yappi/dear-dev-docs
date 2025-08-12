@@ -374,6 +374,21 @@ Belastungssituationen aufzeigen, bevor sie sich in Produktivitätsverlust oder Q
 \todo{Kalender und Meetings (nicht so nennen)}
 \todo{Forschungslücken}
 
+%------------------------------------------------------------------------------------------------------------------------------------------
+
+\section{}
+Ein vollständiges erfassen der Entwicklerzufriedenheit erfordert die Berücksichtigung aller Arbeitsaspekte,
+insbesondere auch Besprechungen (Meetings). Empirische untersuchungen zeigen, dass Entwickler durchschnittlich zwischen
+10,9 Stunden und 16,5 Stunden pro Woche in Besprechungen verbringen. Ein erheblicher Teil dieser Zeit wird insbesondere
+bei grossen oder ungünstig terminierten Besprechungen als wenig produktiv bewertet.
+Eine hohe Meetingfrequenz kann den Arbeitstag fragmentieren und den Flow unterbrechen \cite{stray_understanding_2020, meyer_today_2021}.
+
+Ziel dieses Konzeptentwurf ist die Entwicklung einer Kalendererweiterung für Yappi, welche durch das Integrieren des Persönlichen Kalender
+in die bestehenden Webanwendung Yappi und einer Companion-App welche durch eine Browser-Erweiterung einsicht in die Meetings der Entwickler ermöglicht.
+Die Erweiterung soll nach Ende eines Meetings automatisch, den Entwickler nach Feedback abfragen und die Ergebnisse davon in Yappi für weitere Auswertungen bereitstellen.
+
+%------------------------------------------------------------------------------------------------------------------------------------------
+
 \section{Bestehende Lösungen und Wettbewerbsanalyse}
 
 Der Markt bietet bereits verschiedene Tools und Plattformen, die Teilaspekte der Entwicklerzufriedenheit adressieren. Im Folgenden
@@ -889,96 +904,45 @@ Kurze, kontextbezogene Abfragen im richtigen Moment erhöhen die Teilnahmebereit
 
 Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in den Entwicklungsprozess integriert ist.
 
+\section{Integration von Gesundheitsdaten}
+\todo{in implementierung einbauen}
 
-\section{Integration von Kalenderdaten}
-\xeno{als eigenes subkapitel im State of the art einbauen (analog dem kapitel über gesunheitsdaten); Theoretisch halten keinen bezug auf unsere implementierung}
+Gesundheitsdaten können wertvolle Zusatzinformationen zur Entwicklerzufriedenheit liefern. Sie ergänzen subjektive Stimmungsangaben
+um objektive Messwerte, die Rückschlüsse auf Belastung und Erholung ermöglichen. Durch die Anbindung an etablierte Schnittstellen
+wie Apple Health Kit oder Garmin Health API lassen sich Metriken wie Schlafqualität, Herzfrequenz oder Stressindikatoren
+automatisiert erfassen. Diese Daten bilden zusammen mit den Prozess- und Zufriedenheitsmetriken eine erweiterte Grundlage, um
+Korrelationen zwischen physischem Wohlbefinden und Arbeitszufriedenheit zu erkennen und gezielte Massnahmen abzuleiten.
 
-Ein vollständiges erfassen der Entwicklerzufriedenheit erfordert die Berücksichtigung aller Arbeitsaspekte,
-insbesondere auch Besprechungen (Meetings). Empirische untersuchungen zeigen, dass Entwickler durchschnittlich zwischen
-10,9 Stunden und 16,5 Stunden pro Woche in Besprechungen verbringen. Ein erheblicher Teil dieser Zeit wird insbesondere
-bei grossen oder ungünstig terminierten Besprechungen als wenig produktiv bewertet.
-Eine hohe Meetingfrequenz kann den Arbeitstag fragmentieren und den Flow unterbrechen \cite{stray_understanding_2020, meyer_today_2021}.
+\subsubsection{Auswahl relevanter Gesundheitsmetriken}
 
-Ziel dieses Konzeptentwurf ist die Entwicklung einer Kalendererweiterung für Yappi, welche durch das Integrieren des Persönlichen Kalender
-in die bestehenden Webanwendung Yappi und einer Companion-App welche durch eine Browser-Erweiterung einsicht in die Meetings der Entwickler ermöglicht.
-Die Erweiterung soll nach Ende eines Meetings automatisch, den Entwickler nach Feedback abfragen und die Ergebnisse davon in Yappi für weitere Auswertungen bereitstellen.
+\subsubsection{Quellen und Schnittstellen für Gesundheitsdaten}
+\todo{in implementierung einbauen}
 
-\subsubsection{Messung der Meetingqualität}
-\xeno{quelle einbetten}
-\xeno{@Xeno ich habe diese 7 Metriken im Konzept eingebaut; prüfen ob entfernt werden kann}
-Zur Bewertung werden sieben Kriterien definiert. Diese sind in Anlehnung an Best Practices und gängige Meeting-Umfrageinstrumente ausgewählt:
+Für die Integration von Gesundheitsdaten wurden mehrere Optionen geprüft. Im Mittelpunkt standen die Garmin Health API sowie Apple
+Health Kit. Beide Quellen decken relevante Metriken wie Schritte, Herzfrequenz, Schlaf und Stress/HRV ab, unterscheiden sich jedoch
+deutlich hinsichtlich Zugangsmodell, Datenschutzmechanismen, Integrationsaufwand und Eignung für nicht-kommerzielle
+Forschungsprojekte.
 
-\begin{enumerate}
-    \item \textbf{Zielklarheit und Relevanz} \\
-    Prüft, ob die Meetingziele klar formuliert und relevant waren. Eine präzise Agenda und eindeutige Zieldefinition steigern die Produktivität.
+\begin{description}
+  \item[Garmin Health API] Die Garmin Health API stellt über eine REST-Schnittstelle umfangreiche Tages- und Aktivitätsmetriken
+    bereit. Die Daten werden in der Regel nach dem Gerätesync via über die Mobile Applikation von Garmin bereitgestellt und in
+    JSON ausgeliefert. die Plattform unterstützt Pull- und Push-Modelle, sodass auch eine ereignisgetriebene Integration möglich
+    ist. Der Zugang ist für genehmigte Business-Developer vorgesehen. Für die kommerzielle Nutzung fallen in der Regel
+    Lizenzgebühren an. Diese geschäftliche Ausrichtung sowie die erforderliche formale Zulassung machen die direkte Nutzung für
+    ein kleines, nicht-kommerzielles Forschungsprojekt unpassend. Zwar existieren Forschungsprogramme und Partnerlösungen rund um
+    Garmin, diese sind jedoch üblicherweise an formelle Kooperationen, Vertragsaufwände und teils Kosten gebunden, was die
+    Umsetzungshürde erhöht \cite{garmin_healthapi_2025}.
+  \item[Apple Health Kit] Health Kit dient auf iOS als zentrales, lokales Datenrepository für Gesundheits- und Fitnessdaten von
+    iPhone, Apple Watch und angebundenen Geräten/Apps. Der Zugriff erfolgt feingranular pro Datentyp und erfordert stets explizite
+    Nutzerzustimmung (Lesen/Schreiben getrennt). Daten liegen verschlüsselt auf dem Gerät. Apps erhalten nur Zugriff auf die
+    explizit freigegebenen Kategorien. Für die Integration stehen dokumentierte APIs und Query-Muster zur Verfügung. Eine
+    serverseitige Drittplattform ist nicht erforderlich, wodurch Architektur, Betrieb und Datenschutzfolgenabschätzung vereinfacht
+    werden \cite{apple_healthkit_2025}.
+\end{description}
 
-    \item \textbf{Inhaltliche Tiefe und Verständlichkeit} \\
-    Bewertet, ob Themen angemessen tief und zugleich verständlich behandelt wurden. Unnötige Detailfülle ist zu vermeiden.
-
-    \item \textbf{Zeitmanagement} \\
-    Umfasst Pünktlichkeit beim Start und Einhaltung der geplanten Dauer. Studien empfehlen, Meetingzeiten bewusst zu verkürzen (z. B. 25 statt 30 Minuten), um Effizienz zu erhöhen.
-
-    \item \textbf{Moderation und Beteiligung} \\
-    Erfasst die Qualität der Moderation und die aktive Einbindung der Teilnehmenden. Eine hohe Beteiligungsquote gilt als Indikator für Interaktivität.
-
-    \item \textbf{Ergebnisorientierung} \\
-    Misst, ob konkrete Entscheidungen oder Aufgaben resultierten. Die Anzahl abgeschlossener Aktionspunkte kann als Kennzahl dienen.
-
-    \item \textbf{Allgemeine Zufriedenheit} \\
-    Ermittelt das subjektive Gesamturteil, beispielsweise auf einer Skala von 1 bis 10.
-
-    \item \textbf{Meetingdauer} \\
-    Vergleicht geplante mit tatsächlicher Dauer und bewertet die Angemessenheit.
-\end{enumerate}
-
-Diese Kriterien ermöglichen ein umfassendes Bild der Meetingqualität und liefern Ansatzpunkte für Verbesserungen.
-
-\subsubsection{Kalenderintegration auf Basis offener Standards}
-\xeno{in implementierung einbauen}
-
-Zur automatischen Erkennung relevanter Meetings wird eine Anbindung an das Kalendersysteme des Entwickler vorgesehen.
-Wichtig dabei ist es einen Offenen Standard zu verwenden um eine möglichst hohe Kompatibilität mit Kalendersystemen zu schaffen.
-Grundlage dazu bildet das weit verbreitete iCalendar-Format (ICS), das von nahezu allen gängigen Plattformen unterstützt wird.
-Das Konzept sieht vor, dass der Nutzer in Yappi auf seinem Profil den zugriff auf den Kalender hinterlegen kann.
-Regelmässig werden die auf einen vom Nutzer im Kalender erstellten Kalendereinträge in die Datenbank synchronisiert.
-Auf dieser Basis kann die Anwendung automatisch identifizieren, wann ein Meeting stattfindet.
-Dadurch lassen sich Feedback-Anfragen unmittelbar nach dem Ende einer Besprechung auslösen, ohne dass der Nutzer manuell eingreifen muss.
-
-Die Synchronisation des Kalender erfolgt ausschliesslich lesend, um Eingriffe in persönliche Kalender zu vermeiden.
-Alle übermittelten Kalenderinformationen werden vertraulich behandelt und ausschliesslich für den definierten Zweck genutzt.
-Informationen zu Kalendereinträge sind nur für den Nutzer persönlich einsehbar.
-
-Durch diese Anbindung entfällt das manuelle Erfassung von Kalendereinträgen. Meetings werden automatisch erkannt,
-Änderungen übernommen und die Nutzer benachrichtigt. So entsteht ein nahtloser integrierter feedback flow um die
-Zufriedenheitsdaten von Meetings für die Entwickler zu erheben.
-
-\subsubsection{Companion-App als Feedback-Trigger}
-\xeno{in implementierung einbauen}
-
-Die Companion-App wird als Browsererweiterung umgesetzt, um eine direkte Interaktion mit den Entwicklern zum richtigen
-Zeitpunkt zu ermöglichen. Nach dem Ende eines im Kalender erfassten Meetings erhält der Nutzer eine Benachrichtigung,
-die zur Abgabe einer kurzen Bewertung auffordert. Diese zeitnahe Erhebung stellt sicher, dass Eindrücke und Wahrnehmungen
-noch frisch sind und die Datenqualität hoch bleibt. Die Interaktion erfolgt freiwillig, um Befragungsmüdigkeit zu vermeiden,
-und ist so gestaltet, dass die Beantwortung wenige Sekunden benötigt. Durch die Integration in den Browser wird kein
-zusätzlicher Systemwechsel nötig, wodurch die Hemmschwelle zur Teilnahme sinkt.
-
-\subsubsection{Datenverarbeitung und Auswertung}
-\xeno{in implementierung einbauen}
-
-Die erhobenen Feedbackdaten werden ausschliesslich auf dem Yappi-Server verarbeitet.
-Vor der Auswertung erfolgt eine Anonymisierung, um Rückschlüsse auf einzelne Personen zu verhindern.
-Für jedes Meeting werden aggregierte Kennzahlen, wie Durchschnittswerte der sieben Kriterien oder Verteilungen der Bewertungen, berechnet.
-Diese werden nur dann angezeigt, wenn eine vordefinierte Mindestanzahl an Rückmeldungen vorliegt.
-Neben der Auswertung einzelner Meetings können über längere Zeiträume Trends analysiert und Optimierungsmassnahmen evaluiert werden.
-
-\subsubsection{Integration in die Yappi Webanwendung}
-\xeno{in implementierung einbauen}
-
-Die bestehenden Funktionen von Yappi werden um einen Bereich zur Meetinganalyse ergänzt.
-Entwickler sehen hier ihre eigenen Feedbackabgaben und offene Anfragen.
-Auf der Teamebene kann auf aggregierte, anonymisierte Auswertungen zu den Meetings ihres Teams zugegriffen werden.
-Die Konfiguration der Kalenderintegration und der Verbindung zur Companion-App wird im Nutzerprofil zentral verwaltet.
-Dadurch bleibt die Erweiterung vollständig in die bestehende Systemarchitektur eingebettet und benötigt keine separaten Plattformen.
+Da die Garmin Health API primär für kommerzielle Anwendungen vorgesehen ist und der beantragte Zugang für dieses Projekt nicht
+gewährt wurde, wurde Apple Health Kit als geeignetere Datenquelle ausgewählt. Für die Umsetzung bedeutet dies, dass eine
+iOS-Anwendung entwickelt wird, die die relevanten Daten aus Apple HealthKit ausliest und an Yappi überträgt.
 
 \chapter{Implementierung}
 \todo{Einleitung}
@@ -1545,7 +1509,7 @@ Dadurch bleibt die Erweiterung vollständig in die bestehende Systemarchitektur 
 
 Gesundheitsdaten können wertvolle Zusatzinformationen zur Entwicklerzufriedenheit liefern. Sie ergänzen subjektive Stimmungsangaben
 um objektive Messwerte, die Rückschlüsse auf Belastung und Erholung ermöglichen. Durch die Anbindung an etablierte Schnittstellen
-wie Apple Health Kit oder Garmin Health API lassen sich Metriken wie Schlafqualität, Herzfrequenz oder Stressindikatoren 
+wie Apple Health Kit oder Garmin Health API lassen sich Metriken wie Schlafqualität, Herzfrequenz oder Stressindikatoren
 automatisiert erfassen. Diese Daten bilden zusammen mit den Prozess- und Zufriedenheitsmetriken eine erweiterte Grundlage, um
 Korrelationen zwischen physischem Wohlbefinden und Arbeitszufriedenheit zu erkennen und gezielte Massnahmen abzuleiten.
 
@@ -1553,11 +1517,11 @@ Korrelationen zwischen physischem Wohlbefinden und Arbeitszufriedenheit zu erken
 
 Für die Integration von Gesundheitsdaten wurden mehrere Optionen geprüft. Im Mittelpunkt standen die Garmin Health API sowie Apple
 Health Kit. Beide Quellen decken relevante Metriken wie Schritte, Herzfrequenz, Schlaf und Stress/HRV ab, unterscheiden sich jedoch
-deutlich hinsichtlich Zugangsmodell, Datenschutzmechanismen, Integrationsaufwand und Eignung für nicht-kommerzielle 
+deutlich hinsichtlich Zugangsmodell, Datenschutzmechanismen, Integrationsaufwand und Eignung für nicht-kommerzielle
 Forschungsprojekte.
 
 \begin{description}
-  \item[Garmin Health API] Die Garmin Health API stellt über eine REST-Schnittstelle umfangreiche Tages- und Aktivitätsmetriken 
+  \item[Garmin Health API] Die Garmin Health API stellt über eine REST-Schnittstelle umfangreiche Tages- und Aktivitätsmetriken
     bereit. Die Daten werden in der Regel nach dem Gerätesync via über die Mobile Applikation von Garmin bereitgestellt und in
     JSON ausgeliefert. die Plattform unterstützt Pull- und Push-Modelle, sodass auch eine ereignisgetriebene Integration möglich
     ist. Der Zugang ist für genehmigte Business-Developer vorgesehen. Für die kommerzielle Nutzung fallen in der Regel
@@ -1565,7 +1529,7 @@ Forschungsprojekte.
     ein kleines, nicht-kommerzielles Forschungsprojekt unpassend. Zwar existieren Forschungsprogramme und Partnerlösungen rund um
     Garmin, diese sind jedoch üblicherweise an formelle Kooperationen, Vertragsaufwände und teils Kosten gebunden, was die
     Umsetzungshürde erhöht \cite{garmin_healthapi_2025}.
-  \item[Apple Health Kit] Health Kit dient auf iOS als zentrales, lokales Datenrepository für Gesundheits- und Fitnessdaten von 
+  \item[Apple Health Kit] Health Kit dient auf iOS als zentrales, lokales Datenrepository für Gesundheits- und Fitnessdaten von
     iPhone, Apple Watch und angebundenen Geräten/Apps. Der Zugriff erfolgt feingranular pro Datentyp und erfordert stets explizite
     Nutzerzustimmung (Lesen/Schreiben getrennt). Daten liegen verschlüsselt auf dem Gerät. Apps erhalten nur Zugriff auf die
     explizit freigegebenen Kategorien. Für die Integration stehen dokumentierte APIs und Query-Muster zur Verfügung. Eine
