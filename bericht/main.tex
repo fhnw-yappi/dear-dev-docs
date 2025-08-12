@@ -1102,9 +1102,27 @@ Dadurch bleibt die Erweiterung vollständig in die bestehende Systemarchitektur 
 
         Der \textit{Calendar Companion} erweitert die Yappi-Plattform um eine Kalenderintegration mit Echtzeitbenachrichtigung
         und integriertem Feedbackprozess. Er kombiniert Backend-Services, eine Browsererweiterung sowie einen Kommunikationsbroker,
-        um Kalendereinträge aus standardisierten iCalendar Quellen zu synchronisieren und direktes Feedback zu ermöglichen.
+        um Kalendereinträge zu synchronisieren und direktes Feedback zu ermöglichen.
+
+        Zur automatischen Erkennung relevanter Meetings wird eine Anbindung an das Kalendersysteme des Entwickler vorgesehen.
+        Wichtig dabei ist es einen Offenen Standard zu verwenden um eine möglichst hohe Kompatibilität mit Kalendersystemen zu schaffen.
+        Grundlage dazu bildet das weit verbreitete iCalendar-Format (ICS), das von nahezu allen gängigen Plattformen unterstützt wird.
+        Das Konzept sieht vor, dass der Nutzer in Yappi auf seinem Profil den zugriff auf den Kalender hinterlegen kann.
+        Regelmässig werden die auf einen vom Nutzer im Kalender erstellten Kalendereinträge in die Datenbank synchronisiert.
+        Auf dieser Basis kann die Anwendung automatisch identifizieren, wann ein Meeting stattfindet.
+        Dadurch lassen sich Feedback-Anfragen unmittelbar nach dem Ende einer Besprechung auslösen, ohne dass der Nutzer manuell eingreifen muss.
+
+        Die Synchronisation des Kalender erfolgt ausschliesslich lesend, um Eingriffe in persönliche Kalender zu vermeiden.
+        Alle übermittelten Kalenderinformationen werden vertraulich behandelt und ausschliesslich für den definierten Zweck genutzt.
+        Informationen zu Kalendereinträge sind nur für den Nutzer persönlich einsehbar.
+
+        Durch diese Anbindung entfällt das manuelle Erfassung von Kalendereinträgen. Meetings werden automatisch erkannt,
+        Änderungen übernommen und die Nutzer benachrichtigt. So entsteht ein nahtloser integrierter feedback flow um die
+        Zufriedenheitsdaten von Meetings für die Entwickler zu erheben.
+
         Dieses Kapitel beschreibt die technische Implementierung der einzelnen Komponenten, deren Zusammenspiel
         sowie die zugrunde liegenden Datenstrukturen.
+
 
         \begin{figure}[!htbp]
           \centering
@@ -1116,15 +1134,12 @@ Dadurch bleibt die Erweiterung vollständig in die bestehende Systemarchitektur 
         Die Abbildung~\ref{fig:implementation-calendar-companion-system} zeigt eine Systemübersicht der Kalenderintegration.
 
   \subsection{Yappi Chrome Extension}
-      Die Yappi Chrome Extension dient als Companion-App zur Erfassung von Zufriedenheits-Feedback und Benachrichtigen
-      über das beenden von Kalendereinträgen direkt im Webbrowser.
-      Die Companion-App ist als ereignisgesteuerte Anwendung konzipiert und unterstützt sowohl synchrone Datenabfragen als auch
-      asynchrone Echtzeitbenachrichtigungen auf dem Betriebsystem.
-
-      Die Extension ermöglicht es, Umfragen und Benachrichtigungen ohne den Umweg über die Yappi-Webplattform zu verarbeiten.
-      Dadurch werden Feedbackprozesse in den Arbeits Flow des Nutzers verlagert und Befragungsmüdigkeit reduziert.
-
-
+      Die Companion-App wird als Browsererweiterung umgesetzt, um eine direkte Interaktion mit den Entwicklern zum richtigen
+      Zeitpunkt zu ermöglichen. Nach dem Ende eines im Kalender erfassten Meetings erhält der Nutzer eine Benachrichtigung,
+      die zur Abgabe einer kurzen Bewertung auffordert. Diese zeitnahe Erhebung stellt sicher, dass Eindrücke und Wahrnehmungen
+      noch frisch sind und die Datenqualität hoch bleibt. Die Interaktion erfolgt freiwillig, um Befragungsmüdigkeit zu vermeiden,
+      und ist so gestaltet, dass die Beantwortung wenige Sekunden benötigt. Durch die Integration in den Browser wird kein
+      zusätzlicher Systemwechsel nötig, wodurch die Hemmschwelle zur Teilnahme sinkt.
 
     \subsubsection{Architektur}
         Die Anwendung besteht aus zwei Hauptkomponenten:
@@ -1510,6 +1525,19 @@ Dadurch bleibt die Erweiterung vollständig in die bestehende Systemarchitektur 
 
 \todo{Sequenzdiagramm}
 \todo{Front End Anpassung}
+% Die bestehenden Funktionen von Yappi werden um einen Bereich zur Meetinganalyse ergänzt.
+% Entwickler sehen hier ihre eigenen Feedbackabgaben und offene Anfragen.
+% Auf der Teamebene kann auf aggregierte, anonymisierte Auswertungen zu den Meetings ihres Teams zugegriffen werden.
+% Die Konfiguration der Kalenderintegration und der Verbindung zur Companion-App wird im Nutzerprofil zentral verwaltet.
+% Dadurch bleibt die Erweiterung vollständig in die bestehende Systemarchitektur eingebettet und benötigt keine separaten Plattformen.
+
+% \subsubsection{Datenverarbeitung und Auswertung}
+%
+% Die erhobenen Feedbackdaten werden ausschliesslich auf dem Yappi-Server verarbeitet.
+% Vor der Auswertung erfolgt eine Anonymisierung, um Rückschlüsse auf einzelne Personen zu verhindern.
+% Für jedes Meeting werden aggregierte Kennzahlen, wie Durchschnittswerte der sieben Kriterien oder Verteilungen der Bewertungen, berechnet.
+% Diese werden nur dann angezeigt, wenn eine vordefinierte Mindestanzahl an Rückmeldungen vorliegt.
+% Neben der Auswertung einzelner Meetings können über längere Zeiträume Trends analysiert und Optimierungsmassnahmen evaluiert werden.
 
 %--------------------------------------------------------------------------------------------------------------------------------------
 
