@@ -15,6 +15,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
 \usepackage[onehalfspacing]{setspace}
+\usepackage[hidelinks]{hyperref}
 
 % Präambel:
 \usepackage{tikz}
@@ -316,7 +317,7 @@ somit klar darauf hin, dass Entwicklerzufriedenheit kein rein „weiches“ Them
 Codequalität und Personalbindung hat. Zufriedene Entwickler arbeiten effizienter, treffen sorgfältigere Entscheidungen und bleiben
 ihrem Team länger erhalten, während Unzufriedenheit mit erhöhten Kosten für Projekte und Rekrutierung verbunden ist.
 
-\section{Gesundheitsdaten und Entwicklerzufriedenheit}
+\section{Gesundheitsdaten und Entwicklerzufriedenheit}\label{stateoftheart-gesundheit}
 
 Neben rein arbeitsbezogenen Faktoren wie Arbeitsorganisation, technischer Ausstattung oder Teamdynamik rücken zunehmend auch
 physiologische und gesundheitsbezogene Parameter in den Fokus der Forschung zur Entwicklerzufriedenheit. Verschiedene Studien aus
@@ -360,8 +361,6 @@ Diese Metriken ermöglichen eine gezielte Verknüpfung zwischen erholungs- und g
 Zufriedenheits- und Prozessdaten. Durch die Analyse solcher Daten lassen sich Muster identifizieren, die potenzielle
 Belastungssituationen aufzeigen, bevor sie sich in Produktivitätsverlust oder Qualitätsproblemen niederschlagen. 
 
-\todo{Forschungslücken}
-
 %------------------------------------------------------------------------------------------------------------------------------------------
 
 \section{Entwickler-Pain-Point: Meetings}
@@ -391,6 +390,24 @@ Belastungssituationen aufzeigen, bevor sie sich in Produktivitätsverlust oder Q
     oder die Anpassung der Terminplanung an produktive Arbeitsphasen.
 
 %------------------------------------------------------------------------------------------------------------------------------------------
+
+\section{Forschungslücken}
+
+Obwohl zahlreiche Studien konsistent zeigen, dass Entwicklerzufriedenheit mit positiven Ergebnissen wie höherer Produktivität,
+besserer Codequalität und stärkerer Mitarbeiterbindung einhergeht \cite{graziotin_what_2018, sadowksi_happiness_2019}, ist die
+Kausalität bislang nicht abschliessend geklärt. Unklar bleibt, ob hohe Zufriedenheit die Produktivität steigert oder ob
+erfolgreiche Arbeitsergebnisse wiederum zu höherer Zufriedenheit führen. Wahrscheinlich wirken beide Richtungen wechselseitig
+zusammen.
+
+Ein weiterer offener Punkt sind individuelle Unterschiede. Entwicklerzufriedenheit ist ein subjektives Empfinden, das von
+Persönlichkeit, Erfahrung und privatem Umfeld beeinflusst wird. Was für die eine Person ein Motivationsfaktor ist, zum Beispiel 
+ein anspruchsvolles neues Projekt, kann für eine andere als belastend empfunden werden. Daraus ergibt sich die Notwendigkeit,
+personalisierte Ansätze zu entwickeln.
+
+Zudem fehlen bislang belastbare Langzeitstudien aus realen Unternehmensumgebungen. Viele bisherige Arbeiten basieren auf
+Querschnittsumfragen oder Laborexperimenten, die nur Momentaufnahmen liefern. Langfristige Analysen könnten aufzeigen, wie sich
+dauerhaft hohe oder niedrige Zufriedenheit über mehrere Jahre auf zentrale Kennzahlen wie Codequalität, Defektdichte oder
+Innovationsrate auswirkt. 
 
 \section{Bestehende Lösungen und Wettbewerbsanalyse}
 
@@ -456,7 +473,22 @@ Leistungskennzahlen, berücksichtigen jedoch die emotionale Dimension nicht. Ges
 ohne diese mit der konkreten Entwicklungsarbeit zu verknüpfen. Eine Plattform, die emotionale Faktoren, technischen Kontext und
 physisches Wohlbefinden gemeinsam erfasst und daraus konkrete Handlungsempfehlungen ableitet, ist derzeit nicht verfügbar.
 
-\todo{Fazit vom State of the art}
+\section{Schlussfolgerungen für die Konzeptlösung}
+
+Die Analyse des aktuellen Forschungs- und Praxisstands zeigt, dass Entwicklerzufriedenheit aus einem Zusammenspiel individueller
+Faktoren (z.,B. Motivation, Flow), organisatorischer Rahmenbedingungen (Team- und Unternehmens-, Meetingkultur) sowie 
+physiologischer Aspekte (Schlaf, Belastung, Aktivitätsniveau, Stress) entsteht. Studien belegen deutliche Zusammenhänge zwischen
+hoher Zufriedenheit und positiven Ergebnissen wie gesteigerter Produktivität, verbesserter Codequalität und höherer
+Mitarbeiterbindung. Gleichzeitig wird deutlich, dass bestehende Untersuchungen häufig auf Teilaspekte beschränkt sind und kausale
+Wirkmechanismen oder langfristige Entwicklungen nur unzureichend abbilden.
+
+Die Betrachtung bestehender Lösungen verdeutlicht, dass aktuelle Ansätze meist entweder subjektive Stimmungsdaten, technische
+Leistungskennzahlen oder Gesundheitsmetriken isoliert erfassen. Eine integrierte Lösung, die alle relevanten Einflussfaktoren
+kombiniert, kontextualisiert und in konkrete Handlungsempfehlungen überführt, ist bislang nicht verfügbar.
+
+Diese Lücke bildet den Ausgangspunkt für die im weiteren Verlauf entwickelte Konzeptlösung: Eine Plattform, die
+Entwicklerzufriedenheit kontinuierlich, kontextbezogen und datenbasiert misst, um fundierte Verbesserungen in Arbeitsabläufen,
+Teamkultur und individueller Arbeitsweise zu ermöglichen.
 
 \chapter{Konzeptlösung für die Erweiterungen an Yappi}
 
@@ -659,8 +691,7 @@ Für die Auswahl der relevanten Gesundheitsmetriken wurden drei Kriterien herang
   \item \textbf{Integrationsfähigkeit} über etablierte Schnittstellen wie Apple Health Kit oder die Garmin Health API.
 \end{itemize}
 
-\todo{Referenz einfügen}
-Die im Kapitel~\ref{Gesundheit} beschriebenen Gesundheitsmetriken erfüllen diese Kriterien und umfassen:
+Die im Kapitel~\ref{stateoftheart-gesundheit} beschriebenen Gesundheitsmetriken erfüllen diese Kriterien und umfassen:
 
 \begin{itemize}
 \item \textbf{Schlafdauer}
