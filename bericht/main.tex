@@ -15,6 +15,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
 \usepackage[onehalfspacing]{setspace}
+\usepackage[hidelinks]{hyperref}
 
 % Präambel:
 \usepackage{tikz}
@@ -99,54 +100,20 @@ um langfristige Verbesserungen zu unterstützen. Diese Arbeit dient als Grundlag
 rendes Forschungsprojekt, das sich vertieft mit der Entwicklerzufriedenheit auseinandersetzt und
 zusätzliche Erkenntnisse gewinnen soll.
 
-\section{Ziele und Vision}
-\todo{überarbeiten evt entfernen}
+\subsection{Vision: Yappi als zentrale Plattform für Entwicklerzufriedenheit}
 
-Yappi wird zu einer umfassenden Plattform weiterentwickelt, die nicht nur die Zufriedenheit misst,
-sondern sich nahtlos in den Arbeitsalltag integriert und wertvolle Handlungsempfehlungen liefert.
-Dazu werden folgende Kernaspekte umgesetzt:
+Aus dieser Zielsetzung leitet sich eine klare Vision für die Weiterentwicklung von Yappi ab:
 
-\begin{enumerate}
-  \item \textbf{Produktivitätsfaktoren identifizieren}\\
-    Durch eine tiefere Analyse von Zufriedenheitsindikatoren sollen zentrale Faktoren ermittelt werden,
-    die sich positiv oder negativ auf die Produktivität und das Wohlbefinden von Entwicklerinnen und
-    Entwicklern auswirken. Diese Erkenntnisse werden genutzt, um Vorschläge zu Verbesserungsmass-
-    nahmen abzuleiten.
-  \item \textbf{Integration in den Arbeitsprozess}
-    Yappi soll sich direkt in bestehende Arbeitsabläufe einfügen, um die Erfassung der Zufriedenheit
-    möglichst intuitiv und effizient zu gestalten. Dies kann durch verschiedene Schnittstellen und Erwei-
-    terungen erfolgen, die eine nahtlose Interaktion ermöglichen.
-  \item \textbf{Erweiterung um kontextbezogene Daten}
-    Um ein umfassenderes Bild der Arbeitszufriedenheit zu erhalten, können weitere Einflussfaktoren
-    berücksichtigt werden. Dazu gehören beispielsweise arbeitsbezogene Rahmenbedingungen oder
-    individuelle Gesundheits- und Belastungsindikatoren. Diese Daten sollen helfen, ein besseres Ver-
-    ständnis für langfristige Trends und Zusammenhänge zu entwickeln.
-  \item \textbf{Intelligente Analyse und Handlungsempfehlungen}
-    Durch die Integration von AI schnittstellen können gezielte Analysen erstellt und individualisierte
-    Empfehlungen abgeleitet werden. Dies kann sowohl auf individueller als auch auf Teamebene erfol-
-    gen, um nachhaltige Verbesserungen im Arbeitsumfeld zu fördern.
-\end{enumerate}
-
-\subsubsection{Fazit}
-
-Mit diesen Erweiterungen wird Yappi zu einem essenziellen Bestandteil des Entwickleralltags. Es
-bietet nicht nur eine präzisere Erfassung der Zufriedenheit, sondern liefert auch wertvolle Einblicke
-und Handlungsempfehlungen, um die Arbeitsbedingungen nachhaltig zu verbessern. Unternehmen
-erhalten fundierte Analysen und können gezielt Massnahmen ergreifen, um eine motivierte und pro-
-duktive Entwicklergemeinschaft zu fördern.
-
-In der Umsetzung dieses Projekts liegt der Schwerpunkt auf den ersten drei genannten Zielen, mit besonderem Fokus auf die
-Integration in bestehende Arbeitsprozesse sowie die Erweiterung um kontextbezogene Daten. Die Identifikation von
-Produktivitätsfaktoren wird im Rahmen der Datenerhebung und -analyse vorbereitet, um künftig eine fundierte Ableitung von
-Verbesserungsvorschlägen zu ermöglichen. Das vierte Ziel, die Entwicklung einer intelligenten Analyse- und Empfehlungskomponente,
-wird in diesem Projekt konzeptionell erarbeitet, jedoch noch nicht technisch umgesetzt. Auf diese Weise wird eine solide Grundlage
-geschaffen, um zukünftig auch das vierte Ziel zu erreichen. Die Umsetzung dieses Ziels wird in einer folgenden Bachelorarbeit
-genauer thematisiert.
+Yappi soll sich zu einer zentralen, intelligenten Plattform entwickeln, die es Entwicklerinnen, Entwicklern und Teams ermöglicht,
+die Arbeitszufriedenheit kontinuierlich, präzise und im Kontext zu erfassen, zu verstehen und gezielt zu verbessern. Ziel ist ein
+Arbeitsumfeld, in dem Zufriedenheit als gleichwertiger Faktor neben Produktivität und Codequalität betrachtet wird und in dem
+datenbasierte Erkenntnisse zu einer nachhaltig gesunden und motivierenden Arbeitskultur beitragen.
 
 \section{Fragestellungen}
 
-\todo{Einleitung wie diese Fragen aus dem Zielbild entsteht und wie diese Fragen in diesem Projekt beantwortet werden}
-\todo{Fragen 1-2 werden umgesetzt Frage 3 wird konzeptionell ausgearbeitet evt in beantwortung}
+Aufbauend auf der in der Motivation beschriebenen Vision sowie dem dargestellten Projektrahmen wurden drei zentrale 
+Forschungsfragen formuliert. Sie bilden den inhaltlichen Leitfaden dieser Arbeit und definieren die Aspekte, die im Projekt
+vertieft untersucht werden.
 
 \begin{enumerate}[label=\Alph*.]
   \item Durch welche Technologien und Schnittstellen kann Yappi erweitert werden,
@@ -180,9 +147,9 @@ genauer thematisiert.
         \end{enumerate}
 \end{enumerate}
 
-\chapter{Hintergrund}
-
-\todo{kurze Einleitung oder mergen mit methoden und Einleitung}
+Die Forschungsfragen A und B werden im Rahmen dieser Arbeit praktisch umgesetzt. Die Forschungsfrage C wird aufgrund ihres Umfangs
+und der notwendigen Vorarbeiten in diesem Projekt konzeptionell ausgearbeitet und dient als Grundlage für eine mögliche Umsetzung
+in einem Folgeprojekt.
 
 \section{Ausgangslage}
 
@@ -209,7 +176,12 @@ Erweiterbarkeit und vertiefte Analytik.
   \caption{Systemarchitektur von Yappi vor dem Projekt}
   \label{fig:systemarchitektur}
 \end{figure}
-\todo{kleiner Text zum Diagram}
+
+Abbildung \ref{fig:systemarchitektur} zeigt die Systemarchitektur von Yappi in ihrem ursprünglichen Zustand vor Beginn dieses
+Projekts. Die Plattform bestand aus einer klar getrennten Frontend- und Backend-Architektur, die über dokumentierte
+REST-Schnittstellen kommunizieren. Alle Hauptkomponenten (Webanwendung, API, Datenbank und unterstützende Services) sind 
+funktional vorhanden, jedoch in Teilen nur als Minimal Viable Product (MVP) umgesetzt. Dieses Architektur-Setup bildet die
+Ausgangsbasis für die im weiteren Verlauf geplanten Erweiterungen.
 
 \begin{description}
   \item[Backend] Das Backend ist mit Spring Boot umgesetzt. Als Datenbank ist PostgreSQL im Einsatz. Die Kommunikation zum Frontend
@@ -228,9 +200,21 @@ Erweiterbarkeit und vertiefte Analytik.
     nicht vorhanden. Bestehende Images sind im GitHub Container Registry abgelegt. Für den Betrieb wird eine Linux-VM wie z.B. auf
     der Switch-Engine-Infrastruktur benötigt.
 \end{description}
+
 \section{Parallele Entwicklung auf gemeinsamer Codebasis}
 
-\todo{Zusammenarbeit kurz erklären mit Auswirkungen auf unser Projekt}
+Während der Projektlaufzeit wurde die bestehende Codebasis nicht ausschliesslich durch das im Rahmen dieser Arbeit verantwortliche
+Projektteam weiterentwickelt. Parallel dazu fanden Arbeiten eines weiteren Projekts auf derselben Codebasis statt. 
+
+Um Konsistenz, Qualität und Stabilität der Anwendung zu gewährleisten, übernahm das Projektteam die Verantwortung für die zentrale
+Verwaltung des Codes.
+
+Alle externen Änderungen wurden vor der Integration einem Code Review unterzogen. Dabei prüften wir die Anpassungen insbesondere
+auf funktionale Korrektheit, technische Kompatibilität und grundlegende Einhaltung der bestehenden Architekturprinzipien. Erst
+nach erfolgreicher Durchsicht und Freigabe wurden die Änderungen in den main Branch übernommen.
+
+Dieses Vorgehen stellte sicher, dass parallele Entwicklungsaktivitäten koordiniert abliefen und die gemeinsame Codebasis in einem
+stabilen, funktionsfähigen Zustand blieb.
 
 \section{Stakeholder}
 
@@ -244,11 +228,12 @@ Das Projekt umfasst die folgenden Stakeholder:
 \end{description}
 
 \chapter{Methoden}
-\todo{Kanban erwähen}
+\todo{in vorgängerkapitel mergen}
 \section{Projektmethodik}
 \section{Prototypen}
 \section{Proof of Concepts}
 \todo{Abgrenzung bezüglich Datenschutz}
+\todo{Kanban erwähen}
 \todo{arc42 erwähen}
 
 \chapter{State of the Art}
@@ -332,7 +317,7 @@ somit klar darauf hin, dass Entwicklerzufriedenheit kein rein „weiches“ Them
 Codequalität und Personalbindung hat. Zufriedene Entwickler arbeiten effizienter, treffen sorgfältigere Entscheidungen und bleiben
 ihrem Team länger erhalten, während Unzufriedenheit mit erhöhten Kosten für Projekte und Rekrutierung verbunden ist.
 
-\section{Gesundheitsdaten und Entwicklerzufriedenheit}
+\section{Gesundheitsdaten und Entwicklerzufriedenheit}\label{stateoftheart-gesundheit}
 
 Neben rein arbeitsbezogenen Faktoren wie Arbeitsorganisation, technischer Ausstattung oder Teamdynamik rücken zunehmend auch
 physiologische und gesundheitsbezogene Parameter in den Fokus der Forschung zur Entwicklerzufriedenheit. Verschiedene Studien aus
@@ -376,9 +361,6 @@ Diese Metriken ermöglichen eine gezielte Verknüpfung zwischen erholungs- und g
 Zufriedenheits- und Prozessdaten. Durch die Analyse solcher Daten lassen sich Muster identifizieren, die potenzielle
 Belastungssituationen aufzeigen, bevor sie sich in Produktivitätsverlust oder Qualitätsproblemen niederschlagen. 
 
-\todo{Kalender und Meetings (nicht so nennen)}
-\todo{Forschungslücken}
-
 %------------------------------------------------------------------------------------------------------------------------------------------
 
 \section{Entwickler-Pain-Point: Meetings}
@@ -408,6 +390,24 @@ Belastungssituationen aufzeigen, bevor sie sich in Produktivitätsverlust oder Q
     oder die Anpassung der Terminplanung an produktive Arbeitsphasen.
 
 %------------------------------------------------------------------------------------------------------------------------------------------
+
+\section{Forschungslücken}
+
+Obwohl zahlreiche Studien konsistent zeigen, dass Entwicklerzufriedenheit mit positiven Ergebnissen wie höherer Produktivität,
+besserer Codequalität und stärkerer Mitarbeiterbindung einhergeht \cite{graziotin_what_2018, sadowksi_happiness_2019}, ist die
+Kausalität bislang nicht abschliessend geklärt. Unklar bleibt, ob hohe Zufriedenheit die Produktivität steigert oder ob
+erfolgreiche Arbeitsergebnisse wiederum zu höherer Zufriedenheit führen. Wahrscheinlich wirken beide Richtungen wechselseitig
+zusammen.
+
+Ein weiterer offener Punkt sind individuelle Unterschiede. Entwicklerzufriedenheit ist ein subjektives Empfinden, das von
+Persönlichkeit, Erfahrung und privatem Umfeld beeinflusst wird. Was für die eine Person ein Motivationsfaktor ist, zum Beispiel 
+ein anspruchsvolles neues Projekt, kann für eine andere als belastend empfunden werden. Daraus ergibt sich die Notwendigkeit,
+personalisierte Ansätze zu entwickeln.
+
+Zudem fehlen bislang belastbare Langzeitstudien aus realen Unternehmensumgebungen. Viele bisherige Arbeiten basieren auf
+Querschnittsumfragen oder Laborexperimenten, die nur Momentaufnahmen liefern. Langfristige Analysen könnten aufzeigen, wie sich
+dauerhaft hohe oder niedrige Zufriedenheit über mehrere Jahre auf zentrale Kennzahlen wie Codequalität, Defektdichte oder
+Innovationsrate auswirkt. 
 
 \section{Bestehende Lösungen und Wettbewerbsanalyse}
 
@@ -472,7 +472,23 @@ stellen jedoch keinen Bezug zu technischen oder gesundheitlichen Kontextinformat
 Leistungskennzahlen, berücksichtigen jedoch die emotionale Dimension nicht. Gesundheits-Tracker wiederum messen physiologische Daten,
 ohne diese mit der konkreten Entwicklungsarbeit zu verknüpfen. Eine Plattform, die emotionale Faktoren, technischen Kontext und
 physisches Wohlbefinden gemeinsam erfasst und daraus konkrete Handlungsempfehlungen ableitet, ist derzeit nicht verfügbar.
-\todo{Fazit vom State of the art}
+
+\section{Schlussfolgerungen für die Konzeptlösung}
+
+Die Analyse des aktuellen Forschungs- und Praxisstands zeigt, dass Entwicklerzufriedenheit aus einem Zusammenspiel individueller
+Faktoren (z.,B. Motivation, Flow), organisatorischer Rahmenbedingungen (Team- und Unternehmens-, Meetingkultur) sowie 
+physiologischer Aspekte (Schlaf, Belastung, Aktivitätsniveau, Stress) entsteht. Studien belegen deutliche Zusammenhänge zwischen
+hoher Zufriedenheit und positiven Ergebnissen wie gesteigerter Produktivität, verbesserter Codequalität und höherer
+Mitarbeiterbindung. Gleichzeitig wird deutlich, dass bestehende Untersuchungen häufig auf Teilaspekte beschränkt sind und kausale
+Wirkmechanismen oder langfristige Entwicklungen nur unzureichend abbilden.
+
+Die Betrachtung bestehender Lösungen verdeutlicht, dass aktuelle Ansätze meist entweder subjektive Stimmungsdaten, technische
+Leistungskennzahlen oder Gesundheitsmetriken isoliert erfassen. Eine integrierte Lösung, die alle relevanten Einflussfaktoren
+kombiniert, kontextualisiert und in konkrete Handlungsempfehlungen überführt, ist bislang nicht verfügbar.
+
+Diese Lücke bildet den Ausgangspunkt für die im weiteren Verlauf entwickelte Konzeptlösung: Eine Plattform, die
+Entwicklerzufriedenheit kontinuierlich, kontextbezogen und datenbasiert misst, um fundierte Verbesserungen in Arbeitsabläufen,
+Teamkultur und individueller Arbeitsweise zu ermöglichen.
 
 \chapter{Konzeptlösung für die Erweiterungen an Yappi}
 
@@ -675,8 +691,7 @@ Für die Auswahl der relevanten Gesundheitsmetriken wurden drei Kriterien herang
   \item \textbf{Integrationsfähigkeit} über etablierte Schnittstellen wie Apple Health Kit oder die Garmin Health API.
 \end{itemize}
 
-\todo{Referenz einfügen}
-Die im Kapitel~\ref{Gesundheit} beschriebenen Gesundheitsmetriken erfüllen diese Kriterien und umfassen:
+Die im Kapitel~\ref{stateoftheart-gesundheit} beschriebenen Gesundheitsmetriken erfüllen diese Kriterien und umfassen:
 
 \begin{itemize}
 \item \textbf{Schlafdauer}
