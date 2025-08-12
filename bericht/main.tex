@@ -69,6 +69,7 @@
 \chapter{Einleitung}
 
 \section{Motivation}
+\todo{spellcheck}
 \todo{gendern überprüfen}
 
 Die Zufriedenheit von Entwicklerinnen und Entwicklern wird, wenn überhaupt, meist nur anhand der
@@ -369,9 +370,6 @@ Arbeitsleistung und das subjektive Wohlbefinden deutlich beeinflussen.
 Diese Metriken ermöglichen eine gezielte Verknüpfung zwischen erholungs- und gesundheitsbezogenen Faktoren sowie den erhobenen
 Zufriedenheits- und Prozessdaten. Durch die Analyse solcher Daten lassen sich Muster identifizieren, die potenzielle
 Belastungssituationen aufzeigen, bevor sie sich in Produktivitätsverlust oder Qualitätsproblemen niederschlagen. 
-
-\todo{evt. Methoden und Instrumente zur Messung der Entwicklerzufriedenheit}
-\todo{evt. Technologische und methodische Ansätze in verwandten Arbeiten}
 
 \todo{Kalender und Meetings (nicht so nennen)}
 \todo{Forschungslücken}
@@ -867,122 +865,6 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
 \chapter{Konzeptentwurf}
 \todo{Entfernen sobald alle Inhalte übernommen wurden}
 
-Die im vorhergehenden Kapitel dargestellte Analyse bestehender Lösungen verdeutlicht, dass es derzeit keine Plattform gibt, welche
-emotionale Faktoren, technischen Kontext und physisches Wohlbefinden integriert erfasst und daraus konkrete Handlungsempfehlungen
-ableitet. Yappi soll genau diese Lücke schliessen und eine einheitliche, praxisorientierte Lösung bieten. Ziel ist es, die
-Entwicklerzufriedenheit umfassend zu erfassen und die gewonnenen Erkenntnisse in konkrete Massnahmen zu überführen. Die geplanten
-Kernfunktionen umfassen:
-
-\begin{description}
-  \item[Integriertes Erfassen im Arbeitsfluss:] Yappi lässt sich nahtlos in den täglichen Entwicklungsprozess einbetten. Durch 
-    Plugins für Entwicklungsumgebungen, Browser-Erweiterungen oder Integrationen in Kollaborationstools können Entwickler ihre
-    Zufriedenheit direkt in ihrer Arbeitsumgebung erfassen, ohne den Kontext zu wechseln. Dies erhöht die Teilnahmebereitschaft
-    und stellt sicher, dass Feedback leicht und unmittelbar gegeben werden kann ohne den Arbeitsfluss zu unterbrechen.
-  \item[Automatischer Kontext durch Prozessdaten:] Neben manuellen Stimmungsangaben bezieht Yappi automatisch Kontextinformationen
-    aus dem Arbeitsprozess ein. Beispielsweise können Commit-Daten aus Git und Kalendereinträge herangezogen werden, um die Stimmung
-    in Bezug zu objektiven Ereignissen zu setzen. So liesse sich erkennen, ob z.B. eine Häufung negativer Stimmungswerte mit vielen
-    Meetings korreliert.
-  \item[Erweiterung um Gesundheitsmetriken:] Um ein umfassenderes Bild des Wohlbefindens zu erhalten, soll Yappi optional auch
-    Gesundheitsdaten einbeziehen. Dies kann durch die Anbindung an gängige Gesundheits-APIs oder Wearables (ähnlich Happimeter)
-    erfolgen. Die so gewonnenen zusätzlichen Datenpunkte ermöglichen es, langfristige Entwicklungen zu erkennen und diese im
-    Zusammenhang mit Prozess- sowie Zufriedenheitsdaten zu analysieren.
-  \item[KI-gestützter Coach mit Handlungsempfehlungen:] Über die reine Datenerfassung hinaus soll Yappi einen intelligenten
-    Empfehlungsdienst bereitstellen. Dieser Yappi-Coach analysiert die erfassten Zufriedenheitsdaten, Produktivitätskennzahlen und
-    gegebenenfalls Gesundheitsdaten mittels KI-gestützter Verfahren. Auf dieser Grundlage werden gezielte, evidenzbasierte
-    Empfehlungen für einzelne Entwicklerinnen und Entwickler sowie für Teams generiert. Beispielsweise könnte der Coach vorschlagen,
-    die Dauer von Team-Meetings auf höchstens 1,5 Stunden zu begrenzen, wenn längere Sitzungen mit sinkender Zufriedenheit
-    einhergehen. Ebenso kann er empfehlen, nach vier Stunden konzentrierter Entwicklungsarbeit eine Pause einzulegen, sofern die
-    Analyse zeigt, dass dies die Zufriedenheit steigert. Ziel ist es, konkrete Handlungsimpulse zu geben, die sowohl das
-    individuelle Wohlbefinden als auch die Teamproduktivität verbessern.
-\end{description}
-
-Durch die Kombination dieser Aspekte entsteht mit Yappi eine zentrale Plattform, die kontinuierliches Stimmungs-Tracking,
-automatisierte Kontextdaten aus dem Arbeitsprozess, Gesundheitsmetriken und KI-gestützte Handlungsempfehlungen integriert. Ziel ist
-es, die Entwicklerzufriedenheit nicht nur präzise zu erfassen, sondern die gewonnenen Erkenntnisse unmittelbar in nachhaltige
-Verbesserungen des Arbeitsalltags zu überführen. Unternehmen erhalten damit eine fundierte Entscheidungsgrundlage, um gezielt
-Massnahmen zur Förderung einer motivierten, gesunden und leistungsfähigen Entwicklergemeinschaft umzusetzen. Die nachfolgenden
-Abschnitte greifen diese Kernaspekte auf und verknüpfen sie mit weiteren Konzeptbestandteilen, um ein ganzheitliches Lösungsdesign
-zu entwickeln.
-
-\section{Yappi als Integrationsplattform}
-\todo{in implementierung einbauen}
-
-Die Erweiterung von Yappi zu einer Integrationsplattform ist notwendig, um Daten aus unterschiedlichen Quellen sicher und 
-zuverlässig zu erfassen. Neben Prozessdaten wie Commits oder Meeting-Aktivitäten sollen auch Gesundheitsdaten aus externen
-Companion Apps einbezogen werden. Dies erfordert eine Architektur, welche den Datenaustausch zwischen Yappi und externen Anwendungen
-standardisiert und absichert. Zentrales Element ist ein API-Key-basiertes Authentifizierungsverfahren, das autorisierte Anwendungen
-eindeutig identifiziert und deren Zugriff kontrolliert. Auf dieser Basis können Daten aus heterogenen Quellen in ein einheitliches
-System integriert werden.
-
-\subsubsection{Kommunikationsmechanismus}
-
-Für die Kommunikation zwischen Companion-Anwendungen und dem Yappi Backend wurde bewusst auf einen API-Key-basierten Mechanismus
-gesetzt, anstatt die bestehende JWT-basierte Authentifizierung des Frontends zu verwenden. JWTs eignen sich vor allem für die
-Authentifizierung einzelner Nutzer in interaktiven Sitzungen. Sie erfordern in der Regel eine vorgelagerte Benutzeranmeldung und
-regelmässige Token-Erneuerung. Dieser Ablauf ist für Companion-Anwendungen, die im Hintergrund oder automatisiert Daten erfassen
-und übertragen, nicht optimal. Diese würden durch die Notwendigkeit einer manuellen Anmeldung in ihrer Funktionalität eingeschränkt.
-
-Der API-Key-Mechanismus wurde entwickelt, um diesen Anforderungen gerecht zu werden. Jeder Nutzer verfügt über einen persönlichen
-API-Key, der in der Webanwendung einmalig generiert wird. Dieser Schlüssel wird manuell in den gewünschten Companion-Anwendungen
-hinterlegt. Bei jeder Anfrage an das Backend wird der API-Key im HTTP-Header übermittelt. Das Backend prüft die Gültigkeit des 
-Schlüssels und ordnet die Anfrage dem entsprechenden Nutzerkonto zu. So wird sichergestellt, dass nur autorisierte Clients im
-Namen des Nutzers Daten übermitteln können. API-Keys lassen sich bei Bedarf widerrufen oder rotieren. Durch diesen Mechanismus
-können Companion-Anwendungen zuverlässig und ohne Benutzerinteraktion mit Yappi kommunizieren, während gleichzeitig ein hohes Mass
-an Sicherheit gewährleistet ist.
-
-Durch diesen Mechanismus können Companion-Anwendungen zuverlässig und ohne wiederkehrende Benutzerinteraktion mit Yappi 
-kommunizieren, während gleichzeitig ein hohes Mass an Sicherheit gewährleistet ist.
-
-\subsubsection{Systemarchitektur der Integrationsplattform}
-
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=0.95\textwidth]{../figures/plattform-system-diagram.drawio.png}
-  \caption{Systemarchitektur der Yappi-Integrationsplattform}
-  \label{fig:systemarchitektur}
-\end{figure}
-
-Das in Abbildung \ref{fig:systemarchitektur} dargestellte Architekturdiagramm zeigt die zentralen Komponenten der 
-Yappi-Integrationsplattform sowie deren Anbindung an externe Companion-Anwendungen. Im Zentrum befindet sich das Yappi Backend,
-das als zentrale Schnittstelle für alle eingehenden Daten und Anfragen fungiert.
-
-Das Yappi Frontend verwendet die bestehende JWT-basierte Authentifizierung zur Verwaltung von Nutzersitzungen. Externe
-Companion-Apps, wie beispielsweise die IntelliJ-, Health- oder Calendar-Companion, sind über einen API-Key-Mechanismus angebunden.
-Dieser gewährleistet, dass nur registrierte und autorisierte Clients Daten an das System übermitteln können. Alle eingehenden
-Daten werden vom Backend in der dargestellten Datenbank (DB) persistiert.
-
-\subsubsection{Sicherheit}
-
-Der API-Key-Mechanismus der Integrationsplattform ist so konzipiert, dass er eine sichere und kontrollierte Anbindung externer
-Companion-Anwendungen ermöglicht. Jeder API-Key ist eindeutig einem Nutzerkonto zugeordnet und wird in der Webanwendung einmalig
-generiert. Die Generierung erfolgt über eine abgesicherte Benutzeroberfläche, wodurch sichergestellt ist, dass ausschliesslich
-berechtigte Nutzer einen Schlüssel anlegen können. Zur Übertragungssicherheit wird der API-Key ausschliesslich über verschlüsselte
-Verbindungen (HTTPS) zwischen der Companion-Anwendung und dem Backend übertragen.
-
-Im Backend erfolgt eine serverseitige Validierung, bei der der Schlüssel auf Gültigkeit und Zuordnung geprüft wird. Die Schlüssel
-werden dabei nicht im Klartext gespeichert, sondern in sicherer Form (z. B. gehasht) abgelegt, um auch bei einem möglichen
-Datenbankzugriff unbefugten Gebrauch zu verhindern. Ein kompromittierter API-Key kann jederzeit durch den Nutzer oder einen
-Administrator gesperrt oder durch einen neuen ersetzt werden.
-
-\subsubsection{Ablauf der API-Key Erstellung und -Verwendung}
-
-Abbildung \ref{fig:apikey-swimlane} zeigt den Ablauf der Erstellung und Verwendung des API-Keys innerhalb der
-Yappi-Integrationsplattform. Die Darstellung erfolgt als Swimlane-Diagramm und verdeutlicht die beteiligten Akteure sowie deren
-Interaktionen während des gesamten Prozesses.
-
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=0.95\textwidth]{../figures/apikey-swimlane-diagram.drawio.png}
-  \caption{Ablauf der API-Key Erstellung und -Verwendung in Yappi}
-  \label{fig:apikey-swimlane}
-\end{figure}
-
-Der Prozess beginnt mit der einmaligen Generierung des API-Keys durch den Nutzer in der Webanwendung. Nach der Erstellung wird der
-Schlüssel in der Companion-App hinterlegt und dort dauerhaft gespeichert. Jede Datenanfrage der Companion-App an das Backend
-enthält den API-Key im HTTP-Header, woraufhin das Backend den Schlüssel validiert und die Anfrage bei positiver Prüfung
-autorisiert. Dieser Ablauf stellt sicher, dass ausschliesslich autorisierte Anwendungen im Namen eines Nutzers Daten an Yappi
-übermitteln können.
-
 \section{Integration in die Entwicklungsumgebung}
 
 \xeno{rework}
@@ -1098,46 +980,6 @@ Auf der Teamebene kann auf aggregierte, anonymisierte Auswertungen zu den Meetin
 Die Konfiguration der Kalenderintegration und der Verbindung zur Companion-App wird im Nutzerprofil zentral verwaltet.
 Dadurch bleibt die Erweiterung vollständig in die bestehende Systemarchitektur eingebettet und benötigt keine separaten Plattformen.
 
-\section{Integration von Gesundheitsdaten}
-\todo{in implementierung einbauen}
-
-Gesundheitsdaten können wertvolle Zusatzinformationen zur Entwicklerzufriedenheit liefern. Sie ergänzen subjektive Stimmungsangaben
-um objektive Messwerte, die Rückschlüsse auf Belastung und Erholung ermöglichen. Durch die Anbindung an etablierte Schnittstellen
-wie Apple Health Kit oder Garmin Health API lassen sich Metriken wie Schlafqualität, Herzfrequenz oder Stressindikatoren 
-automatisiert erfassen. Diese Daten bilden zusammen mit den Prozess- und Zufriedenheitsmetriken eine erweiterte Grundlage, um
-Korrelationen zwischen physischem Wohlbefinden und Arbeitszufriedenheit zu erkennen und gezielte Massnahmen abzuleiten.
-
-\subsubsection{Auswahl relevanter Gesundheitsmetriken}
-
-\subsubsection{Quellen und Schnittstellen für Gesundheitsdaten}
-\todo{in implementierung einbauen}
-
-Für die Integration von Gesundheitsdaten wurden mehrere Optionen geprüft. Im Mittelpunkt standen die Garmin Health API sowie Apple
-Health Kit. Beide Quellen decken relevante Metriken wie Schritte, Herzfrequenz, Schlaf und Stress/HRV ab, unterscheiden sich jedoch
-deutlich hinsichtlich Zugangsmodell, Datenschutzmechanismen, Integrationsaufwand und Eignung für nicht-kommerzielle 
-Forschungsprojekte.
-
-\begin{description}
-  \item[Garmin Health API] Die Garmin Health API stellt über eine REST-Schnittstelle umfangreiche Tages- und Aktivitätsmetriken 
-    bereit. Die Daten werden in der Regel nach dem Gerätesync via über die Mobile Applikation von Garmin bereitgestellt und in
-    JSON ausgeliefert. die Plattform unterstützt Pull- und Push-Modelle, sodass auch eine ereignisgetriebene Integration möglich
-    ist. Der Zugang ist für genehmigte Business-Developer vorgesehen. Für die kommerzielle Nutzung fallen in der Regel
-    Lizenzgebühren an. Diese geschäftliche Ausrichtung sowie die erforderliche formale Zulassung machen die direkte Nutzung für
-    ein kleines, nicht-kommerzielles Forschungsprojekt unpassend. Zwar existieren Forschungsprogramme und Partnerlösungen rund um
-    Garmin, diese sind jedoch üblicherweise an formelle Kooperationen, Vertragsaufwände und teils Kosten gebunden, was die
-    Umsetzungshürde erhöht \cite{garmin_healthapi_2025}.
-  \item[Apple Health Kit] Health Kit dient auf iOS als zentrales, lokales Datenrepository für Gesundheits- und Fitnessdaten von 
-    iPhone, Apple Watch und angebundenen Geräten/Apps. Der Zugriff erfolgt feingranular pro Datentyp und erfordert stets explizite
-    Nutzerzustimmung (Lesen/Schreiben getrennt). Daten liegen verschlüsselt auf dem Gerät. Apps erhalten nur Zugriff auf die
-    explizit freigegebenen Kategorien. Für die Integration stehen dokumentierte APIs und Query-Muster zur Verfügung. Eine
-    serverseitige Drittplattform ist nicht erforderlich, wodurch Architektur, Betrieb und Datenschutzfolgenabschätzung vereinfacht
-    werden \cite{apple_healthkit_2025}.
-\end{description}
-
-Da die Garmin Health API primär für kommerzielle Anwendungen vorgesehen ist und der beantragte Zugang für dieses Projekt nicht
-gewährt wurde, wurde Apple Health Kit als geeignetere Datenquelle ausgewählt. Für die Umsetzung bedeutet dies, dass eine
-iOS-Anwendung entwickelt wird, die die relevanten Daten aus Apple HealthKit ausliest und an Yappi überträgt.
-
 \chapter{Implementierung}
 \todo{Einleitung}
 
@@ -1243,13 +1085,11 @@ iOS-Anwendung entwickelt wird, die die relevanten Daten aus Apple HealthKit ausl
 
 
     \todo{Quelle für spring Securtiy Architektur}
-    https://docs.spring.io/spring-security/reference/servlet/architecture.html
-    \todo{Hash Algorithmus}
-    \todo{Datenbank Erweiterung}
+    https://docs.spring.io/spring-security/reference/servlet/architecture.html \\
     \todo{Security "Workarround" erklären}
-    \todo{Beispiel Request (Sequenzdiagramm)}
     \todo{Front End Anpassung}
 
+%--------------------------------------------------------------------------------------------------------------------------------------
 
 \section{IntelliJ IDEA Companion}
 
@@ -1675,10 +1515,52 @@ iOS-Anwendung entwickelt wird, die die relevanten Daten aus Apple HealthKit ausl
 
 \section{Health Companion}
 
-\todo{Health Kit API}
-\todo{Kommunikation}
-\todo{Benutzeroberfläche}
-\todo{Datenbankerweiterung}
+Gesundheitsdaten können wertvolle Zusatzinformationen zur Entwicklerzufriedenheit liefern. Sie ergänzen subjektive Stimmungsangaben
+um objektive Messwerte, die Rückschlüsse auf Belastung und Erholung ermöglichen. Durch die Anbindung an etablierte Schnittstellen
+wie Apple Health Kit oder Garmin Health API lassen sich Metriken wie Schlafqualität, Herzfrequenz oder Stressindikatoren 
+automatisiert erfassen. Diese Daten bilden zusammen mit den Prozess- und Zufriedenheitsmetriken eine erweiterte Grundlage, um
+Korrelationen zwischen physischem Wohlbefinden und Arbeitszufriedenheit zu erkennen und gezielte Massnahmen abzuleiten.
+
+\subsection{Quellen und Schnittstellen für Gesundheitsdaten}
+
+Für die Integration von Gesundheitsdaten wurden mehrere Optionen geprüft. Im Mittelpunkt standen die Garmin Health API sowie Apple
+Health Kit. Beide Quellen decken relevante Metriken wie Schritte, Herzfrequenz, Schlaf und Stress/HRV ab, unterscheiden sich jedoch
+deutlich hinsichtlich Zugangsmodell, Datenschutzmechanismen, Integrationsaufwand und Eignung für nicht-kommerzielle 
+Forschungsprojekte.
+
+\begin{description}
+  \item[Garmin Health API] Die Garmin Health API stellt über eine REST-Schnittstelle umfangreiche Tages- und Aktivitätsmetriken 
+    bereit. Die Daten werden in der Regel nach dem Gerätesync via über die Mobile Applikation von Garmin bereitgestellt und in
+    JSON ausgeliefert. die Plattform unterstützt Pull- und Push-Modelle, sodass auch eine ereignisgetriebene Integration möglich
+    ist. Der Zugang ist für genehmigte Business-Developer vorgesehen. Für die kommerzielle Nutzung fallen in der Regel
+    Lizenzgebühren an. Diese geschäftliche Ausrichtung sowie die erforderliche formale Zulassung machen die direkte Nutzung für
+    ein kleines, nicht-kommerzielles Forschungsprojekt unpassend. Zwar existieren Forschungsprogramme und Partnerlösungen rund um
+    Garmin, diese sind jedoch üblicherweise an formelle Kooperationen, Vertragsaufwände und teils Kosten gebunden, was die
+    Umsetzungshürde erhöht \cite{garmin_healthapi_2025}.
+  \item[Apple Health Kit] Health Kit dient auf iOS als zentrales, lokales Datenrepository für Gesundheits- und Fitnessdaten von 
+    iPhone, Apple Watch und angebundenen Geräten/Apps. Der Zugriff erfolgt feingranular pro Datentyp und erfordert stets explizite
+    Nutzerzustimmung (Lesen/Schreiben getrennt). Daten liegen verschlüsselt auf dem Gerät. Apps erhalten nur Zugriff auf die
+    explizit freigegebenen Kategorien. Für die Integration stehen dokumentierte APIs und Query-Muster zur Verfügung. Eine
+    serverseitige Drittplattform ist nicht erforderlich, wodurch Architektur, Betrieb und Datenschutzfolgenabschätzung vereinfacht
+    werden \cite{apple_healthkit_2025}.
+\end{description}
+
+Da die Garmin Health API primär für kommerzielle Anwendungen vorgesehen ist und der beantragte Zugang für dieses Projekt nicht
+gewährt wurde, wurde Apple Health Kit als geeignetere Datenquelle ausgewählt. Für die Umsetzung bedeutet dies, dass eine
+iOS-Anwendung entwickelt wird, die die relevanten Daten aus Apple HealthKit ausliest und an Yappi überträgt.
+
+\subsection{Daten aus HealthKit auslesen}
+\todo{}
+
+\subsection{Daten an Yappi übertragen}
+\todo{}
+\subsubsection{Backend}
+\todo{}
+\subsubsection{Datenbankerweiterung}
+\todo{}
+
+\subsection{Benutzeroberfläche der iOS App}
+\todo{mit screenshot}
 
 %--------------------------------------------------------------------------------------------------------------------------------------
 
