@@ -51,6 +51,7 @@
 \end{titlepage}
 
 \chapter*{Abstract}
+\todo{Abstract und Keywords schreiben}
 \newpage
 
 \tableofcontents
@@ -135,7 +136,7 @@ genauer thematisiert.
 \section{Fragestellungen}
 
 \todo{Einleitung wie diese Fragen aus dem Zielbild entsteht und wie diese Fragen in diesem Projekt beantwortet werden}
-\todo{Fragen 1-2 werden umgesetzt Frage 3 wird konzeptionell ausgearbeitet}
+\todo{Fragen 1-2 werden umgesetzt Frage 3 wird konzeptionell ausgearbeitet evt in beantwortung}
 
 \begin{enumerate}[label=\Alph*.]
   \item Durch welche Technologien und Schnittstellen kann Yappi erweitert werden,
@@ -192,16 +193,25 @@ Erweiterbarkeit und vertiefte Analytik.
 
 \section{Aktueller technischer Stand}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{../figures/before-system-diagram.drawio.png}
+  \caption{Systemarchitektur von Yappi vor dem Projekt}
+  \label{fig:systemarchitektur}
+\end{figure}
+\todo{kleiner Text zum Diagram}
+
 \begin{description}
   \item[Backend] Das Backend ist mit Spring Boot umgesetzt. Als Datenbank ist PostgreSQL im Einsatz. Die Kommunikation zum Frontend
-    erfolgt über REST-Schnttstellen, welche nach dem OpenAPI standart dokumentiert sind.
+    erfolgt über REST-Schnttstellen, welche nach dem OpenAPI standart dokumentiert sind. Die Kommunikation zur Datenbank erfolgt
+    über Spring JPA.
   \item[Frontend] Das Frontend basiert auf React und Next.js mit TypeScript. Für Aufrufe werden SWR-Hooks verwendet, dabei handelt
     es sich ume eine React library um Daten zu laden. Komponenten werden mit der Library wird shadcn/ui aufgebaut. Die 
     Visualisierungen entstehen mit Recharts. Um die Codequalität sicherzustellen wird ESLint zur statischen Code analyse und 
     Prettier zur automatischen Formatierung nach vordefinierten Guidelines verwendet.
   \item[Authentisierung und Autorisierung] Die Anmeldung erfolgt über OAuth 2.0. Dabei werden Anbieter wie Google oder GitHub 
     über Auth.js unterstützt. Passwörter werden nicht gepseichert. Die Anfragen ans Backend werden mit JSON Web Tokens (JWT) 
-    abgesichert.
+    abgesichert. Die Sicherheitsmechanismen im Backend sind mit Spring Security implementiert.
   \item[Datenmodell] Das relationale Schema umfasst unter anderem Benutzer, Teams, Sprints sowie Umfragetypen für Happiness,
     Emotionen und Work-Kinds.
   \item[Deployment] Die Komponenten sind grösstenteils containerisiert mit Docker. Eine funktionierende CI/CD-Pipeline ist aktuell
@@ -270,29 +280,40 @@ Somit unterstreichen sowohl akademische als auch industrielle Befunde: Entwickle
 Zusammenspiel aus individuellen Faktoren (Flow, Motivation, ...) und Umfeldfaktoren (Team- und Organisationsklima, Arbeitskultur, 
 ...).
 
-\section{Stand der Forschung und verwandte Arbeiten}
+\section{Stand der Forschung zur Entwicklerzufriedenheit}
 
-\todo{Definitionen für Erfolgsparameter einfügen}
+\subsection{Entwicklerzufriedenheit in der Forschung}
+
 In den letzen Jahren haben zahlreiche Studien den Zusammenhang zwischen der Entwicklerzufriedenheit und Erfogsparametern wie 
-Produktivität, Codequalität und Mitarbeiterbindung untersucht. Bei einer grossangelegten Studie wurden 317 Softwareentwickler
-befragt und dabei 42 Konsequenten von Unzufriedenheit sowie 32 Konsequenzen von Zufriedenheit beim Programmieren identifiziert.
-Die Ergebnisse Zeigen, dass Entwicklerzufriedenheit messbare Auswirkungen auf den Enwicklungsprozess, die erzeugten 
-Software-Artefakte und das Wohlbefinden der Person hat. So führt Unzufriedenheit zu einer Reihe negativer Effekte: verzögerte
-Prozessabläufe, nachlässige Arbeitsweise und häufige unterbrechungen des Flows wurden als typische Folgen von negativer Stimmung
-genannt. Unzufriedene Entwickler berichten von langen langen Verzögerungen oder Qualitätsproblemen, weil Frustration sie aus dem
-Konzept brachte. Zufriedenheit hingegen wirkt sich positiv aus: Zufriedene Entwickler zeigen bessere Problemlösungsfähigkeiten,
-höhere Konzentration, berichten von einem anhaltenden Flow Zustand und lernen schneller. Die Ergebnisse legen nahe, dass 
-Zufriedenheit die Codequalität begünstigt. Zufriedene Entwickler treffen sorgfältigere langfristige Entscheidungen. Ein Teilnehmer
-beschrieb, er dokumentiert seinen Code gründlicher und achten stärker auf Wartbarkeit, wenn er Zufrieden ist 
-\cite{graziotin_what_2018}.
+Produktivität, Codequalität und Mitarbeiterbindung untersucht. Produktivität beschreibt im Softwarekontext die Effizienz, mit der
+Entwickler innerhalb einer bestimmten Zeit funktionierende und qualitativ hochwertige Softwareartefakte erstellen. Codequalität
+bezeichnet das Mass, in dem Quellcode korrekt, wartbar, verständlich und effizient ist, und umfasst Aspekte wie Lesbarkeit,
+Modularität, Fehlertoleranz und Testbarkeit. Mitarbeiterbindung wiederum beschreibt das Ausmass, in dem Mitarbeitende langfristig
+und freiwillig im Unternehmen bleiben.
+
+Bei einer grossangelegten Studie wurden 317 Softwareentwickler befragt und dabei 42 Konsequenten von Unzufriedenheit sowie
+32 Konsequenzen von Zufriedenheit beim Programmieren identifiziert. Die Ergebnisse Zeigen, dass Entwicklerzufriedenheit messbare
+Auswirkungen auf den Enwicklungsprozess, die erzeugten Software-Artefakte und das Wohlbefinden der Person hat. So führt
+Unzufriedenheit zu einer Reihe negativer Effekte: verzögerte Prozessabläufe, nachlässige Arbeitsweise und häufige unterbrechungen
+des Flows wurden als typische Folgen von negativer Stimmung genannt. Unzufriedene Entwickler berichten von langen langen
+Verzögerungen oder Qualitätsproblemen, weil Frustration sie aus dem Konzept brachte. Zufriedenheit hingegen wirkt sich positiv
+aus: Zufriedene Entwickler zeigen bessere Problemlösungsfähigkeiten, höhere Konzentration, berichten von einem anhaltenden Flow
+Zustand und lernen schneller. Die Ergebnisse legen nahe, dass Zufriedenheit die Codequalität begünstigt. Zufriedene Entwickler
+treffen sorgfältigere langfristige Entscheidungen. Ein Teilnehmer beschrieb, er dokumentiert seinen Code gründlicher und achten
+stärker auf Wartbarkeit, wenn er Zufrieden ist \cite{graziotin_what_2018}.
+
+\subsection{Entwicklerzufriedenheit in der Industrie}
 
 Neben akademischen Studien liefern auch Industireumfragen und Community-Studien wertvolle Einblicke. Der jährliche Stack Overflow
 Developer Survey etwa spiegelt wieder, dass weiterhin Verbesserungsbedarf besteht. laut der Umfrage 2024 bezeichen sich nur rund 
 20\% der Entwickler als wirklich zufrieden in ihrem Job, während etwa 80\% unzufrieden oder "gelassen" (complacent) sind. Diese Zahl
 unterstreicht, dass ein grosser Teil der Entwicklergemeinschaft nicht glücklich im Arbeitsumfeld ist. Als Hauptgründe werden oft
-Faktoren wie schlechte Work-Life-Balance, zu viele Meetings oder fehlende Anerkennung genannt \cite{stackoverflow_survey_2025}. Eine
-Untersuchung von Zenhub kam zu ähnlichen Ergebnissen: Zwar gaben die meisten befragten Entwickler an, überwiegend zufrieden zu sein,
-doch lediglich 31\% fühlten sich äusserst zufrieden in ihrer aktuellen Arbeitssituation \cite{zenhub_2022_nodate}. 
+Faktoren wie schlechte Work-Life-Balance, zu viele Meetings oder fehlende Anerkennung genannt \cite{stackoverflow_survey_2025}. 
+
+Eine Untersuchung von Zenhub kam zu ähnlichen Ergebnissen: Zwar gaben die meisten befragten Entwickler an, überwiegend zufrieden
+zu sein, doch lediglich 31\% fühlten sich äusserst zufrieden in ihrer aktuellen Arbeitssituation \cite{zenhub_2022_nodate}. 
+
+\subsection{Mitarbeiterbindung und Entwicklerzufriedenheit}
 
 Darüber hinaus tragen Anerkennung und Sinnhaftigkeit der Arbeit entscheidend zur Bindung bei. Wenn Entwicklerinnen und Entwickler
 stolz auf die Qualität ihrer Projekte sind und regelmässig Wertschätzung für ihre Arbeit erhalten, steigt sowohl ihre Zufriedenheit
@@ -301,8 +322,54 @@ somit klar darauf hin, dass Entwicklerzufriedenheit kein rein „weiches“ Them
 Codequalität und Personalbindung hat. Zufriedene Entwickler arbeiten effizienter, treffen sorgfältigere Entscheidungen und bleiben
 ihrem Team länger erhalten, während Unzufriedenheit mit erhöhten Kosten für Projekte und Rekrutierung verbunden ist.
 
+\section{Gesundheitsdaten und Entwicklerzufriedenheit}
+
+Neben rein arbeitsbezogenen Faktoren wie Arbeitsorganisation, technischer Ausstattung oder Teamdynamik rücken zunehmend auch
+physiologische und gesundheitsbezogene Parameter in den Fokus der Forschung zur Entwicklerzufriedenheit. Verschiedene Studien aus
+der Arbeitspsychologie und der Human Factors-Forschung belegen, dass körperliche und mentale Gesundheit einen messbaren Einfluss
+auf kognitive Leistungsfähigkeit, emotionale Stabilität und Motivation haben. Besonders in wissensintensiven und
+hochkonzentrativen Berufen wie der Softwareentwicklung können selbst moderate Abweichungen vom optimalen Gesundheitszustand die
+Arbeitsleistung und das subjektive Wohlbefinden deutlich beeinflussen.
+
+\begin{enumerate}
+  \item \textbf{Schlafdauer}\\
+        Schlafdauer ist ein zentraler Prädiktor für kognitive Leistungsfähigkeit, emotionale Regulation und Motivation. Chronisch 
+        verkürzter Schlaf führt zu verminderter Aufmerksamkeitsspanne, reduzierter Problemlösefähigkeit und einer erhöhten 
+        Anfälligkeit für negative Stimmungslagen. Personen mit ausreichendem, qualitativ hochwertigem Schlaf weisen höhere
+        Arbeitszufriedenheit, geringere Reizbarkeit und bessere soziale Interaktionen am Arbeitsplatz auf. Besonders in
+        wissensintensiven Tätigkeiten wie der Softwareentwicklung, bei denen hohe Konzentration und Kreativität erforderlich sind,
+        kann Schlafmangel die Produktivität stark mindern \cite{opoku_sleep_2023}.
+
+  \item \textbf{Ruheherzfrequenz (RHR)}\\
+        Die Ruheherzfrequenz reflektiert den Grundzustand des Herz-Kreislauf-Systems und reagiert empfindlich auf chronische 
+        Belastungen wie Stress oder Überarbeitung. Eine dauerhaft erhöhte RHR ist mit  reduzierten Erholungsphasen assoziiert.
+        In arbeitspsychologischen Studien wurde ein signifikanter Zusammenhang zwischen hohem Job-Strain, erhöhter RHR und niedrigerer Arbeitszufriedenheit festgestellt. Für Entwicklerinnen und Entwickler kann eine kontinuierliche Überwachung der RHR
+        helfen, Phasen erhöhter Belastung zu erkennen, noch bevor subjektive Erschöpfung spürbar wird \cite{eriksson_rhr_2016}.
+
+  \item \textbf{Stress (Herzratenvariabilität, HRV)}\\
+        Die Herzratenvariabilität beschreibt die zeitliche Variation zwischen aufeinanderfolgenden Herzschlägen und gilt als
+        sensibler Indikator für die Funktionsbalance des autonomen Nervensystems. Eine hohe HRV weist auf ein flexibles, gut
+        reguliertes System hin, das Belastungen effizient kompensieren kann. Eine niedrige HRV hingegen signalisiert anhaltenden
+        Stress oder unzureichende Erholung. In Kombination mit subjektiven Zufriedenheitsdaten kann die HRV helfen, versteckte
+        Stressmuster zu identifizieren, die sonst unentdeckt bleiben würden \cite{borchini_hrv_2012}.
+
+  \item \textbf{Aktivitätsminuten und Schritte}\\
+        Körperliche Aktivität wirkt sich positiv auf mentale Gesundheit, Energielevel und Stimmung aus. Schon moderate Bewegung
+        reduziert Stress, verbessert die Schlafqualität und steigert die Arbeitszufriedenheit. Diese lässt sich durch die täglichen
+        Schritte oder die aktiven Minuten messen. Für sitzende Berufe wie die Softwareentwicklung kann regelmässige Bewegung das
+        Risiko von Ermüdung und Motivationsverlust verringern. Mitarbeitende mit höherem Aktivitätsniveau klagen seltener über
+        emotionale Erschöpfung und haben eine insgesamt positivere Einstellung zur Arbeit \cite{dallmeyer_activity_2023}.
+\end{enumerate}
+
+
+Diese Metriken ermöglichen eine gezielte Verknüpfung zwischen erholungs- und gesundheitsbezogenen Faktoren sowie den erhobenen
+Zufriedenheits- und Prozessdaten. Durch die Analyse solcher Daten lassen sich Muster identifizieren, die potenzielle
+Belastungssituationen aufzeigen, bevor sie sich in Produktivitätsverlust oder Qualitätsproblemen niederschlagen. 
+
 \todo{evt. Methoden und Instrumente zur Messung der Entwicklerzufriedenheit}
 \todo{evt. Technologische und methodische Ansätze in verwandten Arbeiten}
+
+\todo{Kalender und Meetings (nicht so nennen)}
 \todo{Forschungslücken}
 
 \section{Bestehende Lösungen und Wettbewerbsanalyse}
@@ -368,6 +435,7 @@ stellen jedoch keinen Bezug zu technischen oder gesundheitlichen Kontextinformat
 Leistungskennzahlen, berücksichtigen jedoch die emotionale Dimension nicht. Gesundheits-Tracker wiederum messen physiologische Daten,
 ohne diese mit der konkreten Entwicklungsarbeit zu verknüpfen. Eine Plattform, die emotionale Faktoren, technischen Kontext und
 physisches Wohlbefinden gemeinsam erfasst und daraus konkrete Handlungsempfehlungen ableitet, ist derzeit nicht verfügbar.
+\todo{Fazit vom State of the art}
 
 \chapter{Konzeptentwurf}
 
@@ -610,56 +678,6 @@ Korrelationen zwischen physischem Wohlbefinden und Arbeitszufriedenheit zu erken
 
 \subsubsection{Auswahl relevanter Gesundheitsmetriken}
 
-Die Integration von Gesundheitsdaten in Yappi soll das subjektive Stimmungsbild ergänzen und objektive Indikatoren für Belastung,
-Erholung und generelles Wohlbefinden liefern. Subjektive Zufriedenheitsangaben geben wertvolle Einblicke in die aktuelle emotionale
-Lage. Physiologische Metriken hingegen erfassen Veränderungen, die den Betroffenen nicht immer bewusst sind. Beide Perspektiven zu
-kombinieren ermöglicht eine fundiertere Analyse potenzieller Einflussfaktoren auf die Arbeitszufriedenheit von Entwicklerinnen und
-Entwicklern.
-
-Für die Auswahl der relevanten Gesundheitsmetriken wurden drei Kriterien herangezogen:
-
-\begin{itemize}
-  \item \textbf{Wissenschaftlich belegter Zusammenhang} mit Arbeitszufriedenheit oder Leistungsfähigkeit.
-  \item \textbf{Technische Messbarkeit} mittels gängiger Wearables bzw. Smartphone-Sensoren.
-  \item \textbf{Integrationsfähigkeit} über etablierte Schnittstellen wie Apple Health Kit oder die Garmin Health API.
-\end{itemize}
-
-Basierend darauf wurden folgende vier Metriken ausgewählt:
-
-\begin{enumerate}
-  \item \textbf{Schlafdauer}\\
-        Schlafdauer ist ein zentraler Prädiktor für kognitive Leistungsfähigkeit, emotionale Regulation und Motivation. Chronisch 
-        verkürzter Schlaf führt zu verminderter Aufmerksamkeitsspanne, reduzierter Problemlösefähigkeit und einer erhöhten 
-        Anfälligkeit für negative Stimmungslagen. Personen mit ausreichendem, qualitativ hochwertigem Schlaf weisen höhere
-        Arbeitszufriedenheit, geringere Reizbarkeit und bessere soziale Interaktionen am Arbeitsplatz auf. Besonders in
-        wissensintensiven Tätigkeiten wie der Softwareentwicklung, bei denen hohe Konzentration und Kreativität erforderlich sind,
-        kann Schlafmangel die Produktivität stark mindern \cite{opoku_sleep_2023}.
-
-  \item \textbf{Ruheherzfrequenz (RHR)}\\
-        Die Ruheherzfrequenz reflektiert den Grundzustand des Herz-Kreislauf-Systems und reagiert empfindlich auf chronische 
-        Belastungen wie Stress oder Überarbeitung. Eine dauerhaft erhöhte RHR ist mit  reduzierten Erholungsphasen assoziiert.
-        In arbeitspsychologischen Studien wurde ein signifikanter Zusammenhang zwischen hohem Job-Strain, erhöhter RHR und niedrigerer Arbeitszufriedenheit festgestellt. Für Entwicklerinnen und Entwickler kann eine kontinuierliche Überwachung der RHR
-        helfen, Phasen erhöhter Belastung zu erkennen, noch bevor subjektive Erschöpfung spürbar wird \cite{eriksson_rhr_2016}.
-
-  \item \textbf{Stress (Herzratenvariabilität, HRV)}\\
-        Die Herzratenvariabilität beschreibt die zeitliche Variation zwischen aufeinanderfolgenden Herzschlägen und gilt als
-        sensibler Indikator für die Funktionsbalance des autonomen Nervensystems. Eine hohe HRV weist auf ein flexibles, gut
-        reguliertes System hin, das Belastungen effizient kompensieren kann. Eine niedrige HRV hingegen signalisiert anhaltenden
-        Stress oder unzureichende Erholung. In Kombination mit subjektiven Zufriedenheitsdaten kann die HRV helfen, versteckte
-        Stressmuster zu identifizieren, die sonst unentdeckt bleiben würden \cite{borchini_hrv_2012}.
-
-  \item \textbf{Aktivitätsminuten und Schritte}\\
-        Körperliche Aktivität wirkt sich positiv auf mentale Gesundheit, Energielevel und Stimmung aus. Schon moderate Bewegung
-        reduziert Stress, verbessert die Schlafqualität und steigert die Arbeitszufriedenheit. Diese lässt sich durch die täglichen
-        Schritte oder die aktiven Minuten messen. Für sitzende Berufe wie die Softwareentwicklung kann regelmässige Bewegung das
-        Risiko von Ermüdung und Motivationsverlust verringern. Mitarbeitende mit höherem Aktivitätsniveau klagen seltener über
-        emotionale Erschöpfung und haben eine insgesamt positivere Einstellung zur Arbeit \cite{dallmeyer_activity_2023}.
-\end{enumerate}
-
-Diese Metriken ermöglichen eine gezielte Verknüpfung zwischen erholungs- und gesundheitsbezogenen Faktoren sowie den erhobenen
-Zufriedenheits- und Prozessdaten. Damit lassen sich Muster identifizieren, die potenzielle Belastungssituationen aufzeigen und 
-gezielte Massnahmen zur Förderung von Wohlbefinden, Motivation und Leistungsfähigkeit ermöglichen.
-
 \subsubsection{Quellen und Schnittstellen für Gesundheitsdaten}
 
 Für die Integration von Gesundheitsdaten wurden mehrere Optionen geprüft. Im Mittelpunkt standen die Garmin Health API sowie Apple
@@ -688,11 +706,9 @@ Da die Garmin Health API primär für kommerzielle Anwendungen vorgesehen ist un
 gewährt wurde, wurde Apple Health Kit als geeignetere Datenquelle ausgewählt. Für die Umsetzung bedeutet dies, dass eine
 iOS-Anwendung entwickelt wird, die die relevanten Daten aus Apple HealthKit ausliest und an Yappi überträgt.
 
-\section{Yappi Coach}
-\todo{Ausgearbeitets Konzept dokumentieren}
-\question{hier erwähnen dass umsetzung erst im nächsten projekt?}
-
 \section{Konzeptevaluation}
+
+\todo{rework}
 
 Ziel der Evaluation war es, die Relevanz der im Konzeptentwurf beschriebenen Erweiterungen von Yappi aus
 Sicht der Hauptnutzer zu überprüfen.
@@ -720,6 +736,8 @@ während Freitextfelder nur ergänzend zum Einsatz kommen.
 Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichkeit für regelmässige Rückmeldungen erhöht.
 
 \chapter{Implementierung}
+\todo{Einleitung}
+
 \section{Zugriffskontrolle über API-Keys}
 
     Das API-Key-System dient der sicheren und eindeutigen Authentifizierung externer Dienste gegenüber der \texttt{Yappi-Companion}-API.
@@ -1262,6 +1280,7 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
 %--------------------------------------------------------------------------------------------------------------------------------------
 
 \section{Deployment und CI/CD}
+\todo{ein wieso}
 
     Das Deployment der Yappi-Plattform erfolgt automatisiert mittels \textit{Continuous Integration/Continuous Deployment}
     (CI/CD) über GitHub Actions. Die Ausführung erfolgt auf einem SwitchEngines-Cloud-Server mit Debian Linux.
@@ -1420,9 +1439,14 @@ Damit wird der Aufwand für die Teilnehmenden reduziert und die Wahrscheinlichke
 
 \todo{kleine evaluation vor projektende}
 
+\section{Beantwortung der Fragestellung}
+\todo{Bezug auf die Ziele nehmen}
+\todo{}
+
 %--------------------------------------------------------------------------------------------------------------------------------------
 
 \chapter{Diskussion}
+\section{Reflexion}
 \todo{}
 
 \printbibliography
