@@ -26,8 +26,11 @@
 \tableofcontents
 \newpage
 
+
+\chapter{Implementierung}
+\todo{Einleitung}
+
 \section{Yappi als Integrationsplattform}
-\todo{in implementierung einbauen}
 
 Die Erweiterung von Yappi zu einer Integrationsplattform ist notwendig, um Daten aus unterschiedlichen Quellen sicher und 
 zuverlässig zu erfassen. Neben Prozessdaten wie Commits oder Meeting-Aktivitäten sollen auch Gesundheitsdaten aus externen
@@ -36,7 +39,7 @@ standardisiert und absichert. Zentrales Element ist ein API-Key-basiertes Authen
 eindeutig identifiziert und deren Zugriff kontrolliert. Auf dieser Basis können Daten aus heterogenen Quellen in ein einheitliches
 System integriert werden.
 
-\subsubsection{Kommunikationsmechanismus}
+\subsection{Kommunikationsmechanismus: API-Keys}
 
 Für die Kommunikation zwischen Companion-Anwendungen und dem Yappi Backend wurde bewusst auf einen API-Key-basierten Mechanismus
 gesetzt, anstatt die bestehende JWT-basierte Authentifizierung des Frontends zu verwenden. JWTs eignen sich vor allem für die
@@ -73,46 +76,7 @@ Companion-Apps, wie beispielsweise die IntelliJ-, Health- oder Calendar-Companio
 Dieser gewährleistet, dass nur registrierte und autorisierte Clients Daten an das System übermitteln können. Alle eingehenden
 Daten werden vom Backend in der dargestellten Datenbank (DB) persistiert.
 
-\subsubsection{Sicherheit}
-
-Der API-Key-Mechanismus der Integrationsplattform ist so konzipiert, dass er eine sichere und kontrollierte Anbindung externer
-Companion-Anwendungen ermöglicht. Jeder API-Key ist eindeutig einem Nutzerkonto zugeordnet und wird in der Webanwendung einmalig
-generiert. Die Generierung erfolgt über eine abgesicherte Benutzeroberfläche, wodurch sichergestellt ist, dass ausschliesslich
-berechtigte Nutzer einen Schlüssel anlegen können. Zur Übertragungssicherheit wird der API-Key ausschliesslich über verschlüsselte
-Verbindungen (HTTPS) zwischen der Companion-Anwendung und dem Backend übertragen.
-
-Im Backend erfolgt eine serverseitige Validierung, bei der der Schlüssel auf Gültigkeit und Zuordnung geprüft wird. Die Schlüssel
-werden dabei nicht im Klartext gespeichert, sondern in sicherer Form (z. B. gehasht) abgelegt, um auch bei einem möglichen
-Datenbankzugriff unbefugten Gebrauch zu verhindern. Ein kompromittierter API-Key kann jederzeit durch den Nutzer oder einen
-Administrator gesperrt oder durch einen neuen ersetzt werden.
-
-\subsubsection{Ablauf der API-Key Erstellung und -Verwendung}
-
-Abbildung \ref{fig:apikey-swimlane} zeigt den Ablauf der Erstellung und Verwendung des API-Keys innerhalb der
-Yappi-Integrationsplattform. Die Darstellung erfolgt als Swimlane-Diagramm und verdeutlicht die beteiligten Akteure sowie deren
-Interaktionen während des gesamten Prozesses.
-
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=0.95\textwidth]{../figures/apikey-swimlane-diagram.drawio.png}
-  \caption{Ablauf der API-Key Erstellung und -Verwendung in Yappi}
-  \label{fig:apikey-swimlane}
-\end{figure}
-
-Der Prozess beginnt mit der einmaligen Generierung des API-Keys durch den Nutzer in der Webanwendung. Nach der Erstellung wird der
-Schlüssel in der Companion-App hinterlegt und dort dauerhaft gespeichert. Jede Datenanfrage der Companion-App an das Backend
-enthält den API-Key im HTTP-Header, woraufhin das Backend den Schlüssel validiert und die Anfrage bei positiver Prüfung
-autorisiert. Dieser Ablauf stellt sicher, dass ausschliesslich autorisierte Anwendungen im Namen eines Nutzers Daten an Yappi
-übermitteln können.
-
-
-
-
-
-\chapter{Implementierung}
-\todo{Einleitung}
-
-\section{Zugriffskontrolle über API-Keys}
+\subsection{Zugriffskontrolle über API-Keys}
 
     Das API-Key-System dient der sicheren und eindeutigen Authentifizierung externer Dienste gegenüber der \texttt{Yappi-Companion}-API.
     Anstelle von Benutzeranmeldedaten verwenden Clients einen statisch generierten API-Key, der für den jeweiligen Nutzer erstellt und ausschliesslich diesem zugeordnet ist.
@@ -182,6 +146,54 @@ autorisiert. Dieser Ablauf stellt sicher, dass ausschliesslich autorisierte Anwe
     curl -H "Authorization: Bearer <JWT>" https://<host>/apikey
     \end{verbatim}
 
+
+
+
+\subsection{Sicherheit}
+
+Der API-Key-Mechanismus der Integrationsplattform ist so konzipiert, dass er eine sichere und kontrollierte Anbindung externer
+Companion-Anwendungen ermöglicht. Jeder API-Key ist eindeutig einem Nutzerkonto zugeordnet und wird in der Webanwendung einmalig
+generiert. Die Generierung erfolgt über eine abgesicherte Benutzeroberfläche, wodurch sichergestellt ist, dass ausschliesslich
+berechtigte Nutzer einen Schlüssel anlegen können. Zur Übertragungssicherheit wird der API-Key ausschliesslich über verschlüsselte
+Verbindungen (HTTPS) zwischen der Companion-Anwendung und dem Backend übertragen.
+
+Im Backend erfolgt eine serverseitige Validierung, bei der der Schlüssel auf Gültigkeit und Zuordnung geprüft wird. Die Schlüssel
+werden dabei nicht im Klartext gespeichert, sondern in sicherer Form (z. B. gehasht) abgelegt, um auch bei einem möglichen
+Datenbankzugriff unbefugten Gebrauch zu verhindern. Ein kompromittierter API-Key kann jederzeit durch den Nutzer oder einen
+Administrator gesperrt oder durch einen neuen ersetzt werden.
+
+    \subsubsection{Sicherheitsintegration}
+    \begin{itemize}
+      \item \textbf{ApiKeyFilter} - Spring-Security-Filter, der den API-Key aus dem \texttt{X-API-KEY}-Header ausliest und validiert.
+      \item \textbf{SecurityConfig} - Bindet den Filter vor dem \texttt{UsernamePasswordAuthenticationFilter} in die Filterkette ein, um API-Key-Anfragen vor anderen Authentifizierungsmethoden zu prüfen.
+    \end{itemize}
+
+    \subsubsection{Vorteile}
+    \begin{itemize}
+      \item Schlüssel werden nie im Klartext gespeichert.
+      \item Flexible Verwaltung durch Ablaufdaten und Aktivierungs-Flag.
+      \item Sichere Hashing-Verfahren verhindern Missbrauch bei Datenbankkompromittierung.
+    \end{itemize}
+
+\subsection{Ablauf der API-Key Erstellung und -Verwendung}
+
+Abbildung \ref{fig:apikey-swimlane} zeigt den Ablauf der Erstellung und Verwendung des API-Keys innerhalb der
+Yappi-Integrationsplattform. Die Darstellung erfolgt als Swimlane-Diagramm und verdeutlicht die beteiligten Akteure sowie deren
+Interaktionen während des gesamten Prozesses.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{../figures/apikey-swimlane-diagram.drawio.png}
+  \caption{Ablauf der API-Key Erstellung und -Verwendung in Yappi}
+  \label{fig:apikey-swimlane}
+\end{figure}
+
+Der Prozess beginnt mit der einmaligen Generierung des API-Keys durch den Nutzer in der Webanwendung. Nach der Erstellung wird der
+Schlüssel in der Companion-App hinterlegt und dort dauerhaft gespeichert. Jede Datenanfrage der Companion-App an das Backend
+enthält den API-Key im HTTP-Header, woraufhin das Backend den Schlüssel validiert und die Anfrage bei positiver Prüfung
+autorisiert. Dieser Ablauf stellt sicher, dass ausschliesslich autorisierte Anwendungen im Namen eines Nutzers Daten an Yappi
+übermitteln können.
+
     \subsubsection{Verarbeitungslogik}//
     \textbf{Erstellung:}
     \begin{enumerate}
@@ -199,24 +211,13 @@ autorisiert. Dieser Ablauf stellt sicher, dass ausschliesslich autorisierte Anwe
       \item Bei Erfolg: Authentifizierung des zugehörigen Benutzers.
     \end{enumerate}
 
-    \subsubsection{Sicherheitsintegration}
-    \begin{itemize}
-      \item \textbf{ApiKeyFilter} - Spring-Security-Filter, der den API-Key aus dem \texttt{X-API-KEY}-Header ausliest und validiert.
-      \item \textbf{SecurityConfig} - Bindet den Filter vor dem \texttt{UsernamePasswordAuthenticationFilter} in die Filterkette ein, um API-Key-Anfragen vor anderen Authentifizierungsmethoden zu prüfen.
-    \end{itemize}
 
-    \subsubsection{Vorteile}
-    \begin{itemize}
-      \item Schlüssel werden nie im Klartext gespeichert.
-      \item Flexible Verwaltung durch Ablaufdaten und Aktivierungs-Flag.
-      \item Sichere Hashing-Verfahren verhindern Missbrauch bei Datenbankkompromittierung.
-    \end{itemize}
+\todo{Quelle für spring Securtiy Architektur}
+https://docs.spring.io/spring-security/reference/servlet/architecture.html \\
+\todo{Security "Workarround" erklären}
+\todo{Front End Anpassung}
 
 
-    \todo{Quelle für spring Securtiy Architektur}
-    https://docs.spring.io/spring-security/reference/servlet/architecture.html \\
-    \todo{Security "Workarround" erklären}
-    \todo{Front End Anpassung}
 
 \printbibliography
 
