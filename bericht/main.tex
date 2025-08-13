@@ -1,4 +1,10 @@
 \documentclass[12pt,a4paper]{report}
+\usepackage[a4paper,
+    top=3cm,
+    bottom=3cm,
+    left=2.5cm,
+    right=2.5cm
+]{geometry}
 
 \usepackage[backend=biber, style=ieee]{biblatex}
 \addbibresource{literature.bib}
@@ -1691,13 +1697,11 @@ wird.
 Im folgenden Abschnitt werden die notwendigen Anpassungen im Backend und in der Datenbank erläutert, um die empfangenen
 Messdaten zu verarbeiten und dauerhaft zu speichern.
 
-\subsubsection{Backend}
+\subsubsection{Backend-Komponenten}
 
 Für die Verarbeitung der eingehenden Gesundheitsdaten wurde im Backend ein Controller mit zugehörigem Service und Repository
-implementiert. 
-
-Der Controller stellt einen REST-Endpunkt bereit, über den die Companion-App die Daten im beschriebenen JSON-Format an die
-Plattform übermitteln kann. 
+implementiert. Der Controller stellt einen REST-Endpoint bereit, über den die Companion-App die Daten im beschriebenen 
+JSON-Format an die Plattform übermitteln kann. Der folgende Endpoint wird von dem Controller bereitgestellt.
 
 \begin{description}
   \item \texttt{POST /companion/health} \\

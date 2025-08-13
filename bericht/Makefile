@@ -14,4 +14,5 @@ clean:
 	rm -f $(MAIN).aux $(MAIN).bbl $(MAIN).blg $(MAIN).log \
 	      $(MAIN).out $(MAIN).toc $(MAIN).lof $(MAIN).lot \
 	      $(MAIN).bcf $(MAIN).run.xml $(MAIN).fdb_latexmk \
-	      $(MAIN).fls $(MAIN).dvi
+	      $(MAIN).fls $(MAIN).dvi 
+	rm -r -f _minted
