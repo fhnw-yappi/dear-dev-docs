@@ -25,6 +25,12 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 
+
+\usepackage[toc]{appendix}
+\renewcommand{\appendixtocname}{Anhang}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\appendixpagename}{Anhang}
+
 \usepackage{minted}
 
 \definecolor{codebg}{RGB}{245,245,245}
@@ -903,8 +909,6 @@ Die praktische Implementierung ist als Bestandteil eines Nachfolgeprojekts vorge
 
 \section{Konzeptevaluation}
 
-\todo{rework}
-
 Ziel der Evaluation ist es, die Relevanz der im Konzeptentwurf beschriebenen Erweiterungen von Yappi aus
 Sicht der Hauptnutzer zu überprüfen.
 Hierzu wurde eine Umfrage erstellt, die alle vorgesehenen Konzepte und deren Funktionen abdeckte.
@@ -1591,8 +1595,6 @@ Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in 
         \end{itemize}
 
 
-\todo{Sequenzdiagramm}
-\todo{Front End Anpassung}
 % Die bestehenden Funktionen von Yappi werden um einen Bereich zur Meetinganalyse ergänzt.
 % Entwickler sehen hier ihre eigenen Feedbackabgaben und offene Anfragen.
 % Auf der Teamebene kann auf aggregierte, anonymisierte Auswertungen zu den Meetings ihres Teams zugegriffen werden.
@@ -2078,7 +2080,9 @@ Interaktion.
 
 \printbibliography
 
-\appendix
+\begin{appendices}
+\renewcommand{\thesection}{\Alph{section}}
+
     \section{Verlinkungen}
 
         Alle änderungen im Backend und Frontend befinden sich auf dem Branch "develop"
@@ -2120,7 +2124,6 @@ Interaktion.
     \centering
     \includegraphics[width=0.90\textwidth]{../figures/25FS_IIT32 - Plattform zur Analyse von Entwicklerzufriedenheitund Produktivität in agilen Teams.pdf}
     \end{figure}
-
-
+\end{appendices}
 
 \end{document}
