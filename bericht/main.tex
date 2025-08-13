@@ -99,10 +99,9 @@
 \section{Motivation}
 \todo{spellcheck}
 \todo{gendern überprüfen}
-\todo{unscharfe bilder fixen}
 
 Die Zufriedenheit von Entwicklerinnen und Entwicklern wird, wenn überhaupt, meist nur anhand der Menge ihrer geleisteten Arbeit
-gemessen. Dabei entstehen zwangsläufig Defizite, und ein halbjährliches Mitarbeitergespräch erweist sich oft als wenig wirksame
+gemessen. Dabei entstehen zwangsläufig Defizite und ein halbjährliches Mitarbeitergespräch erweist sich oft als wenig wirksame
 Massnahme zur Problemlösung.
 
 Dieses Projekt baut auf einer bestehenden Arbeit auf, in der eine Plattform zur Erfassung der Entwicklerzufriedenheit entwickelt
@@ -181,7 +180,7 @@ Happiness-Daten, deren Auswertung im Dashboard und Vergleiche innerhalb eines Te
 Retrospektiven datenbasierte Gespräche geführt werden können.
 
 Yappi ist als Open-Source-Projekt veröffentlicht. Die Repositories für Backend, Frontend und Infrastruktur sind getrennt 
-organisiert. Eine lauffähige Instanz steht zu beginn dieses Projektes nicht zur verfügung. Die Zielgruppe ist klar beschrieben. 
+organisiert. Eine lauffähige Instanz steht zu Beginn dieses Projekts nicht zur verfügung. Die Zielgruppe ist klar beschrieben. 
 Angesprochen sind agile Software-Teams, Scrum Master und Product Owner unterschiedlicher Unternehmensgrössen. Die Vorgängerarbeit
 hat die methodische Basis gelegt. Sie umfasst Literaturrecherche, Interviews, abgeleitete Problemfelder, User Flows, Produktziele
 und die Validierung der Konzeptlösung. Das vorliegende Projekt baut auf dieser Struktur auf und fokussiert nun auf Integration,
@@ -204,11 +203,11 @@ Ausgangsbasis für die im weiteren Verlauf geplanten Erweiterungen.
 
 \begin{description}
   \item[Backend] Das Backend ist mit Spring Boot umgesetzt. Als Datenbank ist PostgreSQL im Einsatz. Die Kommunikation zum Frontend
-    erfolgt über REST-Schnittstellen, welche nach dem OpenAPI standard dokumentiert sind. Die Kommunikation zur Datenbank erfolgt
+    erfolgt über REST-Schnittstellen, welche nach dem OpenAPI-Standard dokumentiert sind. Die Kommunikation zur Datenbank erfolgt
     über Spring JPA.
   \item[Frontend] Das Frontend basiert auf React und Next.js mit TypeScript. Für Aufrufe werden SWR-Hooks verwendet, dabei handelt
-    es sich ume eine React library um Daten zu laden. Komponenten werden mit der Library wird shadcn/ui aufgebaut. Die 
-    Visualisierungen entstehen mit Recharts. Um die Codequalität sicherzustellen wird ESLint zur statischen Code analyse und 
+    es sich ume eine React-Library zum Laden von Daten. Komponenten werden mit der Library shadcn/ui aufgebaut. Die 
+    Visualisierungen entstehen mit Recharts. Um die Codequalität sicherzustellen wird ESLint zur statischen Code-Analyse und 
     Prettier zur automatischen Formatierung nach vordefinierten Guidelines verwendet.
   \item[Authentisierung und Autorisierung] Die Anmeldung erfolgt über OAuth 2.0. Dabei werden Anbieter wie Google oder GitHub 
     über Auth.js unterstützt. Passwörter werden nicht gespeichert. Die Anfragen ans Backend werden mit JSON Web Tokens (JWT)
@@ -230,7 +229,7 @@ Verwaltung des Codes.
 
 Alle externen Änderungen wurden vor der Integration einem Code Review unterzogen. Dabei prüften wir die Anpassungen insbesondere
 auf funktionale Korrektheit, technische Kompatibilität und grundlegende Einhaltung der bestehenden Architekturprinzipien. Erst
-nach erfolgreicher Durchsicht und Freigabe wurden die Änderungen in den main Branch übernommen.
+nach erfolgreicher Durchsicht und Freigabe wurden die Änderungen in den Main-Branch übernommen.
 
 Dieses Vorgehen stellte sicher, dass parallele Entwicklungsaktivitäten koordiniert abliefen und die gemeinsame Codebasis in einem
 stabilen, funktionsfähigen Zustand blieb.
@@ -291,7 +290,7 @@ der Arbeitsmotivation und dem Engagement bei der Arbeit verknüpft ist~\cite{fra
 
 Eng verwandt mit der Zufriedenheit ist der Begriff \textbf{Flow}. In Anlehnung an Csikszentmihalyis Konzept beschreibt
 Flow einen Zustand von völliger Vertiefung und hohen Fokus beim Programmieren. Flow tritt dann auf, wenn die Anforderungen
-einer Aufgabe im Gleichgewicht mit dem Fähigkeiten des Entwicklers stehen, wodurch man in einen Zustand von intensiver 
+einer Aufgabe im Gleichgewicht mit den Fähigkeiten des Entwicklers stehen, wodurch man in einen Zustand von intensiver 
 Konzentration gelangt. Zufriedene Entwickler gelangen einfacher in einen anhaltenden Flow-Zustand. Unzufriedenheit
 hingegen unterbricht diesen Flow, was zu Frustration führt und Schwierigkeiten führt, nach Unterbrechungen wieder in
 eine Aufgabe zurückzufinden. Teilnehmer einer Untersuchung berichten, negative Erlebnisse reissen einen aus dem Flow
@@ -305,13 +304,13 @@ die Voraussetzung von Motivation, zufriedenere Entwickler weisen in der Regel ei
 Arbeitszufriedenheit weiter stärkt~\cite{franca_motivation_2020}.
 
 Schliesslich spielt auch das Team- und Organisationsklima eine fundamentale Rolle. Eine offene, unterstützende Kultur steigert
-nachweislich die zufriedenheit von Entwicklern. Der DORA Report misst die Leistungsfähigkeit von Softwareentwicklungsteams anhand
+nachweislich die Zufriedenheit von Entwicklern. Der DORA Report misst die Leistungsfähigkeit von Softwareentwicklungsteams anhand
 von vier Schlüsselkennzahlen: Deployment Frequency, Lead Time for Changes, Change Failure Rate und Time to Restore Service. Der DORA
-Report von Google basiert auf umfangreichen Wissenschaftlichen Studien und gilt als Branchenstandard. Der report von 2024 betont,
+Report von Google basiert auf umfangreichen wissenschaftlichen Studien und gilt als Branchenstandard. Der Report von 2024 betont,
 dass Teams mit stabilem, ermutigendem Umfeld bessere Ergebnisse erzielen~\cite{google_dora_2024}. Positive Emotionen und ein
 Zugehörigkeitsgefühl im Team fördern den Gruppenzusammenhalt, was wiederum die Teamleistung von Teammitgliedern verbessert. 
-Umgekehrt können Umgekehrt können toxische Kulturen oder ständig wechselnde Prioritäten die Zufriedenheit und Motivation 
-untergraben, was sich negativ auf die Leistung auswirkt~\cite{sadowski_happiness_2019}.
+Umgekehrt können toxische Kulturen oder ständig wechselnde Prioritäten die Zufriedenheit und Motivation untergraben, was sich
+negativ auf die Leistung auswirkt~\cite{sadowski_happiness_2019}.
 
 Somit unterstreichen sowohl akademische als auch industrielle Befunde: Entwicklerzufriedenheit entsteht in einem komplexen
 Zusammenspiel aus individuellen Faktoren (Flow, Motivation, \ldots) und Umfeldfaktoren (Team- und Organisationsklima, Arbeitskultur,
@@ -321,14 +320,14 @@ Zusammenspiel aus individuellen Faktoren (Flow, Motivation, \ldots) und Umfeldfa
 
 \subsection{Entwicklerzufriedenheit in der Forschung}
 
-In den letzen Jahren haben zahlreiche Studien den Zusammenhang zwischen der Entwicklerzufriedenheit und Erfolgsparametern wie
+In den letzten Jahren haben zahlreiche Studien den Zusammenhang zwischen der Entwicklerzufriedenheit und Erfolgsparametern wie
 Produktivität, Codequalität und Mitarbeiterbindung untersucht. Produktivität beschreibt im Softwarekontext die Effizienz, mit der
 Entwickler innerhalb einer bestimmten Zeit funktionierende und qualitativ hochwertige Softwareartefakte erstellen. Codequalität
 bezeichnet das Mass, in dem Quellcode korrekt, wartbar, verständlich und effizient ist, und umfasst Aspekte wie Lesbarkeit,
 Modularität, Fehlertoleranz und Testbarkeit. Mitarbeiterbindung wiederum beschreibt das Ausmass, in dem Mitarbeitende langfristig
 und freiwillig im Unternehmen bleiben.
 
-Bei einer grossangelegten Studie wurden 317 Softwareentwickler befragt und dabei 42 Konsequenten von Unzufriedenheit sowie
+Bei einer grossangelegten Studie wurden 317 Softwareentwickler befragt und dabei 42 Konsequenzen von Unzufriedenheit sowie
 32 Konsequenzen von Zufriedenheit beim Programmieren identifiziert. Die Ergebnisse Zeigen, dass Entwicklerzufriedenheit messbare
 Auswirkungen auf den Entwicklungsprozess, die erzeugten Software-Artefakte und das Wohlbefinden der Person hat. So führt
 Unzufriedenheit zu einer Reihe negativer Effekte: verzögerte Prozessabläufe, nachlässige Arbeitsweise und häufige unterbrechungen
@@ -336,14 +335,14 @@ des Flows wurden als typische Folgen von negativer Stimmung genannt. Unzufrieden
 Verzögerungen oder Qualitätsproblemen, weil Frustration sie aus dem Konzept brachte. Zufriedenheit hingegen wirkt sich positiv
 aus: Zufriedene Entwickler zeigen bessere Problemlösungsfähigkeiten, höhere Konzentration, berichten von einem anhaltenden Flow
 Zustand und lernen schneller. Die Ergebnisse legen nahe, dass Zufriedenheit die Codequalität begünstigt. Zufriedene Entwickler
-treffen sorgfältigere langfristige Entscheidungen. Ein Teilnehmer beschrieb, er dokumentiert seinen Code gründlicher und achten
+treffen sorgfältigere langfristige Entscheidungen. Ein Teilnehmer beschrieb, er dokumentiert seinen Code gründlicher und achtet
 stärker auf Wartbarkeit, wenn er Zufrieden ist~\cite{graziotin_what_2018}.
 
 \subsection{Entwicklerzufriedenheit in der Industrie}
 
 Neben akademischen Studien liefern auch Industrieumfragen und Community-Studien wertvolle Einblicke. Der jährliche Stack Overflow
-Developer Survey etwa spiegelt wieder, dass weiterhin Verbesserungsbedarf besteht. laut der Umfrage 2024 bezeichnen sich nur rund
-20\% der Entwickler als wirklich zufrieden in ihrem Job, während etwa 80\% unzufrieden oder "gelassen" (complacent) sind. Diese Zahl
+Developer Survey etwa spiegelt wieder, dass weiterhin Verbesserungsbedarf besteht. Laut der Umfrage 2024 bezeichnen sich nur rund
+20\% der Entwickler als wirklich zufrieden in ihrem Job, während etwa 80\% unzufrieden oder \glqq gelassen\grqq{} (complacent) sind. Diese Zahl
 unterstreicht, dass ein grosser Teil der Entwicklergemeinschaft nicht glücklich im Arbeitsumfeld ist. Als Hauptgründe werden oft
 Faktoren wie schlechte Work-Life-Balance, zu viele Meetings oder fehlende Anerkennung genannt~\cite{stackoverflow_survey_2025}.
 
@@ -370,7 +369,7 @@ Arbeitsleistung und das subjektive Wohlbefinden deutlich beeinflussen.
 
 \begin{enumerate}
   \item \textbf{Schlafdauer}\\
-        Schlafdauer ist ein zentraler Prädiktor für kognitive Leistungsfähigkeit, emotionale Regulation und Motivation. Chronisch 
+        Schlafdauer ist ein zentraler Prädiktor für kognitive Leistungsfähigkeit, emotionale Regulation und Motivation. chronisch 
         verkürzter Schlaf führt zu verminderter Aufmerksamkeitsspanne, reduzierter Problemlösefähigkeit und einer erhöhten 
         Anfälligkeit für negative Stimmungslagen. Personen mit ausreichendem, qualitativ hochwertigem Schlaf weisen höhere
         Arbeitszufriedenheit, geringere Reizbarkeit und bessere soziale Interaktionen am Arbeitsplatz auf. Besonders in
@@ -384,7 +383,7 @@ Arbeitsleistung und das subjektive Wohlbefinden deutlich beeinflussen.
         und niedrigerer Arbeitszufriedenheit festgestellt. Für Entwicklerinnen und Entwickler kann eine kontinuierliche Überwachung der RHR
         helfen, Phasen erhöhter Belastung zu erkennen, noch bevor subjektive Erschöpfung spürbar wird~\cite{eriksson_rhr_2016}.
 
-  \item \textbf{Stress (Herzratenvariabilität, HRV)}\\
+  \item \textbf{Stress, Herzratenvariabilität (HRV)}\\
         Die Herzratenvariabilität beschreibt die zeitliche Variation zwischen aufeinanderfolgenden Herzschlägen und gilt als
         sensibler Indikator für die Funktionsbalance des autonomen Nervensystems. Eine hohe HRV weist auf ein flexibles, gut
         reguliertes System hin, das Belastungen effizient kompensieren kann. Eine niedrige HRV hingegen signalisiert anhaltenden
@@ -414,7 +413,7 @@ Belastungssituationen aufzeigen, bevor sie sich in Produktivitätsverlust oder Q
     Koordination, Entscheidungsfindung, Wissensweitergabe oder Problemlösung.
 
     In der Praxis wirken Meetings jedoch häufig als Störfaktor für die Produktivität und Zufriedenheit von Entwicklerinnen
-    und Entwicklern. Empirische Untersuchungen zeigen,dass Softwareentwickelnde durchschnittlich zwischen 10,9 und 16,5
+    und Entwicklern. Empirische Untersuchungen zeigen, dass Softwareentwickelnde durchschnittlich zwischen 10,9 und 16,5
     Stunden pro Woche in Besprechungen verbringen. Ein erheblicher Teil
     dieser Zeit wird als wenig produktiv eingeschätzt. Besonders problematisch sind lange oder ungünstig terminierte Meetings,
     die den Arbeitstag fragmentieren. Dies unterbricht oft den Flow-Zustand, also eine Phase tiefer Konzentration
@@ -518,7 +517,7 @@ physisches Wohlbefinden gemeinsam erfasst und daraus konkrete Handlungsempfehlun
 \section{Schlussfolgerungen für die Konzeptlösung}\label{schlussfolgerungen-für-die-konzeptlösung}
 
 Die Analyse des aktuellen Forschungs- und Praxisstands zeigt, dass Entwicklerzufriedenheit aus einem Zusammenspiel individueller
-Faktoren (z.,B. Motivation, Flow), organisatorischer Rahmenbedingungen (Team- und Unternehmens-, Meetingkultur) sowie 
+Faktoren (z. B. Motivation, Flow), organisatorischer Rahmenbedingungen (Team- und Unternehmens-, Meetingkultur) sowie 
 physiologischer Aspekte (Schlaf, Belastung, Aktivitätsniveau, Stress) entsteht. Studien belegen deutliche Zusammenhänge zwischen
 hoher Zufriedenheit und positiven Ergebnissen wie gesteigerter Produktivität, verbesserter Codequalität und höherer
 Mitarbeiterbindung. Gleichzeitig wird deutlich, dass bestehende Untersuchungen häufig auf Teilaspekte beschränkt sind und kausale
@@ -575,7 +574,7 @@ tatsächlichen Verlauf der Zufriedenheit nur eingeschränkt widerspiegelt. Die v
 Tabelle~\ref{tab:rup-passive} dargestellt.
 
 \begin{table}[H]
-  \caption{Problemstellung nach RUP: Passive erfassung der Entwicklerzufriedenheit}
+  \caption{Problemstellung nach RUP: Passive Erfassung der Entwicklerzufriedenheit}
   \label{tab:rup-passive}
   \centering
   \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.25\textwidth}|X}
@@ -627,7 +626,7 @@ Zufriedenheit herzustellen. Dies führt dazu, dass Massnahmen zur Verbesserung o
 datenbasiert sind. Die vollständige Problemstellung ist in Tabelle~\ref{tab:rup-conclusions} dargestellt.
 
 \begin{table}[H]
-  \caption{Problemstellung nach RUP: Schwierigkeiten beim ableiten von Schlussfolgerungen aus Zufriedenheitsdaten}
+  \caption{Problemstellung nach RUP: Schwierigkeiten beim Ableiten von Schlussfolgerungen aus Zufriedenheitsdaten}
   \label{tab:rup-conclusions}
   \centering
   \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.25\textwidth}|X}
@@ -744,7 +743,7 @@ Die im Kapitel~\ref{stateoftheart-gesundheit} beschriebenen Gesundheitsmetriken 
 
 \subsection{Automatisierte Interpretation und Handlungsempfehlungen durch den Yappi Coach}
 
-Als letzer Bestandteil der Erweiterung wertet der Yappi Coach die erfassten Daten automatisiert aus. Ziel ist es, nicht nur 
+Als letzter Bestandteil der Erweiterung wertet der Yappi Coach die erfassten Daten automatisiert aus. Ziel ist es, nicht nur 
 Rohdaten bereitzustellen, sondern diese in einen interpretierbaren Kontext zu setzen und daraus konkrete, umsetzbare 
 Handlungsempfehlungen abzuleiten.
 
@@ -928,8 +927,8 @@ Die praktische Implementierung ist als Bestandteil eines Nachfolgeprojekts vorge
 Ziel der Evaluation ist es, die Relevanz der im Konzeptentwurf beschriebenen Erweiterungen von Yappi aus
 Sicht der Hauptnutzer zu überprüfen.
 Hierzu wurde eine Umfrage erstellt, die alle vorgesehenen Konzepte und deren Funktionen abdeckte.
-Die Bewertung erfolgte mit einer Likert-Skala von 0 bis 10, wobei 0 "sehr unwichtig" und 10 "sehr wichtig" bedeutet.
-Eine Likert-Skala ist ein in der Sozialforschung weit verbreitetes Verfahren, bei dem Teilnehmende ihre Zustimmung
+Die Bewertung erfolgte mit einer Likert-Skala von 0 bis 10, wobei 0 \glqq sehr unwichtig\grqq{} und 10 \glqq sehr wichtig\grqq{} 
+bedeutet. Eine Likert-Skala ist ein in der Sozialforschung weit verbreitetes Verfahren, bei dem Teilnehmende ihre Zustimmung
 oder Ablehnung zu einer Aussage stufenweise angeben können.
 
 \begin{figure}[H]
@@ -1119,7 +1118,7 @@ autorisiert. Dieser Ablauf stellt sicher, dass ausschliesslich autorisierte Anwe
 
 \subsubsection{API-Endpunkte zur API-Key Generierung}
 
-Um einen API-Key über die Webapplikation zu erstellen stehen die folgenden Endpunkte zur verfügung.
+Um einen API-Key über die Webapplikation zu erstellen stehen die folgenden Endpunkte zur Verfügung.
 
 Diese Endpunkte setzen einen gültigen JWT im \texttt{Authorization}-Header voraus (\texttt{Bearer <token>}) und sind somit nur 
 über das Yappi Frontend erreichbar.
@@ -1209,7 +1208,6 @@ Erfassung von Stimmungsdaten so nahtlos wie möglich in den normalen Entwicklung
 Dialog öffnet sich als eigenständiges Fenster und blockiert die IDE nicht, sodass Entwickler sofort weiterarbeiten können. Die
 Abbildung~/ref{fig:intellij-post-commit} zeigt die Benutzeroberfläche.
 
-\todo{neues design}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{../figures/intellij-post-commit.png}
@@ -2229,13 +2227,13 @@ Yappi langfristig zu einem Wertvollen tool zur Steigerung der Entwicklerzufriede
 
     \section{Verlinkungen}
 
-        Alle änderungen im Backend und Frontend befinden sich auf dem Branch "develop"
+        Alle änderungen im Backend und Frontend befinden sich auf dem Branch \glqq develop\grqq{}
 
         \textcolor{teal}{\href{https://github.com/fhnw-yappi/dear-dev-backend}{GitHub Backend} \\}
 
         \textcolor{teal}{\href{https://github.com/fhnw-yappi/dear-dev-frontend}{GitHub Frontend} \\}
 
-        Alle Companion Apps befinden sich jeweils dem Branch "main"
+        Alle Companion Apps befinden sich jeweils dem Branch \glqq main\grqq{}
 
         \textcolor{teal}{\href{https://github.com/fhnw-yappi/yappi-intellij-companion}{GitHub IntelliJ Companion} \\}
 
