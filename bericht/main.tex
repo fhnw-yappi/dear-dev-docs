@@ -130,7 +130,7 @@ die Arbeitszufriedenheit kontinuierlich, präzise und im Kontext zu erfassen, zu
 Arbeitsumfeld, in dem Zufriedenheit als gleichwertiger Faktor neben Produktivität und Codequalität betrachtet wird und in dem
 datenbasierte Erkenntnisse zu einer nachhaltig gesunden und motivierenden Arbeitskultur beitragen.
 
-\section{Fragestellungen}
+\section{Fragestellungen}\label{fragestellungen}
 
 Aufbauend auf der in der Motivation beschriebenen Vision sowie dem dargestellten Projektrahmen wurden drei zentrale 
 Forschungsfragen formuliert. Sie bilden den inhaltlichen Leitfaden dieser Arbeit und definieren die Aspekte, die im Projekt
@@ -248,16 +248,39 @@ Das Projekt umfasst die folgenden Stakeholder:
   \item[Betrieb und Entwicklung] Projektteam dieses Projekts und anderer Projekte die auf Yappi aufbauen.
 \end{description}
 
-\chapter{Methoden}
-\todo{in vorgängerkapitel mergen}
 \section{Projektmethodik}
-\section{Prototypen}
-\section{Proof of Concepts}
-\todo{Abgrenzung bezüglich Datenschutz}
-\todo{Kanban erwähen}
-\todo{arc42 erwähen}
+
+Dieses Kapitel beschreibt das methodische Vorgehen bei der Entwicklung und Umsetzung der im Rahmen dieses Projekts geplanten
+Erweiterungen an Yappi. Es erläutert, wie aus den Forschungsfragen und identifizierten Problemstellungen konkrete Ziele und
+Lösungsansätze abgeleitet wurden, welche Werkzeuge und Methoden zur Informationsgewinnung eingesetzt wurden und wie der
+Entwicklungsprozess strukturiert war.
+
+\begin{enumerate}
+  \item \textbf{Recherche- und Analysephase:} 
+    \begin{itemize}
+      \item \textbf{Google Scholar:} Recherche wissenschaftlicher Publikationen.
+      \item \textbf{Google Search:} Analyse bestehender Marktangebote und Wettbewerber, um Funktionalitäten, Stärken und
+        Schwächen zu identifizieren.
+      \item \textbf{AI-gestützte Tools (z.\,B. ChatGPT):} Nutzung zur schnellen Exploration von Ideen und Einholung komprimierter
+        Literaturübersichten. Ergebnisse wurden immer manuell überprüft und mit Primärquellen validiert. Zusätzlich wurden 
+        AI-Tools verwendet um Texte hinsichtlich Sprache und Rechtschreibung zu überprüfen.
+    \end{itemize}
+
+  \item \textbf{Zielentwicklung:} Ableitung der Produktziele (Kapitel~\ref{produktziele}) aus den Forschungsfragen 
+    (Kapitel~\ref{fragestellungen}), Problemstellungen (Kapitel~\ref{problemstellungen}) und den Schlussfolgerungen aus der
+    Literaturrecherche und Marktanalyse (Kapitel~\ref{schlussfolgerungen-für-die-konzeptlösung}).
+
+  \item \textbf{Architekturdokumentation:} Beschreibung der technischen Architektur nach dem arc42-Template.
+
+  \item \textbf{Agiles Projektmanagement:} Organisation der Arbeitsschritte mittels Kanban-Board, regelmässige Abstimmungen zur
+    Fortschrittskontrolle und Prioritätsanpassung.
+
+  \item \textbf{Mockups:} Erstellung Mockups (Figma) zur Visualisierung geplanter Benutzeroberflächen, insbesondere für
+    Companion-Apps und Meetingbewertungsdialoge.
+\end{enumerate}
 
 \chapter{State of the Art}
+
 \section{Definition von Entwicklerzufriedenheit}
 
 Entwicklerzufriedenheit wird in der Literatur als Balance zwischen positiven und negativen Erlebnissen bei der
@@ -495,7 +518,7 @@ Leistungskennzahlen, berücksichtigen jedoch die emotionale Dimension nicht. Ges
 ohne diese mit der konkreten Entwicklungsarbeit zu verknüpfen. Eine Plattform, die emotionale Faktoren, technischen Kontext und
 physisches Wohlbefinden gemeinsam erfasst und daraus konkrete Handlungsempfehlungen ableitet, ist derzeit nicht verfügbar.
 
-\section{Schlussfolgerungen für die Konzeptlösung}
+\section{Schlussfolgerungen für die Konzeptlösung}\label{schlussfolgerungen-für-die-konzeptlösung}
 
 Die Analyse des aktuellen Forschungs- und Praxisstands zeigt, dass Entwicklerzufriedenheit aus einem Zusammenspiel individueller
 Faktoren (z.,B. Motivation, Flow), organisatorischer Rahmenbedingungen (Team- und Unternehmens-, Meetingkultur) sowie 
@@ -537,7 +560,7 @@ Die Erweiterung basiert auf folgenden Ansätzen:
 In den folgenden Unterkapiteln wird die schrittweise Entwicklung der Konzeptlösung für die geplanten Erweiterungen von Yappi
 detailliert beschrieben.
 
-\section{Problemstellungen}
+\section{Problemstellungen}\label{problemstellungen}
 
 Die Erweiterung von Yappi verfolgt das Ziel, bestehende Schwächen in der Erfassung und Interpretation der Entwicklerzufriedenheit
 zu beheben. Dazu wurden die relevanten Herausforderungen nach dem Standard des Rational Unified Process (RUP) strukturiert
@@ -816,7 +839,7 @@ Die wichtigsten Vorteile für Teams sind:
     \item \textbf{Stärkung der Zusammenarbeit} durch gezielte, datenbasierte Anpassungen.
 \end{itemize}
 
-\section{Produktziele}
+\section{Produktziele}\label{produktziele}
 
 Die im vorangehenden Kapitel beschriebenen Erweiterungsideen bilden die Grundlage für die folgenden Produktziele. Sie fassen die
 wesentlichen Eigenschaften zusammen, die Yappi im Rahmen der geplanten Weiterentwicklung erfüllen soll, um die identifizierten
