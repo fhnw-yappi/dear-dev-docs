@@ -76,6 +76,7 @@
 \section{Motivation}
 \todo{spellcheck}
 \todo{gendern überprüfen}
+\todo{unscharfe bilder fixen}
 
 Die Zufriedenheit von Entwicklerinnen und Entwicklern wird, wenn überhaupt, meist nur anhand der
 Menge ihrer geleisteten Arbeit gemessen. Dabei entstehen zwangsläufig Defizite, und ein halbjährli-
@@ -880,8 +881,6 @@ evidenzbasierte Vorschläge zur Verbesserung der Arbeitsbedingungen und der Zufr
 Dieses Ziel wird im Rahmen der vorliegenden Arbeit nicht technisch umgesetzt, sondern ausschliesslich konzeptionell ausgearbeitet.
 Die praktische Implementierung ist als Bestandteil eines Nachfolgeprojekts vorgesehen.
 
-\todo{szenarien}
-
 \section{Konzeptevaluation}
 
 \todo{rework}
@@ -1629,17 +1628,127 @@ gewährt wurde, wurde Apple Health Kit als geeignetere Datenquelle ausgewählt. 
 iOS-Anwendung entwickelt wird, die die relevanten Daten aus Apple HealthKit ausliest und an Yappi überträgt.
 
 \subsection{Daten aus HealthKit auslesen}
-\todo{}
+
+Um relevante Gesundheitsmetriken automatisiert zu erfassen, nutzt die iOS-Anwendung die von Apple bereitgestellte
+HealthKit-Schnittstelle. In diesem Kapitel wird der Zugriff auf die Schrittzählungsdaten erklärt, die anderen Metriken werden
+auf die gleiche Art und Weise implementiert. 
+
+Der Zugriff auf HealthKit-Daten erfordert die explizite Zustimmung des Nutzers für jede einzelne Datenkategorie. Beim ersten Start
+der App wird daher eine Berechtigungsanfrage angezeigt, in der der Zugriff auf Schrittzählungsdaten 
+(\texttt{HKQuantityTypeIdentifier.stepCount}) angefordert wird. Erst nach Bestätigung durch den Nutzer beginnt die App mit der
+Erfassung.
+
+Die Umsetzung der Datenerfassung erfolgt über eine Kombination aus einem \texttt{HKObserverQuery} und zeitlich begrenzten 
+\texttt{HKStatisticsQuery}-Abfragen. Der \texttt{HKObserverQuery} registriert sich auf Änderungen in den beobachteten Metriken und
+wird von HealthKit automatisch ausgelöst, sobald neue Daten vorliegen. Für jede Verarbeitung wird der zuletzt verarbeitete 
+Zeitraum gespeichert, sodass bei der nächsten Abfrage nahtlos an dieser Stelle fortgesetzt werden kann, ohne bereits erfasste
+Daten erneut zu verarbeiten.
+
+Die gesammelten Daten werden anschliessend über einen API-Endpoint an das Backend der Yappi-Plattform übertragen und dort
+gespeichert. Dadurch stehen sie zentral zur Verfügung und können gemeinsam mit anderen erfassten Metriken ausgewertet werden. 
 
 \subsection{Daten an Yappi übertragen}
-\todo{}
+
+Um die Verarbeitung auf Serverseite zu vereinfachen und die Erweiterbarkeit auf weitere Metriken zu ermöglichen, werden die Daten
+in einer einheitlichen JSON-Struktur übertragen. Diese enthält zum einen den Typ der Metrik (\texttt{metric}), zum anderen ein Array
+von Messwerten, das für jeden Eintrag den erfassten Zeitraum sowie den zugehörigen Wert enthält. Die Zeiträume werden im
+Format \texttt{yyyy-MM-dd~HH:mm/yyyy-MM-dd~HH:mm} angegeben, um sowohl das Start- als auch das Enddatum einer Messung eindeutig
+zu definieren.
+
+\begin{verbatim}
+{
+    "metric": "STEPS",
+    "data": [
+        {
+            "timeRange": "yyyy-MM-dd HH:mm/yyyy-MM-dd HH:mm",
+            "value": steps
+        },
+        {
+            "timeRange": "2025-08-06 08:00/2025-08-06 09:00",
+            "value": 38
+        }
+    ]
+}
+\end{verbatim}
+
+Diese Struktur erlaubt eine konsistente Verarbeitung unabhängig von der Art der Metrik und bildet die Grundlage für die
+serverseitige Validierung, Speicherung und spätere Analyse. Sie kann ohne Anpassungen um weitere Metriken erweitert werden,
+indem lediglich der Wert von \texttt{metric} angepasst und das \texttt{data}-Array mit den entsprechenden Messpunkten befüllt
+wird.
+
+Im folgenden Abschnitt werden die notwendigen Anpassungen im Backend und in der Datenbank erläutert, um die empfangenen
+Messdaten zu verarbeiten und dauerhaft zu speichern.
+
 \subsubsection{Backend}
-\todo{}
+
+Für die Verarbeitung der eingehenden Gesundheitsdaten wurde im Backend ein Controller mit zugehörigem Service und Repository
+implementiert. 
+
+Der Controller stellt einen REST-Endpunkt bereit, über den die Companion-App die Daten im beschriebenen JSON-Format an die
+Plattform übermitteln kann. 
+
+\begin{description}
+  \item \texttt{POST /companion/health} \\
+        Nimmt Gesundheitsdaten im definierten JSON-Format entgegen und speichert sie für den authentisierten Nutzer. 
+        Bereits vorhandene Einträge im angegebenen Zeitraum werden aktualisiert, andernfalls werden neue Einträge angelegt. \\
+        \textbf{Antworten:} \texttt{200 OK}, \texttt{400 Bad Request}, \texttt{401 Unauthorized}.
+\end{description}
+
+Die eingehenden Anfragen werden an den Service weitergeleitet, der die eigentliche Geschäftslogik übernimmt. Der Service prüft
+zunächst, ob für den übermittelten Benutzer und die angegebene Metrik im gesendeten Zeitraum bereits ein Eintrag in der Datenbank
+vorhanden ist. Falls ja, wird der bestehende Datensatz überschrieben, um stets den aktuellsten Stand zu gewährleisten. Falls kein
+Eintrag vorhanden ist, wird ein neuer Datensatz angelegt.  
+
+Das Repository kapselt den Zugriff auf die Datenbank und übernimmt das Einfügen sowie das Aktualisieren der Messwerte. Durch diese
+Aufteilung in Controller, Service und Repository wird eine klare Trennung von Zuständigkeiten erreicht, was die Wartbarkeit und
+Erweiterbarkeit der Implementierung erleichtert.
+
 \subsubsection{Datenbankerweiterung}
-\todo{}
+
+Zur Speicherung der von der Companion-App übermittelten Gesundheitsdaten wurde das Datenbankschema um die Tabelle 
+\texttt{health\_metric} erweitert. Diese Tabelle dient als generische Ablage für unterschiedliche Metriken. Durch diese Struktur
+lassen sich weitere Gesundheitsmetriken ohne Schemaänderungen hinzufügen.  
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|p{9cm}|}
+\hline
+\textbf{Spalte} & \textbf{Datentyp} & \textbf{Beschreibung} \\
+\hline
+\texttt{id} & SERIAL & Primärschlüssel, auto-inkrementierend \\
+\texttt{user\_id} & INTEGER & Fremdschlüssel auf \texttt{users.id} \\
+\texttt{metric} & TEXT & Typ der Metrik (z.\,B. \texttt{STEPS}, \texttt{SLEEP}) \\
+\texttt{start\_time} & TIMESTAMPTZ & Beginn des Messzeitraums \\
+\texttt{end\_time} & TIMESTAMPTZ & Ende des Messzeitraums \\
+\texttt{value} & NUMERIC & Messwert der Metrik \\
+\texttt{created\_at} & TIMESTAMPTZ & Zeitpunkt der Erfassung in der Datenbank \\
+\hline
+\end{tabular}
+\caption{Schema der Tabelle \texttt{health\_metric}}
+\label{tab:health_metric_schema}
+\end{table}
 
 \subsection{Benutzeroberfläche der iOS App}
-\todo{mit screenshot}
+
+Nachfolgend wird die Benutzeroberfläche der iOS App vorgestellt. Die Benutzeroberfläche der iOS-Anwendung ist bewusst
+minimalistisch gehaltet und darauf ausgelegt, den API-Key einmalig zu hinterlegen, ohne dass danach weitere Eingaben erforderlich
+sind.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=0.5\textheight,keepaspectratio]{../figures/health-app.png}
+  \caption{Benutzeroberfläche der iOS Health Companion App}
+  \label{fig:health-app}
+\end{figure}
+
+Die Abbildung~\ref{fig:health-app} zeigt die Benutzeroberfläche der App. Für die Eingabe des API-Keys stehen mehrere Wege zur
+Verfügung, entweder durch manuelle Eingabe oder durch das Scannen eines QR-Codes. Der integrierte QR-Code-Scanner öffnet sich im
+Vollbildmodus, erkennt den Schlüssel automatisch und trägt ihn direkt in das Eingabefeld ein. Nach der Eingabe wird der API-Key
+in den UserDefaults des Geräts gespeichert, sodass er bei späteren App-Starts automatisch geladen wird.
+
+Die Verarbeitung der Gesundheitsdaten erfolgt vollständig im Hintergrund. Sobald neue Werte vorliegen, werden diese automatisch an
+Yappi übertragen. Dadurch entfällt für den Nutzer jede manuelle Auslösung und der Betrieb der App erfordert keine zusätzliche
+Interaktion.
 
 %--------------------------------------------------------------------------------------------------------------------------------------
 
