@@ -23,6 +23,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{hyperref}
 
 \usepackage{minted}
 
@@ -1235,7 +1236,6 @@ Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in 
                     Ruft aktuelle Umfragen über die REST-API ab, generiert DOM-Elemente aus JSON Vorlagen (\texttt{popup/questionblock.html},
                     \texttt{popup/questionblock.js}) und integriert diese in die Ansicht.
                     Mehr Details dazu in Abschnitt \ref{section:Dynamische Umfragen}.
-                    \todo{check link}
               \item Feedback-Übermittlung (\texttt{popup/popup.js}):
                     Sammelt Antworten, strukturiert sie als JSON und sendet sie per POST-Request an das Yappi-Backend.
             \end{itemize}
@@ -2077,5 +2077,50 @@ Interaktion.
 \todo{}
 
 \printbibliography
+
+\appendix
+    \section{Verlinkungen}
+
+        Alle änderungen im Backend und Frontend befinden sich auf dem Branch "develop"
+
+        \href{https://github.com/fhnw-yappi/dear-dev-backend}{GitHub Backend}
+        \href{https://github.com/fhnw-yappi/dear-dev-frontend}{GitHub Frontend}
+
+        Alle Companion Apps befinden sich jeweils dem Branch "main"
+
+        \href{https://github.com/fhnw-yappi/yappi-intellij-companion}{GitHub IntelliJ Companion}
+        \href{https://github.com/fhnw-yappi/yappi-chrome-extension}{GitHub Chrome Extension}
+        \href{https://github.com/fhnw-yappi/yappi-health-companion}{GitHub Health Companion}
+
+    \section{Mockup}
+
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.90\textwidth]{../figures/mockup/IP5_Yappi_Companion_Coach.pdf}
+      \end{figure}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.90\textwidth]{../figures/mockup/IP5_Yappi_Companion_Health.pdf}
+    \end{figure}
+
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{../figures/mockup/IP5_Yappi_Companion_Intellij.pdf}
+    \end{figure}
+
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{../figures/mockup/IP5_Yappi_Companion_Outlook_Prototype.pdf}
+    \end{figure}
+
+    \section{Anhang}
+
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{../figures/25FS_IIT32 - Plattform zur Analyse von Entwicklerzufriedenheitund Produktivität in agilen Teams.pdf}
+    \end{figure}
+
+
 
 \end{document}
