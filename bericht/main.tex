@@ -103,27 +103,23 @@
 \todo{gendern überprüfen}
 \todo{unscharfe bilder fixen}
 
-Die Zufriedenheit von Entwicklerinnen und Entwicklern wird, wenn überhaupt, meist nur anhand der
-Menge ihrer geleisteten Arbeit gemessen. Dabei entstehen zwangsläufig Defizite, und ein halbjährli-
-ches Mitarbeitergespräch erweist sich oft als wenig wirksame Massnahme zur Problemlösung.
+Die Zufriedenheit von Entwicklerinnen und Entwicklern wird, wenn überhaupt, meist nur anhand der Menge ihrer geleisteten Arbeit
+gemessen. Dabei entstehen zwangsläufig Defizite, und ein halbjährliches Mitarbeitergespräch erweist sich oft als wenig wirksame
+Massnahme zur Problemlösung.
 
-Dieses Projekt baut auf einer bestehenden Arbeit auf, in der eine Plattform zur Erfassung der Ent-
-wicklerzufriedenheit entwickelt wurde. Die Webapplikation Yappi ermöglicht es Entwicklerinnen und
-Entwicklern, ihre Zufriedenheit mit ihrer Arbeit und ihrer aktuellen Situation fortlaufend zu bewerten.
-Yappi erfasst emotionale Faktoren wie Happiness sowie weitere Zufriedenheitsindikatoren. Zusätz-
-lich können spezifische Aufgaben und Arbeitstypen individuell bewertet werden. Die erhobenen Da-
-ten werden anonym auf Teamebene analysiert, um ein fundiertes Verständnis für die Stimmung in-
-nerhalb der Teams zu gewinnen.
+Dieses Projekt baut auf einer bestehenden Arbeit auf, in der eine Plattform zur Erfassung der Entwicklerzufriedenheit entwickelt
+wurde. Die Webapplikation Yappi ermöglicht es Entwicklerinnen und Entwicklern, ihre Zufriedenheit mit ihrer Arbeit und ihrer
+aktuellen Situation fortlaufend zu bewerten. Yappi erfasst emotionale Faktoren wie Happiness sowie weitere 
+Zufriedenheitsindikatoren. Zusätzlich können spezifische Aufgaben und Arbeitstypen individuell bewertet werden. Die erhobenen 
+Daten werden anonym auf Teamebene analysiert, um ein fundiertes Verständnis für die Stimmung innerhalb der Teams zu gewinnen.
 
-Entwicklerinnen und Entwickler haben die Möglichkeit, ihre Zufriedenheit für verschiedene Teams zu
-erfassen, wodurch gezielte Analysen ermöglicht werden. Unternehmen erhalten dadurch wertvolle
-Einblicke, um das Arbeitsumfeld gezielt zu verbessern.
+Entwicklerinnen und Entwickler haben die Möglichkeit, ihre Zufriedenheit für verschiedene Teams zu erfassen, wodurch gezielte
+Analysen ermöglicht werden. Unternehmen erhalten dadurch wertvolle Einblicke, um das Arbeitsumfeld gezielt zu verbessern.
 
-Dieses Projekt baut auf Yappi auf und zielt darauf ab, die Erfassung der Zufriedenheit weiter zu opti-
-mieren. Es wird untersucht, wie die Daten noch präziser erfasst und ausgewertet werden können,
-um langfristige Verbesserungen zu unterstützen. Diese Arbeit dient als Grundlage für ein weiterfüh-
-rendes Forschungsprojekt, das sich vertieft mit der Entwicklerzufriedenheit auseinandersetzt und
-zusätzliche Erkenntnisse gewinnen soll.
+Dieses Projekt baut auf Yappi auf und zielt darauf ab, die Erfassung der Zufriedenheit weiter zu optimieren. Es wird untersucht,
+wie die Daten noch präziser erfasst und ausgewertet werden können, um langfristige Verbesserungen zu unterstützen. Diese Arbeit
+dient als Grundlage für ein weiterführendes Forschungsprojekt, das sich vertieft mit der Entwicklerzufriedenheit auseinandersetzt
+und zusätzliche Erkenntnisse gewinnen soll.
 
 \subsection{Vision: Yappi als zentrale Plattform für Entwicklerzufriedenheit}
 
@@ -262,7 +258,7 @@ Das Projekt umfasst die folgenden Stakeholder:
 \todo{arc42 erwähen}
 
 \chapter{State of the Art}
-\section{Definition von Entwiklerzufriedenheit}
+\section{Definition von Entwicklerzufriedenheit}
 
 Entwicklerzufriedenheit wird in der Literatur als Balance zwischen positiven und negativen Erlebnissen bei der
 Arbeit definiert. Darunter versteht man eine Sequenz von Erfahrungen, bei der häufige positive Emotionen ein
@@ -1143,29 +1139,129 @@ Abbildung~\ref{fig:apikey-frontend} zeigt die zentralen Elemente und Funktionen 
 
 \section{IntelliJ IDEA Companion}
 
-\todo{}
+Die Implementierung nutzt die von JetBrains bereitgestellten IntelliJ-Plugin-APIs, um sich direkt in den Entwicklungsablauf der
+IDE einzuklinken. Diese APIs ermöglichen es, Ereignisse wie einen erfolgreichen Code-Commit abzufangen, eigene Dialogfenster oder
+Benachrichtigungen anzuzeigen und auf gespeicherte Plugin-Einstellungen zuzugreifen. Dadurch kann das Yappi Companion-Plugin
+nahtlos in die bestehende IntelliJ-Oberfläche integriert werden, ohne den gewohnten Workflow der Entwickler zu unterbrechen.
 
-\gideon{:)}
+Der IntelliJ Companion erweitert Yappi um die Möglichkeit, direkt aus der Entwicklungsumgebung heraus Feedback zu Code-Commits
+zu erfassen. Ziel ist es, die Erfassung von Stimmungsdaten möglichst nahtlos in den Entwickler-Workflow zu integrieren, ohne den
+Arbeitsfluss zu unterbrechen. Nach jedem erfolgreichen Commit in IntelliJ IDEA öffnet sich automatisch ein Dialogfenster, in dem
+der Entwickler seine Stimmung zum Commit angeben kann. Diese Daten werden anschliessend an Yappi übertragen und dort gespeichert.
 
-Yappi wird direkt in die integrierte Entwicklungsumgebung (IDE) eingebunden, um den Arbeitsfluss von Entwicklerinnen
-und Entwicklern nicht zu unterbrechen.Als primäre Zielplattform eignet sich ein Plugin für IntelliJ IDEA,
-eine der weltweit am häufigsten genutzten Java-Entwicklungsumgebungen von JetBrains.
-Die Wahl von IntelliJ IDEA basiert auf drei Hauptfaktoren: hohe Verbreitung im professionellen Java-Umfeld,
-umfangreiche Plugin-Schnittstellen zur Integration externer Funktionen und Unterstützung mehrerer Programmiersprachen
-und Build-Systeme, was den Einsatz auch in heterogenen Entwicklungsteams ermöglicht.
-Die unmittelbare Einbettung in die gewohnte Arbeitsoberfläche erlaubt die Erfassung von Zufriedenheitsdaten ohne Kontextwechsel.
+\subsection{Architektur und Integration}
 
-Die Integration trägt dazu bei, den Flow-Zustand zu erhalten.
-Flow bezeichnet einen Zustand tiefer Konzentration, der nur entsteht, wenn Anforderungen und Fähigkeiten
-im Gleichgewicht stehen und Unterbrechungen vermieden werden.
-Kontextwechsel zu externen Tools oder Browsern können diesen Zustand unterbrechen und damit Produktivität sowie Zufriedenheit verringern.
-Das IntelliJ-Plugin reduziert solche Unterbrechungen, indem es Feedbackprozesse unmittelbar in den bestehenden Arbeitskontext integriert.
+Dia Abbildung~\ref{fig:intellij-system-diagram} zeigt den Aufbau des Yappi IntellJ IDEA Companion.
 
-Eine Post-Commit-Aktion ermöglicht es, direkt nach einem abgeschlossenen Commit ein kurzes Feedback abzugeben.
-Dadurch entfällt der Umweg über die Webplattform von Yappi, was die Bedienung beschleunigt und die Gefahr von Befragungsmüdigkeit verringert.
-Kurze, kontextbezogene Abfragen im richtigen Moment erhöhen die Teilnahmebereitschaft und verbessern die Datenqualität.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../figures/intellij-system-diagram.drawio.png}
+\caption{Architektur des IntelliJ IDEA Companion}
+\label{fig:intellij-system-diagram}
+\end{figure}
 
-Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in den Entwicklungsprozess integriert ist
+Die Implementierung basiert auf den IntelliJ-Plugin-APIs. Ein (\texttt{PostCommitPopupHandler}) registriert sich auf erfolgreiche
+Commit-Events. Nach Bestätigung des Commits wird der Post-Commit Dialog angezeigt. Der API-Key, der zur Authentifizierung
+gegenüber Yappi benötigt wird, wird über die Plugin-Einstellungen eingegeben und in einer persistenten Komponente
+(\texttt{CompanionStorage}) gespeichert. Die Kommunikation mit dem Backend erfolgt über eine dedizierte Hilfsklasse
+(\texttt{HttpHelper}), welche die Daten an den entsprechenden Endpoint überträgt.
+
+\subsection{Speicherung der Einstellungen}
+
+Damit sich die Companion App Authentifizieren kann muss ein gültiger API Key hinterlegt werden. Die Eingabe des API-Keys erfolgt
+über den Menüpunkt Settings → Tools → Yappi Companion in IntelliJ. Die Abbildung~\ref{fig:intellij-settings} zeigt den 
+entsprechenden Menupunkt.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../figures/intellij-settings.png}
+\caption{Eingabe des API-Keys in den IntelliJ Companion-Einstellungen}
+\label{fig:intellij-settings}
+\end{figure}
+
+Der Key wird in der Klasse \texttt{CompanionStorage} mithilfe der IntelliJ-Persistenzmechanismen gespeichert und beim nächsten
+Start automatisch geladen.
+
+\subsection{Post-Commit Dialog}
+
+Das Post-Commit-Popup wird automatisch unmittelbar nach einem erfolgreichen Commit in IntelliJ IDEA angezeigt. Ziel ist es, die
+Erfassung von Stimmungsdaten so nahtlos wie möglich in den normalen Entwicklungs- und Versionskontrollprozess einzubinden. Der
+Dialog öffnet sich als eigenständiges Fenster und blockiert die IDE nicht, sodass Entwickler sofort weiterarbeiten können. Die
+Abbildung~/ref{fig:intellij-post-commit} zeigt die Benutzeroberfläche.
+
+\todo{neues design}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../figures/intellij-post-commit.png}
+\caption{Post-Commit Dialog des IntelliJ Companions}
+\label{fig:intellij-post-commit}
+\end{figure}
+
+Die Benutzeroberfläche umfasst zwei zentrale Elemente:
+
+\begin{itemize}
+  \item \textbf{Commit-Nachricht:} Im oberen Bereich wird die soeben erfasste Commit-Nachricht angezeigt.
+  \item \textbf{Stimmungsauswahl:} Über ein Dropdown-Menü können vordefinierte Stimmungen ausgewählt werden, jeweils ergänzt durch
+    ein Emoji zur schnellen Orientierung.
+\end{itemize}
+
+Nach Bestätigung des Dialogs werden die eingegebenen Daten an das Yappi-Backend gesendet. Dieser Vorgang läuft vollständig im
+Hintergrund ab, sodass der Entwickler direkt mit seiner Arbeit fortfahren kann.
+
+\subsection{Daten verarbeiten und Persistieren}
+
+Die vom IntelliJ Companion erfassten Commit-Daten werden über eine gesicherte Verbindung an das Yappi-Backend übertragen. Dort
+erfolgt zunächst die Authentifizierung anhand des API-Keys, der zuvor in den Plugin-Einstellungen hinterlegt wurde. Anschliessend
+werden die empfangenen Daten verarbeitet und persistiert.
+
+\subsubsection{Backend-Komponente}
+
+Für die Verarbeitung wurde eine eigene Backend-Komponente entwickelt, bestehend aus einem neuen Controller, einem Service und
+einem Repository für den Datenbankzugriff. 
+
+Der Controller \texttt{IntellijCompanionController} stellt den Endpoint, über den die Zufriedenzeitsdaten und commit-spezifischen
+Kontextinformationen entgegengenommen werden, bereit. Der Endpoint ist volgendermassen aufgebaut.
+
+\begin{description}
+  \item \texttt{POST /companion/commit} \\
+        Erfasst Zufriedenheitsdaten inklusive Kontexinformationen nach einem Commit. \\
+        \textbf{Antworten:} \texttt{200 OK}, \texttt{400 Bad Request}, \texttt{401 Unauthorized}.
+\end{description}
+
+Die Speicherung erfolgt über ein Repository, das direkt auf die Datenbank zugreift.
+
+\subsubsection{Datenbankerweiterung}
+
+Die vom IntelliJ Companion übermittelten Zufriedenheitsdaten werden im Backend zusammen mit den zusätzlichen Kontextinformationen
+persistiert. Während die eigentlichen Stimmungsdaten in der bestehenden Tabelle für Zufriedenheitsmessungen gespeichert werden,
+wird für die Commit-bezogenen Zusatzinformationen eine separate, flexible Kontexttabelle angelegt. Diese Trennung erlaubt es, in
+Zukunft weitere Arten von Kontextdaten ohne Änderungen Datenbankschama der Zufriedenheitsdaten zu integrieren.
+
+Die Tabelle~\ref{tab:commit_context_schema} zeigt den Aufbau der neuen Kontexttabelle \texttt{commit\_context}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|p{8cm}|}
+\hline
+\textbf{Spalte} & \textbf{Datentyp} & \textbf{Beschreibung} \\
+\hline
+\texttt{id} & SERIAL & Primärschlüssel, auto-inkrementierend \\ 
+\texttt{satisfaction\_id} & INTEGER & Fremdschlüssel auf \texttt{satisfaction\_data.id}, verknüpft die Kontextdaten mit einer 
+  Zufriedenheitsmessung \\
+\texttt{context\_type} & TEXT & Die Art von Kontextinformation die gespeichert wird (z.B. Commit-Message oder Number of Lines 
+  Changed) \\
+\texttt{value} & TEXT & Der Wert welcher gespeichert wird. Z.B. die Commit-Nachricht, wie sie in IntelliJ beim Commit eingegeben
+  wurde \\
+\texttt{created\_at} & TIMESTAMPTZ & Zeitpunkt, zu dem der Datensatz erstellt wurde \\
+\hline
+\end{tabular}
+\caption{Schema der Tabelle \texttt{commit\_context}}
+\label{tab:commit_context_schema}
+\end{table}
+
+Die Speicherung in einer separaten Tabelle stellt sicher, dass die Kernlogik der Zufriedenheitsmessungen unverändert bleibt,
+während gleichzeitig ein flexibles Datenmodell für kontextbezogene Informationen zur Verfügung steht. Dadurch lässt sich der
+Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Datenstrukturen zu beeinträchtigen.
 
 
 %--------------------------------------------------------------------------------------------------------------------------------------
