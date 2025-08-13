@@ -10,24 +10,36 @@
 \usepackage{enumitem}
 \usepackage{tabularx}
 \usepackage{graphicx}
-
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
 \usepackage[onehalfspacing]{setspace}
 \usepackage[hidelinks]{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
 
-% Präambel:
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
-\tikzset{
-  step/.style = {rectangle, rounded corners, draw, align=center,
-                 minimum width=6.5cm, minimum height=7mm, fill=gray!5},
-  ->/.style = {-{Latex[length=2mm,width=2mm]}}
+\usepackage{minted}
+
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{coderule}{RGB}{200,200,200}
+
+\setminted{
+    baselinestretch=1,
+    bgcolor=codebg,
+    frame=single,
+    rulecolor=\color{coderule},
+    framerule=0.5pt,
+    linenos,
+    numbersep=8pt,
+    breaklines,
+    fontsize=\small,
+    xleftmargin=1em,
+    tabsize=2,
+    showspaces=false,
+    showtabs=false,
+    obeytabs=true
 }
 
-
-\usepackage{xcolor}
 \newcommand{\todo}[1]{\colorbox{red}{\textbf{TODO: #1}}\\}
 \newcommand{\question}[1]{\colorbox{yellow}{\textbf{QUESTION: #1}}\\}
 \newcommand{\xeno}[1]{\colorbox{pink}{\textbf{TODO XENO: #1}}\\}
@@ -338,7 +350,8 @@ Arbeitsleistung und das subjektive Wohlbefinden deutlich beeinflussen.
   \item \textbf{Ruheherzfrequenz (RHR)}\\
         Die Ruheherzfrequenz reflektiert den Grundzustand des Herz-Kreislauf-Systems und reagiert empfindlich auf chronische 
         Belastungen wie Stress oder Überarbeitung. Eine dauerhaft erhöhte RHR ist mit  reduzierten Erholungsphasen assoziiert.
-        In arbeitspsychologischen Studien wurde ein signifikanter Zusammenhang zwischen hohem Job-Strain, erhöhter RHR und niedrigerer Arbeitszufriedenheit festgestellt. Für Entwicklerinnen und Entwickler kann eine kontinuierliche Überwachung der RHR
+        In arbeitspsychologischen Studien wurde ein signifikanter Zusammenhang zwischen hohem Job-Strain, erhöhter RHR
+        und niedrigerer Arbeitszufriedenheit festgestellt. Für Entwicklerinnen und Entwickler kann eine kontinuierliche Überwachung der RHR
         helfen, Phasen erhöhter Belastung zu erkennen, noch bevor subjektive Erschöpfung spürbar wird \cite{eriksson_rhr_2016}.
 
   \item \textbf{Stress (Herzratenvariabilität, HRV)}\\
@@ -893,10 +906,10 @@ Eine Likert-Skala ist ein in der Sozialforschung weit verbreitetes Verfahren, be
 oder Ablehnung zu einer Aussage stufenweise angeben können.
 An der Befragung nahmen acht individuelle Softwareentwickler teil.
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.85\textwidth]{../figures/konzept-eval-feature-wichtigkeit.drawio.png}
-  \caption{Durchschnittsbewertung der Konzeptfunktionen auf einer Likert-Skala von 0 = sehr unwichtig bis 10 = sehr wichtig.}
+  \caption{Durchschnittsbewertung der Konzeptfunktionen auf einer Likert-Skala.}
   \label{fig:konzept-eval-feature-wichtigkeit}
 \end{figure}
 
@@ -1064,7 +1077,7 @@ Abbildung \ref{fig:apikey-swimlane} zeigt den Ablauf der Erstellung und Verwendu
 Yappi-Integrationsplattform. Die Darstellung erfolgt als Swimlane-Diagramm und verdeutlicht die beteiligten Akteure sowie deren
 Interaktionen während des gesamten Prozesses.
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.95\textwidth]{../figures/apikey-swimlane-diagram.drawio.png}
   \caption{Ablauf der API-Key Erstellung und -Verwendung in Yappi}
@@ -1121,7 +1134,6 @@ Abbildung~\ref{fig:apikey-frontend} zeigt die zentralen Elemente und Funktionen 
 
 \todo{}
 
-\xeno{rework oder}
 \gideon{:)}
 
 Yappi wird direkt in die integrierte Entwicklungsumgebung (IDE) eingebunden, um den Arbeitsfluss von Entwicklerinnen
@@ -1174,7 +1186,7 @@ Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in 
         sowie die zugrunde liegenden Datenstrukturen.
 
 
-        \begin{figure}[!htbp]
+        \begin{figure}[H]
           \centering
           \includegraphics[width=0.85\textwidth]{../figures/implementation-claendar-companion-system.drawio.png}
           \caption{Systemübersicht zur Kalenderintegration in Yappi}
@@ -1237,7 +1249,7 @@ Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in 
             \end{itemize}
             Durch diese direkte Interaktionsmöglichkeit kann Feedback ohne Umweg über die Hauptanwendung erfasst werden.
 
-            \begin{figure}[htbp]
+            \begin{figure}[H]
               \centering
               \includegraphics[width=0.60\textwidth]{../figures/yappi-chrome-extension/yappi-extension-notification.jpg}
               \caption{Systembenachrichtigung der Chrome Erweiterung in macOS}
@@ -1262,7 +1274,7 @@ Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in 
             Das Design stellt sicher, dass Benutzer sowohl über Echtzeitbenachrichtigungen als auch über die Popup-Ansicht
             jederzeit auf anstehende Feedback-Aufgaben zugreifen können.
 
-            \begin{figure}[!htbp]
+            \begin{figure}[H]
               \centering
               \includegraphics[width=0.60\textwidth]{../figures/yappi-chrome-extension/yappi-extension-popup.jpg}
               \caption{Benutzeroberfläche der Chrome Erweiterung}
@@ -1408,27 +1420,27 @@ Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in 
         Die vom Backend publizierten Benachrichtigungen werden als JSON-Objekte gesendet.
         Eine typische Nachricht enthält die folgenden Felder:
 
-        \begin{verbatim}
-            {
-                "eventId": 3002,
-                "userId": 1,
-                "title": "Meeting IP5 - Standup",
-                "startDate": "2025-08-09T15:00",
-                "endDate": "2025-08-09T15:15",
-                "location": "",
-                "questionBlockId": 1,
-                "teams": [
-                    {
-                        "id": 1,
-                        "name": "Test Team 1"
-                    },
-                    {
-                        "id": 3,
-                        "name": "Test Team 2"
-                    }
-                ]
-            }
-        \end{verbatim}
+\begin{minted}[linenos]{json}
+{
+    "eventId": 3002,
+    "userId": 1,
+    "title": "Meeting IP5 - Standup",
+    "startDate": "2025-08-09T15:00",
+    "endDate": "2025-08-09T15:15",
+    "location": "",
+    "questionBlockId": 1,
+    "teams": [
+        {
+            "id": 1,
+            "name": "Test Team 1"
+        },
+        {
+            "id": 3,
+            "name": "Test Team 2"
+        }
+    ]
+}
+\end{minted}
 
     \subsubsection{Vorteile}
         \begin{itemize}
@@ -1497,7 +1509,7 @@ Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in 
         Das UI des Fragebogen ist sehr einfach gehalten. In der Abbildung \ref{fig:yappi-extension-feedback} ist eine Grafische-Darstellung
         einer Beispielumfrage zu sehen.
 
-        \begin{figure}[!htbp]
+        \begin{figure}[H]
           \centering
           \includegraphics[width=0.90\textwidth]{../figures/yappi-chrome-extension/yappi-extension-feedback.jpg}
           \caption{Feedbackformular zu Kalenderevent}
@@ -1506,64 +1518,64 @@ Ziel ist ein Erfassungsprozess, der unauffällig, effizient und vollständig in 
 
         Die Konfiguration des Fragebogen kann aus folgender JSON Struktur abgeleitet werden.
 
-        \begin{verbatim}
-            {
-            "id": "1000",
-            "title": "Basic Meeting Feedback",
-            "description": "This is am Meeting feedback survey.",
-            "sections": [
-            {
-                "id": "q1",
-                "type": "likert",
-                "title": "1. Clarity of Goals & Relevance",
-                "prompt": "The goals of the meeting were clearly defined.",
-                "required": true,
-                "min": 1,
-                "label_min": "strongly disagree",
-                "max": 5,
-                "label_max": "strongly agree",
-                "step": 1,
-                "default": 3
-            },
-            {
-                "id": "q2",
-                "type": "single-choice",
-                "title": "2. Meeting Length",
-                "prompt": "How would you rate the length of the meeting?",
-                "required": true,
-                "options": [
-                    { "value": "too-short", "label": "Too short" },
-                    { "value": "just-right", "label": "Just right" },
-                    { "value": "too-long", "label": "Too long" }
-                ],
-                "default": "just-right"
-            },
-            {
-            "id": "q3",
-            "type": "multiple-choice",
-            "title": "3. Meeting Highlights",
-            "prompt": "Which aspects of the meeting did you find valuable? (Select all that apply)",
-            "required": false,
-            "options": [
-                { "value": "clear-agenda", "label": "Clear agenda" },
-                { "value": "useful-content", "label": "Useful content" },
-                { "value": "good-discussion", "label": "Good discussion" },
-                { "value": "action-items", "label": "Clear action items" }
-            ],
-            "default": ["clear-agenda", "good-discussion"]
-            },
-            {
-                "id": "q5",
-                "type": "free-text",
-                "title": "4. Additional Comments",
-                "prompt": "Please share any additional feedback or suggestions.",
-                "required": false,
-                "placeholder": "Type your feedback here...",
-                "maxLength": 500
-            }
-            ]
-            }
-        \end{verbatim}
+\begin{minted}[linenos]{json}
+{
+    "id": "1000",
+    "title": "Basic Meeting Feedback",
+    "description": "This is am Meeting feedback survey.",
+    "sections": [
+    {
+        "id": "q1",
+        "type": "likert",
+        "title": "1. Clarity of Goals & Relevance",
+        "prompt": "The goals of the meeting were clearly defined.",
+        "required": true,
+        "min": 1,
+        "label_min": "strongly disagree",
+        "max": 5,
+        "label_max": "strongly agree",
+        "step": 1,
+        "default": 3
+    },
+    {
+        "id": "q2",
+        "type": "single-choice",
+        "title": "2. Meeting Length",
+        "prompt": "How would you rate the length of the meeting?",
+        "required": true,
+        "options": [
+            { "value": "too-short", "label": "Too short" },
+            { "value": "just-right", "label": "Just right" },
+            { "value": "too-long", "label": "Too long" }
+        ],
+        "default": "just-right"
+    },
+    {
+    "id": "q3",
+    "type": "multiple-choice",
+    "title": "3. Meeting Highlights",
+    "prompt": "Which aspects of the meeting did you find valuable? (Select all that apply)",
+    "required": false,
+    "options": [
+        { "value": "clear-agenda", "label": "Clear agenda" },
+        { "value": "useful-content", "label": "Useful content" },
+        { "value": "good-discussion", "label": "Good discussion" },
+        { "value": "action-items", "label": "Clear action items" }
+    ],
+    "default": ["clear-agenda", "good-discussion"]
+    },
+    {
+        "id": "q5",
+        "type": "free-text",
+        "title": "4. Additional Comments",
+        "prompt": "Please share any additional feedback or suggestions.",
+        "required": false,
+        "placeholder": "Type your feedback here...",
+        "maxLength": 500
+    }
+    ]
+}
+\end{minted}
 
     \subsubsection{Vorteile}
         \begin{itemize}
@@ -1655,7 +1667,7 @@ von Messwerten, das für jeden Eintrag den erfassten Zeitraum sowie den zugehör
 Format \texttt{yyyy-MM-dd~HH:mm/yyyy-MM-dd~HH:mm} angegeben, um sowohl das Start- als auch das Enddatum einer Messung eindeutig
 zu definieren.
 
-\begin{verbatim}
+\begin{minted}[linenos]{json}
 {
     "metric": "STEPS",
     "data": [
@@ -1669,7 +1681,7 @@ zu definieren.
         }
     ]
 }
-\end{verbatim}
+\end{minted}
 
 Diese Struktur erlaubt eine konsistente Verarbeitung unabhängig von der Art der Metrik und bildet die Grundlage für die
 serverseitige Validierung, Speicherung und spätere Analyse. Sie kann ohne Anpassungen um weitere Metriken erweitert werden,
@@ -1868,11 +1880,10 @@ Interaktion.
 %--------------------------------------------------------------------------------------------------------------------------------------
 
 \chapter{Evaluation}
-\xeno{}
 
  \section{Usertesting am Hackathon}
 
- Ein geplanter Usability-Test wird im Rahmen des an der FHNW stattfindenden Hackathons \textit{Energie-Days} durchgeführt.
+ Ein geplanter Usability-Test wird im Rahmen des an der FHNW stattfindenden Hackathons \textit{Energy Data Hackdays} durchgeführt.
  Der Hackathon findet am 11. und 12. September 2025 statt und liegt somit zeitlich nach der Abgabe dieser Arbeit.
 
  Die Veranstaltung bringt Entwicklerinnen und Entwickler mit unterschiedlichem fachlichen Hintergrund zusammen, die in
@@ -1893,44 +1904,18 @@ Interaktion.
 
 \section{Evaluation durch Simulation}
 
-Neben dem Praxistest am Hackathon wurde Yappi in einer kontrollierten Testumgebung evaluiert. Ziel ist es, spezifische
-Funktionen ohne Abhängigkeit von realen Projektdaten oder sensiblen Informationen zu überprüfen.
+    Neben dem Praxistest am Hackathon wurde Yappi in einer kontrollierten Testumgebung evaluiert. Ziel ist es, spezifische
+    Funktionen ohne Abhängigkeit von realen Projektdaten oder sensiblen Informationen zu überprüfen.
 
-Die Simulation erfolgte in mehreren Schritten:
-\begin{enumerate}
-    \item Zielgruppen und Nutzerrollen festlegen: Definition typischer Nutzerprofile (Personas) wie Softwareentwickler,
-    Scrum Master oder Product Owner, inklusive ihrer Ziele und Anforderungen.
-    \item Szenarien entwickeln: Erstellung realistischer Nutzungsszenarien, die zentrale Arbeitsabläufe abbilden.
-    \item Testpersonen auswählen: Rekrutierung von Personen mit relevanter Erfahrung, jedoch ohne tiefe
-    Beteiligung an der Entwicklung von Yappi, um eine objektive Bewertung zu gewährleisten.
-    \item Rollen zuweisen: Verteilung der definierten Personas und Szenarien an die Testpersonen mit der Anweisung,
-    die Aufgaben wie in einer realen Arbeitssituation durchzuführen.
-    \item Testdurchführung: Schrittweises Durchspielen der Szenarien, begleitet von der Methode des lauten Denkens,
-    um Nutzungshürden und Verständnisprobleme zu identifizieren.
-    \item Ergebniserfassung: Dokumentation der Beobachtungen in Protokollen, Checklisten und standardisierten
-    Fragebögen.
-    \item Auswertung und Massnahmen: Analyse der Rückmeldungen, Identifikation wiederkehrender Probleme und Ableitung
-    konkreter Optimierungsvorschläge.
-\end{enumerate}
+    Die Tests erfolgen in mehreren Schritten:
+    \begin{enumerate}
+        \item Szenarien entwickeln: Erstellung eines Realistischen nutzerszenario welches das verwenden von Yappi prüft.
+        \item Testpersonen auswählen: Es wurden Arbeitskollegen (Softwareentwickler) rekrutiert um Testfälle durchzuführen.
+        \item Testdurchführung: Schrittweises Durchspielen der Szenarien, begleitet von der Methode des lauten Denkens,
+        um Nutzungshürden und Verständnisprobleme zu identifizieren.
+        \item Ergebniserfassung: Dokumentation der Beobachtungen in einem Protokoll.
+    \end{enumerate}
 
-Diese Simulation ermöglicht es, Funktionen iterativ zu verbessern, bevor sie in realen Teams eingesetzt werden. Eine
-kurze Evaluation vor Projektabschluss stellt sicher, dass die vorgenommenen Anpassungen die identifizierten Probleme adressieren.
-
-    \subsection{Nutzerprofil (Persona)}
-
-    \textbf{Persona:} Softwareentwickler/in
-
-    \textbf{Ziele:}
-    \begin{itemize}
-        \item Arbeitszufriedenheit einfach erfassen.
-        \item Persönliche Trends erkennen.
-    \end{itemize}
-
-    \textbf{Anforderungen:}
-    \begin{itemize}
-        \item Schnelle und intuitive Bedienung.
-        \item Minimale Unterbrechung des Arbeitsflusses.
-    \end{itemize}
 
     \subsection{Testszenarien}
 
@@ -1995,6 +1980,42 @@ kurze Evaluation vor Projektabschluss stellt sicher, dass die vorgenommenen Anpa
         \item Vollständigkeit der abgefragten Informationen
     \end{itemize}
 
+    \subsubsection{Testpersonen und Testdurchführung}
+
+        Kurzfristig konnten bei der Arbeit sowie im Freundeskreis drei Testpersonen rekrutiert werden, um die definierten
+        Szenarien durchzuspielen.
+        Jede Testperson absolvierte jeweils zwei der vorgesehenen Testszenarien.
+
+        Zu Beginn erhielten die Testpersonen eine kurze Einführung zu Yappi. Anschliessend wurde ihnen anhand des
+        jeweiligen Testfalls eine Aufgabe zugeteilt, die sie selbständig ausführen sollten.
+
+        Für die Durchführung stand ein Testgerät zur Verfügung, auf dem die Yappi-Webseite in Google Chrome geöffnet
+        war und die Yappi-Chrome-Extension installiert wurde. Zudem war in IntelliJ IDEA das Yappi-Plugin vorinstalliert
+        und ein kleines Java-Projekt vorbereitet.
+
+    \subsubsection{Testergebnisse}
+
+        \textbf{Positive Rückmeldungen:}
+        \begin{itemize}
+            \item Einfache und verständliche Lösung.
+            \item Direkte Benachrichtigung im System.
+            \item Kurzer und klar strukturierter Feedback-Block.
+            \item Integration, die direkt nach einem Commit zur Eingabe auffordert.
+            \item Benutzeroberfläche wird als intuitiv wahrgenommen.
+        \end{itemize}
+        Anmerkung: Positive Aspekte der Benutzeroberfläche wurden nur selten explizit genannt, da ein intuitives Design von den Testpersonen als selbstverständlich bzw. neutral bewertet wurde.
+
+        \textbf{Verbesserungsvorschläge:}
+        \begin{itemize}
+            \item Aktualisierung der FAQ, da Inhalte teilweise veraltet sind.
+            \item Beschleunigung der Synchronisierung bei einer hohen Anzahl von Kalendereinträgen.
+            \item Ergänzung einer klaren Anleitung zur Erstellung eines ICS-Links.
+        \end{itemize}
+
+
+
+
+
 
 %--------------------------------------------------------------------------------------------------------------------------------------
 
@@ -2020,7 +2041,7 @@ kurze Evaluation vor Projektabschluss stellt sicher, dass die vorgenommenen Anpa
     \subsection*{Forschungsfrage B}
     \textit{Wie können Gesundheitsdaten in die Auswertung der Entwicklerzufriedenheit einfliessen?}
 
-    Es wurde eine konzeptionelle und teilweise technische Lösung für die Anbindung an \textbf{Apple HealthKit} entwickelt
+    Es wurde eine konzeptionelle und teilweise technische Lösung für die Anbindung an Apple HealthKit entwickelt
     (Ziel Z-3). Dadurch können wissenschaftlich relevante Metriken wie Schlafdauer, Ruheherzfrequenz, Stress (HRV) sowie
     Aktivitätsminuten automatisiert erfasst und mit den Zufriedenheitsdaten verknüpft werden.
     Die Integration schafft die Grundlage für weiterführende Analysen zu möglichen Zusammenhängen zwischen physiologischen
@@ -2031,7 +2052,7 @@ kurze Evaluation vor Projektabschluss stellt sicher, dass die vorgenommenen Anpa
     \textit{Wie kann Yappi Teams und Entwickler dabei unterstützen, aus den erfassten Zufriedenheitsdaten
     Handlungsempfehlungen abzuleiten?}
 
-    Die Entwicklung einer intelligenten Empfehlungskomponente, \textbf{Yappi Coach}, wurde konzeptionell ausgearbeitet
+    Die Entwicklung einer intelligenten Empfehlungskomponente, Yappi Coach, wurde konzeptionell ausgearbeitet
     (Ziel Z-4).
     Das Konzept sieht vor, Zufriedenheitsdaten, Arbeitskontext und Gesundheitsmetriken zu kombinieren, um datenbasierte
     und individuell zugeschnittene Handlungsempfehlungen zu generieren. Eine technische Implementierung erfolgte in diesem
