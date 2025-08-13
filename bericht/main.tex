@@ -24,7 +24,6 @@
 \usepackage{listings}
 \usepackage{xcolor}
 
-
 \usepackage[toc]{appendix}
 \renewcommand{\appendixtocname}{Anhang}
 \renewcommand{\appendixname}{Anhang}
@@ -161,7 +160,7 @@ vertieft untersucht werden.
                 darauf hinweisen, dass Meetings nicht länger als 1,5 Stunden dauern sollten, da längere
                 Sitzungen die Zufriedenheit und Konzentration der Entwickler negativ beeinflussen können.
           \item Integration von KI-gestützten Diensten, die auf Basis der gesammelten Gesundheitsdaten
-                sowie Zufriedenheits- und Produktivitätsmetriken individuelle Massnahmen vorschlagen. Diese
+                sowie Zufriedenheit- und Produktivitätsmetriken individuelle Massnahmen vorschlagen. Diese
                 KI-gestützten Empfehlungen können Teams dabei helfen, gezielt Optimierungen vorzunehmen, um
                 die Arbeitsbedingungen und die Effizienz der Entwickler nachhaltig zu verbessern.
         \end{enumerate}
@@ -197,7 +196,7 @@ Erweiterbarkeit und vertiefte Analytik.
   \label{fig:systemarchitektur}
 \end{figure}
 
-Abbildung \ref{fig:systemarchitektur} zeigt die Systemarchitektur von Yappi in ihrem ursprünglichen Zustand vor Beginn dieses
+Abbildung~\ref{fig:systemarchitektur} zeigt die Systemarchitektur von Yappi in ihrem ursprünglichen Zustand vor Beginn dieses
 Projekts. Die Plattform bestand aus einer klar getrennten Frontend- und Backend-Architektur, die über dokumentierte
 REST-Schnittstellen kommunizieren. Alle Hauptkomponenten (Webanwendung, API, Datenbank und unterstützende Services) sind 
 funktional vorhanden, jedoch in Teilen nur als Minimal Viable Product (MVP) umgesetzt. Dieses Architektur-Setup bildet die
@@ -205,14 +204,14 @@ Ausgangsbasis für die im weiteren Verlauf geplanten Erweiterungen.
 
 \begin{description}
   \item[Backend] Das Backend ist mit Spring Boot umgesetzt. Als Datenbank ist PostgreSQL im Einsatz. Die Kommunikation zum Frontend
-    erfolgt über REST-Schnttstellen, welche nach dem OpenAPI standart dokumentiert sind. Die Kommunikation zur Datenbank erfolgt
+    erfolgt über REST-Schnittstellen, welche nach dem OpenAPI standard dokumentiert sind. Die Kommunikation zur Datenbank erfolgt
     über Spring JPA.
   \item[Frontend] Das Frontend basiert auf React und Next.js mit TypeScript. Für Aufrufe werden SWR-Hooks verwendet, dabei handelt
     es sich ume eine React library um Daten zu laden. Komponenten werden mit der Library wird shadcn/ui aufgebaut. Die 
     Visualisierungen entstehen mit Recharts. Um die Codequalität sicherzustellen wird ESLint zur statischen Code analyse und 
     Prettier zur automatischen Formatierung nach vordefinierten Guidelines verwendet.
   \item[Authentisierung und Autorisierung] Die Anmeldung erfolgt über OAuth 2.0. Dabei werden Anbieter wie Google oder GitHub 
-    über Auth.js unterstützt. Passwörter werden nicht gepseichert. Die Anfragen ans Backend werden mit JSON Web Tokens (JWT) 
+    über Auth.js unterstützt. Passwörter werden nicht gespeichert. Die Anfragen ans Backend werden mit JSON Web Tokens (JWT)
     abgesichert. Die Sicherheitsmechanismen im Backend sind mit Spring Security implementiert.
   \item[Datenmodell] Das relationale Schema umfasst unter anderem Benutzer, Teams, Sprints sowie Umfragetypen für Happiness,
     Emotionen und Work-Kinds.
@@ -241,7 +240,7 @@ stabilen, funktionsfähigen Zustand blieb.
 Das Projekt umfasst die folgenden Stakeholder:
 
 \begin{description}
-  \item[Primäre Nutzergruppen] Softwareentwickelnde, Scrum Master und Product Owner in agilen Teams. 
+  \item[Primäre Nutzergruppen] Softwareentwicklerinnen, Softwareentwickler, Scrum Master und Product Owner in agilen Teams.
   \item[Organisationen] Unternehmen nutzen Yappi, um Kultur und Zusammenarbeit datenbasiert zu verbessern.
   \item[Akademische Stakeholder] Betreuende Dozierende und das Institut an der FHNW welche das Projekt begleiten.
   \item[Betrieb und Entwicklung] Projektteam dieses Projekts und anderer Projekte die auf Yappi aufbauen.
@@ -284,45 +283,45 @@ Entwicklungsprozess strukturiert war.
 
 Entwicklerzufriedenheit wird in der Literatur als Balance zwischen positiven und negativen Erlebnissen bei der
 Arbeit definiert. Darunter versteht man eine Sequenz von Erfahrungen, bei der häufige positive Emotionen ein
-hohes Glücksgefühl erzeugen und häufige negative Erfahrungen das Gegenteil bewirken \cite{sadowski_happiness_2019}.
+hohes Glücksgefühl erzeugen und häufige negative Erfahrungen das Gegenteil bewirken~\cite{sadowski_happiness_2019}.
 Auch Industriequellen fassen Entwicklerzufriedenheit als subjektives Wohlbefinden in Bezug auf Arbeitsinhalte
-und -umfeld auf, d.h. als Mass für Zufriedenheit, Freude oder innere Zufriedenheit bei der Arbeit \cite{zenhub_2022_nodate}.
+und -umfeld auf, d.h. als Mass für Zufriedenheit, Freude oder innere Zufriedenheit bei der Arbeit~\cite{zenhub_2022_nodate}.
 Zufriedene Entwickler empfinden demnach mehr Arbeitsfreude und Inhaltlichkeit in ihrer Rolle, was eng mit
-der Arbeitsmotivation und dem Engagement bei der Arbeit verknüpft ist \cite{franca_motivation_2020}.
+der Arbeitsmotivation und dem Engagement bei der Arbeit verknüpft ist~\cite{franca_motivation_2020}.
 
-Eng verwendt mit der Zufriedenheit ist der Begriff \textbf{Flow}. In Anlehnung an Csikszentmihalyis Konzept beschreibt
+Eng verwandt mit der Zufriedenheit ist der Begriff \textbf{Flow}. In Anlehnung an Csikszentmihalyis Konzept beschreibt
 Flow einen Zustand von völliger Vertiefung und hohen Fokus beim Programmieren. Flow tritt dann auf, wenn die Anforderungen
 einer Aufgabe im Gleichgewicht mit dem Fähigkeiten des Entwicklers stehen, wodurch man in einen Zustand von intensiver 
 Konzentration gelangt. Zufriedene Entwickler gelangen einfacher in einen anhaltenden Flow-Zustand. Unzufriedenheit
 hingegen unterbricht diesen Flow, was zu Frustration führt und Schwierigkeiten führt, nach Unterbrechungen wieder in
 eine Aufgabe zurückzufinden. Teilnehmer einer Untersuchung berichten, negative Erlebnisse reissen einen aus dem Flow
-Zustand und machen es schwer, die Arbeit wieder aufzunehmen \cite{sadowski_happiness_2019}.
+Zustand und machen es schwer, die Arbeit wieder aufzunehmen~\cite{sadowski_happiness_2019}.
 
 Motivation und Zufriedenheit hängen eng zusammen, sind aber konzeptionell unterscheidbar. Motivierte Entwickler sind
-zeigen hohes Engagement und Fokus auf ihre Aufgaben, während Zufriedenheiteher durch allgemeines Wohlbefinden und gute
-Laune charakerisiert ist. Faktoren wie Autonomie, Kompetenzerleben und Zugehörigkeitsgefühl steigern die intrinsische 
+zeigen hohes Engagement und Fokus auf ihre Aufgaben, während Zufriedenheit eher durch allgemeines Wohlbefinden und gute
+Laune charakterisiert ist. Faktoren wie Autonomie, Kompetenzerleben und Zugehörigkeitsgefühl steigern die intrinsische
 Motivation von Entwicklern, was sich positiv auf ihre Zufriedenheit auswirkt. Zufriedenheit ist zugleich das Ergebnis und
 die Voraussetzung von Motivation, zufriedenere Entwickler weisen in der Regel eine höhere Antriebskraft auf, was wiederum ihre
-Arbeitszufriedenheit weiter stärkt \cite{franca_motivation_2020}.
+Arbeitszufriedenheit weiter stärkt~\cite{franca_motivation_2020}.
 
 Schliesslich spielt auch das Team- und Organisationsklima eine fundamentale Rolle. Eine offene, unterstützende Kultur steigert
 nachweislich die zufriedenheit von Entwicklern. Der DORA Report misst die Leistungsfähigkeit von Softwareentwicklungsteams anhand
-von vier Schlüsselkennzahlen: Deployment Frequency, Lead Time for Changes, Change Failure Rate und Time to Resore Service. Der DORA
-Report von Google basiert auf umfangreichen Wissenschaftlichen Studien und gilt als Branchenstandart. Der report von 2024 betont,
-dass Teams mit stabilem, ermutigendem Umfeld bessere Ergebnisse erzielen \cite{google_dora_2024}. Positive Emotionen und ein 
+von vier Schlüsselkennzahlen: Deployment Frequency, Lead Time for Changes, Change Failure Rate und Time to Restore Service. Der DORA
+Report von Google basiert auf umfangreichen Wissenschaftlichen Studien und gilt als Branchenstandard. Der report von 2024 betont,
+dass Teams mit stabilem, ermutigendem Umfeld bessere Ergebnisse erzielen~\cite{google_dora_2024}. Positive Emotionen und ein
 Zugehörigkeitsgefühl im Team fördern den Gruppenzusammenhalt, was wiederum die Teamleistung von Teammitgliedern verbessert. 
 Umgekehrt können Umgekehrt können toxische Kulturen oder ständig wechselnde Prioritäten die Zufriedenheit und Motivation 
-untergraben, was sich negativ auf die Leistung auswirkt \cite{sadowski_happiness_2019}.
+untergraben, was sich negativ auf die Leistung auswirkt~\cite{sadowski_happiness_2019}.
 
 Somit unterstreichen sowohl akademische als auch industrielle Befunde: Entwicklerzufriedenheit entsteht in einem komplexen
-Zusammenspiel aus individuellen Faktoren (Flow, Motivation, ...) und Umfeldfaktoren (Team- und Organisationsklima, Arbeitskultur, 
-...).
+Zusammenspiel aus individuellen Faktoren (Flow, Motivation, \ldots) und Umfeldfaktoren (Team- und Organisationsklima, Arbeitskultur,
+\ldots).
 
 \section{Stand der Forschung zur Entwicklerzufriedenheit}
 
 \subsection{Entwicklerzufriedenheit in der Forschung}
 
-In den letzen Jahren haben zahlreiche Studien den Zusammenhang zwischen der Entwicklerzufriedenheit und Erfogsparametern wie 
+In den letzen Jahren haben zahlreiche Studien den Zusammenhang zwischen der Entwicklerzufriedenheit und Erfolgsparametern wie
 Produktivität, Codequalität und Mitarbeiterbindung untersucht. Produktivität beschreibt im Softwarekontext die Effizienz, mit der
 Entwickler innerhalb einer bestimmten Zeit funktionierende und qualitativ hochwertige Softwareartefakte erstellen. Codequalität
 bezeichnet das Mass, in dem Quellcode korrekt, wartbar, verständlich und effizient ist, und umfasst Aspekte wie Lesbarkeit,
@@ -331,31 +330,31 @@ und freiwillig im Unternehmen bleiben.
 
 Bei einer grossangelegten Studie wurden 317 Softwareentwickler befragt und dabei 42 Konsequenten von Unzufriedenheit sowie
 32 Konsequenzen von Zufriedenheit beim Programmieren identifiziert. Die Ergebnisse Zeigen, dass Entwicklerzufriedenheit messbare
-Auswirkungen auf den Enwicklungsprozess, die erzeugten Software-Artefakte und das Wohlbefinden der Person hat. So führt
+Auswirkungen auf den Entwicklungsprozess, die erzeugten Software-Artefakte und das Wohlbefinden der Person hat. So führt
 Unzufriedenheit zu einer Reihe negativer Effekte: verzögerte Prozessabläufe, nachlässige Arbeitsweise und häufige unterbrechungen
 des Flows wurden als typische Folgen von negativer Stimmung genannt. Unzufriedene Entwickler berichten von langen langen
 Verzögerungen oder Qualitätsproblemen, weil Frustration sie aus dem Konzept brachte. Zufriedenheit hingegen wirkt sich positiv
 aus: Zufriedene Entwickler zeigen bessere Problemlösungsfähigkeiten, höhere Konzentration, berichten von einem anhaltenden Flow
 Zustand und lernen schneller. Die Ergebnisse legen nahe, dass Zufriedenheit die Codequalität begünstigt. Zufriedene Entwickler
 treffen sorgfältigere langfristige Entscheidungen. Ein Teilnehmer beschrieb, er dokumentiert seinen Code gründlicher und achten
-stärker auf Wartbarkeit, wenn er Zufrieden ist \cite{graziotin_what_2018}.
+stärker auf Wartbarkeit, wenn er Zufrieden ist~\cite{graziotin_what_2018}.
 
 \subsection{Entwicklerzufriedenheit in der Industrie}
 
-Neben akademischen Studien liefern auch Industireumfragen und Community-Studien wertvolle Einblicke. Der jährliche Stack Overflow
-Developer Survey etwa spiegelt wieder, dass weiterhin Verbesserungsbedarf besteht. laut der Umfrage 2024 bezeichen sich nur rund 
+Neben akademischen Studien liefern auch Industrieumfragen und Community-Studien wertvolle Einblicke. Der jährliche Stack Overflow
+Developer Survey etwa spiegelt wieder, dass weiterhin Verbesserungsbedarf besteht. laut der Umfrage 2024 bezeichnen sich nur rund
 20\% der Entwickler als wirklich zufrieden in ihrem Job, während etwa 80\% unzufrieden oder "gelassen" (complacent) sind. Diese Zahl
 unterstreicht, dass ein grosser Teil der Entwicklergemeinschaft nicht glücklich im Arbeitsumfeld ist. Als Hauptgründe werden oft
-Faktoren wie schlechte Work-Life-Balance, zu viele Meetings oder fehlende Anerkennung genannt \cite{stackoverflow_survey_2025}. 
+Faktoren wie schlechte Work-Life-Balance, zu viele Meetings oder fehlende Anerkennung genannt~\cite{stackoverflow_survey_2025}.
 
 Eine Untersuchung von Zenhub kam zu ähnlichen Ergebnissen: Zwar gaben die meisten befragten Entwickler an, überwiegend zufrieden
-zu sein, doch lediglich 31\% fühlten sich äusserst zufrieden in ihrer aktuellen Arbeitssituation \cite{zenhub_2022_nodate}. 
+zu sein, doch lediglich 31\% fühlten sich äusserst zufrieden in ihrer aktuellen Arbeitssituation~\cite{zenhub_2022_nodate}.
 
 \subsection{Mitarbeiterbindung und Entwicklerzufriedenheit}
 
 Darüber hinaus tragen Anerkennung und Sinnhaftigkeit der Arbeit entscheidend zur Bindung bei. Wenn Entwicklerinnen und Entwickler
 stolz auf die Qualität ihrer Projekte sind und regelmässig Wertschätzung für ihre Arbeit erhalten, steigt sowohl ihre Zufriedenheit
-als auch ihre Loyalität gegenüber dem Unternehmen \cite{sadowski_happiness_2019,graziotin_what_2018}. Die empirischen Befunde deuten
+als auch ihre Loyalität gegenüber dem Unternehmen~\cite{sadowski_happiness_2019,graziotin_what_2018}. Die empirischen Befunde deuten
 somit klar darauf hin, dass Entwicklerzufriedenheit kein rein „weiches“ Thema ist, sondern messbare Auswirkungen auf Produktivität,
 Codequalität und Personalbindung hat. Zufriedene Entwickler arbeiten effizienter, treffen sorgfältigere Entscheidungen und bleiben
 ihrem Team länger erhalten, während Unzufriedenheit mit erhöhten Kosten für Projekte und Rekrutierung verbunden ist.
@@ -365,8 +364,8 @@ ihrem Team länger erhalten, während Unzufriedenheit mit erhöhten Kosten für 
 Neben rein arbeitsbezogenen Faktoren wie Arbeitsorganisation, technischer Ausstattung oder Teamdynamik rücken zunehmend auch
 physiologische und gesundheitsbezogene Parameter in den Fokus der Forschung zur Entwicklerzufriedenheit. Verschiedene Studien aus
 der Arbeitspsychologie und der Human Factors-Forschung belegen, dass körperliche und mentale Gesundheit einen messbaren Einfluss
-auf kognitive Leistungsfähigkeit, emotionale Stabilität und Motivation haben. Besonders in wissensintensiven und
-hochkonzentrativen Berufen wie der Softwareentwicklung können selbst moderate Abweichungen vom optimalen Gesundheitszustand die
+auf kognitive Leistungsfähigkeit, emotionale Stabilität und Motivation haben. Besonders in wissensintensiven Berufen, die ein
+hohes Mass an Konzentration benötigen, wie der Softwareentwicklung können selbst moderate Abweichungen vom optimalen Gesundheitszustand die
 Arbeitsleistung und das subjektive Wohlbefinden deutlich beeinflussen.
 
 \begin{enumerate}
@@ -376,32 +375,32 @@ Arbeitsleistung und das subjektive Wohlbefinden deutlich beeinflussen.
         Anfälligkeit für negative Stimmungslagen. Personen mit ausreichendem, qualitativ hochwertigem Schlaf weisen höhere
         Arbeitszufriedenheit, geringere Reizbarkeit und bessere soziale Interaktionen am Arbeitsplatz auf. Besonders in
         wissensintensiven Tätigkeiten wie der Softwareentwicklung, bei denen hohe Konzentration und Kreativität erforderlich sind,
-        kann Schlafmangel die Produktivität stark mindern \cite{opoku_sleep_2023}.
+        kann Schlafmangel die Produktivität stark mindern~\cite{opoku_sleep_2023}.
 
   \item \textbf{Ruheherzfrequenz (RHR)}\\
         Die Ruheherzfrequenz reflektiert den Grundzustand des Herz-Kreislauf-Systems und reagiert empfindlich auf chronische 
         Belastungen wie Stress oder Überarbeitung. Eine dauerhaft erhöhte RHR ist mit  reduzierten Erholungsphasen assoziiert.
         In arbeitspsychologischen Studien wurde ein signifikanter Zusammenhang zwischen hohem Job-Strain, erhöhter RHR
         und niedrigerer Arbeitszufriedenheit festgestellt. Für Entwicklerinnen und Entwickler kann eine kontinuierliche Überwachung der RHR
-        helfen, Phasen erhöhter Belastung zu erkennen, noch bevor subjektive Erschöpfung spürbar wird \cite{eriksson_rhr_2016}.
+        helfen, Phasen erhöhter Belastung zu erkennen, noch bevor subjektive Erschöpfung spürbar wird~\cite{eriksson_rhr_2016}.
 
   \item \textbf{Stress (Herzratenvariabilität, HRV)}\\
         Die Herzratenvariabilität beschreibt die zeitliche Variation zwischen aufeinanderfolgenden Herzschlägen und gilt als
         sensibler Indikator für die Funktionsbalance des autonomen Nervensystems. Eine hohe HRV weist auf ein flexibles, gut
         reguliertes System hin, das Belastungen effizient kompensieren kann. Eine niedrige HRV hingegen signalisiert anhaltenden
         Stress oder unzureichende Erholung. In Kombination mit subjektiven Zufriedenheitsdaten kann die HRV helfen, versteckte
-        Stressmuster zu identifizieren, die sonst unentdeckt bleiben würden \cite{borchini_hrv_2012}.
+        Stressmuster zu identifizieren, die sonst unentdeckt bleiben würden~\cite{borchini_hrv_2012}.
 
   \item \textbf{Aktivitätsminuten und Schritte}\\
         Körperliche Aktivität wirkt sich positiv auf mentale Gesundheit, Energielevel und Stimmung aus. Schon moderate Bewegung
         reduziert Stress, verbessert die Schlafqualität und steigert die Arbeitszufriedenheit. Diese lässt sich durch die täglichen
         Schritte oder die aktiven Minuten messen. Für sitzende Berufe wie die Softwareentwicklung kann regelmässige Bewegung das
         Risiko von Ermüdung und Motivationsverlust verringern. Mitarbeitende mit höherem Aktivitätsniveau klagen seltener über
-        emotionale Erschöpfung und haben eine insgesamt positivere Einstellung zur Arbeit \cite{dallmeyer_activity_2023}.
+        emotionale Erschöpfung und haben eine insgesamt positivere Einstellung zur Arbeit~\cite{dallmeyer_activity_2023}.
 \end{enumerate}
 
 
-Diese Metriken ermöglichen eine gezielte Verknüpfung zwischen erholungs- und gesundheitsbezogenen Faktoren sowie den erhobenen
+Diese Metriken ermöglichen eine gezielte Verknüpfung zwischen Erholungs- und gesundheitsbezogenen Faktoren sowie den erhobenen
 Zufriedenheits- und Prozessdaten. Durch die Analyse solcher Daten lassen sich Muster identifizieren, die potenzielle
 Belastungssituationen aufzeigen, bevor sie sich in Produktivitätsverlust oder Qualitätsproblemen niederschlagen. 
 
@@ -438,7 +437,7 @@ Belastungssituationen aufzeigen, bevor sie sich in Produktivitätsverlust oder Q
 \section{Forschungslücken}
 
 Obwohl zahlreiche Studien konsistent zeigen, dass Entwicklerzufriedenheit mit positiven Ergebnissen wie höherer Produktivität,
-besserer Codequalität und stärkerer Mitarbeiterbindung einhergeht \cite{graziotin_what_2018, sadowksi_happiness_2019}, ist die
+besserer Codequalität und stärkerer Mitarbeiterbindung einhergeht~\cite{graziotin_what_2018, sadowksi_happiness_2019}, ist die
 Kausalität bislang nicht abschliessend geklärt. Unklar bleibt, ob hohe Zufriedenheit die Produktivität steigert oder ob
 erfolgreiche Arbeitsergebnisse wiederum zu höherer Zufriedenheit führen. Wahrscheinlich wirken beide Richtungen wechselseitig
 zusammen.
@@ -464,7 +463,7 @@ werden einige repräsentative bestehende Lösungen vorgestellt und hinsichtlich 
     E-Mail oder Chat an, deren Ergebnisse in übersichtlichen Dashboards für Teamleiter aufbereitet werden. Entwicklerteams erhalten
     dadurch Stimmungs-Trendkurven und allgemeines Mitarbeiterfeedback. Allerdings ist Officevibe eher generisch auf
     Mitarbeiterengagement ausgerichtet und liefert keine speziell auf Entwickler zugeschnittenen Kontextdaten, z.B. werden keine
-    technischen Metriken aus der Softwareentwicklung einbezogen \cite{courier_officevibe_2025}.
+    technischen Metriken aus der Softwareentwicklung einbezogen~\cite{courier_officevibe_2025}.
 
   \item[TeamMood:] Ein schlankes Stimmungsbarometer für Teams, das täglich eine einfache Mood-Abfrage durchführt. TeamMood sendet
     jedem Teammitglied jeden Tag einen kurzen Prompt (per E-Mail, Slack, microsoft teams etc.), in dem die Person mit einem Klick
@@ -472,7 +471,7 @@ werden einige repräsentative bestehende Lösungen vorgestellt und hinsichtlich 
     die Zeit zu erkennen. Die Hürde zur Teilnahme ist sehr niedrig (niedrigschwelliges Feedback). Jedoch erfasst TeamMood keine
     technischen Prozessmetriken (wie Code-Commits, Buildzeiten o.ä.) und bietet keine automatisierten Empfehlungen. Das bedeutet,
     dass Entwickler und Manager die Stimmungsverläufe selbst interpretieren und Massnahmen ableiten müssen, ohne direkte
-    Handlungsempfehlungen durch das Tool \cite{revelo_teammood_2025}.
+    Handlungsempfehlungen durch das Tool~\cite{revelo_teammood_2025}.
 
   \item[Happimeter:] Hervorgegangen aus einem Forschungsprojekt (u.a. TU Wien und MIT) setzt Happimeter auf Wearable Sensoren, um
     einen persönlichen Happiness-Score zu bestimmen. Entwickler tragen z.B. eine Smartwatch mit der Happimeter-App, die
@@ -480,8 +479,7 @@ werden einige repräsentative bestehende Lösungen vorgestellt und hinsichtlich 
     die aktuelle Stimmung bzw. den Stresslevel der Person voraus. Auf diese Weise sollen objektive Gesundheitsmetriken mit dem
     subjektiven Wohlbefinden verknüpft werden. Der Ansatz liefert interessante biometrische Einblicke (z.B. Stressspitzen während
     der Arbeit), jedoch fehlt der direkte Bezug zur eigentlichen Entwicklungsarbeit. Happimeter weiss nichts über Tasks, Code oder
-    Arbeitskontext, sodass die sensorbasierten Glücks-Werte ohne diesen Kontext schwer zu interpretieren sind
-    \cite{budner_making_2017}.
+    Arbeitskontext, sodass die sensorbasierten Glücks-Werte ohne diesen Kontext schwer zu interpretieren sind~\cite{budner_making_2017}.
 
   \item[Code Climate Velocity:] Code Climate Velocity: Eine Datenplattform, die Entwicklungsmetriken aus Git-Repositories analysiert,
     um die Team-Performance zu bewerten. Velocity konzentriert sich voll auf quantitative Software-Engineering-Kennzahlen. Es misst
@@ -490,7 +488,7 @@ werden einige repräsentative bestehende Lösungen vorgestellt und hinsichtlich 
     Failure Rate, Mean Time to Restore Service) sind integriert. Dadurch erhalten Führungskräfte einen detaillierten Blick auf
     Code-Qualität, Liefergeschwindigkeit und Prozess-Effizienz. Allerdings fehlen subjektive Zufriedenheitsdaten vollständig, die
     menschliche Stimmungslage der Entwickler wird nicht erfasst. Etwaige Einflüsse von Motivation oder Frustration auf die
-    gemessenen Leistungsindikatoren bleiben somit unsichtbar \cite{infoworld_codeclimate_2023}.
+    gemessenen Leistungsindikatoren bleiben somit unsichtbar~\cite{infoworld_codeclimate_2023}.
 
   \item[GitHub Insights:] Als integrierter Teil von GitHub bietet Insights grundlegende Analysen zur Repository-Aktivität. In jedem
     GitHub-Repository steht ein Insights-Dashboard zur Verfügung, das Statistiken zu Commits, Pull-Request-Aktivitäten,
@@ -498,7 +496,7 @@ werden einige repräsentative bestehende Lösungen vorgestellt und hinsichtlich 
     (“Wie viele PRs werden pro Woche gemerged? Wie oft wird deployed?” etc.). Diese Metriken sind wertvolle Aktivitätsstatistiken,
     berücksichtigen jedoch keine emotionalen Faktoren. GitHub Insights liefert also Kennzahlen zur Produktivität, blendet aber das
     Stimmungsbild der Entwickler aus. Etwa ob eine Phase hoher Commit-Rate auf Überstunden und Stress zurückzuführen ist, bleibt
-    unklar \cite{axify_git_2025}.
+    unklar~\cite{axify_git_2025}.
 
   \item[Microsoft Viva Insights:] Viva Insights ist Teil von Microsoft 365 und zielt darauf ab, durch Analyse von Arbeitsmustern die
     Produktivität und das Wohlbefinden von Mitarbeitenden zu verbessern. Die Plattform wertet vor allem Kalender- und
@@ -508,7 +506,7 @@ werden einige repräsentative bestehende Lösungen vorgestellt und hinsichtlich 
     nützliche Empfehlungen (z.B. “Schützen Sie wöchentlich 4 Stunden Fokuszeit” oder “Vermeiden Sie Meetings über 1 Stunde”).
     Allerdings werden Wohlbefinden und Zufriedenheit nur indirekt aus den Verhaltensdaten abgeleitet, eine direkte Erfassung der
     Gefühlslage oder ein Bezug zu konkreten Entwickler-Tätigkeiten (Code, Tickets etc.) fehlt vollständig. Somit bleibt die
-    emotionale Dimension in Viva Insights eher implizit und generalisiert \cite{zachminers_introduction_nodate}.
+    emotionale Dimension in Viva Insights eher implizit und generalisiert~\cite{zachminers_introduction_nodate}.
 \end{description}
 
 Bestehende Lösungen decken jeweils nur einzelne Aspekte der Entwicklerzufriedenheit ab. Engagement-Tools erfassen Stimmungsdaten,
@@ -757,7 +755,7 @@ erkannt werden.
 
 Ein wesentliches Ziel ist es, die Entwicklerinnen und Entwickler direkt bei der Verbesserung ihrer Arbeitssituation zu 
 unterstützen. Statt lediglich Zahlen und Diagramme anzuzeigen, formuliert der Yappi Coach daraus spezifische Empfehlungen, die 
-auf die jeweilige Personzugeschnitten sind. Beispiele hierfür sind:
+auf die jeweilige Person zugeschnitten sind. Beispiele hierfür sind:
 
 \begin{itemize}
     \item Vorschläge zur Anpassung der Meetingfrequenz oder -dauer, wenn wiederholt ein negativer Zusammenhang zwischen
@@ -1001,10 +999,10 @@ kommunizieren, während gleichzeitig ein hohes Mass an Sicherheit gewährleistet
   \centering
   \includegraphics[width=0.95\textwidth]{../figures/plattform-system-diagram.drawio.png}
   \caption{Systemarchitektur der Yappi-Integrationsplattform}
-  \label{fig:systemarchitektur}
+  \label{fig:systemarchitektur-integration-plattform}
 \end{figure}
 
-Das in Abbildung \ref{fig:systemarchitektur} dargestellte Architekturdiagramm zeigt die zentralen Komponenten der 
+Das in Abbildung~\ref{fig:systemarchitektur-integration-plattform} dargestellte Architekturdiagramm zeigt die zentralen Komponenten der
 Yappi-Integrationsplattform sowie deren Anbindung an externe Companion-Anwendungen. Im Zentrum befindet sich das Yappi Backend,
 das als zentrale Schnittstelle für alle eingehenden Daten und Anfragen fungiert.
 
@@ -1060,7 +1058,7 @@ API-Keys.
 \hline
   \texttt{id} & SERIAL & Primärschlüssel, auto-inkrementierend \\
   \texttt{user\_id} & INTEGER & Fremdschlüssel auf \texttt{users.id} \\
-  \texttt{hashed\_key} & TEXT & Gesalteter Hash des API-Keys \\
+  \texttt{hashed\_key} & TEXT &  Hash des API-Keys \\
   \texttt{raw\_key} & TEXT & Roher API-Key \\
   \texttt{created\_at} & TIMESTAMPTZ & Zeitpunkt der Erstellung des Keys \\
   \texttt{expires\_at} & TIMESTAMPTZ & Ablaufdatum des Keys \\
@@ -1102,7 +1100,7 @@ sodass nur für Integrationen mit externen Companion-Anwendungen eine API-Key-Au
 
 \subsection{Ablauf der API-Key Erstellung und -Verwendung}
 
-Abbildung \ref{fig:apikey-swimlane} zeigt den Ablauf der Erstellung und Verwendung des API-Keys innerhalb der
+Abbildung~\ref{fig:apikey-swimlane} zeigt den Ablauf der Erstellung und Verwendung des API-Keys innerhalb der
 Yappi-Integrationsplattform. Die Darstellung erfolgt als Swimlane-Diagramm und verdeutlicht die beteiligten Akteure sowie deren
 Interaktionen während des gesamten Prozesses.
 
@@ -1192,7 +1190,7 @@ gegenüber Yappi benötigt wird, wird über die Plugin-Einstellungen eingegeben 
 
 Damit sich die Companion App Authentifizieren kann muss ein gültiger API Key hinterlegt werden. Die Eingabe des API-Keys erfolgt
 über den Menüpunkt Settings → Tools → Yappi Companion in IntelliJ. Die Abbildung~\ref{fig:intellij-settings} zeigt den 
-entsprechenden Menupunkt.
+entsprechenden Menüpunkt.
 
 \begin{figure}[H]
 \centering
@@ -1242,11 +1240,11 @@ Für die Verarbeitung wurde eine eigene Backend-Komponente entwickelt, bestehend
 einem Repository für den Datenbankzugriff. 
 
 Der Controller \texttt{IntellijCompanionController} stellt den Endpoint, über den die Zufriedenzeitsdaten und commit-spezifischen
-Kontextinformationen entgegengenommen werden, bereit. Der Endpoint ist volgendermassen aufgebaut.
+Kontextinformationen entgegengenommen werden, bereit. Der Endpoint ist folgendermassen aufgebaut.
 
 \begin{description}
   \item \texttt{POST /companion/commit} \\
-        Erfasst Zufriedenheitsdaten inklusive Kontexinformationen nach einem Commit. \\
+        Erfasst Zufriedenheitsdaten inklusive Kontextformationen nach einem Commit. \\
         \textbf{Antworten:} \texttt{200 OK}, \texttt{400 Bad Request}, \texttt{401 Unauthorized}.
 \end{description}
 
@@ -1257,7 +1255,7 @@ Die Speicherung erfolgt über ein Repository, das direkt auf die Datenbank zugre
 Die vom IntelliJ Companion übermittelten Zufriedenheitsdaten werden im Backend zusammen mit den zusätzlichen Kontextinformationen
 persistiert. Während die eigentlichen Stimmungsdaten in der bestehenden Tabelle für Zufriedenheitsmessungen gespeichert werden,
 wird für die Commit-bezogenen Zusatzinformationen eine separate, flexible Kontexttabelle angelegt. Diese Trennung erlaubt es, in
-Zukunft weitere Arten von Kontextdaten ohne Änderungen Datenbankschama der Zufriedenheitsdaten zu integrieren.
+Zukunft weitere Arten von Kontextdaten ohne Änderungen Datenbankschema der Zufriedenheitsdaten zu integrieren.
 
 Die Tabelle~\ref{tab:commit_context_schema} zeigt den Aufbau der neuen Kontexttabelle \texttt{commit\_context}.
 
@@ -1357,7 +1355,7 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
               \item Dynamischer Umfrage-Builder (\texttt{popup/survey/builder.js}):
                     Ruft aktuelle Umfragen über die REST-API ab, generiert DOM-Elemente aus JSON Vorlagen (\texttt{popup/questionblock.html},
                     \texttt{popup/questionblock.js}) und integriert diese in die Ansicht.
-                    Mehr Details dazu in Abschnitt \ref{section:Dynamische Umfragen}.
+                    Mehr Details dazu in Abschnitt~\ref{section:Dynamische Umfragen}.
               \item Feedback-Übermittlung (\texttt{popup/popup.js}):
                     Sammelt Antworten, strukturiert sie als JSON und sendet sie per POST-Request an das Yappi-Backend.
             \end{itemize}
@@ -1367,7 +1365,7 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
         Die Benutzeroberfläche der Yappi Chrome Extension besteht aus zwei zentralen Interaktionselementen: Systembenachrichtigungen und der Popup-Ansicht im Browser.
 
         \textbf{Systembenachrichtigungen} \\
-            Beim Ende eines Events im Kalender des Benutzer, erzeugt die Extension eine native Systembenachrichtigung siehe Abbildung \ref{fig:yappi-extension-notification}.
+            Beim Ende eines Events im Kalender des Benutzer, erzeugt die Extension eine native Systembenachrichtigung siehe Abbildung~\ref{fig:yappi-extension-notification}.
             Diese Benachrichtigungen enthalten:
             \begin{itemize}
                 \item Titel und Beschreibung des Meetings (z.\,B. \glqq Meeting IP5 - Standup\grqq),
@@ -1386,7 +1384,7 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
 
 
         \textbf{Popup-Ansicht} \\
-            Das Browser-Popup siehe Abbildung \ref{fig:yappi-extension-popup} dient als Haupt-UI der Extension und wird durch einen
+            Das Browser-Popup siehe Abbildung~\ref{fig:yappi-extension-popup} dient als Haupt-UI der Extension und wird durch einen
             Klick auf das Yappi-Icon in der Browser-Toolbar geöffnet.
             Die Ansicht enthält:
             \begin{itemize}
@@ -1425,10 +1423,10 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
           \item \textbf{MQTT-Broker} Für asynchrone Benachrichtigungen in Echtzeit.
         \end{itemize}
 
-        Abbildung \ref{fig:communication-calendar-notify} zeigt wie Kommunikation abbläuft nach beenden eines Kalender-Event.
+        Abbildung~\ref{fig:communication-calendar-notify} zeigt wie Kommunikation abläuft nach beenden eines Kalender-Event.
 
         Die interne Kommunikation zwischen Background-Prozess und Popup-UI nutzt die Browser-API \texttt{chrome.storage}.
-        Dort werden alle Informationen, wie Clientdaten oder die letze Kalenderevents gespeichert und ausgetauscht.
+        Dort werden alle Informationen, wie Clientdaten oder die letzte Kalenderevents gespeichert und ausgetauscht.
 
 
 
@@ -1643,7 +1641,7 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
         \end{itemize}
 
     \subsubsection{Beispiel Fragebogen}
-        Das UI des Fragebogen ist sehr einfach gehalten. In der Abbildung \ref{fig:yappi-extension-feedback} ist eine Grafische-Darstellung
+        Das UI des Fragebogen ist sehr einfach gehalten. In der Abbildung~\ref{fig:yappi-extension-feedback} ist eine Grafische-Darstellung
         einer Beispielumfrage zu sehen.
 
         \begin{figure}[H]
@@ -1756,18 +1754,18 @@ Forschungsprojekte.
 \begin{description}
   \item[Garmin Health API] Die Garmin Health API stellt über eine REST-Schnittstelle umfangreiche Tages- und Aktivitätsmetriken
     bereit. Die Daten werden in der Regel nach dem Gerätesync via über die Mobile Applikation von Garmin bereitgestellt und in
-    JSON ausgeliefert. die Plattform unterstützt Pull- und Push-Modelle, sodass auch eine ereignisgetriebene Integration möglich
+    JSON ausgeliefert. die Plattform unterstützt Pull- und Push-Modelle, sodass auch eine ereignis getriebene Integration möglich
     ist. Der Zugang ist für genehmigte Business-Developer vorgesehen. Für die kommerzielle Nutzung fallen in der Regel
     Lizenzgebühren an. Diese geschäftliche Ausrichtung sowie die erforderliche formale Zulassung machen die direkte Nutzung für
     ein kleines, nicht-kommerzielles Forschungsprojekt unpassend. Zwar existieren Forschungsprogramme und Partnerlösungen rund um
     Garmin, diese sind jedoch üblicherweise an formelle Kooperationen, Vertragsaufwände und teils Kosten gebunden, was die
-    Umsetzungshürde erhöht \cite{garmin_healthapi_2025}.
-  \item[Apple Health Kit] Health Kit dient auf iOS als zentrales, lokales Datenrepository für Gesundheits- und Fitnessdaten von
+    Umsetzungshürde erhöht~\cite{garmin_healthapi_2025}.
+  \item[Apple Health Kit] Health Kit dient auf iOS als zentrales, lokales Daten repository für Gesundheits- und Fitnessdaten von
     iPhone, Apple Watch und angebundenen Geräten/Apps. Der Zugriff erfolgt feingranular pro Datentyp und erfordert stets explizite
     Nutzerzustimmung (Lesen/Schreiben getrennt). Daten liegen verschlüsselt auf dem Gerät. Apps erhalten nur Zugriff auf die
     explizit freigegebenen Kategorien. Für die Integration stehen dokumentierte APIs und Query-Muster zur Verfügung. Eine
     serverseitige Drittplattform ist nicht erforderlich, wodurch Architektur, Betrieb und Datenschutzfolgenabschätzung vereinfacht
-    werden \cite{apple_healthkit_2025}.
+    werden~\cite{apple_healthkit_2025}.
 \end{description}
 
 Da die Garmin Health API primär für kommerzielle Anwendungen vorgesehen ist und der beantragte Zugang für dieses Projekt nicht
@@ -1806,10 +1804,6 @@ zu definieren.
 {
     "metric": "STEPS",
     "data": [
-        {
-            "timeRange": "yyyy-MM-dd HH:mm/yyyy-MM-dd HH:mm",
-            "value": steps
-        },
         {
             "timeRange": "2025-08-06 08:00/2025-08-06 09:00",
             "value": 38
@@ -1900,8 +1894,8 @@ Interaktion.
 \section{Deployment und CI/CD}
 
     Das Deployment ist für dieses Projekt ein zentraler Schritt.
-    Es dient der Vorbereitung auf die Durchführung eines User Testing, indem eine lauffähige Version von Yappi b
-    ereitgestellt wird. So kann gewährleistet werden das dieses Testing unter möglichst realitätsnahen Bedigungen stattfinden kann.
+    Es dient der Vorbereitung auf die Durchführung eines User Testing, indem eine lauffähige Version von Yappi
+    bereitgestellt wird. So kann gewährleistet werden das dieses Testing unter möglichst realitätsnahen Bedingungen stattfinden kann.
 
     Zudem ermöglicht ein funktionierendes Deployment die Überprüfung der Zusammenarbeit der verschiedenen Companion Apps.
     Nur in einer produktiven Umgebung lässt sich sicherstellen, dass diese Komponenten korrekt miteinander interagieren u
@@ -2001,7 +1995,7 @@ Interaktion.
 
     Eclipse Mosquitto ist ein leichtgewichtiger MQTT-Broker, der im Projekt als zentraler Kommunikationsbroker eingesetzt wird.
     Er sorgt dafür, dass Echtzeit-Benachrichtigungen unabhängig und effizient aggregiert werden können.
-    Mosquitto verwaltet den Nachrichtenaustausch zwischen dem Backend, das über MQTT kommuniziert, und der Chrome Extension, die zwingendermassen Websockets verwendet,
+    Mosquitto verwaltet den Nachrichtenaustausch zwischen dem Backend, das über MQTT kommuniziert, und der Chrome Extension, die zwingender massen Websockets verwendet,
     sodass beide Systeme zuverlässig miteinander Daten austauschen können.
 
     \begin{itemize}
@@ -2036,7 +2030,7 @@ Interaktion.
 
  Die Durchführung dieses Tests wird es ermöglichen, praxisnahe Rückmeldungen zur Benutzerfreundlichkeit, Funktionalität
  und Integration von Yappi in den Arbeitsfluss zu erhalten. Zusätzlich bieten dieser Test die möglichkeit testdaten zu
- sammeln um weitere erkentnisse zwischen den gesammelten Daten und der Zufriedenheit schaffen.gesammelten Die dabei
+ sammeln um weitere erkenntnisse zwischen den gesammelten Daten und der Zufriedenheit schaffen.gesammelten Die dabei
  gewonnenen Erkenntnisse sollen in ein Folgeprojekt (IP6) einfliessen.
 
 \section{Evaluation durch Simulation}
@@ -2242,6 +2236,7 @@ Interaktion.
       \includegraphics[width=0.90\textwidth]{../figures/mockup/IP5_Yappi_Companion_Health.pdf}
     \end{figure}
 
+    \todo{fix wird nicht richtig angezeigt}
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.90\textwidth]{../figures/mockup/IP5_Yappi_Companion_Intellij.pdf}
