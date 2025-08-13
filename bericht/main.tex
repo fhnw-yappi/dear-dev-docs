@@ -1389,12 +1389,21 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
 
 
     \subsubsection{Kommunikationskanäle}
-      \todo{grafik zu kommunikation}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.60\textwidth]{../figures/yappi-chrome-extension/communication-calendar-notify.drawio.png}
+            \caption{Ablauf nachdem ein Kalender-Event abgeschlossen wurde.}
+            \label{fig:communication-calendar-notify}
+        \end{figure}
+
         Die Verbindung zum Yappi-Backend erfolgt über zwei Kommunikationskanäle:
         \begin{itemize}
           \item \textbf{REST-API} Für synchronen Abruf von Daten und Übermittlung von Antworten.
           \item \textbf{MQTT-Broker} Für asynchrone Benachrichtigungen in Echtzeit.
         \end{itemize}
+
+        Abbildung \ref{fig:communication-calendar-notify} zeigt wie Kommunikation abbläuft nach beenden eines Kalender-Event.
 
         Die interne Kommunikation zwischen Background-Prozess und Popup-UI nutzt die Browser-API \texttt{chrome.storage}.
         Dort werden alle Informationen, wie Clientdaten oder die letze Kalenderevents gespeichert und ausgetauscht.
@@ -1867,7 +1876,14 @@ Interaktion.
 %--------------------------------------------------------------------------------------------------------------------------------------
 
 \section{Deployment und CI/CD}
-\todo{ein wieso}
+
+    Das Deployment ist für dieses Projekt ein zentraler Schritt.
+    Es dient der Vorbereitung auf die Durchführung eines User Testing, indem eine lauffähige Version von Yappi b
+    ereitgestellt wird. So kann gewährleistet werden das dieses Testing unter möglichst realitätsnahen Bedigungen stattfinden kann.
+
+    Zudem ermöglicht ein funktionierendes Deployment die Überprüfung der Zusammenarbeit der verschiedenen Companion Apps.
+    Nur in einer produktiven Umgebung lässt sich sicherstellen, dass diese Komponenten korrekt miteinander interagieren u
+    nd Daten wie vorgesehen austauschen.
 
     Das Deployment der Yappi-Plattform erfolgt automatisiert mittels \textit{Continuous Integration/Continuous Deployment}
     (CI/CD) über GitHub Actions. Die Ausführung erfolgt auf einem SwitchEngines-Cloud-Server mit Debian Linux.
@@ -1975,9 +1991,6 @@ Interaktion.
 
     Durch die Kombination aus GitHub Actions, Docker Compose und NGINX erfolgt der Betrieb der Yappi-Plattform weitgehend automatisiert.
     Codeänderungen werden unmittelbar getestet, gebaut und auf dem SwitchEngines-Server ausgerollt. Dies gewährleistet eine kontinuierliche und zuverlässige Auslieferung neuer Versionen.
-
-\xeno{}
-\todo{UML Deployment Diagramm}
 
 %--------------------------------------------------------------------------------------------------------------------------------------
 
