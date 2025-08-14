@@ -180,7 +180,7 @@ Happiness-Daten, deren Auswertung im Dashboard und Vergleiche innerhalb eines Te
 Retrospektiven datenbasierte Gespräche geführt werden können.
 
 Yappi ist als Open-Source-Projekt veröffentlicht. Die Repositories für Backend, Frontend und Infrastruktur sind getrennt 
-organisiert. Eine lauffähige Instanz steht zu Beginn dieses Projekts nicht zur verfügung. Die Zielgruppe ist klar beschrieben. 
+organisiert. Eine lauffähige Instanz steht zu Beginn dieses Projekts nicht zur Verfügung. Die Zielgruppe ist klar beschrieben. 
 Angesprochen sind agile Software-Teams, Scrum Master und Product Owner unterschiedlicher Unternehmensgrössen. Die Vorgängerarbeit
 hat die methodische Basis gelegt. Sie umfasst Literaturrecherche, Interviews, abgeleitete Problemfelder, User Flows, Produktziele
 und die Validierung der Konzeptlösung. Das vorliegende Projekt baut auf dieser Struktur auf und fokussiert nun auf Integration,
@@ -330,7 +330,7 @@ und freiwillig im Unternehmen bleiben.
 Bei einer grossangelegten Studie wurden 317 Softwareentwickler befragt und dabei 42 Konsequenzen von Unzufriedenheit sowie
 32 Konsequenzen von Zufriedenheit beim Programmieren identifiziert. Die Ergebnisse Zeigen, dass Entwicklerzufriedenheit messbare
 Auswirkungen auf den Entwicklungsprozess, die erzeugten Software-Artefakte und das Wohlbefinden der Person hat. So führt
-Unzufriedenheit zu einer Reihe negativer Effekte: verzögerte Prozessabläufe, nachlässige Arbeitsweise und häufige unterbrechungen
+Unzufriedenheit zu einer Reihe negativer Effekte: verzögerte Prozessabläufe, nachlässige Arbeitsweise und häufige Unterbrechungen
 des Flows wurden als typische Folgen von negativer Stimmung genannt. Unzufriedene Entwickler berichten von langen Verzögerungen
 oder Qualitätsproblemen, weil Frustration sie aus dem Konzept brachte. Zufriedenheit hingegen wirkt sich positiv aus: Zufriedene
 Entwickler zeigen bessere Problemlösungsfähigkeiten, höhere Konzentration, berichten von einem anhaltenden Flow Zustand und
@@ -361,11 +361,11 @@ ihrem Team länger erhalten, während Unzufriedenheit mit erhöhten Kosten für 
 \section{Gesundheitsdaten und Entwicklerzufriedenheit}\label{stateoftheart-gesundheit}
 
 Neben rein arbeitsbezogenen Faktoren wie Arbeitsorganisation, technischer Ausstattung oder Teamdynamik rücken zunehmend auch
-physiologische und gesundheitsbezogene Parameter in den Fokus der Forschung zur Entwicklerzufriedenheit. Verschiedene Studien aus
-der Arbeitspsychologie und der Human Factors-Forschung belegen, dass körperliche und mentale Gesundheit einen messbaren Einfluss
-auf kognitive Leistungsfähigkeit, emotionale Stabilität und Motivation haben. Besonders in wissensintensiven Berufen, die ein
-hohes Mass an Konzentration benötigen, wie der Softwareentwicklung können selbst moderate Abweichungen vom optimalen Gesundheitszustand die
-Arbeitsleistung und das subjektive Wohlbefinden deutlich beeinflussen.
+physiologische und gesundheitsbezogene Parameter in den Fokus der Forschung zur Entwicklerzufriedenheit. Studien aus der
+Arbeitspsychologie und der Human Factors-Forschung belegen einen messbaren Einfluss der körperlichen und mentalen Gesundheit auf
+die Arbeitsleistung. Dieser Einfluss betrifft insbesondere kognitive Fähigkeiten, emotionale Stabilität und Motivation. Besonders
+in wissensintensiven Berufen, die ein hohes Mass an Konzentration benötigen, wie der Softwareentwicklung können selbst moderate
+Abweichungen vom optimalen Gesundheitszustand die Arbeitsleistung und das subjektive Wohlbefinden deutlich beeinflussen.
 
 \begin{enumerate}
   \item \textbf{Schlafdauer}\\
@@ -841,7 +841,7 @@ Die im vorangehenden Kapitel beschriebenen Erweiterungsideen bilden die Grundlag
 wesentlichen Eigenschaften zusammen, die Yappi im Rahmen der geplanten Weiterentwicklung erfüllen soll, um die identifizierten
 Problemstellungen wirksam zu adressieren.
 
-\subsection{Z-1: Automatisierte Aufforderung zur Zufriedenheitserfassung}
+\subsection{Z-1: Automatisierte Aufforderung zur Zufriedenheitserfassung}\label{Z1}
 
 \subsubsection{Ziel:}
 
@@ -861,7 +861,7 @@ Bezieht sich auf Forschungsfrage A: Durch den Einsatz von Technologien und Schni
 oder Integrationen in Tools wie Microsoft Teams und Outlook wird ein reibungsloses und einfaches Erfassen von Zufriedenheitsdaten
 ermöglicht.
 
-\subsection{Z-2: Erfassung der Meetingqualität}
+\subsection{Z-2: Erfassung der Meetingqualität}\label{Z2}
 
 \subsubsection{Ziel:}
 
@@ -880,7 +880,7 @@ Bezieht sich auf Forschungsfrage A: Durch die Integration in Meeting-Plattformen
 bestehende Technologien genutzt, um die Erfassung im direkten Arbeitskontext zu automatisieren und den Erfassungsprozess für die
 Nutzerinnen und Nutzer zu vereinfachen.
 
-\subsection{Z-3: Verknüpfung mit Kontext- und Gesundheitsdaten}
+\subsection{Z-3: Verknüpfung mit Kontext- und Gesundheitsdaten}\label{Z3}
 
 \subsubsection{Ziel:}
 
@@ -899,7 +899,7 @@ Bezieht sich auf Forschungsfrage B: Die Anbindung an Gesundheitsdaten-APIs ermö
 messbare Metriken in die Analyse der Entwicklerzufriedenheit einzubeziehen, um Zusammenhänge zwischen Wohlbefinden und
 Zufriedenheit datenbasiert zu identifizieren.
 
-\subsection{Z-4: Automatisierte Interpretation und Handlungsempfehlungen (Yappi Coach)}
+\subsection{Z-3: Automatisierte Interpretation und Handlungsempfehlungen (Yappi Coach)}\label{Z4}
 
 \subsubsection{Ziel:}
 
@@ -943,6 +943,10 @@ An der Befragung nahmen acht individuelle Softwareentwickler teil.
 Am höchsten bewertet wurden Funktionen mit direkter Integration in den Arbeitsfluss, wie das IntelliJ-Plugin (8,50)
 oder die Erfassung von Gesundheitsdaten (7,67).
 Niedrigere Werte erhielten Funktionen, die manuelle Eingaben erfordern, insbesondere Freitextkommentare zu Meetings (2,33).
+
+Dies zeigt, dass direkte Integrationen wie das IntelliJ-Plugin besonders relevant sind. Niedrige Werte bei Freitextkommentaren
+weisen darauf hin, dass Funktionen mit hohem manuellem Aufwand weniger Akzeptanz finden. Daraus ergibt sich die Priorisierung
+automatisierter Erfassungen.
 
 Die Umfrage diente nicht nur der Bestätigung der Konzeptideen, sondern auch der Priorisierung und Optimierung einzelner Funktionen.
 So ergab sich aus den Rückmeldungen, dass die Meetingumfrage als kompakter Frageblock mit Auswahloptionen gestaltet wird,
@@ -989,8 +993,8 @@ Namen des Nutzers Daten übermitteln können. API-Keys lassen sich bei Bedarf wi
 können Companion-Anwendungen zuverlässig und ohne Benutzerinteraktion mit Yappi kommunizieren, während gleichzeitig ein hohes Mass
 an Sicherheit gewährleistet ist.
 
-Durch diesen Mechanismus können Companion-Anwendungen zuverlässig und ohne wiederkehrende Benutzerinteraktion mit Yappi 
-kommunizieren, während gleichzeitig ein hohes Mass an Sicherheit gewährleistet ist.
+Die Implementierung des API-Key-Mechanismus dient als technische Grundlage für die Ziele \textbf{\hyperref[Z1]{Z-1}} und 
+\textbf{\hyperref[Z3]{Z-3}}, da sie externe Module sicher mit Yappi verbindet und den Datenaustausch ermöglicht.
 
 \subsection{Systemarchitektur der Integrationsplattform}
 
@@ -1006,7 +1010,7 @@ Yappi-Integrationsplattform sowie deren Anbindung an externe Companion-Anwendung
 das als zentrale Schnittstelle für alle eingehenden Daten und Anfragen fungiert.
 
 Das Yappi Frontend verwendet die bestehende JWT-basierte Authentifizierung zur Verwaltung von Nutzersitzungen. Externe
-Companion-Apps, wie beispielsweise die IntelliJ-, Health- oder Calendar-Companion, sind über den API-Key-Mechanismus angebunden.
+Companion-Apps, wie beispielsweise die IntelliJ, Health oder Calendar Companion, sind über den API-Key-Mechanismus angebunden.
 Dieser gewährleistet, dass nur registrierte und autorisierte Clients Daten an das System übermitteln können. Alle eingehenden
 Daten werden vom Backend in der dargestellten Datenbank (DB) persistiert.
 
@@ -1168,6 +1172,8 @@ zu erfassen. Ziel ist es, die Erfassung von Stimmungsdaten möglichst nahtlos in
 Arbeitsfluss zu unterbrechen. Nach jedem erfolgreichen Commit in IntelliJ IDEA öffnet sich automatisch ein Dialogfenster, in dem
 der Entwickler seine Stimmung zum Commit angeben kann. Diese Daten werden anschliessend an Yappi übertragen und dort gespeichert.
 
+Das IntelliJ-Plugin erfüllt das Ziel \textbf{\hyperref[Z1]{Z-1}}, indem es Entwickler unmittelbar nach einem Commit zur Eingabe von Zufriedenheitsdaten auffordert.
+
 \subsection{Architektur und Integration}
 
 Dia Abbildung~\ref{fig:intellij-system-diagram} zeigt den Aufbau des Yappi IntellJ IDEA Companion.
@@ -1320,6 +1326,9 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
 
         Die Abbildung~\ref{fig:implementation-calendar-companion-system} zeigt eine Systemübersicht der Kalenderintegration.
 
+        Der Calendar Companion setzt das Ziel \textbf{\hyperref[Z2]{Z-2}} um, indem er nach Abschluss relevanter Meetings
+        automatisch eine Bewertung zur Meetingqualität anfordert.
+
   \subsection{Yappi Chrome Extension}
       Die Companion-App wird als Browsererweiterung umgesetzt, um eine direkte Interaktion mit den Entwicklern zum richtigen
       Zeitpunkt zu ermöglichen. Nach dem Ende eines im Kalender erfassten Meetings erhält der Nutzer eine Benachrichtigung,
@@ -1353,7 +1362,7 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
               \item Dynamischer Umfrage-Builder (\texttt{popup/survey/builder.js}):
                     Ruft aktuelle Umfragen über die REST-API ab, generiert DOM-Elemente aus JSON Vorlagen (\texttt{popup/questionblock.html},
                     \texttt{popup/questionblock.js}) und integriert diese in die Ansicht.
-                    Mehr Details dazu in Abschnitt~\ref{section:Dynamische Umfragen}.
+                    Mehr Details dazu in Abschnitt~\ref{dynamische-umfragen}.
               \item Feedback-Übermittlung (\texttt{popup/popup.js}):
                     Sammelt Antworten, strukturiert sie als JSON und sendet sie per POST-Request an das Yappi-Backend.
             \end{itemize}
@@ -1363,7 +1372,9 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
         Die Benutzeroberfläche der Yappi Chrome Extension besteht aus zwei zentralen Interaktionselementen: Systembenachrichtigungen und der Popup-Ansicht im Browser.
 
         \textbf{Systembenachrichtigungen} \\
-            Beim Ende eines Events im Kalender des Benutzer, erzeugt die Extension eine native Systembenachrichtigung siehe Abbildung~\ref{fig:yappi-extension-notification}.
+            Beim Ende eines Events im Kalender des Benutzer, erzeugt die Extension eine native Systembenachrichtigung. Die 
+            Abbildung~\ref{fig:yappi-extension-notification} zeigt diese Systembenachrichtigung unter macOS.
+
             Diese Benachrichtigungen enthalten:
             \begin{itemize}
                 \item Titel und Beschreibung des Meetings (z.\,B. \glqq Meeting IP5 - Standup\grqq),
@@ -1382,8 +1393,9 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
 
 
         \textbf{Popup-Ansicht} \\
-            Das Browser-Popup siehe Abbildung~\ref{fig:yappi-extension-popup} dient als Haupt-UI der Extension und wird durch einen
-            Klick auf das Yappi-Icon in der Browser-Toolbar geöffnet.
+            Die Abbildung~\ref{fig:yappi-extension-popup} zeiggt das Browser-Popup. Dieses dient als Haupt-UI der
+            Extension und wird durch einen Klick auf das Yappi-Icon in der Browser-Toolbar geöffnet.
+
             Die Ansicht enthält:
             \begin{itemize}
                 \item Verbindungsstatus zum Nachrichtenbroker,
@@ -1585,12 +1597,13 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
 
 
 
-\subsection{Dynamische Umfragen}
+\subsection{Dynamische Umfragen}\label{dynamische-umfragen}
     Die dynamischen Umfragen in Yappi basieren auf flexibel konfigurierbaren Fragenblöcken, die als JSON-Objekte in der Datenbank gespeichert werden.
     Diese Struktur ermöglicht es, Umfragen anzupassen oder zu erweitern, ohne Änderungen am Anwendungscode vorzunehmen.
 
     \subsubsection{Datenbank}
-        Die Tabelle \texttt{questionblocks} speichert die Konfiguration einzelner Fragenblöcke.
+        Die Tabelle \texttt{questionblocks} speichert die Konfiguration einzelner Fragenblöcke. Das zugrunde liegende 
+        Datenbankschema ist in der Tabelle~\ref{tab:questionblocks_schema} dargestellt.
 
         \begin{table}[!htbp]
             \centering
@@ -1742,6 +1755,13 @@ wie Apple Health Kit oder Garmin Health API lassen sich Metriken wie Schlafquali
 automatisiert erfassen. Diese Daten bilden zusammen mit den Prozess- und Zufriedenheitsmetriken eine erweiterte Grundlage, um
 Korrelationen zwischen physischem Wohlbefinden und Arbeitszufriedenheit zu erkennen und gezielte Massnahmen abzuleiten.
 
+Der im Rahmen dieses Projekts entwickelte \textit{Health Companion} ist eine iOS-Anwendung, die diese Funktionalität in Yappi
+integriert. Sie ermöglicht die automatisierte Erfassung der ausgewählten Gesundheitsmetriken aus Apple HealthKit und überträgt
+diese sicher an das Yappi Backend.
+
+Diese Erweiterung adressiert das Ziel\textbf{\hyperref[Z3]{Z-3}}, indem sie Gesundheitsdaten automatisch erfasst und so eine 
+fundiertere Analyse der Einflussfaktoren auf die Arbeitszufriedenheit ermöglicht.
+
 \subsection{Quellen und Schnittstellen für Gesundheitsdaten}
 
 Für die Integration von Gesundheitsdaten wurden mehrere Optionen geprüft. Im Mittelpunkt standen die Garmin Health API sowie Apple
@@ -1844,7 +1864,8 @@ Erweiterbarkeit der Implementierung erleichtert.
 
 Zur Speicherung der von der Companion-App übermittelten Gesundheitsdaten wurde das Datenbankschema um die Tabelle 
 \texttt{health\_metric} erweitert. Diese Tabelle dient als generische Ablage für unterschiedliche Metriken. Durch diese Struktur
-lassen sich weitere Gesundheitsmetriken ohne Schemaänderungen hinzufügen.  
+lassen sich weitere Gesundheitsmetriken ohne Schemaänderungen hinzufügen. Die Tabelle~\ref{tab:health_metric_schema} zeigt das
+Datenbankschema.
 
 \begin{table}[H]
 \centering
@@ -1893,7 +1914,8 @@ Interaktion.
 
     Das Deployment ist für dieses Projekt ein zentraler Schritt.
     Es dient der Vorbereitung auf die Durchführung eines User Testing, indem eine lauffähige Version von Yappi
-    bereitgestellt wird. So kann gewährleistet werden das dieses Testing unter möglichst realitätsnahen Bedingungen stattfinden kann.
+    bereitgestellt wird. So kann gewährleistet werden das dieses Testing unter möglichst realitätsnahen Bedingungen stattfinden
+    kann.
 
     Zudem ermöglicht ein funktionierendes Deployment die Überprüfung der Zusammenarbeit der verschiedenen Companion Apps.
     Nur in einer produktiven Umgebung lässt sich sicherstellen, dass diese Komponenten korrekt miteinander interagieren u
@@ -1909,6 +1931,10 @@ Interaktion.
     Umgebungsvariablen, Secrets werden zentral verwaltet. Durch die vollständige Containerisierung bleibt die Lösung
     host-agnostisch und kann mittels Infrastructure as Code (z. B. Terraform) und standardisierten Manifesten
     ohne Codeanpassungen auf neue Hosting-Systeme migriert werden.
+
+    Das Deployment- und CI/CD-Setup unterstützt die Umsetzung von den Zielen \textbf{\hyperref[Z1]{Z-1}}, 
+    \textbf{\hyperref[Z2]{Z-2}} und \textbf{\hyperref[Z3]{Z-3}}, indem es eine stabile und kontinuierlich aktualisierte Plattform
+    bereitstellt.
 
     \subsection{Build- und Deployment-Pipeline}
 
@@ -2189,10 +2215,11 @@ Interaktion.
     für ein Folgeprojekt.
 
     \subsection*{Zusammenfassung}
-    Die Ziele Z-1 bis Z-3 wurden in diesem Projekt vollständig oder prototypisch umgesetzt, womit die Forschungsfragen
-    A und B beantwortet werden können. Die Forschungsfrage C wurde konzeptionell beantwortet, eine praktische Umsetzung
-    ist als nächster Entwicklungsschritt vorgesehen. Insgesamt trägt die Arbeit zur Verbesserung der kontinuierlichen,
-    kontextbezogenen und nutzerfreundlichen Erfassung von Entwicklerzufriedenheit bei.
+    Die Ziele \textbf{\hyperref[Z1]{Z-1}}, \textbf{\hyperref[Z2]{Z-2}} und \textbf{\hyperref[Z3]{Z-3}} wurden in diesem Projekt
+    vollständig oder prototypisch umgesetzt, womit die Forschungsfragen (Kapitel~\ref{fragestellungen}) A und B beantwortet
+    werden können. Die Forschungsfrage C wurde konzeptionell beantwortet, eine praktische Umsetzung ist als nächster
+    Entwicklungsschritt vorgesehen. Insgesamt trägt die Arbeit zur Verbesserung der kontinuierlichen, kontextbezogenen und
+    nutzerfreundlichen Erfassung von Entwicklerzufriedenheit bei.
 
 
 %--------------------------------------------------------------------------------------------------------------------------------------
