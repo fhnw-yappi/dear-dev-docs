@@ -259,9 +259,9 @@ Entwicklungsprozess strukturiert war.
       \item \textbf{Google Scholar:} Recherche wissenschaftlicher Publikationen.
       \item \textbf{Google Search:} Analyse bestehender Marktangebote und Wettbewerber, um Funktionalitäten, Stärken und
         Schwächen zu identifizieren.
-      \item \textbf{KI gestützte Tools (z.\,B. ChatGPT):} Nutzung zur schnellen Exploration von Ideen und Einholung komprimierter
+      \item \textbf{KI-gestützte Tools (z.\,B. ChatGPT):} Nutzung zur schnellen Exploration von Ideen und Einholung komprimierter
         Literaturübersichten. Ergebnisse wurden immer manuell überprüft und mit Primärquellen validiert. Zusätzlich wurden 
-        KI gestützte Tools verwendet, um Texte hinsichtlich Sprache und Rechtschreibung zu überprüfen.
+        KI-gestützte Tools verwendet, um Texte hinsichtlich Sprache und Rechtschreibung zu überprüfen.
     \end{itemize}
 
   \item \textbf{Zielentwicklung:} Ableitung der Produktziele (Kapitel~\ref{produktziele}) aus den Forschungsfragen 
@@ -293,7 +293,7 @@ Eng verwandt mit der Zufriedenheit ist der Begriff \textbf{Flow}. In Anlehnung a
 Flow einen Zustand von völliger Vertiefung und hohen Fokus beim Programmieren. Flow tritt auf, wenn die Anforderungen
 einer Aufgabe im Gleichgewicht mit den Fähigkeiten des Entwicklers stehen, wodurch Entwicklerinnen und Entwickler
 in einen Zustand von intensiver Konzentration gelangt. Zufriedene Entwickler gelangen einfacher in einen anhaltenden
-Flow-Zustand. Unzufriedenheit hingegen unterbricht diesen Flow, was zu Frustration führt und Schwierigkeiten führt,
+Flow Zustand. Unzufriedenheit hingegen unterbricht diesen Flow, was zu Frustration führt und Schwierigkeiten bereitet,
 nach Unterbrechungen wieder in eine Aufgabe zurückzufinden. Teilnehmende einer Untersuchung  berichten, dass negative 
 Erlebnisse einen aus dem Flow Zustand reissen und es erschwert, die Arbeit wieder aufzunehmen~\cite{sadowski_happiness_2019}.
 
@@ -329,7 +329,7 @@ Modularität, Fehlertoleranz und Testbarkeit. Mitarbeiterbindung wiederum beschr
 und freiwillig im Unternehmen bleiben.
 
 Bei einer grossangelegten Studie wurden 317 Softwareentwickler befragt und dabei 42 Konsequenzen von Unzufriedenheit sowie
-32 Konsequenzen von Zufriedenheit beim Programmieren identifiziert. Die Ergebnisse Zeigen, dass Entwicklerzufriedenheit messbare
+32 Konsequenzen von Zufriedenheit beim Programmieren identifiziert. Die Ergebnisse zeigen, dass Entwicklerzufriedenheit messbare
 Auswirkungen auf den Entwicklungsprozess, die erzeugten Software-Artefakte und das Wohlbefinden der Person hat. So führt
 Unzufriedenheit zu einer Reihe negativer Effekte: verzögerte Prozessabläufe, nachlässige Arbeitsweise und häufige Unterbrechungen
 des Flows wurden als typische Folgen von negativer Stimmung genannt. Unzufriedene Entwickler berichten von langen Verzögerungen
@@ -337,7 +337,7 @@ oder Qualitätsproblemen, weil Frustration sie aus dem Konzept brachte. Zufriede
 Entwickler zeigen bessere Problemlösungsfähigkeiten, höhere Konzentration, berichten von einem anhaltenden Flow Zustand und
 lernen schneller. Die Ergebnisse legen nahe, dass Zufriedenheit die Codequalität begünstigt. Zufriedene Entwickler treffen
 sorgfältigere langfristige Entscheidungen. Ein Teilnehmer beschrieb, er dokumentiert seinen Code gründlicher und achtet
-stärker auf Wartbarkeit, wenn er Zufrieden ist~\cite{graziotin_what_2018}.
+stärker auf Wartbarkeit, wenn er zufrieden ist~\cite{graziotin_what_2018}.
 
 \subsection{Entwicklerzufriedenheit in der Industrie}
 
@@ -417,7 +417,7 @@ Belastungssituationen aufzeigen, bevor sie sich in Produktivitätsverlust oder Q
     und Entwicklern. Empirische Untersuchungen zeigen, dass Softwareentwickelnde durchschnittlich zwischen 10,9 und 16,5
     Stunden pro Woche in Besprechungen verbringen. Ein erheblicher Teil
     dieser Zeit wird als wenig produktiv eingeschätzt. Besonders problematisch sind lange oder ungünstig terminierte Meetings,
-    die den Arbeitstag fragmentieren. Dies unterbricht oft den Flow-Zustand, also eine Phase tiefer Konzentration
+    die den Arbeitstag fragmentieren. Dies unterbricht oft den Flow Zustand, also eine Phase tiefer Konzentration
     und vollständiger Aufgabenfokussierung. Die Wiederaufnahme komplexer Programmieraufgaben nach einer Unterbrechung erfordert
     zusätzlichen kognitiven Aufwand und führt zu Zeitverlust. \cite{stray_understanding_2020, meyer_today_2021}
 
@@ -1177,7 +1177,7 @@ Das IntelliJ-Plugin erfüllt das Ziel \textbf{\hyperref[Z1]{Z-1}}, indem es Entw
 
 \subsection{Architektur und Integration}
 
-Dia Abbildung~\ref{fig:intellij-system-diagram} zeigt den Aufbau des Yappi IntellJ IDEA Companion.
+Die Abbildung~\ref{fig:intellij-system-diagram} zeigt den Aufbau des Yappi IntellJ IDEA Companion.
 
 \begin{figure}[H]
 \centering
@@ -1194,7 +1194,7 @@ gegenüber Yappi benötigt wird, wird über die Plugin-Einstellungen eingegeben 
 
 \subsection{Speicherung der Einstellungen}
 
-Damit sich die Companion App Authentifizieren kann muss ein gültiger API-Key hinterlegt werden. Die Eingabe des API-Keys erfolgt
+Damit sich die Companion App authentifizieren kann muss ein gültiger API-Key hinterlegt werden. Die Eingabe des API-Keys erfolgt
 über den Menüpunkt Settings → Tools → Yappi Companion in IntelliJ. Die Abbildung~\ref{fig:intellij-settings} zeigt den 
 entsprechenden Menüpunkt.
 
@@ -1244,12 +1244,12 @@ werden die empfangenen Daten verarbeitet und persistiert.
 Für die Verarbeitung wurde eine eigene Backend-Komponente entwickelt, bestehend aus einem neuen Controller, einem Service und
 einem Repository für den Datenbankzugriff. 
 
-Der Controller \texttt{IntellijCompanionController} stellt den Endpoint, über den die Zufriedenzeitsdaten und commit-spezifischen
+Der Controller \texttt{IntellijCompanionController} stellt den Endpoint, über den die Zufriedenheitsdaten und commit-spezifischen
 Kontextinformationen entgegengenommen werden, bereit. Der Endpoint ist folgendermassen aufgebaut.
 
 \begin{description}
   \item \texttt{POST /companion/commit} \\
-        Erfasst Zufriedenheitsdaten inklusive Kontextformationen nach einem Commit. \\
+        Erfasst Zufriedenheitsdaten inklusive Kontextinformationen nach einem Commit. \\
         \textbf{Antworten:} \texttt{200 OK}, \texttt{400 Bad Request}, \texttt{401 Unauthorized}.
 \end{description}
 
@@ -1301,17 +1301,17 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
         Zur automatischen Erkennung relevanter Meetings wird eine Anbindung an das Kalendersysteme des Entwickler vorgesehen.
         Wichtig dabei ist es einen Offenen Standard zu verwenden um eine möglichst hohe Kompatibilität mit Kalendersystemen zu schaffen.
         Grundlage dazu bildet das weit verbreitete iCalendar-Format (ICS), das von nahezu allen gängigen Plattformen unterstützt wird.
-        Das Konzept sieht vor, dass der Nutzer in Yappi auf seinem Profil den zugriff auf den Kalender hinterlegen kann.
+        Das Konzept sieht vor, dass der Nutzer in Yappi auf seinem Profil den Zugriff auf den Kalender hinterlegen kann.
         Regelmässig werden die auf einen vom Nutzer im Kalender erstellten Kalendereinträge in die Datenbank synchronisiert.
         Auf dieser Basis kann die Anwendung automatisch identifizieren, wann ein Meeting stattfindet.
         Dadurch lassen sich Feedback-Anfragen unmittelbar nach dem Ende einer Besprechung auslösen, ohne dass der Nutzer manuell eingreifen muss.
 
-        Die Synchronisation des Kalender erfolgt ausschliesslich lesend, um Eingriffe in persönliche Kalender zu vermeiden.
+        Die Synchronisation des Kalenders erfolgt ausschliesslich lesend, um Eingriffe in persönliche Kalender zu vermeiden.
         Alle übermittelten Kalenderinformationen werden vertraulich behandelt und ausschliesslich für den definierten Zweck genutzt.
         Informationen zu Kalendereinträge sind nur für den Nutzer persönlich einsehbar.
 
         Durch diese Anbindung entfällt das manuelle Erfassung von Kalendereinträgen. Meetings werden automatisch erkannt,
-        Änderungen übernommen und die Nutzer benachrichtigt. So entsteht ein nahtloser integrierter feedback flow um die
+        Änderungen übernommen und die Nutzer benachrichtigt. So entsteht ein nahtloser integrierter Feedback Flow um die
         Zufriedenheitsdaten von Meetings für die Entwickler zu erheben.
 
         Dieses Kapitel beschreibt die technische Implementierung der einzelnen Komponenten, deren Zusammenspiel
@@ -1405,7 +1405,7 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
 
 
         \textbf{Popup-Ansicht} \\
-            Die Abbildung~\ref{fig:yappi-extension-popup} zeiggt das Browser-Popup. Dieses dient als Haupt-UI der
+            Die Abbildung~\ref{fig:yappi-extension-popup} zeigt das Browser-Popup. Dieses dient als Haupt-UI der
             Extension und wird durch einen Klick auf das Yappi-Icon in der Browser-Toolbar geöffnet.
 
             Die Ansicht enthält:
@@ -1445,7 +1445,7 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
           \item \textbf{MQTT-Broker} Für asynchrone Benachrichtigungen in Echtzeit.
         \end{itemize}
 
-        Abbildung~\ref{fig:communication-calendar-notify} zeigt wie Kommunikation abläuft nach beenden eines Kalender-Event.
+        Abbildung~\ref{fig:communication-calendar-notify} zeigt wie, Kommunikation abläuft, nach Beenden eines Kalender-Events.
 
         Die interne Kommunikation zwischen Background-Prozess und Popup-UI nutzt die Browser-API \texttt{chrome.storage}.
         Dort werden alle Informationen, wie Clientdaten oder die letzte Kalenderevents gespeichert und ausgetauscht.
@@ -1460,16 +1460,16 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
 
 \subsection{Backend-Integration}
 
-        Das Yappi-Backend fungiert als Zentraler Controller der gesamten Kalenderintegration von Yappi.
+        Das Yappi-Backend fungiert als zentraler Controller der gesamten Kalenderintegration von Yappi.
         Es ist zuständig für jeglichen Datenaustausch, Datenspeicherung sowie Datenverarbeitung und besteht
-        aus verschiedenen modulen welche alle ihre verantwortlichkeiten haben.
+        aus verschiedenen Modulen, welche alle ihre Verantwortlichkeiten haben.
 
         Für den Calendar Companion wurde ein eigenes Modul erstellt.
 
         Das Kalendermodul im Yappi-Backend ist für die Verwaltung und Bereitstellung von Kalendereinträgen verantwortlich.
         Es unterstützt sowohl den Abruf von Einträgen über eine REST-API als auch eine proaktive Benachrichtigung der Chrome-Extension in Echtzeit.
         Letzteres erfolgt über das Publish-Subscribe-Protokoll \textit{MQTT} (Message Queuing Telemetry Transport).
-        Zudem ist es Zuständig für das Laden und synchronisieren der externen iCalendar-Daten (ICS) welche von den Nutzer hinterlegt werden.
+        Zudem ist es zuständig für das Laden und synchronisieren der externen iCalendar-Daten (ICS) welche von den Nutzer hinterlegt werden.
 
 
     \subsubsection{Model-Klasse}
@@ -1771,7 +1771,7 @@ Der im Rahmen dieses Projekts entwickelte \textit{Health Companion} ist eine iOS
 integriert. Sie ermöglicht die automatisierte Erfassung der ausgewählten Gesundheitsmetriken aus Apple HealthKit und überträgt
 diese sicher an das Yappi Backend.
 
-Diese Erweiterung adressiert das Ziel\textbf{\hyperref[Z3]{Z-3}}, indem sie Gesundheitsdaten automatisch erfasst und so eine 
+Diese Erweiterung adressiert das Ziel \textbf{\hyperref[Z3]{Z-3}}, indem sie Gesundheitsdaten automatisch erfasst und so eine 
 fundiertere Analyse der Einflussfaktoren auf die Arbeitszufriedenheit ermöglicht.
 
 \subsection{Quellen und Schnittstellen für Gesundheitsdaten}
@@ -1782,15 +1782,15 @@ deutlich hinsichtlich Zugangsmodell, Datenschutzmechanismen, Integrationsaufwand
 Forschungsprojekte.
 
 \begin{description}
-  \item[Garmin Health API] Die Garmin Health API stellt über eine REST-Schnittstelle umfangreiche Tages- und Aktivitätsmetriken
+  \item[Garmin Health API:] Die Garmin Health API stellt über eine REST-Schnittstelle umfangreiche Tages- und Aktivitätsmetriken
     bereit. Die Daten werden in der Regel nach dem Gerätesync via über die Mobile Applikation von Garmin bereitgestellt und in
-    JSON ausgeliefert. die Plattform unterstützt Pull- und Push-Modelle, sodass auch eine ereignis getriebene Integration möglich
+    JSON ausgeliefert. Die Plattform unterstützt Pull- und Push-Modelle, sodass auch eine ereignisgetriebene Integration möglich
     ist. Der Zugang ist für genehmigte Business-Developer vorgesehen. Für die kommerzielle Nutzung fallen in der Regel
     Lizenzgebühren an. Diese geschäftliche Ausrichtung sowie die erforderliche formale Zulassung machen die direkte Nutzung für
     ein kleines, nicht-kommerzielles Forschungsprojekt unpassend. Zwar existieren Forschungsprogramme und Partnerlösungen rund um
     Garmin, diese sind jedoch üblicherweise an formelle Kooperationen, Vertragsaufwände und teils Kosten gebunden, was die
     Umsetzungshürde erhöht~\cite{garmin_healthapi_2025}.
-  \item[Apple Health Kit] Health Kit dient auf iOS als zentrales, lokales Daten repository für Gesundheits- und Fitnessdaten von
+  \item[Apple Health Kit:] Health Kit dient auf iOS als zentrales, lokales Datenrepository für Gesundheits- und Fitnessdaten von
     iPhone, Apple Watch und angebundenen Geräten/Apps. Der Zugriff erfolgt feingranular pro Datentyp und erfordert stets explizite
     Nutzerzustimmung (Lesen/Schreiben getrennt). Daten liegen verschlüsselt auf dem Gerät. Apps erhalten nur Zugriff auf die
     explizit freigegebenen Kategorien. Für die Integration stehen dokumentierte APIs und Query-Muster zur Verfügung. Eine
@@ -1901,7 +1901,7 @@ Datenbankschema.
 \subsection{Benutzeroberfläche der iOS App}
 
 Nachfolgend wird die Benutzeroberfläche der iOS App vorgestellt. Die Benutzeroberfläche der iOS-Anwendung ist bewusst
-minimalistisch gehaltet und darauf ausgelegt, den API-Key einmalig zu hinterlegen, ohne dass danach weitere Eingaben erforderlich
+minimalistisch gehalten und darauf ausgelegt, den API-Key einmalig zu hinterlegen, ohne dass danach weitere Eingaben erforderlich
 sind.
 
 \begin{figure}[H]
@@ -1926,16 +1926,16 @@ Interaktion.
 
     Das Deployment ist für dieses Projekt ein zentraler Schritt.
     Es dient der Vorbereitung auf die Durchführung eines User Testing, indem eine lauffähige Version von Yappi
-    bereitgestellt wird. So kann gewährleistet werden das dieses Testing unter möglichst realitätsnahen Bedingungen stattfinden
+    bereitgestellt wird. So kann gewährleistet werden dass dieses Testing unter möglichst realitätsnahen Bedingungen stattfinden
     kann.
 
     Zudem ermöglicht ein funktionierendes Deployment die Überprüfung der Zusammenarbeit der verschiedenen Companion Apps.
-    Nur in einer produktiven Umgebung lässt sich sicherstellen, dass diese Komponenten korrekt miteinander interagieren u
-    nd Daten wie vorgesehen austauschen.
+    Nur in einer produktiven Umgebung lässt sich sicherstellen, dass diese Komponenten korrekt miteinander interagieren und Daten
+    wie vorgesehen austauschen.
 
     Das Deployment der Yappi-Plattform erfolgt automatisiert mittels \textit{Continuous Integration/Continuous Deployment}
     (CI/CD) über GitHub Actions. Die Ausführung erfolgt auf einem SwitchEngines-Cloud-Server mit Debian Linux.
-    Das System ist vollständig Dockerisiert. Der externe Zugriff wird durch einen NGINX-Reverse-Proxy ermöglicht.
+    Das System ist vollständig dockerisiert. Der externe Zugriff wird durch einen NGINX-Reverse-Proxy ermöglicht.
 
     Ziel ist ein einfaches, schnelles und reproduzierbares Deployment direkt nach der Continuous-Integration-Phase.
     Der Build erzeugt versionierte, unveränderliche Docker-Images, die in ein Repository publiziert und auf
@@ -1961,7 +1961,7 @@ Interaktion.
         \begin{figure}[H]
           \centering
           \includegraphics[width=0.3\textwidth]{../figures/backend-flow.drawio.png}
-          \caption{Deployment flow vom Backend}
+          \caption{Deployment-Flow vom Backend}
           \label{fig:backend-flow}
         \end{figure}
 
@@ -2010,7 +2010,7 @@ Interaktion.
     \subsection{NGINX-Proxykonfiguration}
 
         Der NGINX-Proxy übernimmt Routing und Zugriffskontrolle. Alle Anfragen werden per http/https direkt auf den Proxy gemacht.
-        Dieser aggregiert dann automatisch zum gewünschten Endpunkte. Das Mapping der Endpunkte sieht wie folgt aus:
+        Dieser aggregiert dann automatisch zum gewünschten Endpunkt. Das Mapping der Endpunkte sieht wie folgt aus:
 
         \begin{itemize}
             \item \texttt{/v1/}, \texttt{/apikey/}, \texttt{/auth/} $\rightarrow$ Weiterleitung an das Backend.
@@ -2031,7 +2031,8 @@ Interaktion.
 
     Eclipse Mosquitto ist ein leichtgewichtiger MQTT-Broker, der im Projekt als zentraler Kommunikationsbroker eingesetzt wird.
     Er sorgt dafür, dass Echtzeit-Benachrichtigungen unabhängig und effizient aggregiert werden können.
-    Mosquitto verwaltet den Nachrichtenaustausch zwischen dem Backend, das über MQTT kommuniziert, und der Chrome Extension, die zwingender massen Websockets verwendet,
+    Mosquitto verwaltet den Nachrichtenaustausch zwischen dem Backend, das über MQTT kommuniziert, und der Chrome Extension, die 
+    zwingendermassen Websockets verwendet,
     sodass beide Systeme zuverlässig miteinander Daten austauschen können.
 
     \begin{itemize}
@@ -2266,7 +2267,7 @@ Yappi langfristig zu einem Wertvollen tool zur Steigerung der Entwicklerzufriede
 
     \section{Verlinkungen}
 
-        Alle änderungen im Backend und Frontend befinden sich auf dem Branch \glqq develop\grqq{}
+        Alle Änderungen im Backend und Frontend befinden sich auf dem Branch \glqq develop\grqq{}
 
         \textcolor{teal}{\href{https://github.com/fhnw-yappi/dear-dev-backend}{GitHub Backend} \\}
 
