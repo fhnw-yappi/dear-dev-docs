@@ -82,10 +82,21 @@
 \end{titlepage}
 
 \chapter*{Abstract}
-\todo{Abstract und Keywords schreiben}
+
+Yappi ist eine Plattform zur kontinuierlichen Erfassung von Entwicklerzufriedenheit. Diese Arbeit erweitert Yappi
+um Integrationen, die Stimmungsdaten nahtlos erheben und mit Meeting- sowie Gesundheitskontext verknüpfen. Umsetzungen umfassen
+ein IDE-Plugin mit Post-Commit-Abfrage, eine Kalenderintegration rund um Besprechungen, eine Browser-Erweiterung für zeitnahe
+Rückmeldungen sowie einen iOS-App zur Nutzung von Gesundheitsdaten. Ein Backend mit API-Key-Authentifizierung verarbeitet und
+persistiert die Daten und bildet eine skalierbare Grundlage für Analysen und künftige Handlungsempfehlungen. Formative
+Evaluationen zeigen hohe Akzeptanz für wenig unterbrechende, direkt in Tools integrierte Interaktionen und bestätigen die
+technische Machbarkeit der Kontextverknüpfung. Die Arbeit liefert damit eine funktionsfähige Basis für eine kontinuierliche und
+nutzerfreundliche Messung von Entwicklerzufriedenheit.
+
+\par\smallskip\noindent\textbf{Schlüsselwörter: } Entwicklerzufriedenheit; Yappi; Flow; IDE-Plugin; Kalenderintegration; 
+Browser-Erweiterung; Apple HealthKit; Gesundheitsdaten; API-Key-Authentifizierung; Agile Teams.
+
 \newpage
 
-\todo{überprüfen ob sinnvolle namen und die richtigen titel angezeigt werden}
 \tableofcontents
 \newpage
 
@@ -98,8 +109,6 @@
 \chapter{Einleitung}
 
 \section{Motivation}
-\todo{spellcheck}
-\todo{gendern überprüfen}
 
 Die Zufriedenheit von Entwicklerinnen und Entwicklern wird, wenn überhaupt, meist nur anhand der Menge ihrer geleisteten Arbeit
 gemessen. Dabei entstehen zwangsläufig Defizite und ein halbjährliches Mitarbeitergespräch erweist sich oft als wenig wirksame
@@ -138,7 +147,7 @@ vertieft untersucht werden.
   \item Durch welche Technologien und Schnittstellen kann Yappi erweitert werden,
         um ein reibungsloses und einfaches Erfassen von Zufriedenheitsdaten zu ermöglichen?
         \begin{enumerate}[label=\alph*.]
-          \item Entwicklung von Entwickler-Tool-Plugins, die nahtlos in bestehende Arbeitsumgebungen
+          \item Entwicklung von Tools, die nahtlos in bestehende Arbeitsumgebungen
                 integriert werden können, um die Nutzung von Yappi angenehmer und effizienter zu gestalten.
                 Diese Plugins sollen Entwicklern ermöglichen, direkt in ihrer bevorzugten Umgebung Feedback
                 zu erfassen, ohne den Arbeitsfluss zu unterbrechen. Integration von Yappi in verschiedene
@@ -151,18 +160,18 @@ vertieft untersucht werden.
                 Entwicklerzufriedenheit zu integrieren. Dies ermöglicht eine genauere Einschätzung des
                 Wohlbefindens und potenzieller Belastungsfaktoren.
         \end{enumerate}
-  \item Wie kann Yappi Teams und Entwickler dabei unterstützen, aus den erfassten
-        Zufriedenheitsdaten Handlungsempfehlungen abzuleiten, um die Zufriedenheit und Produktivität
-        von Entwicklern zu erhöhen?
+  \item Wie kann Yappi Entwicklerinnen, Entwickler und Teams dabei unterstützen, aus den erfassten
+        Zufriedenheitsdaten, Handlungsempfehlungen abzuleiten und so die Zufriedenheit und Produktivität
+        von Entwicklerinnen und Entwickler zu erhöhen?
         \begin{enumerate}[label=\alph*.]
           \item Entwicklung eines Yappi Coach, der anhand einer detaillierten Analyse der erfassten
                 Daten gezielte Tipps zur Verbesserung der Arbeitsweise gibt. Beispielsweise könnte der Coach
                 darauf hinweisen, dass Meetings nicht länger als 1,5 Stunden dauern sollten, da längere
-                Sitzungen die Zufriedenheit und Konzentration der Entwickler negativ beeinflussen können.
+                Sitzungen die Zufriedenheit und Konzentration der Entwicklerinnen und Entwickler negativ beeinflussen können.
           \item Integration von KI-gestützten Diensten, die auf Basis der gesammelten Gesundheitsdaten
                 sowie Zufriedenheit- und Produktivitätsmetriken individuelle Massnahmen vorschlagen. Diese
                 KI-gestützten Empfehlungen können Teams dabei helfen, gezielt Optimierungen vorzunehmen, um
-                die Arbeitsbedingungen und die Effizienz der Entwickler nachhaltig zu verbessern.
+                die Arbeitsbedingungen und die Effizienz der Entwicklerinnen und Entwickler nachhaltig zu verbessern.
         \end{enumerate}
 \end{enumerate}
 
@@ -286,22 +295,22 @@ Arbeit definiert. Darunter versteht man eine Sequenz von Erfahrungen, bei der h�
 hohes Glücksgefühl erzeugen und häufige negative Erfahrungen das Gegenteil bewirken~\cite{sadowski_happiness_2019}.
 Auch Industriequellen fassen Entwicklerzufriedenheit als subjektives Wohlbefinden in Bezug auf Arbeitsinhalte
 und -umfeld auf, d.h. als Mass für Zufriedenheit, Freude oder innere Zufriedenheit bei der Arbeit~\cite{zenhub_2022_nodate}.
-Zufriedene Entwickler empfinden demnach mehr Arbeitsfreude und Inhaltlichkeit in ihrer Rolle, was eng mit
+Zufriedene Entwicklerinnen und Entwickler empfinden demnach mehr Arbeitsfreude und Inhaltlichkeit in ihrer Rolle, was eng mit
 der Arbeitsmotivation und dem Engagement bei der Arbeit verknüpft ist~\cite{franca_motivation_2020}.
 
 Eng verwandt mit der Zufriedenheit ist der Begriff \textbf{Flow}. In Anlehnung an Csikszentmihalyis Konzept beschreibt
 Flow einen Zustand von völliger Vertiefung und hohen Fokus beim Programmieren. Flow tritt auf, wenn die Anforderungen
-einer Aufgabe im Gleichgewicht mit den Fähigkeiten des Entwicklers stehen, wodurch Entwicklerinnen und Entwickler
+einer Aufgabe im Gleichgewicht mit den Fähigkeiten der Entwicklerinn oder dem Entwickler stehen, wodurch sie
 in einen Zustand von intensiver Konzentration gelangt. Zufriedene Entwickler gelangen einfacher in einen anhaltenden
 Flow Zustand. Unzufriedenheit hingegen unterbricht diesen Flow, was zu Frustration führt und Schwierigkeiten bereitet,
 nach Unterbrechungen wieder in eine Aufgabe zurückzufinden. Teilnehmende einer Untersuchung  berichten, dass negative 
 Erlebnisse einen aus dem Flow Zustand reissen und es erschwert, die Arbeit wieder aufzunehmen~\cite{sadowski_happiness_2019}.
 
-Motivation und Zufriedenheit hängen eng zusammen, sind aber konzeptionell unterscheidbar. Motivierte Entwickler sind
+Motivation und Zufriedenheit hängen eng zusammen, sind aber konzeptionell unterscheidbar. Motivierte Entwicklerinnen und Entwickler sind
 zeigen hohes Engagement und Fokus auf ihre Aufgaben, während Zufriedenheit eher durch allgemeines Wohlbefinden und gute
 Laune charakterisiert ist. Faktoren wie Autonomie, Kompetenzerleben und Zugehörigkeitsgefühl steigern die intrinsische
 Motivation von Entwicklern, was sich positiv auf ihre Zufriedenheit auswirkt. Zufriedenheit ist zugleich das Ergebnis und
-die Voraussetzung von Motivation, zufriedenere Entwickler weisen in der Regel eine höhere Antriebskraft auf, was wiederum ihre
+die Voraussetzung von Motivation, zufriedenere Entwicklerinnen und Entwickler weisen in der Regel eine höhere Antriebskraft auf, was wiederum ihre
 Arbeitszufriedenheit weiter stärkt~\cite{franca_motivation_2020}.
 
 Schliesslich spielt auch das Team- und Organisationsklima eine fundamentale Rolle. Eine offene, unterstützende Kultur steigert
@@ -323,7 +332,7 @@ Zusammenspiel aus individuellen Faktoren (Flow, Motivation, \ldots) und Umfeldfa
 
 In den letzten Jahren haben zahlreiche Studien den Zusammenhang zwischen der Entwicklerzufriedenheit und Erfolgsparametern wie
 Produktivität, Codequalität und Mitarbeiterbindung untersucht. Produktivität beschreibt im Softwarekontext die Effizienz, mit der
-Entwickler innerhalb einer bestimmten Zeit funktionierende und qualitativ hochwertige Softwareartefakte erstellen. Codequalität
+Entwicklerinnen und Entwickler innerhalb einer bestimmten Zeit funktionierende und qualitativ hochwertige Softwareartefakte erstellen. Codequalität
 bezeichnet das Mass, in dem Quellcode korrekt, wartbar, verständlich und effizient ist, und umfasst Aspekte wie Lesbarkeit,
 Modularität, Fehlertoleranz und Testbarkeit. Mitarbeiterbindung wiederum beschreibt das Ausmass, in dem Mitarbeitende langfristig
 und freiwillig im Unternehmen bleiben.
@@ -332,22 +341,22 @@ Bei einer grossangelegten Studie wurden 317 Softwareentwickler befragt und dabei
 32 Konsequenzen von Zufriedenheit beim Programmieren identifiziert. Die Ergebnisse zeigen, dass Entwicklerzufriedenheit messbare
 Auswirkungen auf den Entwicklungsprozess, die erzeugten Software-Artefakte und das Wohlbefinden der Person hat. So führt
 Unzufriedenheit zu einer Reihe negativer Effekte: verzögerte Prozessabläufe, nachlässige Arbeitsweise und häufige Unterbrechungen
-des Flows wurden als typische Folgen von negativer Stimmung genannt. Unzufriedene Entwickler berichten von langen Verzögerungen
+des Flows wurden als typische Folgen von negativer Stimmung genannt. Unzufriedene Entwicklerinnen und Entwickler berichten von langen Verzögerungen
 oder Qualitätsproblemen, weil Frustration sie aus dem Konzept brachte. Zufriedenheit hingegen wirkt sich positiv aus: Zufriedene
-Entwickler zeigen bessere Problemlösungsfähigkeiten, höhere Konzentration, berichten von einem anhaltenden Flow Zustand und
-lernen schneller. Die Ergebnisse legen nahe, dass Zufriedenheit die Codequalität begünstigt. Zufriedene Entwickler treffen
-sorgfältigere langfristige Entscheidungen. Ein Teilnehmer beschrieb, er dokumentiert seinen Code gründlicher und achtet
+Entwicklerinnen und Entwickler zeigen bessere Problemlösungsfähigkeiten, höhere Konzentration, berichten von einem anhaltenden Flow Zustand und
+lernen schneller. Die Ergebnisse legen nahe, dass Zufriedenheit die Codequalität begünstigt. Zufriedene Entwicklerinnen und Entwickler treffen
+sorgfältigere langfristige Entscheidungen. Ein Teilnehmerinnen und Teilnehmer beschrieb, er dokumentiert seinen Code gründlicher und achtet
 stärker auf Wartbarkeit, wenn er zufrieden ist~\cite{graziotin_what_2018}.
 
 \subsection{Entwicklerzufriedenheit in der Industrie}
 
 Neben akademischen Studien liefern auch Industrieumfragen und Community-Studien wertvolle Einblicke. Der jährliche Stack Overflow
 Developer Survey etwa spiegelt wieder, dass weiterhin Verbesserungsbedarf besteht. Laut der Umfrage 2024 bezeichnen sich nur rund
-20\% der Entwickler als wirklich zufrieden in ihrem Job, während etwa 80\% unzufrieden oder \glqq gelassen\grqq{} (complacent) sind. Diese Zahl
+20\% der Entwicklerinnen und Entwickler als wirklich zufrieden in ihrem Job, während etwa 80\% unzufrieden oder \glqq gelassen\grqq{} (complacent) sind. Diese Zahl
 unterstreicht, dass ein grosser Teil der Entwicklergemeinschaft nicht glücklich im Arbeitsumfeld ist. Als Hauptgründe werden oft
 Faktoren wie schlechte Work-Life-Balance, zu viele Meetings oder fehlende Anerkennung genannt~\cite{stackoverflow_survey_2025}.
 
-Eine Untersuchung von Zenhub kam zu ähnlichen Ergebnissen: Zwar gaben die meisten befragten Entwickler an, überwiegend zufrieden
+Eine Untersuchung von Zenhub kam zu ähnlichen Ergebnissen: Zwar gaben die meisten befragten Entwicklerinnen und Entwickler an, überwiegend zufrieden
 zu sein, doch lediglich 31\% fühlten sich äusserst zufrieden in ihrer aktuellen Arbeitssituation~\cite{zenhub_2022_nodate}.
 
 \subsection{Mitarbeiterbindung und Entwicklerzufriedenheit}
@@ -356,7 +365,7 @@ Darüber hinaus tragen Anerkennung und Sinnhaftigkeit der Arbeit entscheidend zu
 stolz auf die Qualität ihrer Projekte sind und regelmässig Wertschätzung für ihre Arbeit erhalten, steigt sowohl ihre Zufriedenheit
 als auch ihre Loyalität gegenüber dem Unternehmen~\cite{sadowski_happiness_2019,graziotin_what_2018}. Die empirischen Befunde deuten
 somit klar darauf hin, dass Entwicklerzufriedenheit kein rein „weiches“ Thema ist, sondern messbare Auswirkungen auf Produktivität,
-Codequalität und Personalbindung hat. Zufriedene Entwickler arbeiten effizienter, treffen sorgfältigere Entscheidungen und bleiben
+Codequalität und Personalbindung hat. Zufriedene Entwicklerinnen und Entwickler arbeiten effizienter, treffen sorgfältigere Entscheidungen und bleiben
 ihrem Team länger erhalten, während Unzufriedenheit mit erhöhten Kosten für Projekte und Rekrutierung verbunden ist.
 
 \section{Gesundheitsdaten und Entwicklerzufriedenheit}\label{stateoftheart-gesundheit}
@@ -406,7 +415,7 @@ Belastungssituationen aufzeigen, bevor sie sich in Produktivitätsverlust oder Q
 
 %------------------------------------------------------------------------------------------------------------------------------------------
 
-\section{Entwickler-Pain-Point: Meetings}
+\section{Pain-Point: Meetings}
 
     Meetings sind geplante, zeitlich begrenzte Zusammenkünfte mehrerer Personen mit einem festgelegten Zweck. Sie finden in
     der Softwareentwicklung vor Ort oder virtuell statt und umfassen formelle Formate wie Sprint-Planungen, Retrospektiven
@@ -462,7 +471,7 @@ werden einige repräsentative bestehende Lösungen vorgestellt und hinsichtlich 
     Engagement und Stimmung im Unternehmen kontinuierlich zu messen. Officevibe bietet anonyme wöchentliche Kurzbefragungen per
     E-Mail oder Chat an, deren Ergebnisse in übersichtlichen Dashboards für Teamleiter aufbereitet werden. Entwicklerteams erhalten
     dadurch Stimmungs-Trendkurven und allgemeines Mitarbeiterfeedback. Allerdings ist Officevibe eher generisch auf
-    Mitarbeiterengagement ausgerichtet und liefert keine speziell auf Entwickler zugeschnittenen Kontextdaten, z.B. werden keine
+    das Engagement von Mitarbeiterinnen und Mitarbeiter ausgerichtet und liefert keine speziell auf Entwicklerinnen und Entwickler zugeschnittenen Kontextdaten, z.B. werden keine
     technischen Metriken aus der Softwareentwicklung einbezogen~\cite{courier_officevibe_2025}.
 
   \item[TeamMood:] Ein schlankes Stimmungsbarometer für Teams, das täglich eine einfache Mood-Abfrage durchführt. TeamMood sendet
@@ -470,11 +479,11 @@ werden einige repräsentative bestehende Lösungen vorgestellt und hinsichtlich 
     ihre aktuelle Stimmung angibt. Die Antworten werden als anonymer Team-Stimmungsverlauf visualisiert, was es erlaubt, Trends über
     die Zeit zu erkennen. Die Hürde zur Teilnahme ist sehr niedrig (niedrigschwelliges Feedback). Jedoch erfasst TeamMood keine
     technischen Prozessmetriken (wie Code-Commits, Buildzeiten o.ä.) und bietet keine automatisierten Empfehlungen. Das bedeutet,
-    dass Entwickler und Manager die Stimmungsverläufe selbst interpretieren und Massnahmen ableiten müssen, ohne direkte
+    dass Entwicklerinnen und Entwickler die Stimmungsverläufe selbst interpretieren und Massnahmen ableiten müssen, ohne direkte
     Handlungsempfehlungen durch das Tool~\cite{revelo_teammood_2025}.
 
   \item[Happimeter:] Hervorgegangen aus einem Forschungsprojekt (u.a. TU Wien und MIT) setzt Happimeter auf Wearable Sensoren, um
-    einen persönlichen Happiness-Score zu bestimmen. Entwickler tragen z.B. eine Smartwatch mit der Happimeter-App, die
+    einen persönlichen Happiness-Score zu bestimmen. Entwicklerinnen und Entwickler tragen z.B. eine Smartwatch mit der Happimeter-App, die
     kontinuierlich physiologische Daten wie Herzfrequenz, Bewegung oder Schlaf erfasst. Ein Machine-Learning-Modell sagt daraus
     die aktuelle Stimmung bzw. den Stresslevel der Person voraus. Auf diese Weise sollen objektive Gesundheitsmetriken mit dem
     subjektiven Wohlbefinden verknüpft werden. Der Ansatz liefert interessante biometrische Einblicke (z.B. Stressspitzen während
@@ -487,7 +496,7 @@ werden einige repräsentative bestehende Lösungen vorgestellt und hinsichtlich 
     Entwicklungspipeline. Auch Industrie-Standards wie die vier DORA-Metriken (Deployment Frequency, Lead Time for Changes, Change
     Failure Rate, Mean Time to Restore Service) sind integriert. Dadurch erhalten Führungskräfte einen detaillierten Blick auf
     Code-Qualität, Liefergeschwindigkeit und Prozess-Effizienz. Allerdings fehlen subjektive Zufriedenheitsdaten vollständig, die
-    menschliche Stimmungslage der Entwickler wird nicht erfasst. Etwaige Einflüsse von Motivation oder Frustration auf die
+    menschliche Stimmungslage der Entwicklerinnen und Entwickler wird nicht erfasst. Etwaige Einflüsse von Motivation oder Frustration auf die
     gemessenen Leistungsindikatoren bleiben somit unsichtbar~\cite{infoworld_codeclimate_2023}.
 
   \item[GitHub Insights:] Als integrierter Teil von GitHub bietet Insights grundlegende Analysen zur Repository-Aktivität. In jedem
@@ -495,17 +504,17 @@ werden einige repräsentative bestehende Lösungen vorgestellt und hinsichtlich 
     Issue-Verläufen und Release-Frequenzen visualisiert. Teams können so ihre Entwicklungsaktivität und Geschwindigkeit verfolgen
     (“Wie viele PRs werden pro Woche gemerged? Wie oft wird deployed?” etc.). Diese Metriken sind wertvolle Aktivitätsstatistiken,
     berücksichtigen jedoch keine emotionalen Faktoren. GitHub Insights liefert also Kennzahlen zur Produktivität, blendet aber das
-    Stimmungsbild der Entwickler aus. Etwa ob eine Phase hoher Commit-Rate auf Überstunden und Stress zurückzuführen ist, bleibt
+    Stimmungsbild der Entwicklerinnen und Entwickler aus. Etwa ob eine Phase hoher Commit-Rate auf Überstunden und Stress zurückzuführen ist, bleibt
     unklar~\cite{axify_git_2025}.
 
   \item[Microsoft Viva Insights:] Viva Insights ist Teil von Microsoft 365 und zielt darauf ab, durch Analyse von Arbeitsmustern die
     Produktivität und das Wohlbefinden von Mitarbeitenden zu verbessern. Die Plattform wertet vor allem Kalender- und
-    Kommunikationsdaten aus (z.B. E-Mail- und Teams-Nutzung, Meeting-Häufigkeit). Entwickler erhalten z.B. Hinweise, wenn
+    Kommunikationsdaten aus (z.B. E-Mail- und Teams-Nutzung, Meeting-Häufigkeit). Entwicklerinnen und Entwickler erhalten z.B. Hinweise, wenn
     Meeting-Überlast droht, oder Vorschläge, regelmässige Fokuszeiten für ungestörtes Arbeiten einzuplanen. Führungskräfte sehen
     aggregierte Team-Insights, etwa ob viele Überstunden anfallen oder wenig Konzentrationsphasen vorhanden sind. Zwar gibt Viva
     nützliche Empfehlungen (z.B. “Schützen Sie wöchentlich 4 Stunden Fokuszeit” oder “Vermeiden Sie Meetings über 1 Stunde”).
     Allerdings werden Wohlbefinden und Zufriedenheit nur indirekt aus den Verhaltensdaten abgeleitet, eine direkte Erfassung der
-    Gefühlslage oder ein Bezug zu konkreten Entwickler-Tätigkeiten (Code, Tickets etc.) fehlt vollständig. Somit bleibt die
+    Gefühlslage oder ein Bezug zu konkreten Tätigkeiten von Entwicklerinnen und Entwicklern (Code, Tickets etc.) fehlt vollständig. Somit bleibt die
     emotionale Dimension in Viva Insights eher implizit und generalisiert~\cite{zachminers_introduction_nodate}.
 \end{description}
 
@@ -581,7 +590,7 @@ Tabelle~\ref{tab:rup-passive} dargestellt.
   \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.25\textwidth}|X}
     \hline
     Das Problem & der passiven Erfassung der Entwicklerzufriedenheit,
-    bei der ein Entwickler von sich aus eine Rückmeldung abgeben muss \\ \hline
+    bei der eine Entwicklerin oder ein Entwickler von sich aus eine Rückmeldung abgeben muss \\ \hline
 
     betrifft & Entwicklerinnen und Entwickler. \\ \hline
 
@@ -659,14 +668,14 @@ Initiative Zufriedenheitsdaten erfassen müssen. Stattdessen werden sie zu geeig
 kurze Rückmeldungen zu geben. Es wird angenommen, dass diese Form der aktiven Aufforderung die Häufigkeit der Erfassungen erhöht
 und somit eine vollständigere sowie aussagekräftigere Datengrundlage schafft.
 
-Ein relevanter Zeitpunkt zur Aufforderung zur Erfassung von Zufriedenheitsdaten sollte so gewählt werden, dass der Entwickler
-nicht aus seinem Arbeitsfluss herausgerissen wird. Geeignete Zeitpunkte sind Beispielsweise:
+Ein relevanter Zeitpunkt zur Aufforderung zur Erfassung von Zufriedenheitsdaten sollte so gewählt werden, dass Entwicklerinnen und
+Entwickler nicht aus ihrem Arbeitsfluss herausgerissen werden. Geeignete Zeitpunkte sind Beispielsweise:
 
 \begin{itemize}
   \item \textbf{Nach einem Commit:} Entwicklerinnen und Entwickler übermitteln im Arbeitsalltag regelmässig ihre vorgenommenen
     Codeänderungen an das Versionsverwaltungssystem (Commit). Direkt nach dem Abschluss einer Entwicklungsaufgabe oder eines
     Arbeitspakets wird der bestehende Arbeitsfluss ohnehin kurz unterbrochen, um den Commit auszuführen. Dieser Moment eignet sich
-    daher, um eine kurze Rückmeldung zu erfassen, ohne den Entwickler aus einer konzentrierten Arbeitssituation herauszureissen.
+    daher, um eine kurze Rückmeldung zu erfassen, ohne die Entwicklerin oder den Entwickler aus einer konzentrierten Arbeitssituation herauszureissen.
     Gleichzeitig ist die Erinnerung an den gerade abgeschlossenen Arbeitsprozess noch präsent, was eine präzisere Einschätzung
     ermöglicht.
 
@@ -982,11 +991,11 @@ System integriert werden.
 
 Für die Kommunikation zwischen Companion-Anwendungen und dem Yappi Backend wurde bewusst auf einen API-Key-basierten Mechanismus
 gesetzt, anstatt die bestehende JWT-basierte Authentifizierung des Frontends zu verwenden. JWTs eignen sich vor allem für die
-Authentifizierung einzelner Nutzer in interaktiven Sitzungen. Sie erfordern in der Regel eine vorgelagerte Benutzeranmeldung und
+Authentifizierung einzelner Nutzerinnen und Nutzer in interaktiven Sitzungen. Sie erfordern in der Regel eine vorgelagerte Benutzeranmeldung und
 regelmässige Token-Erneuerung. Dieser Ablauf ist für Companion-Anwendungen, die im Hintergrund oder automatisiert Daten erfassen
 und übertragen, nicht optimal. Diese würden durch die Notwendigkeit einer manuellen Anmeldung in ihrer Funktionalität eingeschränkt.
 
-Der API-Key-Mechanismus wurde entwickelt, um diesen Anforderungen gerecht zu werden. Jeder Nutzer verfügt über einen persönlichen
+Der API-Key-Mechanismus wurde entwickelt, um diesen Anforderungen gerecht zu werden. Jede Nutzerin und jeder Nutzer verfügt über einen persönlichen
 API-Key, der in der Webanwendung einmalig generiert wird. Dieser Schlüssel wird manuell in den gewünschten Companion-Anwendungen
 hinterlegt. Bei jeder Anfrage an das Backend wird der API-Key im HTTP-Header übermittelt. Das Backend prüft die Gültigkeit des 
 Schlüssels und ordnet die Anfrage dem entsprechenden Nutzerkonto zu. So wird sichergestellt, dass nur autorisierte Clients im
@@ -1018,7 +1027,7 @@ Daten werden vom Backend in der dargestellten Datenbank (DB) persistiert.
 \subsection{Zugriffskontrolle über API-Keys}
 
 Das API-Key-System dient der sicheren und eindeutigen Authentifizierung externer Dienste gegenüber der \texttt{Yappi-Companion}-API.
-Anstelle von Benutzeranmeldedaten verwenden Clients einen statisch generierten API-Key, der für den jeweiligen Nutzer erstellt und ausschliesslich diesem zugeordnet ist.
+Anstelle von Anmeldedaten verwenden Clients einen statisch generierten API-Key, der für jeweilige Nuterinnen und Nutzer erstellt und ausschliesslich diesem zugeordnet ist.
 Dies ermöglicht den kontrollierten Zugriff auf geschützte Endpunkte, ohne dass sensible Login-Daten offengelegt oder dauerhaft gespeichert werden müssen.
 
 Über einen gültigen API-Key können autorisierte Clients Anfragen an Endpunkte mit dem Pfadpräfix \texttt{/companion/} stellen.
@@ -1073,7 +1082,7 @@ API-Keys.
 \label{tab:api_key_schema}
 \end{table}
 
-Die Speicherung des rohen API-Keys (\texttt{raw\_key}) dient ausschliesslich dem Zweck, diesen dem Benutzer nach der Erstellung 
+Die Speicherung des rohen API-Keys (\texttt{raw\_key}) dient ausschliesslich dem Zweck, diesen Nutzerinnen und Nutzer nach der Erstellung 
 erneut anzeigen zu können. Diese Entscheidung stellt einen bewussten Kompromiss zwischen Benutzerfreundlichkeit und Sicherheit
 dar, wurde jedoch so umgesetzt, dass das Feld bei Bedarf ohne tiefgreifende Änderungen am System entfernt werden kann.
 
@@ -1082,13 +1091,13 @@ dar, wurde jedoch so umgesetzt, dass das Feld bei Bedarf ohne tiefgreifende Änd
 Der API-Key-Mechanismus der Integrationsplattform ist so konzipiert, dass er eine sichere und kontrollierte Anbindung externer
 Companion-Anwendungen ermöglicht. Jeder API-Key ist eindeutig einem Nutzerkonto zugeordnet und wird in der Webanwendung einmalig
 generiert. Die Generierung erfolgt über eine abgesicherte Benutzeroberfläche, wodurch sichergestellt ist, dass ausschliesslich
-berechtigte Nutzer einen Schlüssel anlegen können. Zur Übertragungssicherheit wird der API-Key ausschliesslich über verschlüsselte
+berechtigte Nutzerinnen und Nutzer einen Schlüssel anlegen können. Zur Übertragungssicherheit wird der API-Key ausschliesslich über verschlüsselte
 Verbindungen (HTTPS) zwischen der Companion-Anwendung und dem Backend übertragen.
 
 Im Backend erfolgt eine serverseitige Validierung, bei der der Schlüssel auf Gültigkeit und Zuordnung geprüft wird. Die Schlüssel
 werden dabei nicht im Klartext gespeichert, sondern in sicherer Form (z. B. gehasht) abgelegt, um auch bei einem möglichen
-Datenbankzugriff unbefugten Gebrauch zu verhindern. Ein kompromittierter API-Key kann jederzeit durch den Nutzer oder einen
-Administrator gesperrt oder durch einen neuen ersetzt werden.
+Datenbankzugriff unbefugten Gebrauch zu verhindern. Ein kompromittierter API-Key kann jederzeit durch die Nutzerin oder den Nutzer
+gesperrt oder durch einen neuen ersetzt werden.
 
 Die technische Umsetzung der API-Key-Prüfung erfolgt über speziell in Spring Security integrierte Komponenten. Diese sorgen dafür,
 dass API-Key-Anfragen noch vor der regulären Benutzer-Authentifizierung ausgewertet und ggf. blockiert werden:
@@ -1115,7 +1124,7 @@ Interaktionen während des gesamten Prozesses.
   \label{fig:apikey-swimlane}
 \end{figure}
 
-Der Prozess beginnt mit der einmaligen Generierung des API-Keys durch den Nutzer in der Webanwendung. Nach der Erstellung wird der
+Der Prozess beginnt mit der einmaligen Generierung des API-Keys durch die Nutzerin oder den Nutzer in der Webanwendung. Nach der Erstellung wird der
 Schlüssel in der Companion-App hinterlegt und dort dauerhaft gespeichert. Jede Datenanfrage der Companion-App an das Backend
 enthält den API-Key im HTTP-Header, woraufhin das Backend den Schlüssel validiert und die Anfrage bei positiver Prüfung
 autorisiert. Dieser Ablauf stellt sicher, dass ausschliesslich autorisierte Anwendungen im Namen eines Nutzers Daten an Yappi
@@ -1133,7 +1142,7 @@ Diese Endpunkte setzen einen gültigen JWT im \texttt{Authorization}-Header vora
         Liefert den aktiven API-Key des aktuell authentisierten Nutzers. \\
         \textbf{Antworten:} \texttt{200 OK}, \texttt{404 Not Found}, \texttt{401 Unauthorized} (fehlender/ungültiger Header).
   \item \texttt{POST /apikey/generate} \\
-        Erzeugt einen neuen API-Key für den authentisierten Nutzer und gibt den API-Key zurück. \\
+        Erzeugt einen neuen API-Key für eine Nutzerin oder einen Nutzer und gibt den API-Key zurück. \\
         \textbf{Antworten:} \texttt{200 OK}, \texttt{401 Unauthorized}.
 \end{itemize}
 
@@ -1166,14 +1175,14 @@ Abbildung~\ref{fig:apikey-frontend} zeigt die zentralen Elemente und Funktionen 
 Die Implementierung nutzt die von JetBrains bereitgestellten IntelliJ-Plugin-APIs, um sich direkt in den Entwicklungsablauf der
 IDE einzuklinken. Diese APIs ermöglichen es, Ereignisse wie einen erfolgreichen Code-Commit abzufangen, eigene Dialogfenster oder
 Benachrichtigungen anzuzeigen und auf gespeicherte Plugin-Einstellungen zuzugreifen. Dadurch kann das Yappi Companion-Plugin
-nahtlos in die bestehende IntelliJ-Oberfläche integriert werden, ohne den gewohnten Workflow der Entwickler zu unterbrechen.
+nahtlos in die bestehende IntelliJ-Oberfläche integriert werden, ohne den gewohnten Workflow der Entwicklerinnen und Entwickler zu unterbrechen.
 
 Der IntelliJ Companion erweitert Yappi um die Möglichkeit, direkt aus der Entwicklungsumgebung heraus Feedback zu Code-Commits
-zu erfassen. Ziel ist es, die Erfassung von Stimmungsdaten möglichst nahtlos in den Entwickler-Workflow zu integrieren, ohne den
+zu erfassen. Ziel ist es, die Erfassung von Stimmungsdaten möglichst nahtlos in den Workflow von Entwicklerinnen und Entwickler zu integrieren, ohne den
 Arbeitsfluss zu unterbrechen. Nach jedem erfolgreichen Commit in IntelliJ IDEA öffnet sich automatisch ein Dialogfenster, in dem
-der Entwickler seine Stimmung zum Commit angeben kann. Diese Daten werden anschliessend an Yappi übertragen und dort gespeichert.
+die Entwicklerin oder der Entwickler seine Stimmung zum Commit angeben kann. Diese Daten werden anschliessend an Yappi übertragen und dort gespeichert.
 
-Das IntelliJ-Plugin erfüllt das Ziel \textbf{\hyperref[Z1]{Z-1}}, indem es Entwickler unmittelbar nach einem Commit zur Eingabe von Zufriedenheitsdaten auffordert.
+Das IntelliJ-Plugin erfüllt das Ziel \textbf{\hyperref[Z1]{Z-1}}, indem es Entwicklerinnen und Entwickler unmittelbar nach einem Commit zur Eingabe von Zufriedenheitsdaten auffordert.
 
 \subsection{Architektur und Integration}
 
@@ -1212,7 +1221,7 @@ Start automatisch geladen.
 
 Das Post-Commit-Popup wird automatisch unmittelbar nach einem erfolgreichen Commit in IntelliJ IDEA angezeigt. Ziel ist es, die
 Erfassung von Stimmungsdaten so nahtlos wie möglich in den normalen Entwicklungs- und Versionskontrollprozess einzubinden. Der
-Dialog öffnet sich als eigenständiges Fenster und blockiert die IDE nicht, sodass Entwickler sofort weiterarbeiten können. Die
+Dialog öffnet sich als eigenständiges Fenster und blockiert die IDE nicht, sodass Entwicklerinnen und Entwickler sofort weiterarbeiten können. Die
 Abbildung~/ref{fig:intellij-post-commit} zeigt die Benutzeroberfläche.
 
 \begin{figure}[H]
@@ -1231,7 +1240,7 @@ Die Benutzeroberfläche umfasst zwei zentrale Elemente:
 \end{itemize}
 
 Nach Bestätigung des Dialogs werden die eingegebenen Daten an das Yappi-Backend gesendet. Dieser Vorgang läuft vollständig im
-Hintergrund ab, sodass der Entwickler direkt mit seiner Arbeit fortfahren kann.
+Hintergrund ab, sodass Entwicklerinnen und Entwickler direkt mit ihrer Arbeit fortfahren können.
 
 \subsection{Daten verarbeiten und Persistieren}
 
@@ -1298,21 +1307,21 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
         und integriertem Feedbackprozess. Er kombiniert Backend-Services, eine Browsererweiterung sowie einen Kommunikationsbroker,
         um Kalendereinträge zu synchronisieren und direktes Feedback zu ermöglichen.
 
-        Zur automatischen Erkennung relevanter Meetings wird eine Anbindung an das Kalendersysteme des Entwickler vorgesehen.
+        Zur automatischen Erkennung relevanter Meetings werden Kalendersysteme von Entwicklerinnen und Entwickler angebunden.
         Wichtig dabei ist es einen Offenen Standard zu verwenden um eine möglichst hohe Kompatibilität mit Kalendersystemen zu schaffen.
         Grundlage dazu bildet das weit verbreitete iCalendar-Format (ICS), das von nahezu allen gängigen Plattformen unterstützt wird.
-        Das Konzept sieht vor, dass der Nutzer in Yappi auf seinem Profil den Zugriff auf den Kalender hinterlegen kann.
-        Regelmässig werden die auf einen vom Nutzer im Kalender erstellten Kalendereinträge in die Datenbank synchronisiert.
+        Das Konzept sieht vor, dass Nutzerinnen und Nutzer in Yappi auf ihrem Profil den Zugriff auf den Kalender hinterlegen können.
+        Regelmässig werden die  Kalendereinträge von Nutzerinnen und Nutzer in die Datenbank synchronisiert.
         Auf dieser Basis kann die Anwendung automatisch identifizieren, wann ein Meeting stattfindet.
-        Dadurch lassen sich Feedback-Anfragen unmittelbar nach dem Ende einer Besprechung auslösen, ohne dass der Nutzer manuell eingreifen muss.
+        Dadurch lassen sich Feedback-Anfragen unmittelbar nach dem Ende einer Besprechung auslösen, ohne dass Nuterinnen und Nutzer manuell eingreifen müssen.
 
         Die Synchronisation des Kalenders erfolgt ausschliesslich lesend, um Eingriffe in persönliche Kalender zu vermeiden.
         Alle übermittelten Kalenderinformationen werden vertraulich behandelt und ausschliesslich für den definierten Zweck genutzt.
-        Informationen zu Kalendereinträge sind nur für den Nutzer persönlich einsehbar.
+        Informationen zu Kalendereinträge sind nur für die Nutzerin oder den Nutzer persönlich einsehbar.
 
         Durch diese Anbindung entfällt das manuelle Erfassung von Kalendereinträgen. Meetings werden automatisch erkannt,
-        Änderungen übernommen und die Nutzer benachrichtigt. So entsteht ein nahtloser integrierter Feedback Flow um die
-        Zufriedenheitsdaten von Meetings für die Entwickler zu erheben.
+        Änderungen übernommen und die Nutzerinnen und Nutzer benachrichtigt. So entsteht ein nahtloser integrierter Feedback Flow um die
+        Zufriedenheitsdaten von Meetings für die Entwicklerinnen und Entwickler zu erheben.
 
         Dieses Kapitel beschreibt die technische Implementierung der einzelnen Komponenten, deren Zusammenspiel
         sowie die zugrunde liegenden Datenstrukturen.
@@ -1332,7 +1341,7 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
 
   \subsection{Yappi Chrome Extension}
       Die Companion-App wird als Browsererweiterung umgesetzt, um eine direkte Interaktion mit den Entwicklern zum richtigen
-      Zeitpunkt zu ermöglichen. Nach dem Ende eines im Kalender erfassten Meetings erhält der Nutzer eine Benachrichtigung,
+      Zeitpunkt zu ermöglichen. Nach dem Ende eines im Kalender erfassten Meetings erhält die Nutzerin oder der Nutzer eine Benachrichtigung,
       die zur Abgabe einer kurzen Bewertung auffordert. Diese zeitnahe Erhebung stellt sicher, dass Eindrücke und Wahrnehmungen
       noch frisch sind und die Datenqualität hoch bleibt. Die Interaktion erfolgt freiwillig, um Befragungsmüdigkeit zu vermeiden,
       und ist so gestaltet, dass die Beantwortung wenige Sekunden benötigt. Durch die Integration in den Browser wird kein
@@ -1384,7 +1393,7 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
         Die Benutzeroberfläche der Yappi Chrome Extension besteht aus zwei zentralen Interaktionselementen: Systembenachrichtigungen und der Popup-Ansicht im Browser.
 
         \textbf{Systembenachrichtigungen} \\
-            Beim Ende eines Events im Kalender des Benutzer, erzeugt die Extension eine native Systembenachrichtigung. Die 
+            Beim Ende eines Events, erzeugt die Extension eine native Systembenachrichtigung. Die 
             Abbildung~\ref{fig:yappi-extension-notification} zeigt diese Systembenachrichtigung unter macOS.
 
             Diese Benachrichtigungen enthalten:
@@ -1419,7 +1428,7 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
                         \item \texttt{Delete} Entfernt den Eintrag aus der Liste der letzten Meetings.
                     \end{itemize}
             \end{itemize}
-            Das Design stellt sicher, dass Benutzer sowohl über Echtzeitbenachrichtigungen als auch über die Popup-Ansicht
+            Das Design stellt sicher, dass Nutzerinnen und Nutzer sowohl über Echtzeitbenachrichtigungen als auch über die Popup-Ansicht
             jederzeit auf anstehende Feedback-Aufgaben zugreifen können.
 
             \begin{figure}[H]
@@ -1469,19 +1478,19 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
         Das Kalendermodul im Yappi-Backend ist für die Verwaltung und Bereitstellung von Kalendereinträgen verantwortlich.
         Es unterstützt sowohl den Abruf von Einträgen über eine REST-API als auch eine proaktive Benachrichtigung der Chrome-Extension in Echtzeit.
         Letzteres erfolgt über das Publish-Subscribe-Protokoll \textit{MQTT} (Message Queuing Telemetry Transport).
-        Zudem ist es zuständig für das Laden und synchronisieren der externen iCalendar-Daten (ICS) welche von den Nutzer hinterlegt werden.
+        Zudem ist es zuständig für das Laden und synchronisieren der externen iCalendar-Daten (ICS) welche von den Nutzerinnen und Nutzer hinterlegt werden.
 
 
     \subsubsection{Model-Klasse}
         Die zentrale Datenstruktur bildet die JPA-Entität \texttt{CalendarEvent.java} (\texttt{entities/}).
-        Sie repräsentiert einen einzelnen Kalendereintrag mit Attributen wie \texttt{title}, \texttt{startDate}, \texttt{endDate}, \texttt{allDay} sowie der Zuordnung zu einem Nutzer (\texttt{userId}).
+        Sie repräsentiert einen einzelnen Kalendereintrag mit Attributen wie \texttt{title}, \texttt{startDate}, \texttt{endDate}, \texttt{allDay} sowie der Zuordnung zu einer Nutzerin oder einem Nutzer (\texttt{userId}).
         Diese Klasse wird innerhalb des Backends zwischen Services und Controllern verwendet.
 
     \subsubsection{API-Endpunkte (\texttt{CalendarController})}
         Die Interaktion externer Clients mit dem Kalendermodul erfolgt über folgende REST-Endpunkte:
         \begin{itemize}
             \item \texttt{GET /api/calendar/\{userId\}}
-                Ruft alle Kalendereinträge einer bestimmten Nutzer-ID ab.
+                Ruft alle Kalendereinträge einer Nutzerin oder eines Nutzers ab.
                 Der Controller delegiert die Anfrage an den \texttt{CalendarService}, der die Daten lädt und als JSON zurückgibt.
             \item \texttt{POST /api/calendar/sync}
                 Stösst die Synchronisation manuell an, z.\,B. für sofortige Aktualisierungen oder Debugging.
@@ -1542,7 +1551,7 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
             \item \textbf{Entität} (\texttt{CalendarEvent.java}): Datenmodell und Tabellenstruktur.
             \item \textbf{Repository} (\texttt{CalendarEventRepository.java}): CRUD-Operationen auf \texttt{calendar\_events}.
             \item \textbf{Service} (\texttt{CalendarService.java}): Geschäftslogik zum Erstellen, Abrufen und Löschen von Events.
-            \item \textbf{Controller} (\texttt{CalendarController.java}): REST-Endpunkte zum Abrufen von Events pro Nutzer.
+            \item \textbf{Controller} (\texttt{CalendarController.java}): REST-Endpunkte zum Abrufen von Events pro Nutzerin oder Nutzer.
             \item \textbf{Scheduler} (\texttt{CalendarEventScheduler.java}): Zeitgesteuerte Erstellung und Aktualisierung der Events.
             \item \textbf{Factory} (\texttt{CalendarEventFactory.java}): Hilfsklasse zur einfachen Erstellung neuer Eventobjekte.
         \end{itemize}
@@ -1743,19 +1752,19 @@ Funktionsumfang von Yappi künftig unkompliziert erweitern, ohne bestehende Date
         \end{itemize}
 
 
-% Die bestehenden Funktionen von Yappi werden um einen Bereich zur Meetinganalyse ergänzt.
-% Entwickler sehen hier ihre eigenen Feedbackabgaben und offene Anfragen.
-% Auf der Teamebene kann auf aggregierte, anonymisierte Auswertungen zu den Meetings ihres Teams zugegriffen werden.
-% Die Konfiguration der Kalenderintegration und der Verbindung zur Companion-App wird im Nutzerprofil zentral verwaltet.
-% Dadurch bleibt die Erweiterung vollständig in die bestehende Systemarchitektur eingebettet und benötigt keine separaten Plattformen.
 
-% \subsubsection{Datenverarbeitung und Auswertung}
-%
-% Die erhobenen Feedbackdaten werden ausschliesslich auf dem Yappi-Server verarbeitet.
-% Vor der Auswertung erfolgt eine Anonymisierung, um Rückschlüsse auf einzelne Personen zu verhindern.
-% Für jedes Meeting werden aggregierte Kennzahlen, wie Durchschnittswerte der sieben Kriterien oder Verteilungen der Bewertungen, berechnet.
-% Diese werden nur dann angezeigt, wenn eine vordefinierte Mindestanzahl an Rückmeldungen vorliegt.
-% Neben der Auswertung einzelner Meetings können über längere Zeiträume Trends analysiert und Optimierungsmassnahmen evaluiert werden.
+
+
+
+
+
+
+
+
+
+
+
+
 
 %--------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1810,7 +1819,7 @@ auf die gleiche Art und Weise implementiert.
 
 Der Zugriff auf HealthKit-Daten erfordert die explizite Zustimmung des Nutzers für jede einzelne Datenkategorie. Beim ersten Start
 der App wird daher eine Berechtigungsanfrage angezeigt, in der der Zugriff auf Schrittzählungsdaten 
-(\texttt{HKQuantityTypeIdentifier.stepCount}) angefordert wird. Erst nach Bestätigung durch den Nutzer beginnt die App mit der
+(\texttt{HKQuantityTypeIdentifier.stepCount}) angefordert wird. Erst nach Bestätigung durch die Nutzerin oder den Nutzer beginnt die App mit der
 Erfassung.
 
 Die Umsetzung der Datenerfassung erfolgt über eine Kombination aus einem \texttt{HKObserverQuery} und zeitlich begrenzten 
@@ -1858,13 +1867,13 @@ JSON-Format an die Plattform übermitteln kann. Der folgende Endpoint wird von d
 
 \begin{description}
   \item \texttt{POST /companion/health} \\
-        Nimmt Gesundheitsdaten im definierten JSON-Format entgegen und speichert sie für den authentisierten Nutzer. 
+        Nimmt Gesundheitsdaten im definierten JSON-Format entgegen und speichert sie für authentisierten Nutzerinnen und Nutzer. 
         Bereits vorhandene Einträge im angegebenen Zeitraum werden aktualisiert, andernfalls werden neue Einträge angelegt. \\
         \textbf{Antworten:} \texttt{200 OK}, \texttt{400 Bad Request}, \texttt{401 Unauthorized}.
 \end{description}
 
 Die eingehenden Anfragen werden an den Service weitergeleitet, der die eigentliche Geschäftslogik übernimmt. Der Service prüft
-zunächst, ob für den übermittelten Benutzer und die angegebene Metrik im gesendeten Zeitraum bereits ein Eintrag in der Datenbank
+zunächst, ob für den übermittelte Benutzerinnen und Benutzer und die angegebene Metrik im gesendeten Zeitraum bereits ein Eintrag in der Datenbank
 vorhanden ist. Falls ja, wird der bestehende Datensatz überschrieben, um stets den aktuellsten Stand zu gewährleisten. Falls kein
 Eintrag vorhanden ist, wird ein neuer Datensatz angelegt.  
 
@@ -1917,7 +1926,7 @@ Vollbildmodus, erkennt den Schlüssel automatisch und trägt ihn direkt in das E
 in den UserDefaults des Geräts gespeichert, sodass er bei späteren App-Starts automatisch geladen wird.
 
 Die Verarbeitung der Gesundheitsdaten erfolgt vollständig im Hintergrund. Sobald neue Werte vorliegen, werden diese automatisch an
-Yappi übertragen. Dadurch entfällt für den Nutzer jede manuelle Auslösung und der Betrieb der App erfordert keine zusätzliche
+Yappi übertragen. Dadurch entfällt für Nutzerinnen und Nutzer jede manuelle Auslösung und der Betrieb der App erfordert keine zusätzliche
 Interaktion.
 
 %--------------------------------------------------------------------------------------------------------------------------------------
@@ -2217,7 +2226,7 @@ Interaktion.
     vollständig produktiv umgesetzt, die technische Machbarkeit jedoch validiert.
 
     \subsection*{Forschungsfrage C}
-    \textit{Wie kann Yappi Teams und Entwickler dabei unterstützen, aus den erfassten Zufriedenheitsdaten
+    \textit{Wie kann Yappi Teams und Entwicklerinnen und Entwickler dabei unterstützen, aus den erfassten Zufriedenheitsdaten
     Handlungsempfehlungen abzuleiten?}
 
     Die Entwicklung einer intelligenten Empfehlungskomponente, Yappi Coach, wurde konzeptionell ausgearbeitet
